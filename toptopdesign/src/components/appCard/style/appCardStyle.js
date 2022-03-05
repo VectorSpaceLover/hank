@@ -19,11 +19,6 @@ export const Styles = styled.div`
                 top: 32px;
                 width: 45px;
                 height: 45px;
-                // @media screen and (max-width: 600px) {
-                //     left: 20px;
-                //     width: 30px;
-                //     height: 30px;
-                // }
                 background-color: var(--mist-gray);
                 border-radius: 22.5px;
             }

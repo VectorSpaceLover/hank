@@ -8,9 +8,8 @@ import { keywords } from '../../../assets/config';
 import StyledList from "../../../components/list";
 import OutsideClickHandler from './outSide';
 
-export default function SearchBox({searchFunction, showKeyword}){
+export default function SearchBox({ searchFunction, showKeyword, showKeywordList, setShowKeywordList}){
     const [currentKey, setCurrentKey] = useState('');
-    const [showKeywordList, setShowKeywordList] = useState(false);
 
     const getSearchResult = () => {
         searchFunction(currentKey);

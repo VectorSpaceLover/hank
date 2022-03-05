@@ -1,4 +1,5 @@
 const Products = require('../model/Products');
+const { search } = require('../routes/products');
 
 const getProducts = async (req, res) => {
     const mobiles = await Products.find({ type: 'mobile' });
@@ -19,6 +20,21 @@ const getProducts = async (req, res) => {
     });
 }
 
+const searchProducts = async (req, res) => {
+    const { keyword } = req.query;
+    const searchResults = await Products.find({productName:{$regex: keyword}});
+    if(searchResults){
+        return res.send({
+            searchResults: searchResults,
+        });
+    }else{
+        return res.send({
+            status: 'error',
+            searchResults: [],
+        });
+    }
+}
+
 const createNewProduct = async (req, res) => {
     const {
         productName,
@@ -30,6 +46,7 @@ const createNewProduct = async (req, res) => {
         productName: productName,
         subName: subName,
         type: type,
+        favourited: false,
     })
 
   const savedProduct = await newProduct.save();
@@ -42,6 +59,7 @@ const createNewProduct = async (req, res) => {
 
 module.exports = {
     getProducts,
+    searchProducts,
     createNewProduct
 };
   

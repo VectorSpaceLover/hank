@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Styles } from "./style/homeStyle";
 import { Grid } from '@mui/material';
 import SearchBox from './components/searchBox';
-import ItemGallery from '../../components/appCard/itemGallery';
 import AppList from "../../components/appList";
 import {
     allPatternItems
@@ -10,18 +9,34 @@ import {
 import IndeterminateCheckbox from '../../components/checkBox';
 import { ReactComponent as SearchIcon } from '../../assets/img/user/home/search.svg';
 import axios from 'axios';
+import ImageView from '../../components/imageView';
+import TxtButton from '../../components/txtButton';
 
 export default function Home(){
     const [showPatternList, setShowPatternList] = useState(false);
     const [searchKey, setSearchKey] = useState('');
     const [showSearchKey, setShowSearchKey] = useState('');
+    const [showKeywordList, setShowKeywordList] = useState(false);
     const [popularWebSites, setPopularWebsites] = useState([]);
     const [addedApps, setAddedApps] = useState([]);
     const [popularApps, setPopularApps] = useState([]);
+    const [searchResults, setSearchResults] = useState([]);
 
-    const searchFunction = (key) => {
+    const searchFunction = async (key) => {
+        setShowKeywordList(false);
         setSearchKey(key);
-        setShowSearchKey(true);
+        if(key === '')
+            setShowSearchKey(false);
+        else
+        {
+            setShowSearchKey(true);
+            const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/search?keyword=${key}`);
+            console.log(res);
+            if(res.data && res.data.searchResults && res.data.searchResults.length > 1)
+                setSearchResults(res.data.searchResults);
+            else
+                setSearchResults([]);
+        }
     }
 
     const viewFullPattern = () => {
@@ -70,7 +85,12 @@ export default function Home(){
                         </div>
                     </Grid>
                 </Grid>
-                <SearchBox showKeyword={showKeyword} searchFunction={searchFunction} />
+                <SearchBox 
+                    setShowKeywordList={setShowKeywordList}
+                    showKeywordList={showKeywordList} 
+                    showKeyword={showKeyword} 
+                    searchFunction={searchFunction} 
+                />
                 <div className="center-container">
                     <div 
                         className="view-full"
@@ -92,20 +112,41 @@ export default function Home(){
                         </div>
                     }
                 </div>
-                {/* <div className="all-patterns">
-                    <ItemGallery />
-                </div> */}
                 {showSearchKey && 
                     <div className='keyword-container'>
                         <SearchIcon />
                         <div className='search-keyword'>{searchKey}</div>
                     </div>
                 }
-                <div className="all-apps">
-                    <AppList title='Most popular mobile apps' data={popularApps}/>
-                    <AppList title='Just added' data={addedApps}/>
-                    <AppList title='Most popular websites' data={popularWebSites}/>
-                </div>
+                {(searchResults && showSearchKey)?(
+                    <>
+                        <div className="all-searched-app">
+                            <div className="app-list">
+                                <Grid container spacing={3}>
+                                    {searchResults.map((info, idx) => {
+                                        return (
+                                            <Grid item sm={6} xs={12} md={3} key={idx}>
+                                                <ImageView info={info}/>
+                                            </Grid>
+                                        )
+                                    })}
+                                </Grid>
+                            </div>
+                        </div>
+                        {searchResults.length && 
+                            <div className='center-mode'>
+                                <TxtButton text={"More"}/>
+                            </div>
+                        }
+                    </>
+                ):(
+                    <div className="all-apps">
+                        <AppList title='Most popular mobile apps' data={popularApps}/>
+                        <AppList title='Just added' data={addedApps}/>
+                        <AppList title='Most popular websites' data={popularWebSites}/>
+                    </div>
+                )}
+                
             </div>
         </Styles>
     )

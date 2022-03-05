@@ -8,7 +8,7 @@ export default function AppCard({info}){
                     <div className="circle"></div>
                     <div className="card-body">
                         <div className="app-name">
-                            {info.name}
+                            {info.productName}
                         </div>
                         <div className="sub-name">
                             {info.subName}

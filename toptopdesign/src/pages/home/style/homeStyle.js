@@ -85,11 +85,22 @@ export const Styles = styled.div`
                 border-radius: 16px;
             }
         }
+        .center-mode{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            .more-button{
+                
+            }
+        }
         .all-patterns{
             margin-top: 59px;
         }
         .all-apps{
             margin-bottom: 114px;
+        }
+        .all-searched-app{
+            margin-bottom: 64px;
         }
         .keyword-container{
             display: flex;
@@ -97,9 +108,11 @@ export const Styles = styled.div`
             align-items: center;
             justify-content: center;
             margin-top: 66px;
+            margin-bottom: 44px;
             .search-keyword{
                 ${PptelegrafUltraBoldBlack40px}
                 min-height: 42px;
+                margin-left: 10px;
                 letter-spacing: 0;
                 display: inline-block;
             }

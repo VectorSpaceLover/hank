@@ -4,7 +4,7 @@ export const Styles = styled.div`
   .search-button {
     color: white;
     position: absolute;
-    right: -5px;
+    right: -2px;
     top: 1px;
     background: #1a1a1c;
     cursor: pointer;
@@ -13,7 +13,7 @@ export const Styles = styled.div`
     align-items: center;
     justify-content: center;
     width: 112px;
-    height: 56px;
+    height: 53px;
     border-radius: 63px;
     &:hover {
       color: black;
