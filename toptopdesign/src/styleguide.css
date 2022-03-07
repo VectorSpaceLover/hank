@@ -16,7 +16,9 @@
     --mist-gray: rgba(196, 196, 196, 1);
     --bon-jour: rgba(225, 225, 225, 1);
     --white: rgba(255, 255, 255, 1);
-  
+    --gallery: rgba(239, 239, 239, 1);
+    --gray-nurse: rgba(232, 232, 232, 1);
+   
     --font-size-xxs: 10px;
     --font-size-xs: 13px;
     --font-size-l: 16px;
@@ -28,6 +30,7 @@
     --font-size-xs2: 12px;
     --font-size-xl3: 36px;
     --font-size-xl2: 48px;
+    --font-size-xxl2: 40px;
   
     --font-family-open_sans: "Open Sans";
     --font-family-pp_telegraf-regular: "PP Telegraf-Regular";

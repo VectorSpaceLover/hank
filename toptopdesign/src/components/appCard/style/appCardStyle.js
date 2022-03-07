@@ -15,8 +15,8 @@ export const Styles = styled.div`
         .card-header{
             .circle{
                 position: absolute;
-                left: 32px;
-                top: 32px;
+                left: 44px;
+                top: 44px;
                 width: 45px;
                 height: 45px;
                 background-color: var(--mist-gray);
@@ -25,15 +25,18 @@ export const Styles = styled.div`
             .card-body{
                 display: flex;
                 flex-direction: column;
-                align-items: center;
-                padding-top: 34px;
                 .app-name{
+                    margin-top: 44px;
+                    margin-left: 101px;
+                    margin-bottom: 8px;
                     display: inline-block;
                     ${PptelegrafUltraBoldBlack20px}
                     min-height: 21px;
                     letter-spacing: 0;
                 }
                 .sub-name{
+                    display: inline-block;
+                    margin: auto;
                     ${ValignTextMiddle}
                     ${PptelegrafRegularNormalWhite10px}
                     text-align: center;
@@ -41,15 +44,17 @@ export const Styles = styled.div`
                     line-height: 10.5px;
                     white-space: nowrap;
                     height: 24px;
-                    margin-top: 8px;
-                    margin-bottom: 53px;
                     display: flex;
                     align-items: center;
-                    min-width: 140px;
+                    width: 140px;
                     background-color: var(--second);
                     border-radius: 100px;
+                    @media screen and (max-width: 800px) {
+                        margin-top: 4px;
+                    }
                 }
             }
         }
+        
     }
 `;

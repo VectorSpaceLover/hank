@@ -1,4 +1,5 @@
-import ImageGallery from "./imageGallery";
+import ElasticCarousel from "../elastic";
+// import ImageGallery from "./imageGallery";
 import { Styles } from './style/appCardStyle';
 export default function AppCard({info}){
     return (
@@ -15,7 +16,7 @@ export default function AppCard({info}){
                         </div>
                     </div>
                 </div>
-                <ImageGallery />
+                <ElasticCarousel />
             </div>
         </Styles>
     );

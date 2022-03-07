@@ -54,6 +54,14 @@ export const PptelegrafRegularNormalBlack13px = css`
   font-style: normal;
 `;
 
+export const OpensansNormalBlack14px = css`
+  color: var(--second);
+  font-family: var(--font-family-open_sans);
+  font-size: var(--font-size-s2);
+  font-weight: 400;
+  font-style: normal;
+`;
+
 export const PptelegrafUltraBoldBlack48px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-ultrabold);
@@ -89,10 +97,11 @@ export const PptelegrafUltraBoldBlack14px = css`
 export const PptelegrafRegularNormalGraniteGray1 = css`
   color: var(--gray);
   font-family: var(--font-family-pp_telegraf-regular);
-  font-size: var(--font-size-xxs);
+  font-size: var(--font-size-s2);
   font-weight: 400;
   font-style: normal;
 `;
+
 export const PptelegrafUltraBoldBlack40px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-ultrabold);
@@ -108,6 +117,69 @@ export const PptelegrafUltraBoldMirage16px = css`
   font-style: normal;
 `;
 
+export const PptelegrafRegularNormalWhite16px = css`
+  color: var(--white);
+  font-family: var(--font-family-pp_telegraf-regular);
+  font-size: var(--font-size-l);
+  font-weight: 400;
+  font-style: normal;
+`;
+
+export const PptelegrafUltraBoldCharade40px = css`
+  color: var(--charade);
+  font-family: var(--font-family-pp_telegraf-ultrabold);
+  font-size: var(--font-size-xxl2);
+  font-weight: 700;
+  font-style: normal;
+`;
+
+export const PptelegrafRegularNormalWhite17px = css`
+  color: var(--white);
+  font-family: var(--font-family-pp_telegraf-regular);
+  font-size: var(--font-size-m);
+  font-weight: 400;
+  font-style: normal;
+`;
+
+export const PptelegrafUltraBoldBlack17px = css`
+  color: var(--second);
+  font-family: var(--font-family-pp_telegraf-ultrabold);
+  font-size: var(--font-size-x1);
+  font-weight: 700;
+  font-style: normal;
+`;
+
+export const ManropeSemiBoldCharade28px = css`
+  color: var(--charade);
+  font-family: var(--font-family-manrope);
+  font-size: var(--font-size-xxl22);
+  font-weight: 600;
+  font-style: normal;
+`;
+
+export const PptelegrafRegularNormalBlack17px = css`
+  color: var(--second);
+  font-family: var(--font-family-pp_telegraf-regular);
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+  font-style: normal;
+`;
+
 export const Border1pxSecond = css`
   border: 1px solid var(--second);
+`;
+
+export const Border1pxPurple = css`
+  border: 1px solid var(--purple);
+`;
+export const Border2pxBrandPurple = css`
+  border: 2px solid var(--main);
+`;
+
+export const Border2pxGrayNurse = css`
+  border: 2px solid var(--gray-nurse);
+`;
+
+export const Border1pxGraniteGray = css`
+  border: 1px solid var(--granite-gray);
 `;

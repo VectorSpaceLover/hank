@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import { 
+  PptelegrafRegularNormalWhite16px,
+  Border1pxPurple
+} from '../../../../../assets/styledMixins';
 
 export const Styles = styled.div`
   .txt-button {
@@ -11,8 +15,8 @@ export const Styles = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 24px;
-    min-width: 221px;
+    min-height: 53px;
+    width: 528px;
     text-align: right;
     letter-spacing: 0;
     line-height: 24px;
@@ -23,9 +27,12 @@ export const Styles = styled.div`
       color: black;
       background: #c5c5ca;
     }
-    @media screen and (max-width: 600px) {
-      width: 160px;
-      min-width: 160px;
+    @media screen and (max-width: 768px) {
+      ${PptelegrafRegularNormalWhite16px}
+      ${Border1pxPurple}
+      width: 275px;
+      background-color: var(--second);
+      border-radius: 100px;
     }
   }
 `;

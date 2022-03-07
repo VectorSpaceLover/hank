@@ -11,6 +11,7 @@ import { ReactComponent as SearchIcon } from '../../assets/img/user/home/search.
 import axios from 'axios';
 import ImageView from '../../components/imageView';
 import TxtButton from '../../components/txtButton';
+import Footer from '../../components/footer';
 
 export default function Home(){
     const [showPatternList, setShowPatternList] = useState(false);
@@ -146,7 +147,7 @@ export default function Home(){
                         <AppList title='Most popular websites' data={popularWebSites}/>
                     </div>
                 )}
-                
+                <Footer />
             </div>
         </Styles>
     )

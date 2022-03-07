@@ -12,14 +12,17 @@ export const Styles = styled.div`
         @media screen and (max-width: 1200px) {
             height: 473px;
         }
-        @media screen and (max-width: 1000px) {
-            height: 250px;
+        @media screen and (max-width: 1100px) {
+            height: 350px;
         }
-        @media screen and (max-width: 800px) {
-            height: 200px;
+        @media screen and (max-width: 1000px) {
+            height: 300px;
+        }
+        @media screen and (max-width: 892px) {
+            height: 616px;
         }
         @media screen and (max-width: 600px) {
-            height: 473px;
+            height: 296px;
         }
         .favourite{
             position: absolute;

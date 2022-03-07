@@ -1,0 +1,38 @@
+.seperator {
+  width: 100%;
+}
+
+.controls-wrapper {
+  width: 100%;
+}
+
+.carousel-wrapper {
+  width: 100%;
+}
+
+.rec-carousel-item:focus {
+  outline: none;
+  box-shadow: inset 0 0 1px 0px violet;
+}
+
+.rec .rec-slider-container{
+  margin: 0px;
+}
+
+.rec-carousel{
+  position: relative;
+}
+
+.rec-arrow-left{
+  position: absolute;
+  left: 10px;
+  z-index: 100;
+}
+
+.rec-arrow-right{
+  position: absolute;
+  right: 10px;
+  z-index: 100;
+  width: 20px;
+  height: 20px;
+}

@@ -3,8 +3,6 @@ import {
   Border1pxSecond,
   PptelegrafRegularNormalBlack13px,
   ValignTextMiddle,
-  PptelegrafRegularNormalBlack14px,
-  PptelegrafRegularNormalGraniteGray1
 } from '../../../assets/styledMixins';
 
 export const Styles = styled.div`

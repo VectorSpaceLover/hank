@@ -311,5 +311,71 @@ export const keywords = [
     {
         keyword: "Algiers",
     }
-  ];
+];
+
+export const collections = [
+    {
+        name: 'Collection Name',
+        subName: 'Number of screens',
+    },
+    {
+        name: 'Good Design',
+        subName: '5 screens',
+    },
+    {
+        name: 'Interior design',
+        subName: '1 screen',
+    },
+    {
+        name: 'Our next project',
+        subName: '6 screens',
+    },{
+        name: 'Collection Name',
+        subName: 'Number of screens',
+    },
+    {
+        name: 'Good Design',
+        subName: '5 screens',
+    },
+    {
+        name: 'Interior design',
+        subName: '1 screen',
+    },
+    {
+        name: 'Our next project',
+        subName: '6 screens',
+    },
+    {
+        name: 'Collection Name',
+        subName: 'Number of screens',
+    },
+    {
+        name: 'Good Design',
+        subName: '5 screens',
+    },
+    {
+        name: 'Interior design',
+        subName: '1 screen',
+    },
+    {
+        name: 'Our next project',
+        subName: '6 screens',
+    },
+    {
+        name: 'Collection Name',
+        subName: 'Number of screens',
+    },
+    {
+        name: 'Good Design',
+        subName: '5 screens',
+    },
+    {
+        name: 'Interior design',
+        subName: '1 screen',
+    },
+    {
+        name: 'Our next project',
+        subName: '6 screens',
+    },
+]
   
