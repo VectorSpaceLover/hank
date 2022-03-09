@@ -9,15 +9,6 @@ export const Styles = styled.div`
         box-shadow: 4px -2px 9px 8px rgb(0 0 0 / 2%);
         background-color: var(--white);
         border-radius: 16px;
-        @media screen and (max-width: 1200px) {
-            height: 473px;
-        }
-        @media screen and (max-width: 1100px) {
-            height: 350px;
-        }
-        @media screen and (max-width: 1000px) {
-            height: 300px;
-        }
         @media screen and (max-width: 892px) {
             height: 616px;
         }

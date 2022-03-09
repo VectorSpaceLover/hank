@@ -12,16 +12,17 @@ export const Styles = styled.div`
         margin: 137px 164px 0px 164px;
         padding: 0px 22px;
         @media screen and (max-width: 1200px) {
-            padding: 130px 140px 0px 140px;
+            margin: 130px 140px 0px 140px;
         }
         @media screen and (max-width: 1000px) {
-            padding: 130px 100px 0px 100px;
+            margin: 130px 100px 0px 100px;
         }
         @media screen and (max-width: 800px) {
-            padding: 130px 60px 0px 60px;
+            margin: 130px 60px 0px 60px;
         }
         @media screen and (max-width: 600px) {
-            padding: 130px 20px 0px 20px;
+            margin: 130px 20px 0px 20px;
+            padding: 0px;
         }
         .xs-hide{
             display: block;
@@ -119,6 +120,17 @@ export const Styles = styled.div`
     }
     .all-app-container{
         margin: 0px 29px 0px 186px;
-        margin-bottom: 114px;
+        @media screen and (max-width: 1200px) {
+            margin: 0px 20px 114px 140px;
+        }
+        @media screen and (max-width: 1000px) {
+            margin: 0px 20px 114px 100px;
+        }
+        @media screen and (max-width: 800px) {
+            margin: 0px 20px 114px 60px;
+        }
+        @media screen and (max-width: 600px) {
+            margin: 0px 20px 114px 20px;
+        }
     }
 `;

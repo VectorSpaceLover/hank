@@ -125,7 +125,7 @@ export default function Home(){
                                 <Grid container spacing={3}>
                                     {searchResults.map((info, idx) => {
                                         return (
-                                            <Grid item sm={6} xs={12} md={3} key={idx}>
+                                            <Grid item sm={6} xs={6} md={3} key={idx}>
                                                 <ImageView info={info}/>
                                             </Grid>
                                         )

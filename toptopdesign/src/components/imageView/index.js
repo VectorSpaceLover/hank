@@ -6,7 +6,7 @@ export default function ImageView({ favourited, imageList }){
     return (
         <Styles>
             <div className='image-container'>
-                <img className='image-viewer' src='/img/carousel/1.png' alt=''/>
+                {/* <img className='image-viewer' src='/img/carousel/1.png' alt=''/> */}
                 <div className='favourite'>
                     {favourited? <Favourite />:<UnFavourite />}
                 </div>

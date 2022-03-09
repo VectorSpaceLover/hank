@@ -10,7 +10,7 @@ export default function AppList({title, data}){
                     {title}
                 </div>
                 <div className="app-list">
-                    <Grid container spacing={3}>
+                    {/* <Grid container spacing={3}>
                         {data && data.map((info, idx) => {
                             return (
                                 <Grid item sm={6} xs={12} md={4} key={idx}>
@@ -18,7 +18,14 @@ export default function AppList({title, data}){
                                 </Grid>
                             )
                         })}
-                    </Grid>
+                    </Grid> */}
+                    {data && data.map((info, idx) => {
+                            return (
+                                // <Grid item sm={6} xs={12} md={4} key={idx}>
+                                    <AppCard info={info}/>
+                                // </Grid>
+                            )
+                    })}
                 </div>
             </div>
         </Styles>

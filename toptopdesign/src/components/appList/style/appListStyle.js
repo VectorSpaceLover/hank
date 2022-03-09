@@ -12,7 +12,16 @@ export const Styles = styled.div`
             padding: 60px 0px 24px 0px;
         }
         .app-list{
-            
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            @media screen and (max-width: 1500px) {
+                flex-wrap: nowrap;
+            }
+            @media screen and (max-width: 600px) {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
     }
 `;

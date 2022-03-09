@@ -8,10 +8,18 @@ import {
 export const Styles = styled.div`
     .app-card{
         position: relative;
-        padding: 10px;
+        padding: 10px 0px 40px 0px;
         box-shadow: 4px -2px 9px 8px rgb(0 0 0 / 2%);
         background-color: var(--white);
         border-radius: 16px;
+        width: 400px;
+        margin: 0px 24px 24px 0px;
+        @media screen and (max-width: 800px) {
+            width: 400px;
+        }
+        @media screen and (max-width: 600px) {
+            width: 100%;
+        }
         .card-header{
             .circle{
                 position: absolute;
@@ -55,6 +63,5 @@ export const Styles = styled.div`
                 }
             }
         }
-        
     }
 `;
