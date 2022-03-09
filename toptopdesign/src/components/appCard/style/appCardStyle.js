@@ -14,12 +14,7 @@ export const Styles = styled.div`
         border-radius: 16px;
         width: 400px;
         margin: 0px 24px 24px 0px;
-        @media screen and (max-width: 800px) {
-            width: 400px;
-        }
-        @media screen and (max-width: 600px) {
-            width: 100%;
-        }
+        
         .card-header{
             .circle{
                 position: absolute;
