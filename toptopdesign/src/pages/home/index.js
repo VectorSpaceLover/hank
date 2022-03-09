@@ -8,10 +8,10 @@ import {
 } from '../../assets/config';
 import IndeterminateCheckbox from '../../components/checkBox';
 import { ReactComponent as SearchIcon } from '../../assets/img/user/home/search.svg';
-import axios from 'axios';
 import ImageView from '../../components/imageView';
 import TxtButton from '../../components/txtButton';
 import Footer from '../../components/footer';
+import { getAllProducts, getSearchResults } from '../../api/collection';
 
 export default function Home(){
     const [showPatternList, setShowPatternList] = useState(false);
@@ -31,8 +31,7 @@ export default function Home(){
         else
         {
             setShowSearchKey(true);
-            const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/search?keyword=${key}`);
-            console.log(res);
+            const res = await getSearchResults(key);
             if(res.data && res.data.searchResults && res.data.searchResults.length > 1)
                 setSearchResults(res.data.searchResults);
             else
@@ -49,13 +48,13 @@ export default function Home(){
     }
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/products/`)
-        .then(res => {
-            const { mobiles, recents, websites } = res.data;
+        async function getInitialData(){
+            const { mobiles, recents, websites } = await getAllProducts();
             setPopularApps(mobiles);
             setPopularWebsites(websites);
             setAddedApps(recents);
-        });
+        }
+        getInitialData();
     }, []);
 
     return (
@@ -119,7 +118,7 @@ export default function Home(){
                         <div className='search-keyword'>{searchKey}</div>
                     </div>
                 }
-                {(searchResults && showSearchKey)?(
+                {(searchResults && showSearchKey)&&(
                     <>
                         <div className="all-searched-app">
                             <div className="app-list">
@@ -140,15 +139,18 @@ export default function Home(){
                             </div>
                         }
                     </>
-                ):(
+                )}
+            </div>
+            { !(searchResults && searchKey) &&
+                <div className='all-app-container'>
                     <div className="all-apps">
                         <AppList title='Most popular mobile apps' data={popularApps}/>
                         <AppList title='Just added' data={addedApps}/>
                         <AppList title='Most popular websites' data={popularWebSites}/>
                     </div>
-                )}
-                <Footer />
-            </div>
+                </div>
+            }
+            <Footer />
         </Styles>
     )
 }

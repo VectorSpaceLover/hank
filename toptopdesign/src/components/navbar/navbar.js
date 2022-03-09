@@ -53,7 +53,7 @@ const viewAllStyle = {
 function Navbar() {
     const navigate = useNavigate()
     const { items, signIn, line38 } = navbarData;
-    const [isSigned, setSigned] = useState(true);
+    const [isSigned, setSigned] = useState(false);
 
     const [anchorGift, setAnchorGift] = useState(null);
     const [anchorAlarm, setAnchorAlarm] = useState(null);
@@ -80,13 +80,16 @@ function Navbar() {
             <div className='navbar'>
                 <div className='flex-row' >
                     <div className='overlap-group' >
-                        <div className='menu-icon'>
+                        {/* <div className='menu-icon'>
                             <img className='line-first' alt='first' src="https://anima-uploads.s3.amazonaws.com/projects/621ea468b7b66445f330bb3a/releases/621ea60073fa301aef53addf/img/group-1155@2x.svg" />
-                        </div>
-                        <div className='item-group' >
+                        </div> */}
+                        {/* <div className='item-group' >
                             {items.map((itemName, index) => 
                                 <div className={index === 0? 'item': 'item item-ml'} key={`${itemName} ${index}`}>{itemName}</div>
                             )}
+                        </div> */}
+                        <div className='home'>
+                            Home
                         </div>
                         <img className='title-img'  src='/img/user/banner.svg' alt='banner' />
                     </div>

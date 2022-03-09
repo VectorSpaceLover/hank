@@ -37,3 +37,21 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: "PP Telegraf-Ultralight";
+  src: local('PP Telegraf-Ultralight'), local('PP Telegraf-Ultralight'), 
+   url('./assets/font/PPTelegraf-UltraLight.otf')format("truetype");
+}
+
+@font-face {
+  font-family: "PP Telegraf-UltraBold";
+  src: local('PP Telegraf-UltraBold'), local('PP Telegraf-UltraBold'), 
+   url('./assets/font/PPTelegraf-UltraBold.otf')format("truetype");
+}
+
+@font-face {
+  font-family: "PP Telegraf-Regular";
+  src: local('PP Telegraf-Regular'), local('PP Telegraf-Regular'), 
+   url('./assets/font/PPTelegraf-Regular.otf')format("truetype");
+}

@@ -1,7 +1,11 @@
 import styled from "styled-components";
+import {
+  PptelegrafRegularNormalWhite24px
+} from '../../../assets/styledMixins';
 
 export const Styles = styled.div`
   .txt-button {
+    ${PptelegrafRegularNormalWhite24px}
     color: white;
     right: -2px;
     top: 1px;
@@ -11,7 +15,7 @@ export const Styles = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 24px;
+    min-height: 53px;
     min-width: 221px;
     text-align: right;
     letter-spacing: 0;

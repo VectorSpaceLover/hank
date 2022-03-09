@@ -6,7 +6,6 @@ import {
 export const Styles = styled.div`
   .footer{
     ${PptelegrafRegularNormalWhite14px}
-    margin: 0px 163px;
     @media screen and (max-width: 1200px) {
       margin: 0px 140px;
     }
@@ -26,6 +25,7 @@ export const Styles = styled.div`
     background-color: var(--second);
     border-radius: 26px;
     overflow: hidden;
+    margin: 137px 186px 0px 186px;
     .terms{
         min-height: 15px;
         min-width: 48px;

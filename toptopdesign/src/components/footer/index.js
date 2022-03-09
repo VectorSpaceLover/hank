@@ -9,6 +9,5 @@ export default function Footer(){
                 <div className='copyright'>@2022 TOP TOP DESIGN</div>
             </div>
         </Styles>
-        
       );
 }

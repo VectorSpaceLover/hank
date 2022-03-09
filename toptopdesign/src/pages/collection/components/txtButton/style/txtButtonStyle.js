@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { 
   PptelegrafRegularNormalWhite16px,
-  Border1pxPurple
+  Border1pxPurple,
+  PptelegrafRegularNormalWhite24px
 } from '../../../../../assets/styledMixins';
 
 export const Styles = styled.div`
@@ -23,6 +24,7 @@ export const Styles = styled.div`
     white-space: nowrap;
     border-radius: 63px;
     margin-bottom: 50px;
+    ${PptelegrafRegularNormalWhite24px}
     &:hover {
       color: black;
       background: #c5c5ca;

@@ -9,7 +9,8 @@ import {
 
 export const Styles = styled.div`
     .home-container{
-        padding: 137px 163px 0px 163px;
+        margin: 137px 164px 0px 164px;
+        padding: 0px 22px;
         @media screen and (max-width: 1200px) {
             padding: 130px 140px 0px 140px;
         }
@@ -46,6 +47,7 @@ export const Styles = styled.div`
                 display: flex;
                 flex-direction: row;
                 align-items: center;
+                margin-left: auto;
                 .des-img{
                     width: 54px;
                     height: 54px;
@@ -96,9 +98,6 @@ export const Styles = styled.div`
         .all-patterns{
             margin-top: 59px;
         }
-        .all-apps{
-            margin-bottom: 114px;
-        }
         .all-searched-app{
             margin-bottom: 64px;
         }
@@ -117,5 +116,9 @@ export const Styles = styled.div`
                 display: inline-block;
             }
         }
+    }
+    .all-app-container{
+        margin: 0px 29px 0px 186px;
+        margin-bottom: 114px;
     }
 `;

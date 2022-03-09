@@ -19,5 +19,11 @@ export const Styles = styled.div`
       color: black;
       background: #c5c5ca;
     }
+    @media screen and (max-width: 700px) {
+      width: 50px;
+      height: 50px;
+      right: -25px;
+      top: -25px;
+    }
   }
 `;

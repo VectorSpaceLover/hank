@@ -1,6 +1,6 @@
 import React from 'react'
 import { Styles } from './style/txtButtonStyle'
-const TxtButton = (props) => {
+const TextButton = (props) => {
   const {text, ...rest} = props
 
   return (
@@ -11,4 +11,4 @@ const TxtButton = (props) => {
     </Styles>
   )
 }
-export default TxtButton
+export default TextButton

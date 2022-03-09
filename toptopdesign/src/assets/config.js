@@ -377,5 +377,44 @@ export const collections = [
         name: 'Our next project',
         subName: '6 screens',
     },
+];
+
+export const oneCollection = [
+    {
+        path: '',
+    },
+    {
+        path: '',
+    },
+    {
+        path: '',
+    },
+    {
+        path: '',
+    },
+    {
+        path: '',
+    },
+    {
+        path: '',
+    },
+    {
+        path: '',
+    },
+    {
+        path: '',
+    },
+    {
+        path: '',
+    },
+    {
+        path: '',
+    },
+    {
+        path: '',
+    },
+    {
+        path: '',
+    },
 ]
   

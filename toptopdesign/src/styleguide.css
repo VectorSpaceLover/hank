@@ -25,6 +25,7 @@
     --font-size-xl: 17px;
     --font-size-s2: 14px;
     --font-size-m2: 20px;
+    --font-size-xl22: 24px;
     --font-size-m4: 40px;
     --font-size-l2: 28px;
     --font-size-xs2: 12px;
@@ -35,6 +36,7 @@
     --font-family-open_sans: "Open Sans";
     --font-family-pp_telegraf-regular: "PP Telegraf-Regular";
     --font-family-pp_telegraf-ultrabold: "PP Telegraf-UltraBold";
+    --font-family-pp_telegraf-ultralight: "PP Telegraf-Ultralight";
   }
   
   /* Classes */

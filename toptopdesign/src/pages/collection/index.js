@@ -1,89 +1,224 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import CustomedButton from "./components/customedBtn";
 import SearchBox from "./components/searchBox/index.js";
-import { Styles, DialogStyles } from './style/collectionStyle';
+import { 
+    Styles, 
+    DialogStyles, 
+    DeleteDlgStyle 
+} from './style/collectionStyle';
 import Dialog from '@mui/material/Dialog';
 import Input from "./components/input";
 import EmailInput from "./components/emailInput";
 import CloseButton from "./components/closeBtn";
 import TextButton from './components/txtButton';
-import CollectionCard from './components/collectionCard';
 
-import { collections } from '../../assets/config';
-import { Grid } from "@mui/material";
+import IconButton from '@mui/material/IconButton';
 
-export default function Collection(){
-    const [open, setOpen] = useState(false);
+import { ReactComponent as FacebookIcon } from '../../assets/img/user/collection/facebook.svg';
+import { ReactComponent as TwitterIcon } from '../../assets/img/user/collection/twitter.svg';
+import { ReactComponent as DiscordIcon } from '../../assets/img/user/collection/discord.svg';
+import { ReactComponent as LinkIcon } from '../../assets/img/user/collection/link.svg';
+import { ReactComponent as DeleteImg } from '../../assets/img/user/collection/delete.svg';
 
-    const handleClickOpen = () => {
-        setOpen(true);
+import {
+    getCollectionById
+} from '../../api/collection';
+
+export default function Collection({children}){
+    const [createdOpen, setCreatedOpen] = useState(false);
+    const [deletedOpen, setDeletedOpen] = useState(false);
+    const [viewCollection, setViewCollection] = useState(false);
+    const { id } = useParams();
+    const [isEdited, SetEdited] = useState(false);
+
+    const openCreatedDlg = () => {
+        setCreatedOpen(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const openDeletedDlg = () => {
+        setDeletedOpen(true);
     };
+
+    const closeCreatedDlg = () => {
+        setCreatedOpen(false);
+        SetEdited(false);
+    };
+
+    const closeDeletedDlg = () => {
+        setDeletedOpen(false);
+    };
+
+    const openEditDlg = () => {
+        SetEdited(true);
+        setCreatedOpen(true);
+    }
+
+    useEffect(() => {
+        if(id !== undefined && id !== null){
+            setViewCollection(true);
+        }else{
+            setViewCollection(false);
+        }
+    }, [id]);
+
     return(
         <Styles>
             <div className="collection-container">
                 <div className="search-bar">
                     <div className="topic-txt">
-                        {`Collctins (0)`}
+                        <div className="collection-count">
+                            {`Collections (0)`}
+                        </div>
+                        {viewCollection && 
+                            <div className="collection-des">
+                                This area will be used for the collection description when creating the collection, max 150 characters. and the width is like this.
+                            </div>
+                        }
                     </div>
                     <div className="search-action">
-                        <SearchBox />
-                        <CustomedButton text={"Add Collection"} onClick={handleClickOpen}/>
+                        {viewCollection?(
+                            <div className="action-group">
+                                <div className="social-group">
+                                    <IconButton 
+                                        aria-label="delete"
+                                    >
+                                        <FacebookIcon className='icon alarm' />
+                                    </IconButton>
+                                    <IconButton 
+                                        aria-label="delete"
+                                    >
+                                        <TwitterIcon className='icon alarm' />
+                                    </IconButton>
+                                    <IconButton 
+                                        aria-label="delete"
+                                    >
+                                        <DiscordIcon className='icon alarm' />
+                                    </IconButton>
+                                    <IconButton 
+                                        aria-label="delete"
+                                    >
+                                        <LinkIcon className='icon alarm' />
+                                    </IconButton>
+                                </div>
+                                <div className="btn-group">
+                                    <div 
+                                        className='small-btn-outline mr-24'
+                                        onClick={openEditDlg}
+                                    >
+                                        Edit
+                                    </div>
+                                    <div 
+                                        className='small-btn-outline'
+                                        onClick={openDeletedDlg}
+                                    >
+                                        Delete Collection
+                                    </div>
+                                </div>
+                            </div>
+                        ):(
+                            <>
+                                <SearchBox />
+                                <CustomedButton text={"Add Collection"} onClick={openCreatedDlg}/>
+                            </>
+                        )}
                     </div>
+                    
                 </div>
-                <div className="collection-list">
-                    <Grid container spacing={3}>
-                        {collections && collections.map((info, idx) => {
-                            return (
-                                <Grid item sm={4} xs={6} md={3} key={idx}>
-                                    <CollectionCard info={info} key={idx}/>
-                                </Grid>
-                            )
-                        })}
-                    </Grid>
-                </div>
+                {children && children}
                 <Dialog
-                    open={open} 
-                    onClose={handleClose}
+                    open={createdOpen} 
+                    onClose={closeCreatedDlg}
                     maxWidth='md'
                     fullWidth={true}
                     PaperProps={{
                         style: {
-                          borderRadius: 24,
-                          overflow: 'hidden',
-                          backgroundColor: 'transparent',
-                          boxShadow: 'none',
-                          padding: 30,
-                          '@media(minWidth: 780px)' : {
+                            display: 'flex',
+                            alignItems: 'center',
+                            borderRadius: 24,
+                            overflow: 'hidden',
+                            backgroundColor: 'transparent',
+                            boxShadow: 'none',
+                            padding: 30,
+                            '@media(minWidth: 780px)' : {
                             height: 486,
-                          }
+                            }
                         },
                     }}
                 >
                     <DialogStyles>
                         <div className="dialog-container">
                             <div className="header">
-                                Create a new collection
+                                {!isEdited?<>Create a new collection</>:<>Edit collection</>}
                             </div>
                             <div className="body">
-                                <div className="label">
-                                    Name
+                                <div className="liner">
+                                    <div className="label">
+                                        Name
+                                    </div>
+                                    <div className="max-character">
+                                        64
+                                    </div>
                                 </div>
                                 <Input />
-                                <div className="label">
-                                    Description (optional)
+                                <div className="liner">
+                                    <div className="label">
+                                        Description (optional)
+                                    </div>
+                                    <div className="max-character">
+                                        150
+                                    </div>
                                 </div>
                                 <EmailInput />
                             </div>
                             <div className="footer">
-                                <TextButton text={"Create Colleciton"}/>
+                                <TextButton text={!isEdited?"Create Colleciton":"Update"}/>
                             </div>
-                            <CloseButton handleClose={handleClose}/>
+                            <CloseButton handleClose={closeCreatedDlg}/>
                         </div>
                     </DialogStyles>
+                </Dialog>
+
+                <Dialog
+                    open={deletedOpen} 
+                    onClose={closeDeletedDlg}
+                    maxWidth='md'
+                    fullWidth={true}
+                    PaperProps={{
+                        style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            borderRadius: 24,
+                            overflow: 'hidden',
+                            backgroundColor: 'transparent',
+                            boxShadow: 'none',
+                            padding: 30,
+                            height: 636,
+                            '@media(minWidth: 780px)' : {
+                            height: 486,
+                            }
+                        },
+                    }}
+                >
+                    <DeleteDlgStyle>
+                        <div className="dialog-container">
+                            <div className="header">
+                                Delete collection!
+                            </div>
+                            <div className="body">
+                                <div className="des-txt">
+                                    Are you sure you want to delete this collection? This process is irreversible even customer support can’t help you either. 
+                                </div>
+                                <div className="picture">
+                                    <DeleteImg />
+                                </div>
+                            </div>
+                            <div className="footer">
+                                <TextButton text={"Yes I’m sure"}/>
+                            </div>
+                            <CloseButton handleClose={closeDeletedDlg}/>
+                        </div>
+                    </DeleteDlgStyle>
                 </Dialog>
             </div>
         </Styles>

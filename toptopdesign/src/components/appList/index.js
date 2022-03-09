@@ -11,7 +11,7 @@ export default function AppList({title, data}){
                 </div>
                 <div className="app-list">
                     <Grid container spacing={3}>
-                        {data.map((info, idx) => {
+                        {data && data.map((info, idx) => {
                             return (
                                 <Grid item sm={6} xs={12} md={4} key={idx}>
                                     <AppCard info={info}/>

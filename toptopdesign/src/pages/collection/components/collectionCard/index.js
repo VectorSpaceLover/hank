@@ -1,9 +1,18 @@
 import { Grid } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 import { Styles } from './style/collectionCardStyle';
-export default function CollectionCard({info}){
+export default function CollectionCard({info, idx}){
+    const navigate = useNavigate()
+
+    const viewDetail = (idx) => {
+        navigate(`/collection/${idx}`)
+    }
+
     return (
         <Styles>
-            <div className="card-container">
+            <div className="card-container"
+                onClick={() => viewDetail(idx)}
+            >
                 <div className="card-header">
                     <div className="collection-name">
                         {info.name}

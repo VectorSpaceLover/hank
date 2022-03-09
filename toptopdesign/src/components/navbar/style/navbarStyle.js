@@ -3,6 +3,7 @@ import {
   Border1pxSecond,
   PptelegrafRegularNormalBlack13px,
   ValignTextMiddle,
+  PptelegrafRegularNormalBlack14px
 } from '../../../assets/styledMixins';
 
 export const Styles = styled.div`
@@ -27,6 +28,17 @@ export const Styles = styled.div`
             @media screen and (max-width: 800px) {
                 padding: 31px 10px 0px 10px;
             }
+            .home{
+                ${PptelegrafRegularNormalBlack14px}
+                display: flex;
+                align-items: center;
+                min-height: 15px;
+                min-width: 36px;
+                letter-spacing: 0;
+                &:hover {
+                    color: #867d7d;
+                }
+            }
             .overlap-group{
                 display: flex;
                 height: 37px;
@@ -39,6 +51,7 @@ export const Styles = styled.div`
                         display: none;
                     }
                     .item{
+                        ${PptelegrafRegularNormalBlack14px}
                         min-height: 15px;
                         min-width: 36px;
                         letter-spacing: 0;

@@ -5,7 +5,7 @@ import {
 
 export const Styles = styled.div`
     .list-container{
-        padding: 20px;
+        padding: 20px 0px 20px 0px;
         box-shadow: 4px -2px 9px 8px rgb(0 0 0 / 2%);
         background-color: var(--white);
         border-radius: 16px;
@@ -14,6 +14,8 @@ export const Styles = styled.div`
         left: 0px;
         width: calc(100% - 40px);
         .list-item{
+            z-index: 2;
+            padding: 0px 20px 0px 20px;
             display: flex;
             flex-direction: row;
             align-items: center;

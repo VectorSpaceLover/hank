@@ -13,6 +13,7 @@ export const Styles = styled.div`
         background-color: var(--white);
         border-radius: 16px;
         height: 336px;
+        cursor: pointer;
         @media screen and (max-width: 900px) {
             height: 311px;
         }
