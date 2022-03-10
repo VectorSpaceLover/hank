@@ -15,7 +15,8 @@ export const Styles = styled.div`
         width: 400px;
         margin: 0px 24px 24px 0px;
         @media screen and (max-width: 600px) {
-            margin: 0px;
+            margin-left: 0px;
+            margin-bottom: 10px;
         }
         .card-header{
             .circle{

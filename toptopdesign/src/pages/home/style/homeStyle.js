@@ -95,6 +95,12 @@ export const Styles = styled.div`
                     align-items: center;
                     flex-wrap: wrap;
                     padding: 0px 35px 10px 35px;
+                    @media screen and (max-width: 800px) {
+                        padding: 10px 35px 20px 35px;
+                    }
+                    @media screen and (max-width: 600px) {
+                        padding: 10px 35px 20px 35px;
+                    }
                     .pattern-item{
                         width: 140px;
                         display: flex;

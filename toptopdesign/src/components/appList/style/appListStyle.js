@@ -18,6 +18,7 @@ export const Styles = styled.div`
             @media screen and (max-width: 600px) {
                 margin: 0px;
                 flex-wrap: wrap;
+                padding: 0px 30px;
             }
         }
     }
