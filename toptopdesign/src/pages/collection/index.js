@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CustomedButton from "./components/customedBtn";
 import SearchBox from "./components/searchBox/index.js";
 import { 
@@ -24,9 +25,12 @@ import { ReactComponent as DeleteImg } from '../../assets/img/user/collection/de
 import {
     getCollectionById,
     createNewCollection,
+    deleteCollectionById,
+    upDateCollection,
 } from '../../api/collection';
 
 export default function Collection({children}){
+    // const allCollecRef = useRef();
     const [createdOpen, setCreatedOpen] = useState(false);
     const [deletedOpen, setDeletedOpen] = useState(false);
     const [viewCollection, setViewCollection] = useState(false);
@@ -35,6 +39,7 @@ export default function Collection({children}){
     const [collectionName, setCollectionName] = useState('');
     const [description, setDescription] = useState('');
     const [colDes, setColDes] = useState('');
+    const navigate = useNavigate()
 
     const openCreatedDlg = () => {
         setCreatedOpen(true);
@@ -66,14 +71,42 @@ export default function Collection({children}){
         }
     }, [id]);
 
-    useEffect(() => {
-        async function getInitialData(){
-            const { collection } = await getCollectionById(id);
-            setColDes(collection[0].description);
+    const getInitialData = async() => {
+        const { collection } = await getCollectionById(id);
+        setColDes(collection[0].description);
+    }
+
+    const handleCreate = (isEdited) => {
+        if(!isEdited){
+            createNewCollection(collectionName, description);
+        }else{
+            upDateCollection(id, collectionName, description);
         }
+        window.location.reload(false);
+        closeCreatedDlg();
+        setCollectionName('');
+        setDescription('');
+        // allCollecRef.current.getInitialData();
+    }
+
+    const handleDelete = () => {
+        deleteCollectionById(id);
+        closeDeletedDlg();
+        navigate(`/collection/`);
+        window.location.reload(false);
+    }
+
+    useEffect(() => {
         if(id)
             getInitialData();
     }, [id])
+
+    // const ChildComponentWithRef = React.forwardRef((props, ref) =>
+    //     React.cloneElement(children, {
+    //         ...props,
+    //         ref
+    //     })
+    // );
 
     return(
         <Styles>
@@ -185,7 +218,7 @@ export default function Collection({children}){
                                 <EmailInput description={description} setDescription={setDescription}/>
                             </div>
                             <div className="footer">
-                                <TextButton text={!isEdited?"Create Colleciton":"Update"} onClick={() => createNewCollection(collectionName, description)}/>
+                                <TextButton text={!isEdited?"Create Colleciton":"Update"} onClick={() => handleCreate(isEdited)}/>
                             </div>
                             <CloseButton handleClose={closeCreatedDlg}/>
                         </div>
@@ -227,7 +260,7 @@ export default function Collection({children}){
                                 </div>
                             </div>
                             <div className="footer">
-                                <TextButton text={"Yes I’m sure"}/>
+                                <TextButton text={"Yes I’m sure"} onClick={() => handleDelete()}/>
                             </div>
                             <CloseButton handleClose={closeDeletedDlg}/>
                         </div>

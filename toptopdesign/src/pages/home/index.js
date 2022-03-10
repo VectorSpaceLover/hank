@@ -164,9 +164,13 @@ export default function Home(){
             </div>
             { !(searchResults && searchKey) &&
                 <div className='all-app-container'>
-                    <div className="all-apps">
+                    <div className='mobile-container'>
                         <AppList title='Most popular mobile apps' data={popularApps}/>
+                    </div>
+                    <div className='added-container'>
                         <AppList title='Just added' data={addedApps}/>
+                    </div>
+                    <div className='web-container'>
                         <AppList title='Most popular websites' data={popularWebSites}/>
                     </div>
                 </div>

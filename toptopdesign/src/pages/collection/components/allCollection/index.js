@@ -1,18 +1,20 @@
 import CollectionCard from '../collectionCard';
 import { Grid } from "@mui/material";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
 import { getAllCollection } from '../../../../api/collection';
 
-export default function AllCollections(){
+const AllCollections = forwardRef((props, ref) => {
     const [collections, setCollections] = useState([]);
 
-    useEffect(() => {
-      async function getInitialData(){
+    useImperativeHandle(ref, () => ({ getInitialData }), [])
+
+    const getInitialData = async () => {
         const { collections } = await getAllCollection();
         setCollections(collections);
     }
-    getInitialData();
+    useEffect(() => {
+        getInitialData();
     }, [])
     
 
@@ -38,4 +40,6 @@ export default function AllCollections(){
             </Grid>
         </div>
     )
-}
+})
+
+export default AllCollections;

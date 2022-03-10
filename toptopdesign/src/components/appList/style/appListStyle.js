@@ -5,7 +5,7 @@ import {
 
 export const Styles = styled.div`
     .app-list-conatiner{
-
+        
         .title{
             ${PptelegrafUltraBoldBlack28px}
             min-height: 30px;

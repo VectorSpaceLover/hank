@@ -11,6 +11,10 @@ export const Styles = styled.div`
     .before-container {
         display: flex;
         justify-content: center;
+        @media screen and (min-width: 1900px) {
+            position: relative;
+            margin: 137px 122px 0px 186px;
+        }
         .home-container{
             margin: 137px 0px 0px 0px;
             padding: 0px 22px 20px 22px;
@@ -146,6 +150,7 @@ export const Styles = styled.div`
         }
     }
     .all-app-container{
+        position: relative;
         margin: 0px 29px 0px 186px;
         @media screen and (max-width: 1200px) {
             margin: 0px 20px 114px 140px;
@@ -158,6 +163,30 @@ export const Styles = styled.div`
         }
         @media screen and (max-width: 600px) {
             margin: 0px 20px 114px 20px;
+        }
+        @media screen and (min-width: 1900px) {
+            position: relative;
+        }
+        .mobile-container{
+            @media screen and (min-width: 1900px) {
+                position: absolute;
+                top: 0px;
+                left: calc((100% - 1300px) / 2);
+            }
+        }
+        .added-container{
+            @media screen and (min-width: 1900px) {
+                position: absolute;
+                top: 650px;
+                left: calc((100% - 1300px) / 2);
+            }
+        }
+        .web-container{
+            @media screen and (min-width: 1900px) {
+                position: absolute;
+                top: 1300px;
+                left: calc((100% - 1300px) / 2);
+            }
         }
     }
 `;

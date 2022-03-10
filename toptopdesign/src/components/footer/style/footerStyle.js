@@ -24,6 +24,11 @@ export const Styles = styled.div`
       @media screen and (max-width: 600px) {
         margin: 0px 20px;
       }
+      @media screen and (min-width: 1900px) {
+        position: absolute;
+        top: 1850px;
+        margin-bottom: 30px;
+      }
       height: 45px;
       display: flex;
       padding: 0px 40px 0px 40px;

@@ -53,7 +53,7 @@ export const Styles = styled.div`
                     ${ValignTextMiddle}
                     height: 22px;
                     min-width: 58px;
-                    text-align: center;
+                    padding-top: 1px;
                     letter-spacing: 1.04px;
                     line-height: 22.5px;
                     white-space: nowrap;
@@ -96,6 +96,8 @@ export const Styles = styled.div`
                 &:hover {
                     color: #867d7d;
                 }
+                width: 85px;
+                height: 37px;
             }
         }
     }

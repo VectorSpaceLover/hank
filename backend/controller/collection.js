@@ -42,9 +42,53 @@ const getCollectionById = async (req, res) => {
 
 }
 
+const deleteCollectionById = async (req, res) => {
+    const { id } = req.params;
+    
+    await Collection.findByIdAndRemove(id, (err, doc) => {
+        if(!err){
+            return res.send({
+                status: 'ok',
+                deleted: id,
+            })
+        }else{
+            return res.status(404).send({
+                message: `cant save Collection with ID: ${id} in database.`,
+            });
+        }
+    });
+}
+
+const upDateCollection = async (req, res) => {
+    const { id } = req.params;
+    const {
+        collectionName,
+        description,
+    } = req.body;
+    
+    const collection = await Collection.findById(id);
+    if(!collection){
+        return res.status(404).send({
+            message: `Collection with ID: ${id} does not exist in database.`,
+        });
+    }
+
+    collection.updatedAt = Date.now();
+    collection.collectionName = collectionName;
+    collection.description = description;
+
+    const savedCollection = await collection.save();
+    return res.send({
+        status: 'ok',
+        collection: savedCollection,
+    });
+}
+
 module.exports = {
     getCollections,
     getCollectionById,
-    createNewCollection
+    createNewCollection,
+    deleteCollectionById,
+    upDateCollection,
 };
   
