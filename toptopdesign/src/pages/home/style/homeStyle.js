@@ -74,6 +74,7 @@ export const Styles = styled.div`
                 text-align: center;
                 .view-full{
                     ${PptelegrafUltraBoldBlack14px}
+                    position: relative;
                     min-height: 15px;
                     display: inline-block;
                     letter-spacing: 0;
@@ -84,8 +85,12 @@ export const Styles = styled.div`
                     }
                 }
                 .pattern-container{
+                    position: absolute;
+                    top: 0px
+                    left: 0px;
                     margin-top: 20px;
                     overflow-y: auto;
+                    max-width: 1090px;
                     height: 196px;
                     box-shadow: 4px -2px 9px 8px rgb(0 0 0 / 2%);
                     background-color: var(--white);
@@ -94,7 +99,7 @@ export const Styles = styled.div`
                     flex-direction: row;
                     align-items: center;
                     flex-wrap: wrap;
-                    padding: 0px 35px 10px 35px;
+                    padding: 10px 35px 20px 35px;
                     @media screen and (max-width: 800px) {
                         padding: 10px 35px 20px 35px;
                     }
@@ -106,6 +111,7 @@ export const Styles = styled.div`
                         display: flex;
                         justify-content: start;
                     }
+                    z-index: 100;
                 }
             }
             .center-mode{

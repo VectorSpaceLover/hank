@@ -33,29 +33,35 @@ export const Styles = styled.div`
       overflow: hidden;
       margin: 137px 186px 0px 186px;
       .terms{
+          display: flex;
+          align-items: center; 
           min-height: 15px;
           min-width: 48px;
           letter-spacing: 0;
           @media screen and (max-width: 600px) {
-            font-size: 8px;
+            font-size: 12px;
           }
       }
       .privacy{
+          display: flex;
+          align-items: center;
           min-height: 15px;
           margin-left: 58px;
           min-width: 59px;
           letter-spacing: 0;
           @media screen and (max-width: 600px) {
-            font-size: 8px;
+            font-size: 12px;
           }
       }
       .copyright{
+          display: flex;
+          align-items: center;
           min-height: 15px;
           letter-spacing: 0;
           display: inline-block;
           margin-left: auto;
           @media screen and (max-width: 600px) {
-            font-size: 8px;
+            font-size: 12px;
           }
       }
     }

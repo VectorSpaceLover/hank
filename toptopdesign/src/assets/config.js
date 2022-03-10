@@ -76,6 +76,48 @@ export const allPatternItems = [
     {
         name: 'Sign Up',
     },
+    {
+        name: 'Sign Up',
+    },
+    {
+        name: 'On Boarding',
+    },
+    {
+        name: 'Sign In',
+    },
+    {
+        name: 'Sign Up',
+    },
+    {
+        name: 'On Boarding',
+    },
+    {
+        name: 'Sign In',
+    },
+    {
+        name: 'Sign Up',
+    },
+    {
+        name: 'On Boarding',
+    },
+    {
+        name: 'Sign In',
+    },
+    {
+        name: 'Sign Up',
+    },
+    {
+        name: 'On Boarding',
+    },
+    {
+        name: 'Sign In',
+    },
+    {
+        name: 'Sign Up',
+    },
+    {
+        name: 'Sign Up',
+    },
 ];
 
 export const popularApps = [

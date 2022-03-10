@@ -12,6 +12,7 @@ import ImageView from '../../components/imageView';
 import TxtButton from '../../components/txtButton';
 import Footer from '../../components/footer';
 import { getAllProducts, getSearchResults } from '../../api/home';
+import OutsideClickHandler from './components/outSide';
 
 export default function Home(){
     const [showPatternList, setShowPatternList] = useState(false);
@@ -92,38 +93,45 @@ export default function Home(){
                         showKeyword={showKeyword} 
                         searchFunction={searchFunction} 
                     />
-                    <div className="center-container">
-                        <div 
-                            className="view-full"
-                            onClick={() => viewFullPattern()}
-                        >
-                            View full pattern list
-                        </div>
-                        {/* {showPatternList && 
-                            <div className="pattern-container">
-                                <Grid container spacing={3}>
+                    <OutsideClickHandler
+                        onOutsideClick={() => {
+                            setShowPatternList(false)
+                        }}
+                    >
+                        <div className="center-container">
+                            <div 
+                                className="view-full"
+                                onClick={() => viewFullPattern()}
+                            >
+                                View full pattern list
+                            </div>
+                            {/* {showPatternList && 
+                                <div className="pattern-container">
+                                    <Grid container spacing={3}>
+                                        {allPatternItems && allPatternItems.map((info, idx) => {
+                                            return (
+                                                <Grid item sm={3} xs={6} md={2} key={idx}>
+                                                    <IndeterminateCheckbox info={info}/>
+                                                </Grid>
+                                            )
+                                        })}
+                                    </Grid>
+                                </div>
+                            } */}
+                            {showPatternList && 
+                                <div className="pattern-container">
                                     {allPatternItems && allPatternItems.map((info, idx) => {
                                         return (
-                                            <Grid item sm={3} xs={6} md={2} key={idx}>
-                                                <IndeterminateCheckbox info={info}/>
-                                            </Grid>
+                                            <div className='pattern-item'>
+                                                <IndeterminateCheckbox info={info} key={idx}/>
+                                            </div>
                                         )
                                     })}
-                                </Grid>
-                            </div>
-                        } */}
-                        {showPatternList && 
-                            <div className="pattern-container">
-                                {allPatternItems && allPatternItems.map((info, idx) => {
-                                    return (
-                                        <div className='pattern-item'>
-                                            <IndeterminateCheckbox info={info} key={idx}/>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        }
-                    </div>
+                                </div>
+                            }
+                        </div>
+                    </OutsideClickHandler>
+                    
                     {showSearchKey && 
                         <div className='keyword-container'>
                             <SearchIcon />
