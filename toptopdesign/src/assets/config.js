@@ -70,6 +70,12 @@ export const allPatternItems = [
     {
         name: 'On Boarding',
     },
+    {
+        name: 'Sign In',
+    },
+    {
+        name: 'Sign Up',
+    },
 ];
 
 export const popularApps = [

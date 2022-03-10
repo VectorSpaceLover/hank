@@ -77,22 +77,12 @@ function Navbar() {
 
     return (
         <Styles>
-            <div className='navbar'>
-                <div className='flex-row' >
-                    <div className='overlap-group' >
-                        {/* <div className='menu-icon'>
-                            <img className='line-first' alt='first' src="https://anima-uploads.s3.amazonaws.com/projects/621ea468b7b66445f330bb3a/releases/621ea60073fa301aef53addf/img/group-1155@2x.svg" />
-                        </div> */}
-                        {/* <div className='item-group' >
-                            {items.map((itemName, index) => 
-                                <div className={index === 0? 'item': 'item item-ml'} key={`${itemName} ${index}`}>{itemName}</div>
-                            )}
-                        </div> */}
-                        <div className='home'>
-                            Home
-                        </div>
-                        <img className='title-img'  src='/img/user/banner.svg' alt='banner' />
+            <div className='before-container'>
+                <div className='navbar'>
+                    <div className='home'>
+                        Home
                     </div>
+                    <img className='title-img'  src='/img/user/banner.svg' alt='banner' />
                     {!isSigned? (
                         <div className='small-btn-outline' >
                             <div className='sign-in-btn' >{signIn}</div>
@@ -113,148 +103,11 @@ function Navbar() {
                             >
                                 <Gift className='icon' />
                             </IconButton>
-                            <Menu
-                                anchorEl={anchorGift}
-                                id="account-menu"
-                                open={openGift}
-                                onClose={closeGiftMenu}
-                                onClick={closeGiftMenu}
-                                PaperProps={{
-                                elevation: 0,
-                                sx: {
-                                    overflow: 'visible',
-                                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                    mt: 1.5,
-                                    width: 286,
-                                    borderRadius: 4,
-                                    padding: '24px 23px 4px 23px',
-                                    '@media screen and (max-width: 600px)': {
-                                        width: 270,
-                                    },
-                                    '& .MuiAvatar-root': {
-                                        width: 32,
-                                        height: 32,
-                                        ml: -0.5,
-                                        mr: 1,
-                                    },
-                                    '&:before': {
-                                        content: '""',
-                                        display: 'block',
-                                        position: 'absolute',
-                                        top: 0,
-                                        right: 14,
-                                        width: 10,
-                                        height: 10,
-                                        bgcolor: 'background.paper',
-                                        transform: 'translateY(-50%) rotate(45deg)',
-                                        zIndex: 0,
-                                    },
-                                },
-                                }}
-                                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                            >
-                                <MenuItem onClick={closeGiftMenu} disableRipple>
-                                    <ProfileIcon style={{ marginRight: 14 }} />
-                                    My Profile
-                                </MenuItem>
-                                <Divider/>
-                                <MenuItem onClick={closeGiftMenu} disableRipple>
-                                    <CollectionsIcon style={{ marginRight: 14 }}/>
-                                    Collections
-                                </MenuItem>
-                                <Divider/>
-                                <MenuItem onClick={closeGiftMenu} disableRipple>
-                                    <SettingIcon style={{ marginRight: 14 }} />
-                                    Settings
-                                </MenuItem>
-                                <Divider/>
-                                <MenuItem onClick={closeGiftMenu} disableRipple>
-                                    <SupportIcon style={{ marginRight: 14 }} />
-                                    Support
-                                </MenuItem>
-                                <Divider/>
-                                <MenuItem onClick={closeGiftMenu} disableRipple>
-                                    <SignOutIcon style={{ marginRight: 14 }} />
-                                    Sign Out
-                                </MenuItem>
-                            </Menu>
-                            <Menu
-                                anchorEl={anchorAlarm}
-                                id="account-menu"
-                                open={openAlarm}
-                                onClose={closeAlarmMenu}
-                                onClick={closeAlarmMenu}
-                                PaperProps={{
-                                elevation: 0,
-                                sx: {
-                                    overflow: 'visible',
-                                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                    mt: 1.5,
-                                    width: 421,
-                                    '@media screen and (max-width: 600px)': {
-                                        width: 343,
-                                        height: 347,
-                                    },
-                                    borderRadius: 4,
-                                    padding: '24px 4px 14px 4px',
-                                    '& .MuiAvatar-root': {
-                                        width: 32,
-                                        height: 32,
-                                        ml: -0.5,
-                                        mr: 1,
-                                    },
-                                    '&:before': {
-                                        content: '""',
-                                        display: 'block',
-                                        position: 'absolute',
-                                        top: 0,
-                                        right: 14,
-                                        width: 10,
-                                        height: 10,
-                                        bgcolor: 'background.paper',
-                                        transform: 'translateY(-50%) rotate(45deg)',
-                                        zIndex: 0,
-                                    },
-                                },
-                                }}
-                                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                            >
-                                {messages && messages.map((val, idx) => {
-                                    let res = '';
-                                    if(idx < 5){
-                                        res =   <div key={idx}>
-                                                    <MenuItem onClick={(event) => {viewMessage(idx);closeAlarmMenu(event)}} disableRipple disabled={idx===4?true:false}>
-                                                        <div style={menuItemStyle}>
-                                                            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
-                                                                <VoiceIcon style={{ marginRight: 7 }} />
-                                                                <div style={txtStyle}>{val.title}</div>
-                                                            </div>
-                                                            <div style={dateStyle}>{val.date}</div>
-                                                        </div>
-                                                    </MenuItem>
-                                                    <Divider/>
-                                                </div>;
-                                    }else{
-                                        if(idx === 5){
-                                            res = <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }} key={idx}>
-                                                    <a
-                                                        href='/myaccount/all'
-                                                        style={viewAllStyle}
-                                                    >
-                                                        View all messages
-                                                    </a>
-                                                </div>
-                                        };
-                                    }
-                                    return res;
-                                })}
-                            </Menu>
                         </div>
                     )}
                 </div>
             </div>
+            
         </Styles>
     );
 }

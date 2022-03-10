@@ -1,11 +1,9 @@
 import { Styles } from './style/emailInputStyle';
-import { useState } from 'react';
 
-export default function EmailInput(){
-    const [email, setEmail] = useState('');
+export default function EmailInput({description, setDescription}){
 
     const handleChange = (e) => {
-        setEmail(e.target.value)
+        setDescription(e.target.value)
     }
 
     return (
@@ -13,7 +11,7 @@ export default function EmailInput(){
             <textarea 
                 className='input'
                 onChange={e => handleChange(e)}
-                value={email}
+                value={description}
             />
         </Styles>
     )

@@ -7,82 +7,38 @@ import {
 } from '../../../assets/styledMixins';
 
 export const Styles = styled.div`
-    .navbar{
-        min-height: 86px;
-        background-color: var(--white);
+    .before-container{
+        display: flex;
+        justify-content: center;
         border-bottom: 1px solid var(--second);
-        position: relative;
-        .flex-row{
-            padding: 31px 165px 0px 165px;
-            margin-left: 6px;
+        .navbar{
+            width: 100%;
+            max-width: 1156px;
+            min-height: 86px;
+            background-color: var(--white);
+            position: relative;
+            padding: 0px 22px;
             display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
             @media screen and (max-width: 1200px) {
-                padding: 31px 100px 0px 100px;
+                margin: 0px 140px 0px 140px;
             }
             @media screen and (max-width: 1000px) {
-                padding: 31px 60px 0px 60px;
-            }
-            @media screen and (max-width: 900px) {
-                padding: 31px 30px 0px 30px;
+                margin: 0px 100px 0px 100px;
             }
             @media screen and (max-width: 800px) {
-                padding: 31px 10px 0px 10px;
+                margin: 0px 60px 0px 60px;
             }
-            .home{
-                ${PptelegrafRegularNormalBlack14px}
-                display: flex;
-                align-items: center;
-                min-height: 15px;
-                min-width: 36px;
-                letter-spacing: 0;
-                &:hover {
-                    color: #867d7d;
-                }
-            }
-            .overlap-group{
-                display: flex;
-                height: 37px;
-                .item-group{
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    justify-content: space-between;
-                    @media screen and (max-width: 768px) {
-                        display: none;
-                    }
-                    .item{
-                        ${PptelegrafRegularNormalBlack14px}
-                        min-height: 15px;
-                        min-width: 36px;
-                        letter-spacing: 0;
-                        &:hover {
-                            color: #867d7d;
-                        }
-                    }
-                    .item-ml{
-                        margin-left: 58px;
-                    }
-                }
-                .menu-icon {
-                    display: none;
-                    cursor: pointer;
-                    @media screen and (max-width: 768px) {
-                      display: block;
-                    }
-                }
-                .title-img{
-                    position: absolute;
-                    width: 85px;
-                    height: 37px;
-                    top: 27px;
-                    left: calc((100vw - 85px)/2);
-                }
+            @media screen and (max-width: 600px) {
+                margin: 0px 20px 0px 20px;
+                padding: 0px;
             }
             .small-btn-outline{
                 ${Border1pxSecond}
                 ${PptelegrafRegularNormalBlack13px}
                 height: 32px;
-                margin-left: auto;
                 margin-bottom: 0.78px;
                 display: flex;
                 padding: 0 15.5px;
@@ -126,6 +82,22 @@ export const Styles = styled.div`
                     margin-bottom: 2.02px;
                 }
             }
+            .title-img{
+                width: 85px;
+                height: 37px;
+            }
+            .home{
+                ${PptelegrafRegularNormalBlack14px}
+                display: flex;
+                align-items: center;
+                min-height: 15px;
+                min-width: 36px;
+                letter-spacing: 0;
+                &:hover {
+                    color: #867d7d;
+                }
+            }
         }
     }
+    
 `;

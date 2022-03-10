@@ -22,7 +22,7 @@ export default function AppList({title, data}){
                     {data && data.map((info, idx) => {
                             return (
                                 // <Grid item sm={6} xs={12} md={4} key={idx}>
-                                    <AppCard info={info}/>
+                                    <AppCard info={info} key={idx}/>
                                 // </Grid>
                             )
                     })}

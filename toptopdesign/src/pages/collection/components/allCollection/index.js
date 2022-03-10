@@ -1,9 +1,20 @@
 import CollectionCard from '../collectionCard';
 import { Grid } from "@mui/material";
+import { useState, useEffect } from 'react';
 
-import { collections } from '../../../../assets/config';
+import { getAllCollection } from '../../../../api/collection';
 
 export default function AllCollections(){
+    const [collections, setCollections] = useState([]);
+
+    useEffect(() => {
+      async function getInitialData(){
+        const { collections } = await getAllCollection();
+        setCollections(collections);
+    }
+    getInitialData();
+    }, [])
+    
 
     return (
         <div className="collection-list">
@@ -20,7 +31,6 @@ export default function AllCollections(){
                             <CollectionCard 
                                 info={info} 
                                 key={idx}
-                                idx={idx}
                             />
                         </Grid>
                     )

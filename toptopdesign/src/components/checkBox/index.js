@@ -14,12 +14,12 @@ export default function IndeterminateCheckbox({info}) {
         control={<Checkbox 
                     checked={checked} 
                     sx={{
-                        color: "black",
-                        '&.Mui-checked': {
-                        color: "black",
-                         },
+                          color: "black",
+                          '&.Mui-checked': {
+                            color: "black",
+                          },
                        }}
-                    onChange={handleChange} 
+                    onChange={handleChange}
                 />}
     />
   );

@@ -1,5 +1,4 @@
 const Products = require('../model/Products');
-const { search } = require('../routes/products');
 
 const getProducts = async (req, res) => {
     const mobiles = await Products.find({ type: 'mobile' });
@@ -22,7 +21,7 @@ const getProducts = async (req, res) => {
 
 const searchProducts = async (req, res) => {
     const { keyword } = req.query;
-    const searchResults = await Products.find({productName:{$regex: keyword}});
+    const searchResults = await Products.find({productName:{$regex: keyword, $options: 'i'}});
     if(searchResults){
         return res.send({
             searchResults: searchResults,

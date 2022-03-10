@@ -41,7 +41,7 @@ export const Styles = styled.div`
                 }
                 .sub-name{
                     display: inline-block;
-                    margin: auto;
+                    margin-left: 101px;
                     ${ValignTextMiddle}
                     ${PptelegrafRegularNormalWhite10px}
                     text-align: center;

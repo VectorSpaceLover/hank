@@ -1,8 +1,6 @@
 import { Styles } from './style/inputStyle';
-import { useState } from 'react';
 
-export default function Input(){
-    const [collectionName, setCollectionName] = useState('');
+export default function Input({collectionName, setCollectionName}){
 
     const handleChange = (e) => {
         setCollectionName(e.target.value);

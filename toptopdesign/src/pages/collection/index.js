@@ -22,7 +22,8 @@ import { ReactComponent as LinkIcon } from '../../assets/img/user/collection/lin
 import { ReactComponent as DeleteImg } from '../../assets/img/user/collection/delete.svg';
 
 import {
-    getCollectionById
+    getCollectionById,
+    createNewCollection,
 } from '../../api/collection';
 
 export default function Collection({children}){
@@ -31,6 +32,9 @@ export default function Collection({children}){
     const [viewCollection, setViewCollection] = useState(false);
     const { id } = useParams();
     const [isEdited, SetEdited] = useState(false);
+    const [collectionName, setCollectionName] = useState('');
+    const [description, setDescription] = useState('');
+    const [colDes, setColDes] = useState('');
 
     const openCreatedDlg = () => {
         setCreatedOpen(true);
@@ -62,6 +66,15 @@ export default function Collection({children}){
         }
     }, [id]);
 
+    useEffect(() => {
+        async function getInitialData(){
+            const { collection } = await getCollectionById(id);
+            setColDes(collection[0].description);
+        }
+        if(id)
+            getInitialData();
+    }, [id])
+
     return(
         <Styles>
             <div className="collection-container">
@@ -72,7 +85,7 @@ export default function Collection({children}){
                         </div>
                         {viewCollection && 
                             <div className="collection-des">
-                                This area will be used for the collection description when creating the collection, max 150 characters. and the width is like this.
+                                {colDes}
                             </div>
                         }
                     </div>
@@ -160,7 +173,7 @@ export default function Collection({children}){
                                         64
                                     </div>
                                 </div>
-                                <Input />
+                                <Input collectionName={collectionName} setCollectionName={setCollectionName}/>
                                 <div className="liner">
                                     <div className="label">
                                         Description (optional)
@@ -169,10 +182,10 @@ export default function Collection({children}){
                                         150
                                     </div>
                                 </div>
-                                <EmailInput />
+                                <EmailInput description={description} setDescription={setDescription}/>
                             </div>
                             <div className="footer">
-                                <TextButton text={!isEdited?"Create Colleciton":"Update"}/>
+                                <TextButton text={!isEdited?"Create Colleciton":"Update"} onClick={() => createNewCollection(collectionName, description)}/>
                             </div>
                             <CloseButton handleClose={closeCreatedDlg}/>
                         </div>

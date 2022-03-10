@@ -12,7 +12,8 @@ export const Styles = styled.div`
         position: absolute;
         top: 60px;
         left: 0px;
-        width: calc(100% - 40px);
+        width: 100%;
+        z-index: 100;
         .list-item{
             z-index: 2;
             padding: 0px 20px 0px 20px;

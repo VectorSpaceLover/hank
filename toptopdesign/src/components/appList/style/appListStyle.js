@@ -5,6 +5,7 @@ import {
 
 export const Styles = styled.div`
     .app-list-conatiner{
+
         .title{
             ${PptelegrafUltraBoldBlack28px}
             min-height: 30px;
@@ -14,14 +15,20 @@ export const Styles = styled.div`
         .app-list{
             display: flex;
             flex-direction: row;
-            flex-wrap: wrap;
-            @media screen and (max-width: 1500px) {
-                flex-wrap: nowrap;
-            }
             @media screen and (max-width: 600px) {
+                margin: 0px;
                 flex-wrap: wrap;
-                justify-content: center;
             }
         }
     }
 `;
+
+// flex-wrap: wrap;
+
+// @media screen and (max-width: 1500px) {
+//     flex-wrap: nowrap;
+// }
+// @media screen and (max-width: 600px) {
+//     flex-wrap: wrap;
+//     justify-content: center;
+// }
