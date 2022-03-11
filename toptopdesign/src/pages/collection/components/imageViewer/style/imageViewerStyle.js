@@ -23,9 +23,10 @@ export const Styles = styled.div`
     .overlay-image{
         width: 100%;
         height: 220px;
-        border-radius: 24px;
         object-fit: cover;
         position: relative;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(105, 105, 105, 0) 34.62%);
+        border-radius: 24px;
     }
     
     .overlay {
@@ -33,12 +34,12 @@ export const Styles = styled.div`
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: #008CBA;
         overflow: hidden;
         width: 100%;
         height: 0px;
         border-radius: 24px;
         transition: .5s ease;
+        
         .close-btn{
             position: absolute;
             top: 10px;

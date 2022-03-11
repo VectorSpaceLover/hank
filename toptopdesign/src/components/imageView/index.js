@@ -34,6 +34,10 @@ export default function ImageView({ favourited, imageList }){
     const [collectionName, setCollectionName] = useState('');
     const [description, setDescription] = useState('');
 
+    const [selectedId, setSelectedId] = useState('');
+
+    const [goTxt, setGoTxt] = useState("Let’s go!");
+
     const viewCollections = () => {
         setCollectionOpen(true);
     }
@@ -72,6 +76,16 @@ export default function ImageView({ favourited, imageList }){
         setSearchedCollections(searchResults);
     }
 
+    const gotoFunc = async() => {
+        if(selectedId !== ''){
+            setGoTxt("Successfully Added!");
+            const changeTxt = () => {
+                setGoTxt("Let’s go!");
+            }
+            await setTimeout(changeTxt, 3000);
+        }
+    }
+    
     useEffect(() => {
         getInitialData();
     }, [])
@@ -124,10 +138,15 @@ export default function ImageView({ favourited, imageList }){
                                 searchCollection={searchCollection}
                             />
                             {searchedCollections && searchedCollections.map((item, idx) => {
-                                return <Collection info={item} key={idx}/>
+                                return <Collection 
+                                            info={item} 
+                                            key={idx}
+                                            selectedId={selectedId}
+                                            setSelectedId={setSelectedId}
+                                        />
                             })}
                             <CreateButton text={"Create New Collection"} onClick={openNewCollection}/>
-                            <GoButton text={"Let’s go!"} onClick={closeViewCollectionsDlg}/>
+                            <GoButton text={goTxt} onClick={gotoFunc}/>
                         </div>
                         <CloseButton handleClose={closeViewCollectionsDlg}/>
                     </ViewCollectionDlgStyle>

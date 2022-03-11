@@ -90,4 +90,11 @@ export const Styles = styled.div`
             }
         }
     }
+    .focus{
+        ${Border2pxBrandPurple}
+        padding: 0px;
+        @media screen and (max-width: 700px) {
+            padding: 20px 12px;
+        }
+    }
 `;

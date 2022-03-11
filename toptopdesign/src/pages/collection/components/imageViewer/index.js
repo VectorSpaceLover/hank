@@ -13,7 +13,8 @@ export default function ImageViewer({index, closeItem}){
                     <>
                         <img src="/img/user/collection/collection.png" alt="" className="image" />
                         <div className="overlay">
-                            <img src="/img/user/collection/collection_hover.png" alt="" className="overlay-image"/>
+                            {/* <img src="/img/user/collection/collection_hover.png" alt="" className="overlay-image"/> */}
+                            <div className="overlay-image"></div>
                             <IconButton 
                                 aria-label="delete"
                                 className="close-btn"

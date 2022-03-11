@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Styles } from './style/collectionStyle';
 
-export default function Collection({info}){
+export default function Collection({info, selectedId, setSelectedId}){
     const [createdAt, setCreatedAt] = useState('');
     useEffect(() => {
         const date = new Date(info.createdDate);
@@ -9,7 +9,10 @@ export default function Collection({info}){
     }, [info])    
     return (
         <Styles>
-            <div className='collection-container'>
+            <div 
+                className={`collection-container ${info._id === selectedId && 'focus'}`}
+                onClick={() => setSelectedId(info._id)}
+            >
                 <div className='collection-txt'>
                     <div className='collection-name'>
                         {info.collectionName}

@@ -13,7 +13,6 @@ export const Styles = styled.div`
         height: 54px;
         background-color: var(--gallery);
         border-radius: 24px;
-        box-shadow: 0px 2px 2px #0066cc2e;
         outline: none;
         &:focus{
             ${Border2pxBrandPurple}
