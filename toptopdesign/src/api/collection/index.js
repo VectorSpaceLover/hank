@@ -5,6 +5,12 @@ export const getCollectionById = async (id) => {
     return res.data;
 }
 
+export const getCollectionByName = async (key) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/collection/search?keyword=${key}`);
+    console.log(res.data);
+    return res.data;
+}
+
 export const createNewCollection = async (name, des) => {
     const newCollection = { collectionName: name, description: des };
     const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/collection/`, newCollection);
@@ -22,7 +28,7 @@ export const deleteCollectionById = async (id) => {
 }
 
 export const upDateCollection = async (id, collectionName, description) => {
-    const res = axios.put(
+    const res = await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/collection/${id}`, 
         {
             collectionName: collectionName, 

@@ -12,6 +12,9 @@ export default function EmailInput({description, setDescription}){
                 className='input'
                 onChange={e => handleChange(e)}
                 value={description}
+                rows="2" 
+                cols="20" 
+                maxLength="150"
             />
         </Styles>
     )

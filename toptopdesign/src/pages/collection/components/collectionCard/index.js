@@ -15,10 +15,10 @@ export default function CollectionCard({info}){
             >
                 <div className="card-header">
                     <div className="collection-name">
-                        {info.name}
+                        {info.collectionName}
                     </div>
                     <div className="sub-name">
-                        {info.subName}
+                        24
                     </div>
                 </div>
                 <div className="card-body">

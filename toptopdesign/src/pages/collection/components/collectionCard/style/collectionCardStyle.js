@@ -28,6 +28,9 @@ export const Styles = styled.div`
                 min-width: 141px;
                 text-align: center;
                 letter-spacing: 0;
+                display: flex;
+                justify-content: center;
+                overflow: hidden;
             }
             .sub-name{
                 ${PptelegrafRegularNormalGraniteGray1}

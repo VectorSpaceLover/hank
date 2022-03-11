@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import CustomedButton from "./components/customedBtn";
@@ -27,10 +27,15 @@ import {
     createNewCollection,
     deleteCollectionById,
     upDateCollection,
+    getAllCollection,
+    getCollectionByName,
 } from '../../api/collection';
+import { CollectionsContext } from '../../context/collections';
 
 export default function Collection({children}){
-    // const allCollecRef = useRef();
+    const [collections, setCollections] = useContext(CollectionsContext);
+    const [keyword, setKeyword] = useState('');
+
     const [createdOpen, setCreatedOpen] = useState(false);
     const [deletedOpen, setDeletedOpen] = useState(false);
     const [viewCollection, setViewCollection] = useState(false);
@@ -39,9 +44,12 @@ export default function Collection({children}){
     const [collectionName, setCollectionName] = useState('');
     const [description, setDescription] = useState('');
     const [colDes, setColDes] = useState('');
+
     const navigate = useNavigate()
 
     const openCreatedDlg = () => {
+        setCollectionName('');
+        setDescription('');
         setCreatedOpen(true);
     };
 
@@ -63,6 +71,11 @@ export default function Collection({children}){
         setCreatedOpen(true);
     }
 
+    const searchCollection = async () => {
+        const { searchResults } = await getCollectionByName(keyword);
+        setCollections(searchResults);
+    }
+
     useEffect(() => {
         if(id !== undefined && id !== null){
             setViewCollection(true);
@@ -71,42 +84,40 @@ export default function Collection({children}){
         }
     }, [id]);
 
-    const getInitialData = async() => {
+    const getInitialData = useCallback( async() => {
         const { collection } = await getCollectionById(id);
         setColDes(collection[0].description);
-    }
+        setDescription(collection[0].description);
+        setCollectionName(collection[0].collectionName);
+    }, [id])
 
-    const handleCreate = (isEdited) => {
+    const handleCreate = async (isEdited) => {
         if(!isEdited){
-            createNewCollection(collectionName, description);
+            await createNewCollection(collectionName, description);
+            setCollectionName('');
+            setDescription('');
         }else{
-            upDateCollection(id, collectionName, description);
+            await upDateCollection(id, collectionName, description);
+            setColDes(description);
+            setDescription(description);
         }
-        window.location.reload(false);
+        const { collections } = await getAllCollection();
+        setCollections(collections);
         closeCreatedDlg();
-        setCollectionName('');
-        setDescription('');
-        // allCollecRef.current.getInitialData();
     }
 
-    const handleDelete = () => {
+    const handleDelete = async() => {
         deleteCollectionById(id);
         closeDeletedDlg();
         navigate(`/collection/`);
-        window.location.reload(false);
+        const { collections } = await getAllCollection();
+        setCollections(collections);
     }
 
     useEffect(() => {
         if(id)
             getInitialData();
-    }, [id])
-
-    // const ChildComponentWithRef = React.forwardRef((props, ref) =>
-    //     React.cloneElement(children, {
-    //         ...props,
-    //         ref
-    //     })
-    // );
+    }, [id, getInitialData])
 
     return(
         <Styles>
@@ -114,7 +125,7 @@ export default function Collection({children}){
                 <div className="search-bar">
                     <div className="topic-txt">
                         <div className="collection-count">
-                            {`Collections (0)`}
+                            {`Collections (${collections.length})`}
                         </div>
                         {viewCollection && 
                             <div className="collection-des">
@@ -164,7 +175,11 @@ export default function Collection({children}){
                             </div>
                         ):(
                             <>
-                                <SearchBox />
+                                <SearchBox 
+                                    keyword={keyword}
+                                    setKeyword={setKeyword}
+                                    searchCollection={searchCollection}
+                                />
                                 <CustomedButton text={"Add Collection"} onClick={openCreatedDlg}/>
                             </>
                         )}

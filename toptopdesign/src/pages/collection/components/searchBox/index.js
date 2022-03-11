@@ -1,12 +1,15 @@
 import { Styles } from './style/searchBoxStyle';
-import { useState } from 'react';
 import { ReactComponent as SearchIcon } from '../../../../assets/img/user/collection/search.svg';
 
-export default function SearchBox(){
-    const [currentKey, setCurrentKey] = useState('');
+export default function SearchBox({keyword, setKeyword, searchCollection}){
 
-    const handleChange = () => {
+    const handleChange = (e) => {
+        setKeyword(e.target.value);
+    }
 
+    const handleKeyDown = (e) => {
+        if(e.code === "Enter")
+            searchCollection();
     }
 
     return (
@@ -15,8 +18,9 @@ export default function SearchBox(){
                 <input
                     className='search-input'
                     onChange={e => handleChange(e)}
-                    value={currentKey}
+                    value={keyword}
                     placeholder="Search collection..."
+                    onKeyUp={(e) => handleKeyDown(e)}
                 />
                 <SearchIcon className='search-btn'/>
             </div>

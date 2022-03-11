@@ -1,5 +1,4 @@
 import { Styles } from "./style/imageViewerStyle";
-import { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import { ReactComponent as CloseIcon } from '../../../../assets/img/user/collection/cover_close.svg';
 

@@ -189,6 +189,14 @@ export const PptelegrafRegularNormalBlack17px = css`
   font-style: normal;
 `;
 
+export const OpensansNormalElectricViolet14px = css`
+  color: var(--main);
+  font-family: var(--font-family-open_sans);
+  font-size: var(--font-size-s2);
+  font-weight: 400;
+  font-style: normal;
+`;
+
 export const Border1pxSecond = css`
   border: 1px solid var(--second);
 `;

@@ -13,6 +13,7 @@ export default function Input({collectionName, setCollectionName}){
                 onChange={e => handleChange(e)}
                 value={collectionName}
                 placeholder=""
+                maxLength="64"
             />
         </Styles>
     )

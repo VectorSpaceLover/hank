@@ -22,16 +22,13 @@ export const Styles = styled.div`
             background-color: var(--white);
             border-radius: 24px;
             &::placeholder {
-              color: #1a1a1c;
+              color: #8b939e;
             }
             @media screen and (max-width: 650px) {
                 width: 100%;
             }
             &:focus {
                 border: none;
-                &::placeholder {
-                color: #8b939e;
-              }
             }
           }
           .error {

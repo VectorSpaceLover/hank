@@ -1,13 +1,12 @@
 import CollectionCard from '../collectionCard';
 import { Grid } from "@mui/material";
-import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { getAllCollection } from '../../../../api/collection';
+import { CollectionsContext } from '../../../../context/collections';
 
-const AllCollections = forwardRef((props, ref) => {
-    const [collections, setCollections] = useState([]);
-
-    useImperativeHandle(ref, () => ({ getInitialData }), [])
+const AllCollections = () => {
+    const [collections, setCollections] = useContext(CollectionsContext);
 
     const getInitialData = async () => {
         const { collections } = await getAllCollection();
@@ -17,7 +16,6 @@ const AllCollections = forwardRef((props, ref) => {
         getInitialData();
     }, [])
     
-
     return (
         <div className="collection-list">
             <Grid container spacing={3}>
@@ -40,6 +38,6 @@ const AllCollections = forwardRef((props, ref) => {
             </Grid>
         </div>
     )
-})
+}
 
 export default AllCollections;

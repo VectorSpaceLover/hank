@@ -7,11 +7,13 @@ const {
     getCollections,
     getCollectionById,
     deleteCollectionById,
-    upDateCollection
+    upDateCollection,
+    searchCollections
 } = require('../controller/collection');
 
 router.get('/', getCollections);
 router.get('/detail', getCollectionById);
+router.get('/search', searchCollections);
 
 router.post('/', createNewCollection);
 
