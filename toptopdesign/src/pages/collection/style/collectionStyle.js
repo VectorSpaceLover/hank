@@ -12,10 +12,6 @@ export const Styles = styled.div`
     .before-container{
         display: flex;
         justify-content: center;
-        @media screen and (min-width: 1900px) {
-            position: relative;
-            margin: 137px 122px 0px 186px;
-        }
         .collection-container{
             margin: 137px 0px 0px 0px;
             padding: 0px 22px 20px 22px;
