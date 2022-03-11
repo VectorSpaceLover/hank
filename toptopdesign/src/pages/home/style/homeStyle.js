@@ -141,7 +141,7 @@ export const Styles = styled.div`
         position: relative;
         margin: 0px 29px 0px 186px;
         @media screen and (min-width: 1200px) {
-            margin: 0px 20px 114px calc((100% - 1200px) / 2 + 22px);
+            margin: 0px 20px 0px calc((100% - 1200px) / 2 + 22px);
         }
 
         @media screen and (max-width: 1200px) {
