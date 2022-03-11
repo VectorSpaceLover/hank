@@ -12,6 +12,7 @@ export const Styles = styled.div`
         flex-wrap: wrap;
     }
     .empty{
+        text-align: center;
         ${PptelegrafRegularNormalBlack17px}
         padding-top: 251px;
         line-height: 29px;

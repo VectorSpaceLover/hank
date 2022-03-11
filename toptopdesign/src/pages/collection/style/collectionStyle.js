@@ -15,7 +15,7 @@ export const Styles = styled.div`
         .collection-container{
             margin: 137px 0px 0px 0px;
             padding: 0px 22px 20px 22px;
-            max-width: 1156px;
+            width: 1156px;
             
             .search-bar{
                 border-bottom: 1px solid rgba(105, 105, 105, 0.2);
