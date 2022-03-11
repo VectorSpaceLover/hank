@@ -16,8 +16,8 @@ export const Styles = styled.div`
     border-radius: 63px;
     box-shadow: -5px 13px 20px rgb(0 0 0 / 8%);
     &:hover {
-      color: black;
-      background: #c5c5ca;
+      color: white;
+      background: rgb(205 200 200 / 87%);
     }
     @media screen and (max-width: 700px) {
       width: 50px;

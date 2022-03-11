@@ -2,12 +2,12 @@ import { Styles } from "./style/imageViewerStyle";
 import IconButton from '@mui/material/IconButton';
 import { ReactComponent as CloseIcon } from '../../../../assets/img/user/collection/cover_close.svg';
 
-export default function ImageViewer({index, closeItem}){
+export default function ImageViewer({info, index, closeItem}){
 
     return (
         <Styles>
-            <div className="container">
-                {index >= 8?(
+            <div className="image-container">
+                {info === ''?(
                     <></>
                 ):(
                     <>

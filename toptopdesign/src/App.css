@@ -55,3 +55,9 @@
   src: local('PP Telegraf-Regular'), local('PP Telegraf-Regular'), 
    url('./assets/font/PPTelegraf-Regular.otf')format("truetype");
 }
+
+@font-face {
+  font-family: "Manrope";
+  src: local('Manrope'), local('Manrope'), 
+   url('https://fonts.google.com/specimen/Manrope')format("truetype");
+}

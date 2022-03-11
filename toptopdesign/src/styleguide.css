@@ -18,21 +18,22 @@
     --white: rgba(255, 255, 255, 1);
     --gallery: rgba(239, 239, 239, 1);
     --gray-nurse: rgba(232, 232, 232, 1);
+    --charade: #2E2C34;
    
-    --font-size-xxs: 10px;
-    --font-size-xs: 13px;
+    --font-size-10: 10px;
+    --font-size-12: 12px;
+    --font-size-13: 13px;
+    --font-size-14: 14px;
     --font-size-l: 16px;
-    --font-size-xl: 17px;
-    --font-size-s2: 14px;
-    --font-size-m2: 20px;
-    --font-size-xl22: 24px;
-    --font-size-m4: 40px;
-    --font-size-l2: 28px;
-    --font-size-xs2: 12px;
-    --font-size-xl3: 36px;
-    --font-size-xl2: 48px;
-    --font-size-xxl2: 40px;
+    --font-size-17: 17px;
+    --font-size-20: 20px;
+    --font-size-24: 24px;
+    --font-size-28: 28px;
+    --font-size-36: 36px;
+    --font-size-40: 40px;
+    --font-size-48: 48px;
   
+    --font-family-manrope: "Manrope";
     --font-family-open_sans: "Open Sans";
     --font-family-pp_telegraf-regular: "PP Telegraf-Regular";
     --font-family-pp_telegraf-ultrabold: "PP Telegraf-UltraBold";
@@ -51,21 +52,21 @@
   .pptelegraf-ultra-bold-black-17px {
     color: var(--second);
     font-family: var(--font-family-pp_telegraf-ultrabold);
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-17);
     font-weight: 700;
     font-style: normal;
   }
   .pptelegraf-regular-normal-white-10px {
     color: var(--white);
     font-family: var(--font-family-pp_telegraf-regular);
-    font-size: var(--font-size-xxs);
+    font-size: var(--font-size-10);
     font-weight: 400;
     font-style: normal;
   }
   .pptelegraf-ultra-bold-black-12px {
     color: var(--second);
     font-family: var(--font-family-pp_telegraf-ultrabold);
-    font-size: var(--font-size-xs2);
+    font-size: var(--font-size-12);
     font-weight: 700;
     font-style: normal;
   }
@@ -84,7 +85,7 @@
   .pptelegraf-ultra-bold-black-28px {
     color: var(--second);
     font-family: var(--font-family-pp_telegraf-ultrabold);
-    font-size: var(--font-size-l2);
+    font-size: var(--font-size-28);
     font-weight: 700;
     font-style: normal;
   }
@@ -96,21 +97,21 @@
   .pptelegraf-ultra-bold-black-20px {
     color: var(--second);
     font-family: var(--font-family-pp_telegraf-ultrabold);
-    font-size: var(--font-size-m2);
+    font-size: var(--font-size-20);
     font-weight: 700;
     font-style: normal;
   }
   .pptelegraf-regular-normal-white-12px {
     color: var(--white);
     font-family: var(--font-family-pp_telegraf-regular);
-    font-size: var(--font-size-xs2);
+    font-size: var(--font-size-12);
     font-weight: 400;
     font-style: normal;
   }
   .opensans-normal-electric-violet-14px {
     color: var(--main);
     font-family: var(--font-family-open_sans);
-    font-size: var(--font-size-s2);
+    font-size: var(--font-size-14);
     font-weight: 400;
     font-style: normal;
   }
@@ -129,7 +130,7 @@
   .pptelegraf-regular-normal-granite-gray-14px {
     color: var(--gray);
     font-family: var(--font-family-pp_telegraf-regular);
-    font-size: var(--font-size-s2);
+    font-size: var(--font-size-14);
     font-weight: 400;
     font-style: normal;
   }
@@ -143,14 +144,14 @@
   .pptelegraf-regular-normal-blue-ribbon-14px {
     color: var(--blue-ribbon);
     font-family: var(--font-family-pp_telegraf-regular);
-    font-size: var(--font-size-s2);
+    font-size: var(--font-size-14);
     font-weight: 400;
     font-style: normal;
   }
   .pptelegraf-regular-normal-granite-gray-10px {
     color: var(--gray);
     font-family: var(--font-family-pp_telegraf-regular);
-    font-size: var(--font-size-xxs);
+    font-size: var(--font-size-10);
     font-weight: 400;
     font-style: normal;
   }
@@ -164,7 +165,7 @@
   .pptelegraf-ultra-bold-black-14px {
     color: var(--second);
     font-family: var(--font-family-pp_telegraf-ultrabold);
-    font-size: var(--font-size-s2);
+    font-size: var(--font-size-14);
     font-weight: 700;
     font-style: normal;
   }
@@ -178,7 +179,7 @@
   .pptelegraf-regular-normal-electric-violet-14px {
     color: var(--main);
     font-family: var(--font-family-pp_telegraf-regular);
-    font-size: var(--font-size-s2);
+    font-size: var(--font-size-14);
     font-weight: 400;
     font-style: normal;
   }
@@ -197,21 +198,21 @@
   .pptelegraf-regular-normal-granite-gray-14px2 {
     color: var(--granite-gray2);
     font-family: var(--font-family-pp_telegraf-regular);
-    font-size: var(--font-size-s2);
+    font-size: var(--font-size-14);
     font-weight: 400;
     font-style: normal;
   }
   .pptelegraf-regular-normal-white-14px {
     color: var(--white);
     font-family: var(--font-family-pp_telegraf-regular);
-    font-size: var(--font-size-s2);
+    font-size: var(--font-size-14);
     font-weight: 400;
     font-style: normal;
   }
   .pptelegraf-regular-normal-black-14px {
     color: var(--second);
     font-family: var(--font-family-pp_telegraf-regular);
-    font-size: var(--font-size-s2);
+    font-size: var(--font-size-14);
     font-weight: 400;
     font-style: normal;
   }

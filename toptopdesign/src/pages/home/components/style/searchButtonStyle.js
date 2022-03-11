@@ -16,8 +16,8 @@ export const Styles = styled.div`
     height: 53px;
     border-radius: 63px;
     &:hover {
-      color: black;
-      background: #c5c5ca;
+      color: white;
+      background: rgb(51, 51, 51);
     }
   }
 `;

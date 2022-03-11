@@ -5,7 +5,7 @@ export default function Collection({info, selectedId, setSelectedId}){
     const [createdAt, setCreatedAt] = useState('');
     useEffect(() => {
         const date = new Date(info.createdDate);
-        setCreatedAt(date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate());
+        setCreatedAt(date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear());
     }, [info])    
     return (
         <Styles>

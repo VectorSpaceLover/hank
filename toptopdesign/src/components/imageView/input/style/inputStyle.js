@@ -16,6 +16,10 @@ export const Styles = styled.div`
         outline: none;
         &:focus{
             ${Border2pxBrandPurple}
+            filter: drop-shadow(0px 1px 12px rgba(46, 44, 52, 0.12));
+        }
+        @media screen and (max-width: 700px) {
+            height: 36px;
         }
     }
 `;

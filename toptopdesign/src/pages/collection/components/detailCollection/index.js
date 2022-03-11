@@ -1,12 +1,13 @@
 import { Grid } from "@mui/material";
 import { Styles } from './style/detailCollectionStyle';
-import { oneCollection } from '../../../../assets/config';
+import { oneCollection, imageList } from '../../../../assets/config';
 import ImageViewer from '../imageViewer';
 import TextButton from './viewButton';
 import { useState } from "react";
 
 export default function DetailCollection(){
-    const [images, setImages] = useState(oneCollection);
+    const [images, setImages] = useState(imageList);
+    console.log(images);
 
     const closeItem = (idx) => {
         const newImages = images.filter((item, index) => {
@@ -20,22 +21,13 @@ export default function DetailCollection(){
 
     return (
         <Styles>
-            <div className="collection-list">
-                <Grid container spacing={3}>
+            <div className="detail-collection">
+                <div className="collection-list">
                     {images && images.map((info, idx) => {
-                        return (
-                            <Grid 
-                                item 
-                                sm={4}
-                                xs={6} 
-                                md={3} 
-                                key={idx}
-                            >
-                                <ImageViewer index={idx} closeItem={closeItem}/>
-                            </Grid>
-                        )
+                        console.log(info)
+                        return <ImageViewer info={info} index={idx} closeItem={closeItem} key={idx}/>
                     })}
-                </Grid>
+                </div>
             </div>
             <div className="footer">
                 <TextButton text={"View More"}/>

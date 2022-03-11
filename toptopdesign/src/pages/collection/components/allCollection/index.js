@@ -1,10 +1,10 @@
 import CollectionCard from '../collectionCard';
 import { Grid } from "@mui/material";
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 
 import { getAllCollection } from '../../../../api/collection';
 import { CollectionsContext } from '../../../../context/collections';
-
+import { Styles } from './style/allCollectionStyle';
 const AllCollections = () => {
     const [collections, setCollections] = useContext(CollectionsContext);
 
@@ -17,26 +17,23 @@ const AllCollections = () => {
     }, [])
     
     return (
-        <div className="collection-list">
-            <Grid container spacing={3}>
-                {collections && collections.map((info, idx) => {
-                    return (
-                        <Grid 
-                            item 
-                            sm={4} 
-                            xs={6} 
-                            md={3} 
-                            key={idx}
-                        >
-                            <CollectionCard 
-                                info={info} 
-                                key={idx}
-                            />
-                        </Grid>
-                    )
-                })}
-            </Grid>
-        </div>
+        <Styles>
+            <div className="all-collection">
+                {(collections && collections.length > 0) &&
+                    <div className='collection-list'>
+                        {collections.map((info, idx) => {
+                            return (
+                                    <CollectionCard 
+                                        info={info} 
+                                        key={idx}
+                                    />
+                            )
+                        })}
+                    </div>
+                }
+                {(!collections || collections.length === 0) && <div className='empty'>Click the “Add Collection” button to create your first Collection ❤️</div>}
+            </div>
+        </Styles>
     )
 }
 

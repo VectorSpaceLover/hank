@@ -17,7 +17,7 @@ export const Styles = styled.div`
         padding: 1px;
         @media screen and (max-width: 700px) {
             flex-wrap: wrap;
-            height: 214px;
+            height: 173px;
             padding: 21px 13px;
             width: calc(100% - 26px);
         }
@@ -50,10 +50,18 @@ export const Styles = styled.div`
                 padding-top: 13px;
                 max-width: 200px;
                 overflow: hidden;
+                line-height: 15px;
+                @media screen and (max-width: 700px) {
+                    padding-top: 8px;
+                }
             }
             .txt{
                 ${PptelegrafRegularNormalGraniteGray1}
                 padding-top: 13px;
+                line-height: 15px;
+                @media screen and (max-width: 700px) {
+                    padding-top: 8px;
+                }
             }
             @media screen and (max-width: 800px) {
                 width: 40%;

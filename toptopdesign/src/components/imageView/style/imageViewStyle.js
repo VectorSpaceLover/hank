@@ -16,10 +16,10 @@ export const Styles = styled.div`
         background-color: var(--white);
         border-radius: 16px;
         @media screen and (max-width: 892px) {
-            height: 616px;
+            height: 596px;
         }
         @media screen and (max-width: 600px) {
-            height: 296px;
+            height: 275px;
         }
         .favourite{
             position: absolute;
@@ -43,8 +43,8 @@ export const ViewCollectionDlgStyle = styled.div`
     margin: 0px;
     position: relative;
     .dialog-container{
-        height: 704px;
-        width: 693px;
+        height: 654px;
+        width: 689px;
         padding: 34px 32px 34px 32px;
         overflow-x: hide;
         overflow-y: auto;
@@ -130,10 +130,8 @@ export const DialogStyles = styled.div`
             ${ManropeSemiBoldCharade28px}
             border-bottom: 1px solid var(--granite-gray);
             min-height: 36px;
-            letter-spacing: 0;
-            line-height: 36px;
-            white-space: nowrap;
             padding-bottom: 24px;
+            line-height: 36px;
         }
         .body{
             .liner{

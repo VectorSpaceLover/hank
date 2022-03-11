@@ -9,7 +9,7 @@ export const ValignTextMiddle = css`
 export const PptelegrafUltraBoldBlack20px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-ultrabold);
-  font-size: var(--font-size-m2);
+  font-size: var(--font-size-20);
   font-weight: 700;
   font-style: normal;
 `;
@@ -17,7 +17,7 @@ export const PptelegrafUltraBoldBlack20px = css`
 export const PptelegrafRegularNormalBlack20px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-regular);
-  font-size: var(--font-size-m2);
+  font-size: var(--font-size-20);
   font-weight: 400;
   font-style: normal;
 `;
@@ -25,7 +25,7 @@ export const PptelegrafRegularNormalBlack20px = css`
 export const PptelegrafRegularNormalWhite10px = css`
   color: var(--white);
   font-family: var(--font-family-pp_telegraf-regular);
-  font-size: var(--font-size-xxs);
+  font-size: var(--font-size-10);
   font-weight: 400;
   font-style: normal;
 `;
@@ -33,7 +33,7 @@ export const PptelegrafRegularNormalWhite10px = css`
 export const PptelegrafRegularNormalBlack14px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-regular);
-  font-size: var(--font-size-s2);
+  font-size: var(--font-size-14);
   font-weight: 400;
   font-style: normal;
 `;
@@ -41,7 +41,7 @@ export const PptelegrafRegularNormalBlack14px = css`
 export const PptelegrafRegularNormalWhite24px = css`
   color: var(--white);
   font-family: var(--font-family-pp_telegraf-regular);
-  font-size: var(--font-size-xl22);
+  font-size: var(--font-size-24);
   font-weight: 400;
   font-style: normal;
 `;
@@ -49,7 +49,7 @@ export const PptelegrafRegularNormalWhite24px = css`
 export const PptelegrafUltraBoldBlack28px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-ultrabold);
-  font-size: var(--font-size-l2);
+  font-size: var(--font-size-28);
   font-weight: 700;
   font-style: normal;
 `;
@@ -57,7 +57,7 @@ export const PptelegrafUltraBoldBlack28px = css`
 export const PptelegrafUltraBoldCharade28px = css`
   color: var(--charade);
   font-family: var(--font-family-pp_telegraf-ultrabold);
-  font-size: var(--font-size-l2);
+  font-size: var(--font-size-28);
   font-weight: 700;
   font-style: normal;
 `;
@@ -73,7 +73,7 @@ export const PptelegrafRegularNormalWhite14px = css`
 export const PptelegrafRegularNormalBlack13px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-regular);
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-13);
   font-weight: 400;
   font-style: normal;
 `;
@@ -81,7 +81,7 @@ export const PptelegrafRegularNormalBlack13px = css`
 export const OpensansNormalBlack14px = css`
   color: var(--second);
   font-family: var(--font-family-open_sans);
-  font-size: var(--font-size-s2);
+  font-size: var(--font-size-14);
   font-weight: 400;
   font-style: normal;
 `;
@@ -89,7 +89,7 @@ export const OpensansNormalBlack14px = css`
 export const PptelegrafUltraBoldBlack48px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-ultrabold);
-  font-size: var(--font-size-xl2);
+  font-size: var(--font-size-48);
   font-weight: 700;
   font-style: normal;
 `;
@@ -113,7 +113,7 @@ export const PptelegrafRegularNormalBlueRibbon14 = css`
 export const PptelegrafUltraBoldBlack14px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-ultrabold);
-  font-size: var(--font-size-s2);
+  font-size: var(--font-size-14);
   font-weight: 700;
   font-style: normal;
 `;
@@ -121,7 +121,7 @@ export const PptelegrafUltraBoldBlack14px = css`
 export const PptelegrafRegularNormalGraniteGray1 = css`
   color: var(--gray);
   font-family: var(--font-family-pp_telegraf-regular);
-  font-size: var(--font-size-s2);
+  font-size: var(--font-size-14);
   font-weight: 400;
   font-style: normal;
 `;
@@ -129,7 +129,7 @@ export const PptelegrafRegularNormalGraniteGray1 = css`
 export const PptelegrafUltraBoldBlack40px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-ultrabold);
-  font-size: var(--font-size-m4);
+  font-size: var(--font-size-40);
   font-weight: 700;
   font-style: normal;
 `;
@@ -152,7 +152,7 @@ export const PptelegrafRegularNormalWhite16px = css`
 export const PptelegrafUltraBoldCharade40px = css`
   color: var(--charade);
   font-family: var(--font-family-pp_telegraf-ultrabold);
-  font-size: var(--font-size-xxl2);
+  font-size: var(--font-size-40);
   font-weight: 700;
   font-style: normal;
 `;
@@ -176,7 +176,7 @@ export const PptelegrafUltraBoldBlack17px = css`
 export const ManropeSemiBoldCharade28px = css`
   color: var(--charade);
   font-family: var(--font-family-manrope);
-  font-size: var(--font-size-xxl22);
+  font-size: var(--font-size-28);
   font-weight: 600;
   font-style: normal;
 `;
@@ -184,7 +184,7 @@ export const ManropeSemiBoldCharade28px = css`
 export const PptelegrafRegularNormalBlack17px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-regular);
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-17);
   font-weight: 400;
   font-style: normal;
 `;
@@ -192,7 +192,7 @@ export const PptelegrafRegularNormalBlack17px = css`
 export const OpensansNormalElectricViolet14px = css`
   color: var(--main);
   font-family: var(--font-family-open_sans);
-  font-size: var(--font-size-s2);
+  font-size: var(--font-size-14);
   font-weight: 400;
   font-style: normal;
 `;

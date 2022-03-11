@@ -9,144 +9,152 @@ import {
 } from '../../../assets/styledMixins';
 
 export const Styles = styled.div`
-    .collection-container{
-        margin: 147px 164px 0px 164px;
-        padding: 0px 22px;
-        @media screen and (max-width: 1100px) {
-            margin: 120px 100px 0px 100px;
+    .before-container{
+        display: flex;
+        justify-content: center;
+        @media screen and (min-width: 1900px) {
+            position: relative;
+            margin: 137px 122px 0px 186px;
         }
-        @media screen and (max-width: 1000px) {
-            margin: 80px 80px 0px 80px;
-        }
-        @media screen and (max-width: 600px) {
-            margin: 60px 40px 0px 40px;
-        }
-        .search-bar{
-            border-bottom: 1px solid rgba(105, 105, 105, 0.2);
-            padding-bottom: 23px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            @media screen and (max-width: 650px) {
-                flex-direction: column;
-            }
-            .topic-txt{
-                @media screen and (max-width: 650px) {
-                    align-items: start;
-                    width: 100%;
-                }
-                .collection-count{
-                    ${PptelegrafUltraBoldCharade40px}
-                    min-height: 42px;
-                    letter-spacing: 0;
-                }
-                .collection-des{
-                    ${PptelegrafRegularNormalBlack17px}
-                    min-height: 58px;
-                    letter-spacing: 0;
-                    line-height: 29px;
-                    max-width: 480px;
-                    padding-top: 24px;
-                    @media screen and (max-width: 900px) {
-                        padding-top: 10px;
-                    }
-                }
-            }
-            .search-action{
+        .collection-container{
+            margin: 137px 0px 0px 0px;
+            padding: 0px 22px 20px 22px;
+            max-width: 1156px;
+            
+            .search-bar{
+                border-bottom: 1px solid rgba(105, 105, 105, 0.2);
+                padding-bottom: 23px;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                margin-left: auto;
-                .add-collection-btn{
-                    margin-left: 24px;
-                }
-                @media screen and (max-width: 900px) {
-                    width: 255px;
-                    flex-direction: column;
-                }
                 @media screen and (max-width: 650px) {
-                    padding-top: 10px;
-                    width: 100%;
-                }
-                .action-group{
-                    display: flex;
                     flex-direction: column;
+                }
+                .topic-txt{
                     @media screen and (max-width: 650px) {
+                        align-items: start;
                         width: 100%;
                     }
-                    .social-group{
-                        display: flex;
-                        flex-direction: row;
-                        align-items: flex-end;
-                        margin-left: auto;
-                        .icon{
-                            width: 28px;
-                            height: 28px;
-                        }
-                        .mr-16{
-                            margin-right: 16px;
-                        }
-                        @media screen and (max-width: 650px) {
-                            justify-content: center;
-                            margin: 0px;
+                    .collection-count{
+                        ${PptelegrafUltraBoldCharade40px}
+                        min-height: 42px;
+                        letter-spacing: 0;
+                        @media screen and (max-width: 600px) {
+                            padding-bottom: 24px;
                         }
                     }
-                    .btn-group{
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
+                    .collection-des{
+                        ${PptelegrafRegularNormalBlack17px}
+                        min-height: 58px;
+                        letter-spacing: 0;
+                        line-height: 29px;
+                        max-width: 480px;
                         padding-top: 24px;
-                        .small-btn-outline{
-                            ${Border1pxSecond}
-                            ${PptelegrafRegularNormalBlack17px}
-                            height: 32px;
-                            width: 177px;
-                            margin-left: auto;
-                            margin-bottom: 0.78px;
-                            display: flex;
-                            padding: 0 15.5px;
-                            justify-content: center;
-                            align-items: center;
-                            border-radius: 64px;
-                            cursor: pointer;
-                            &:hover {
-                                color: #ffffff;
-                                background: #000000;
-                            }
-                            @media screen and (max-width: 650px) {
-                                width: 100%;
-                                padding: 0px;
-                            }
-                            @media screen and (max-width: 900px) {
-                                margin-right: 0px;
-                                margin-top: 10px;
-                            }
-                        }
                         @media screen and (max-width: 900px) {
-                            width: 255px;
-                            flex-direction: column;
+                            padding-top: 12px;
                         }
+                        @media screen and (max-width: 600px) {
+                            padding-top: 16px;
+                        }
+                    }
+                }
+                .search-action{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    margin-left: auto;
+                    .add-collection-btn{
+                        margin-left: 24px;
+                    }
+                    @media screen and (max-width: 900px) {
+                        width: 255px;
+                        flex-direction: column;
+                    }
+                    @media screen and (max-width: 650px) {
+                        padding-top: 10px;
+                        width: 100%;
+                    }
+                    .action-group{
+                        display: flex;
+                        flex-direction: column;
                         @media screen and (max-width: 650px) {
-                            padding-top: 10px;
                             width: 100%;
                         }
-                        .mr-24{
-                            margin-right: 24px;
-                            @media screen and (max-width: 900px) {
-                                margin-right: 0px;
+                        .social-group{
+                            display: flex;
+                            flex-direction: row;
+                            align-items: flex-end;
+                            margin-left: auto;
+                            .icon{
+                                width: 28px;
+                                height: 28px;
+                            }
+                            .mr-16{
+                                margin-right: 16px;
                             }
                             @media screen and (max-width: 650px) {
-                                margin-right: 0px;
+                                justify-content: center;
+                                margin: 0px;
+                            }
+                        }
+                        .btn-group{
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            padding-top: 24px;
+                            .small-btn-outline{
+                                ${Border1pxSecond}
+                                ${PptelegrafRegularNormalBlack17px}
+                                height: 32px;
+                                width: 177px;
+                                margin-left: auto;
+                                margin-bottom: 0.78px;
+                                display: flex;
+                                padding: 0 15.5px;
+                                justify-content: center;
+                                align-items: center;
+                                border-radius: 64px;
+                                cursor: pointer;
+                                &:hover {
+                                    color: #ffffff;
+                                    background: #000000;
+                                }
+                                @media screen and (max-width: 650px) {
+                                    width: 100%;
+                                    padding: 0px;
+                                }
+                                @media screen and (max-width: 900px) {
+                                    margin-right: 0px;
+                                    margin-top: 10px;
+                                }
+                            }
+                            @media screen and (max-width: 900px) {
+                                width: 255px;
+                                flex-direction: column;
+                            }
+                            @media screen and (max-width: 650px) {
+                                padding-top: 0px;
+                                width: 100%;
+                            }
+                            .mr-24{
+                                margin-right: 24px;
+                                @media screen and (max-width: 900px) {
+                                    margin-right: 0px;
+                                }
+                                @media screen and (max-width: 650px) {
+                                    margin-right: 0px;
+                                }
                             }
                         }
                     }
                 }
             }
-        }
-        .collection-list{
-            padding-top: 32px;
+            .collection-list{
+                padding-top: 32px;
+            }
         }
     }
+    
 `;
 
 export const DialogStyles = styled.div`
@@ -265,3 +273,17 @@ export const DeleteDlgStyle = styled.div`
         }
     }
 `;
+
+// @media screen and (max-width: 1200px) {
+//     margin: 130px 140px 0px 140px;
+// }
+// @media screen and (max-width: 1000px) {
+//     margin: 130px 100px 0px 100px;
+// }
+// @media screen and (max-width: 800px) {
+//     margin: 130px 60px 0px 60px;
+// }
+// @media screen and (max-width: 600px) {
+//     margin: 130px 20px 0px 20px;
+//     padding: 0px;
+// }

@@ -17,7 +17,7 @@ export default function SearchInput({keyword, setKeyword, searchCollection}){
                 className='input'
                 onChange={e => handleChange(e)}
                 value={keyword}
-                placeholder=""
+                placeholder="Search Collection..."
                 onKeyUp={(e) => handleKeyDown(e)}
             />
         </Styles>

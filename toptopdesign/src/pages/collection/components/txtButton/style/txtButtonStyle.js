@@ -26,8 +26,8 @@ export const Styles = styled.div`
     margin-bottom: 50px;
     ${PptelegrafRegularNormalWhite24px}
     &:hover {
-      color: black;
-      background: #c5c5ca;
+      color: white;
+      background: rgb(51, 51, 51);
     }
     @media screen and (max-width: 768px) {
       ${PptelegrafRegularNormalWhite16px}
