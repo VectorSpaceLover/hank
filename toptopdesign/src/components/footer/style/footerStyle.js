@@ -4,10 +4,13 @@ import {
 } from '../../../assets/styledMixins';
 
 export const Styles = styled.div`
-  .before-container{
+  .footer-before-container{
     display: flex;
     justify-content: center;
     margin-bottom: 32px;
+    @media screen and (min-width: 1900px) {
+      margin: 0px 122px 0px 186px;
+    }
     .footer{
       width: 100%;
       max-width: 1156px;
@@ -25,8 +28,6 @@ export const Styles = styled.div`
         margin: 0px 20px;
       }
       @media screen and (min-width: 1900px) {
-        position: absolute;
-        top: 1850px;
         margin-bottom: 30px;
       }
       height: 45px;

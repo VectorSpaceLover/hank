@@ -24,7 +24,6 @@ export default function DetailCollection(){
             <div className="detail-collection">
                 <div className="collection-list">
                     {images && images.map((info, idx) => {
-                        console.log(info)
                         return <ImageViewer info={info} index={idx} closeItem={closeItem} key={idx}/>
                     })}
                 </div>

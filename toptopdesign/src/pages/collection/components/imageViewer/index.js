@@ -7,13 +7,10 @@ export default function ImageViewer({info, index, closeItem}){
     return (
         <Styles>
             <div className="image-container">
-                {info === ''?(
-                    <></>
-                ):(
+                {info !== '' &&
                     <>
                         <img src="/img/user/collection/collection.png" alt="" className="image" />
                         <div className="overlay">
-                            {/* <img src="/img/user/collection/collection_hover.png" alt="" className="overlay-image"/> */}
                             <div className="overlay-image"></div>
                             <IconButton 
                                 aria-label="delete"
@@ -23,8 +20,7 @@ export default function ImageViewer({info, index, closeItem}){
                                 <CloseIcon className="close-icon"/>
                             </IconButton>
                         </div>
-                    </>
-                )}
+                    </>}
             </div>
         </Styles>
     )

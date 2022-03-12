@@ -19,7 +19,9 @@ export const Styles = styled.div`
             margin: 137px 0px 0px 0px;
             padding: 0px 22px 20px 22px;
             max-width: 1156px;
-            
+            @media screen and (max-width: 500px) {
+                padding: 0px 16px 20px 16px;
+            }
             .xs-hide{
                 display: block;
                 @media screen and (max-width: 620px) {

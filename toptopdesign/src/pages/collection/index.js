@@ -137,7 +137,7 @@ export default function Collection({children}){
                     <div className="search-bar">
                         <div className="topic-txt">
                             <div className="collection-count">
-                                {`Collections (${collections.length})`}
+                                {!viewCollection?`Collections (${collections.length})`:collectionName}
                             </div>
                             {viewCollection && 
                                 <div className="collection-des">

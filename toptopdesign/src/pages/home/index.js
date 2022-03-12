@@ -129,7 +129,7 @@ export default function Home(){
                         <>
                             <div className="all-searched-app">
                                 <div className="app-list">
-                                    <Grid container spacing={3}>
+                                    <Grid container spacing={window.innerWidth<=500?1:2}>
                                         {searchResults.map((info, idx) => {
                                             return (
                                                 <Grid item sm={6} xs={6} md={3} key={idx}>

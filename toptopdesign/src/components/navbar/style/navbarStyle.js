@@ -12,7 +12,7 @@ export const Styles = styled.div`
         justify-content: center;
         border-bottom: 1px solid var(--second);
         @media screen and (min-width: 1900px) {
-            margin: 137px 122px 0px 186px;
+            margin: 0px 122px 0px 186px;
         }
         .navbar{
             width: 100%;
