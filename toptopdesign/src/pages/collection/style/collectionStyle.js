@@ -207,7 +207,7 @@ export const DialogStyles = styled.div`
         }
         @media screen and (max-width: 700px) {
             width: 352px;
-            height: 530px;
+            height: 444px;
             padding: 20px 20px 20px 20px;
         }
         .header{
@@ -218,17 +218,24 @@ export const DialogStyles = styled.div`
             line-height: 36px;
             white-space: nowrap;
             padding-bottom: 24px;
+            @media screen and (max-width: 700px) {
+                padding-bottom: 16px;
+            }
         }
         .body{
             .liner{
                 display: flex;
                 flex-direction: row;
                 align-items: center;
+                padding: 24px 0px 12px 0px;
+                @media screen and (max-width: 700px) {
+                    padding: 21px 0px 12px 0px;
+                }
                 .label{
                     ${PptelegrafRegularNormalBlack17px}
                     min-height: 18px;
                     letter-spacing: 0;
-                    padding: 24px 0px 12px 0px;
+                    
                 }
                 .max-character{
                     ${PptelegrafRegularNormalBlack17px}
