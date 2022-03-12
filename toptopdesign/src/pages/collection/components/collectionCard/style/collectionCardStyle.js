@@ -32,15 +32,21 @@ export const Styles = styled.div`
             height: 228px;
         }
         .card-header{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             .collection-name{
                 ${PptelegrafUltraBoldBlack17px}
-                margin-bottom: 13px;
-                min-height: 18px;
-                min-width: 141px;
-                text-align: center;
-                letter-spacing: 0;
                 display: flex;
                 justify-content: center;
+                margin-bottom: 13px;
+                min-height: 18px;
+                text-align: center;
+                letter-spacing: 0;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                display: block;
+                max-width: 100px;
                 overflow: hidden;
                 @media screen and (max-width: 600px) {
                     margin-bottom: 5px;
@@ -53,6 +59,10 @@ export const Styles = styled.div`
                 border-radius: 100px;
                 letter-spacing: 0;
                 padding-bottom: 20px;
+                text-overflow: ellipsis;
+                display: block;
+                max-width: 100px;
+                overflow: hidden;
                 @media screen and (max-width: 800px) {
                     margin-top: 4px;
                 }

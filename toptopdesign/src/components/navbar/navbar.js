@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Styles } from './style/navbarStyle';
-import { navbarData } from '../../assets/config';
 import IconButton from '@mui/material/IconButton';
 import { ReactComponent as Alarm } from '../../assets/img/user/home/alarm.svg';
 import { ReactComponent as Gift } from '../../assets/img/user/home/gift.svg';
@@ -15,6 +14,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {messages} from '../../assets/config';
 import { useNavigate } from "react-router-dom";
+import { withStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
 
 const dateStyle = {
     fontFamily: "PP Telegraf-Regular", 
@@ -50,9 +51,47 @@ const viewAllStyle = {
     paddingTop: 4,
 }
 
+const SignInButton = withStyles((theme) => ({
+    root: {
+        marginLeft: 14,
+        height: 48,
+        display: 'flex',
+        padding: '0px 17px',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: `var(--main)`,
+        borderRadius: 24,
+        cursor: 'pointer',
+        textAlign: 'center',
+        width: 177,
+        textTransform: 'none',
+        transition: '.3s ease',
+        color: `var(--white)`,
+        fontFamily: `var(--font-family-pp_telegraf-regular)`,
+        fontSize: `var(--font-size-m)`,
+        fontWeight: 400,
+        fontStyle: `normal`,
+        '&:hover': {
+            opacity: '.7',
+            backgroundColor: 'var(--blue-ribbon)',
+        },
+        ['@media screen and (max-width: 900px)']: { // eslint-disable-line no-useless-computed-key
+            width: 255,
+            marginLeft: 0,
+            padding: 0,
+            marginTop: 10,
+        },
+        ['@media screen and (max-width: 650px)']: { // eslint-disable-line no-useless-computed-key
+            width: '100%',
+        },
+        '& .icon': {
+
+        }
+    },
+  }))(Button);
+
 function Navbar() {
     const navigate = useNavigate();
-    const { items, signIn } = navbarData;
     const [isSigned, setSigned] = useState(false);
 
     const [anchorGift, setAnchorGift] = useState(null);
@@ -84,10 +123,14 @@ function Navbar() {
                     </div>
                     <img className='title-img'  src='/img/user/banner.svg' alt='banner' />
                     {!isSigned? (
-                        <div className='small-btn-outline' >
-                            <div className='sign-in-btn' >SIGN IN</div>
+                        // <div className='small-btn-outline' >
+                        //     <div className='sign-in-btn' >SIGN IN</div>
+                        //     <img className='sign-in-arrow' src='/img/arrowright.svg' alt='arrow' />
+                        // </div>
+                        <SignInButton>
                             <img className='sign-in-arrow' src='/img/arrowright.svg' alt='arrow' />
-                        </div>
+                            <span>SIGN IN</span>
+                        </SignInButton>
                     ):(
                         <div className='icon-group'>
                             <IconButton 

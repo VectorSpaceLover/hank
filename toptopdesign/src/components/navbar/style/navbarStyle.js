@@ -11,9 +11,6 @@ export const Styles = styled.div`
         display: flex;
         justify-content: center;
         border-bottom: 1px solid var(--second);
-        @media screen and (min-width: 1900px) {
-            margin: 0px 122px 0px 186px;
-        }
         .navbar{
             width: 100%;
             max-width: 1156px;
@@ -60,7 +57,6 @@ export const Styles = styled.div`
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                margin-left: auto;
                 .icon{
                     width: 18px;
                     height: 21px;

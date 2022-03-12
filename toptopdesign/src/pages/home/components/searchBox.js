@@ -1,12 +1,35 @@
 import { Styles } from './style/searchBoxStyle';
 import { useState } from 'react';
-import SearchButton from './searchButton';
-import { styled, alpha } from '@mui/material/styles';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { keywords } from '../../../assets/config';
 import StyledList from "../../../components/list";
 import OutsideClickHandler from './outSide';
+import { withStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import SearchIcon from '@mui/icons-material/Search';
+
+const SearchButton = withStyles((theme) => ({
+    root: {
+        color: `var(--white)`,
+        position: 'absolute',
+        right: -2,
+        top: 1,
+        backgroundColor: `var(--black-normal)`,
+        cursor: 'pointer',
+        textAlign: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 112,
+        height: 53,
+        borderRadius: 63,
+        textTransform: 'none',
+        transition: '.3s ease',
+        '&:hover': {
+            opacity: '.7',
+            backgroundColor: `var(--black-hover)`,
+        },
+    },
+  }))(Button);
 
 export default function SearchBox({ searchFunction, showKeyword, showKeywordList, setShowKeywordList}){
     const [currentKey, setCurrentKey] = useState('');
@@ -36,7 +59,9 @@ export default function SearchBox({ searchFunction, showKeyword, showKeywordList
                         placeholder="Type keyword to search patterns or apps"
                         onClick={() => {showKeyword();setShowKeywordList(true)}}
                     />
-                    <SearchButton onClick={getSearchResult}/>
+                    <SearchButton onClick={getSearchResult}>
+                        <SearchIcon />
+                    </SearchButton>
                     {showKeywordList && 
                         <StyledList data={keywords} setCurrentKey={setCurrentKey} setShowKeywordList={setShowKeywordList}/>
                     }

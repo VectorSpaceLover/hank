@@ -10,7 +10,7 @@ export default function Collection({info, selectedId, setSelectedId}){
     return (
         <Styles>
             <div 
-                className={`collection-container ${info._id === selectedId && 'focus'}`}
+                className={`collection-card ${info._id === selectedId && 'focus'}`}
                 onClick={() => setSelectedId(info._id)}
             >
                 <div className='collection-txt'>

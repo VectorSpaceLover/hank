@@ -7,7 +7,6 @@ import {
     PptelegrafRegularNormalBlack20px,
     PptelegrafUltraBoldCharade28px,
     ValignTextMiddle,
-    Border2pxGrayNurse
 } from '../../../assets/styledMixins';
 
 export const Styles = styled.div`
@@ -15,10 +14,11 @@ export const Styles = styled.div`
         display: flex;
         justify-content: center;
         .collection-container{
+            position: relative;
             margin: 137px 0px 0px 0px;
             padding: 0px 22px 20px 22px;
-            width: 1156px;
-            position: relative;
+            max-width: 1156px;
+            width: 100%;
             .back-btn{
                 position: absolute;
                 top: -58px;
@@ -70,6 +70,11 @@ export const Styles = styled.div`
                         ${PptelegrafUltraBoldCharade40px}
                         min-height: 42px;
                         letter-spacing: 0;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        display: block;
+                        max-width: 300px;
                         @media screen and (max-width: 600px) {
                             padding-bottom: 24px;
                         }
@@ -79,9 +84,12 @@ export const Styles = styled.div`
                         min-height: 58px;
                         letter-spacing: 0;
                         line-height: 29px;
-                        max-width: 480px;
                         padding-top: 24px;
                         overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        display: block;
+                        max-width: 300px;
                         @media screen and (max-width: 900px) {
                             padding-top: 12px;
                         }

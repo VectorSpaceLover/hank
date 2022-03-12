@@ -1,13 +1,11 @@
-import { Grid } from "@mui/material";
 import { Styles } from './style/detailCollectionStyle';
-import { oneCollection, imageList } from '../../../../assets/config';
+import { imageList } from '../../../../assets/config';
 import ImageViewer from '../imageViewer';
 import TextButton from './viewButton';
 import { useState } from "react";
 
 export default function DetailCollection(){
     const [images, setImages] = useState(imageList);
-    console.log(images);
 
     const closeItem = (idx) => {
         const newImages = images.filter((item, index) => {

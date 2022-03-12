@@ -6,7 +6,7 @@ import {
 } from '../../../../assets/styledMixins';
 
 export const Styles = styled.div`
-    .collection-container{
+    .collection-card{
         ${Border1pxGraniteGray}
         width: 100%;
         height: 121px;
@@ -44,6 +44,10 @@ export const Styles = styled.div`
                 color: #000000;
                 max-width: 200px;
                 overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                display: block;
+                max-width: 150px;
             }
             .sub-name{
                 ${PptelegrafRegularNormalGraniteGray1}
@@ -51,6 +55,11 @@ export const Styles = styled.div`
                 max-width: 200px;
                 overflow: hidden;
                 line-height: 15px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                display: block;
+                max-width: 150px;
                 @media screen and (max-width: 700px) {
                     padding-top: 8px;
                 }
@@ -59,6 +68,11 @@ export const Styles = styled.div`
                 ${PptelegrafRegularNormalGraniteGray1}
                 padding-top: 13px;
                 line-height: 15px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                display: block;
+                max-width: 150px;
                 @media screen and (max-width: 700px) {
                     padding-top: 8px;
                 }

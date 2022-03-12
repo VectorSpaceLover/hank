@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import CustomedButton from "./components/customedBtn";
 import SearchBox from "./components/searchBox/index.js";
 import { 
     Styles, 
@@ -21,6 +20,8 @@ import { ReactComponent as TwitterIcon } from '../../assets/img/user/collection/
 import { ReactComponent as DiscordIcon } from '../../assets/img/user/collection/discord.svg';
 import { ReactComponent as LinkIcon } from '../../assets/img/user/collection/link.svg';
 import { ReactComponent as DeleteImg } from '../../assets/img/user/collection/delete.svg';
+import { ReactComponent as AddIcon } from '../../assets/img/user/collection/add.svg';
+
 
 import {
     getCollectionById,
@@ -31,6 +32,119 @@ import {
     getCollectionByName,
 } from '../../api/collection';
 import { CollectionsContext } from '../../context/collections';
+import { withStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+
+const AddCollectionButton = withStyles((theme) => ({
+    root: {
+        marginLeft: 14,
+        height: 48,
+        display: 'flex',
+        padding: '0px 17px',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: `var(--main)`,
+        borderRadius: 24,
+        cursor: 'pointer',
+        textAlign: 'center',
+        width: 177,
+        textTransform: 'none',
+        transition: '.3s ease',
+        color: `var(--white)`,
+        fontFamily: `var(--font-family-pp_telegraf-regular)`,
+        fontSize: `var(--font-size-m)`,
+        fontWeight: 400,
+        fontStyle: `normal`,
+        '&:hover': {
+            opacity: '.7',
+            backgroundColor: 'var(--blue-ribbon)',
+        },
+        ['@media screen and (max-width: 900px)']: { // eslint-disable-line no-useless-computed-key
+            width: 255,
+            marginLeft: 0,
+            padding: 0,
+            marginTop: 10,
+        },
+        ['@media screen and (max-width: 650px)']: { // eslint-disable-line no-useless-computed-key
+            width: '100%',
+        },
+        '& .icon': {
+
+        }
+    },
+  }))(Button);
+
+const CreateCollectionButton = withStyles((theme) => ({
+    root: {
+        color: `var(--white)`,
+        fontFamily: `var(--font-family-pp_telegraf-regular)`,
+        fontSize: `var(--font-size-24)`,
+        fontWeight: 400,
+        fontStyle: `normal`,
+        backgroundColor: `var(--black-normal)`,
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 53,
+        width: 528,
+        letterSpacing: 0,
+        lineHeight: 24,
+        whiteSpace: 'nowrap',
+        borderRadius: 63,
+        marginBottom: 50,
+        textTransform: 'none',
+        transition: '.3s ease',
+        '&:hover': {
+            opacity: '.7',
+            backgroundColor: `var(--black-hover)`,
+        },
+        [`@media screen and (max-width: 768px)`]: {
+            fontWeight: 400,
+            border: `1px solid var(--purple)`,
+            width: 275,
+            borderRadius: 100,
+          }
+    },
+}))(Button);
+
+const EditButton = withStyles((theme) => ({
+    root: {
+        border: '1px solid var(--second)',
+        color: `var(--second)`,
+        fontFamily: `var(--font-family-pp_telegraf-regular)`,
+        fontSize: `var(--font-size-17)`,
+        fontWeight: 400,
+        fontStyle: 'normal',
+        height: 48,
+        width: 177,
+        marginLeft: 'auto',
+        marginBottom: 0.78,
+        display: 'flex',
+        padding: '0px 15.5px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 64,
+        cursor: 'pointer',
+        
+        [`@media screen and (max-width: 650px)`]: {
+            width: '100%',
+            height: 36,
+            padding: 0,
+        },
+        [`@media screen and (max-width: 900px)`]: {
+            marginRight: 0,
+            marginTop: 10,
+        },
+        textTransform: 'none',
+        transition: '.3s ease',
+        '&:hover': {
+            color: `var(--white)`,
+            backgroundColor: `var(--second)`,
+        },
+    },
+}))(Button);
+
 
 export default function Collection({children}){
     const [collections, setCollections] = useContext(CollectionsContext);
@@ -171,18 +285,17 @@ export default function Collection({children}){
                                         </IconButton>
                                     </div>
                                     <div className="btn-group">
-                                        <div 
-                                            className='small-btn-outline mr-24'
+                                        <EditButton
+                                            className="mr-24"
                                             onClick={openEditDlg}
                                         >
                                             Edit
-                                        </div>
-                                        <div 
-                                            className='small-btn-outline'
+                                        </EditButton>
+                                        <EditButton
                                             onClick={openDeletedDlg}
                                         >
                                             Delete Collection
-                                        </div>
+                                        </EditButton>
                                     </div>
                                 </div>
                             ):(
@@ -192,7 +305,10 @@ export default function Collection({children}){
                                         setKeyword={setKeyword}
                                         searchCollection={searchCollection}
                                     />
-                                    <CustomedButton text={"Add Collection"} onClick={openCreatedDlg}/>
+                                    <AddCollectionButton onClick={openCreatedDlg}>
+                                        <AddIcon className='icon'/>
+                                        <span>Add Collection</span>
+                                    </AddCollectionButton>
                                 </>
                             )}
                         </div>
@@ -244,7 +360,11 @@ export default function Collection({children}){
                                     <EmailInput description={description} setDescription={setDescription}/>
                                 </div>
                                 <div className="footer">
-                                    <TextButton text={!isEdited?"Create Colleciton":"Update"} onClick={() => handleCreate(isEdited)}/>
+                                    <CreateCollectionButton
+                                        onClick={() => handleCreate(isEdited)}
+                                    >
+                                        {!isEdited?"Create Colleciton":"Update"}
+                                    </CreateCollectionButton>
                                 </div>
                                 <CloseButton handleClose={closeCreatedDlg}/>
                             </div>

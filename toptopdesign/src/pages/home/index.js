@@ -9,10 +9,36 @@ import {
 import IndeterminateCheckbox from '../../components/checkBox';
 import { ReactComponent as SearchIcon } from '../../assets/img/user/home/search.svg';
 import ImageView from '../../components/imageView';
-import TxtButton from '../../components/txtButton';
 import Footer from '../../components/footer';
 import { getAllProducts, getSearchResults } from '../../api/home';
 import OutsideClickHandler from './components/outSide';
+import { withStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+
+const MoreButton = withStyles((theme) => ({
+    root: {
+        color: `var(--white)`,
+        fontFamily: `var(--font-family-pp_telegraf-regular)`,
+        fontSize: `var(--font-size-24)`,
+        fontWeight: 400,
+        fontStyle: 'normal',
+        width: 221,
+        height: 53,
+        borderRadius: 63,
+        cursor: 'pointer',
+        lineHeight: 24,
+        backgroundColor: `var(--black-normal)`,
+        letterSpacing: 0,
+        whiteSpace: 'nowrap',
+        marginBottom: 50,
+        textTransform: 'none',
+        transition: '.3s ease',
+        '&:hover': {
+            opacity: '.7',
+            backgroundColor: `var(--black-hover)`,
+        },
+    },
+  }))(Button);
 
 export default function Home(){
     const [showPatternList, setShowPatternList] = useState(false);
@@ -142,7 +168,9 @@ export default function Home(){
                             </div>
                             {searchResults.length && 
                                 <div className='center-mode'>
-                                    <TxtButton text={"More"}/>
+                                    <MoreButton>
+                                        More
+                                    </MoreButton>
                                 </div>
                             }
                         </>

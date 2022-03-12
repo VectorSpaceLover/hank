@@ -13,14 +13,86 @@ import {
     getCollectionByName,
 } from '../../api/collection';
 import CreateButton from './txtButton';
-import GoButton from './goButton';
-import TextButton from '../../pages/collection/components/txtButton';
 import EmailInput from '../../pages/collection/components/emailInput';
 import { useNavigate } from "react-router-dom";
 import {
     createNewCollection
 } from '../../api/collection';
 import Input from '../../pages/collection/components/input';
+import { withStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+
+const CreateCollectionButton = withStyles((theme) => ({
+    root: {
+        color: `var(--white)`,
+        fontFamily: `var(--font-family-pp_telegraf-regular)`,
+        fontSize: `var(--font-size-24)`,
+        fontWeight: 400,
+        fontStyle: `normal`,
+        backgroundColor: `var(--black-normal)`,
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 53,
+        width: 528,
+        letterSpacing: 0,
+        lineHeight: 24,
+        whiteSpace: 'nowrap',
+        borderRadius: 63,
+        marginBottom: 50,
+        textTransform: 'none',
+        transition: '.3s ease',
+        '&:hover': {
+            opacity: '.7',
+            backgroundColor: `var(--black-hover)`,
+        },
+        [`@media screen and (max-width: 768px)`]: {
+            fontWeight: 400,
+            width: 306,
+            borderRadius: 100,
+          }
+    },
+}))(Button);
+
+const GoButton = withStyles((theme) => ({
+    root: {
+        color: `var(--white)`,
+        fontFamily: `var(--font-family-pp_telegraf-regular)`,
+        fontSize: `var(--font-size-24)`,
+        fontWeight: 400,
+        fontStyle: `normal`,
+        backgroundColor: `var(--black-normal)`,
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 53,
+        width: 528,
+        letterSpacing: 0,
+        lineHeight: 24,
+        whiteSpace: 'nowrap',
+        borderRadius: 63,
+        marginBottom: 50,
+        marginTop: 8,
+        border: `1px solid var(--purple)`,
+        textTransform: 'none',
+        transition: '.3s ease',
+        '&:hover': {
+            opacity: '.7',
+            backgroundColor: `var(--black-hover)`,
+        },
+        [`@media screen and (max-width: 768px)`]: {
+            fontWeight: 400,
+            width: 306,
+            borderRadius: 100,
+        },
+        [`@media screen and (max-width: 600px)`]: {
+            width: 306,
+        }
+    },
+}))(Button);
+
 
 export default function ImageView({ favourited, imageList }){
     const navigate = useNavigate();
@@ -145,7 +217,12 @@ export default function ImageView({ favourited, imageList }){
                                         />
                             })}
                             <CreateButton text={"Create New Collection"} onClick={openNewCollection}/>
-                            <GoButton text={goTxt} onClick={gotoFunc}/>
+                            <div className='footer'>
+                                <GoButton onClick={gotoFunc}>
+                                    {goTxt}
+                                </GoButton>
+                            </div>
+                            
                         </div>
                         <CloseButton handleClose={closeViewCollectionsDlg}/>
                     </ViewCollectionDlgStyle>
@@ -199,7 +276,11 @@ export default function ImageView({ favourited, imageList }){
                                 <EmailInput description={description} setDescription={setDescription}/>
                             </div>
                             <div className="footer">
-                                <TextButton text={"Create Colleciton"} onClick={() => handleCreate()}/>
+                                <CreateCollectionButton
+                                    onClick={() => handleCreate()}
+                                >
+                                    Create Colleciton
+                                </CreateCollectionButton>
                             </div>
                             <CloseButton handleClose={closeCreatedDlg}/>
                         </div>

@@ -15,6 +15,7 @@ export const Styles = styled.div`
     margin-top: 12px;
     margin-left: auto;
     cursor: pointer;
+    transition: .3s ease;
     &:hover {
       color: rgb(191 157 226);
     }

@@ -1,6 +1,5 @@
 import CollectionCard from '../collectionCard';
-import { Grid } from "@mui/material";
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useCallback } from 'react';
 
 import { getAllCollection } from '../../../../api/collection';
 import { CollectionsContext } from '../../../../context/collections';
@@ -8,13 +7,15 @@ import { Styles } from './style/allCollectionStyle';
 const AllCollections = () => {
     const [collections, setCollections] = useContext(CollectionsContext);
 
-    const getInitialData = async () => {
+    
+    const getInitialData = useCallback( async() => {
         const { collections } = await getAllCollection();
         setCollections(collections);
-    }
+    }, [setCollections])
+
     useEffect(() => {
         getInitialData();
-    }, [])
+    }, [getInitialData])
     
     return (
         <Styles>
