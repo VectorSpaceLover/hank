@@ -51,44 +51,41 @@ const viewAllStyle = {
     paddingTop: 4,
 }
 
-const SignInButton = withStyles((theme) => ({
+const EditButton = withStyles((theme) => ({
     root: {
-        marginLeft: 14,
-        height: 48,
-        display: 'flex',
-        padding: '0px 17px',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: `var(--main)`,
-        borderRadius: 24,
-        cursor: 'pointer',
-        textAlign: 'center',
-        width: 177,
-        textTransform: 'none',
-        transition: '.3s ease',
-        color: `var(--white)`,
-        fontFamily: `var(--font-family-pp_telegraf-regular)`,
-        fontSize: `var(--font-size-m)`,
-        fontWeight: 400,
-        fontStyle: `normal`,
+        border: '1px solid var(--second) !important',
+        color: `var(--second) !important`,
+        fontFamily: `var(--font-family-pp_telegraf-regular) !important`,
+        fontSize: `var(--font-size-13) !important`,
+        fontWeight: '400px !important',
+        fontStyle: 'normal !important',
+        height: '32px !important',
+        marginBottom: '0.78px !important',
+        display: 'flex !important',
+        padding: '0px 15.5px !important',
+        justifyContent: 'flex-end !important',
+        alignItems: 'center !important',
+        borderRadius: '64px !important',
+        cursor: 'pointer !important',
         '&:hover': {
-            opacity: '.7',
-            backgroundColor: 'var(--blue-ribbon)',
+            opacity: '.7 !important',
+            color: `var(--white) !important`,
+            backgroundColor: `var(--second) !important`
         },
-        ['@media screen and (max-width: 900px)']: { // eslint-disable-line no-useless-computed-key
-            width: 255,
-            marginLeft: 0,
-            padding: 0,
-            marginTop: 10,
+        '& .sign-in-arrow': {
+            width: '13px !important',
+            height: '8px !important',
+            marginLeft: '8px !important',
+            marginTop: '0px !important',
         },
-        ['@media screen and (max-width: 650px)']: { // eslint-disable-line no-useless-computed-key
-            width: '100%',
-        },
-        '& .icon': {
-
+        '& .sign-in-txt': {
+            display: 'flex !important',
+            paddingTop: '1px !important',
+            alignItems: 'center !important',
         }
     },
-  }))(Button);
+}))(Button);
+
 
 function Navbar() {
     const navigate = useNavigate();
@@ -127,10 +124,12 @@ function Navbar() {
                         //     <div className='sign-in-btn' >SIGN IN</div>
                         //     <img className='sign-in-arrow' src='/img/arrowright.svg' alt='arrow' />
                         // </div>
-                        <SignInButton>
+                        <EditButton
+                            className="mr-24"
+                        >
+                            <span className='sign-in-txt'>SIGN IN</span>
                             <img className='sign-in-arrow' src='/img/arrowright.svg' alt='arrow' />
-                            <span>SIGN IN</span>
-                        </SignInButton>
+                        </EditButton>
                     ):(
                         <div className='icon-group'>
                             <IconButton 
