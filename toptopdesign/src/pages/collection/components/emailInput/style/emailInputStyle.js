@@ -12,14 +12,13 @@ export const Styles = styled.div`
         width: calc(100% - 48px);
         padding: 21px 24px 21px 24px;
         margin-bottom: 16px;
-        height: 175px;
+        height: 133px;
         background-color: var(--gallery);
         border-radius: 24px;
         overflow-y: auto;
         min-height: 16px;
         letter-spacing: 0.1px;
         line-height: 16px;
-        white-space: nowrap;
         outline: none;
         &:focus{
             ${Border2pxBrandPurple}

@@ -109,7 +109,7 @@ export const DialogStyles = styled.div`
     margin: 0px;
     position: relative;
     .dialog-container{
-        height: 534px;
+        height: 466px;
         width: 693px;
         padding: 34px 32px 34px 32px;
         overflow: hide;

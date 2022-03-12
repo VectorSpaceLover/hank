@@ -52,7 +52,7 @@ const viewAllStyle = {
 
 function Navbar() {
     const navigate = useNavigate();
-    const { items, signIn, line38 } = navbarData;
+    const { items, signIn } = navbarData;
     const [isSigned, setSigned] = useState(false);
 
     const [anchorGift, setAnchorGift] = useState(null);
@@ -85,8 +85,8 @@ function Navbar() {
                     <img className='title-img'  src='/img/user/banner.svg' alt='banner' />
                     {!isSigned? (
                         <div className='small-btn-outline' >
-                            <div className='sign-in-btn' >{signIn}</div>
-                            <img className='sign-in-arrow' src={line38} alt='arrow' />
+                            <div className='sign-in-btn' >SIGN IN</div>
+                            <img className='sign-in-arrow' src='/img/arrowright.svg' alt='arrow' />
                         </div>
                     ):(
                         <div className='icon-group'>

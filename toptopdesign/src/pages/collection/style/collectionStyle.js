@@ -5,7 +5,9 @@ import {
     PptelegrafRegularNormalBlack17px,
     Border1pxSecond,
     PptelegrafRegularNormalBlack20px,
-    PptelegrafUltraBoldCharade28px
+    PptelegrafUltraBoldCharade28px,
+    ValignTextMiddle,
+    Border2pxGrayNurse
 } from '../../../assets/styledMixins';
 
 export const Styles = styled.div`
@@ -16,6 +18,39 @@ export const Styles = styled.div`
             margin: 137px 0px 0px 0px;
             padding: 0px 22px 20px 22px;
             width: 1156px;
+            position: relative;
+            .back-btn{
+                position: absolute;
+                top: -58px;
+                left: 22px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 2px;
+                width: 100px;
+                height: 26px;
+                @media screen and (max-width: 768px) {
+                    top: -42px;
+                }
+                @media screen and (max-width: 600px) {
+                    top: -45px;
+                }
+                .back-arrow{
+                    ${ValignTextMiddle}
+                    height: 13px;
+                    width: 24px;
+                    letter-spacing: 1.04px;
+                    line-height: 22.5px;
+                    white-space: nowrap;
+                    transform:rotate(180deg);
+                }
+                .text{
+                    ${PptelegrafRegularNormalBlack17px}
+                    height: 13px;
+                    margin-left: 10px;
+                }
+            }
             
             .search-bar{
                 border-bottom: 1px solid rgba(105, 105, 105, 0.2);
@@ -46,6 +81,7 @@ export const Styles = styled.div`
                         line-height: 29px;
                         max-width: 480px;
                         padding-top: 24px;
+                        overflow: hidden;
                         @media screen and (max-width: 900px) {
                             padding-top: 12px;
                         }
@@ -157,7 +193,7 @@ export const DialogStyles = styled.div`
     margin: 0px;
     position: relative;
     .dialog-container{
-        height: 534px;
+        height: 466px;
         width: 693px;
         padding: 34px 32px 34px 32px;
         overflow: hide;

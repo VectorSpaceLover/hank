@@ -8,6 +8,8 @@ export const Styles = styled.div`
     .input{
         ${Border2pxGrayNurse}
         ${OpensansNormalBlack14px}
+        filter: drop-shadow(0px 1px 12px rgba(0, 0, 0, 0.12));
+
         width: calc(100% - 48px);
         padding: 0px 24px 0px 24px;
         height: 54px;

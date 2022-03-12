@@ -93,7 +93,6 @@ export default function ImageView({ favourited, imageList }){
     return (
         <Styles>
             <div className='image-container'>
-                {/* <img className='image-viewer' src='/img/carousel/1.png' alt=''/> */}
                 <div className='favourite'>
                     {favourited?
                         <IconButton 
@@ -182,7 +181,7 @@ export default function ImageView({ favourited, imageList }){
                                         Name
                                     </div>
                                     <div className="max-character">
-                                        64
+                                        {64 - collectionName.length}
                                     </div>
                                 </div>
                                 <Input 
@@ -194,7 +193,7 @@ export default function ImageView({ favourited, imageList }){
                                         Description (optional)
                                     </div>
                                     <div className="max-character">
-                                        150
+                                        {150 - description.length}
                                     </div>
                                 </div>
                                 <EmailInput description={description} setDescription={setDescription}/>

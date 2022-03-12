@@ -110,8 +110,8 @@ export const Styles = styled.div`
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
+                height: 53px;
                 .more-button{
-                    
                 }
             }
             .all-patterns{

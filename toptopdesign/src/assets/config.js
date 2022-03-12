@@ -8,7 +8,6 @@ export const navbarData = {
     ],
     titleImage: "https://anima-uploads.s3.amazonaws.com/projects/621ea468b7b66445f330bb3a/releases/621ea67598af0465c7322215/img/group-564-2@2x.svg",
     signIn: "SIGN IN",
-    line38: "https://anima-uploads.s3.amazonaws.com/projects/621ea468b7b66445f330bb3a/releases/621ea5127008b16657f7b4ca/img/line-38@2x.svg",
     line154: "https://anima-uploads.s3.amazonaws.com/projects/621ea468b7b66445f330bb3a/releases/621ea5127008b16657f7b4ca/img/line-154@1x.svg",
 };
 

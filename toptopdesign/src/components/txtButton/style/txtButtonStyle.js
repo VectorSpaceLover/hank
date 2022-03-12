@@ -15,7 +15,7 @@ export const Styles = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 53px;
+    height: 53px;
     min-width: 221px;
     text-align: right;
     letter-spacing: 0;

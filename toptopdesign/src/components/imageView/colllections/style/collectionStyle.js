@@ -18,14 +18,14 @@ export const Styles = styled.div`
         @media screen and (max-width: 700px) {
             flex-wrap: wrap;
             height: 173px;
-            padding: 21px 13px;
+            padding: 21px 13px 17px 13px;
             width: calc(100% - 26px);
         }
         &:hover{
             ${Border2pxBrandPurple}
             padding: 0px;
             @media screen and (max-width: 700px) {
-                padding: 20px 12px;
+                padding: 20px 12px 16px 12px;
             }
         }
         .collection-txt{
@@ -102,7 +102,7 @@ export const Styles = styled.div`
         ${Border2pxBrandPurple}
         padding: 0px;
         @media screen and (max-width: 700px) {
-            padding: 20px 12px;
+            padding: 20px 12px 16px 12px;
         }
     }
 `;

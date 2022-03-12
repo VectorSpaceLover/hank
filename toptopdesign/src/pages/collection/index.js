@@ -114,6 +114,10 @@ export default function Collection({children}){
         setCollections(collections);
     }
 
+    const back = () => {
+        navigate(`/collection/`);
+    }
+
     useEffect(() => {
         if(id)
             getInitialData();
@@ -123,6 +127,13 @@ export default function Collection({children}){
         <Styles>
             <div className="before-container">
                 <div className="collection-container">
+                    { viewCollection &&
+                        <div className='back-btn'
+                            onClick={back}
+                        >
+                            <img className='back-arrow' src='/img/arrowright.svg' alt='arrow' />
+                            <div className='text' >Back</div>
+                        </div>}
                     <div className="search-bar">
                         <div className="topic-txt">
                             <div className="collection-count">
@@ -185,7 +196,6 @@ export default function Collection({children}){
                                 </>
                             )}
                         </div>
-                        
                     </div>
                     {children && children}
                     <Dialog
@@ -219,7 +229,7 @@ export default function Collection({children}){
                                             Name
                                         </div>
                                         <div className="max-character">
-                                            64
+                                            {64 - collectionName.length}
                                         </div>
                                     </div>
                                     <Input collectionName={collectionName} setCollectionName={setCollectionName}/>
@@ -228,7 +238,7 @@ export default function Collection({children}){
                                             Description (optional)
                                         </div>
                                         <div className="max-character">
-                                            150
+                                            {150 - description.length}
                                         </div>
                                     </div>
                                     <EmailInput description={description} setDescription={setDescription}/>

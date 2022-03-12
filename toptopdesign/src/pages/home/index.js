@@ -105,19 +105,6 @@ export default function Home(){
                             >
                                 View full pattern list
                             </div>
-                            {/* {showPatternList && 
-                                <div className="pattern-container">
-                                    <Grid container spacing={3}>
-                                        {allPatternItems && allPatternItems.map((info, idx) => {
-                                            return (
-                                                <Grid item sm={3} xs={6} md={2} key={idx}>
-                                                    <IndeterminateCheckbox info={info}/>
-                                                </Grid>
-                                            )
-                                        })}
-                                    </Grid>
-                                </div>
-                            } */}
                             {showPatternList && 
                                 <div className="pattern-container">
                                     {allPatternItems && allPatternItems.map((info, idx) => {
