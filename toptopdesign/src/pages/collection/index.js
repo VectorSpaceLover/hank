@@ -57,7 +57,7 @@ const AddCollectionButton = withStyles((theme) => ({
         fontStyle: `normal !important`,
         '&:hover': {
             opacity: '.7 !important',
-            backgroundColor: 'var(--blue-ribbon) !important',
+            backgroundColor: 'var(--blue-hover) !important',
         },
         ['@media screen and (max-width: 900px)']: { // eslint-disable-line no-useless-computed-key
             width: '255px !important',
