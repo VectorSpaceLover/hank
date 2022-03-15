@@ -78,6 +78,14 @@ export const PptelegrafRegularNormalBlack13px = css`
   font-style: normal;
 `;
 
+export const PptelegrafRegularNormalGray11px = css`
+  color: var(--gray);
+  font-family: var(--font-family-pp_telegraf-regular);
+  font-size: var(--font-size-11);
+  font-weight: 400;
+  font-style: normal;
+`;
+
 export const OpensansNormalBlack14px = css`
   color: var(--second);
   font-family: var(--font-family-open_sans);
@@ -91,6 +99,14 @@ export const PptelegrafUltraBoldBlack48px = css`
   font-family: var(--font-family-pp_telegraf-ultrabold);
   font-size: var(--font-size-48);
   font-weight: 700;
+  font-style: normal;
+`;
+
+export const PptelegrafUltraBoldBlack24px = css`
+  color: var(--second);
+  font-family: var(--font-family-pp_telegraf-ultrabold);
+  font-size: var(--font-size-24);
+  font-weight: 800;
   font-style: normal;
 `;
 
@@ -185,6 +201,23 @@ export const PptelegrafRegularNormalBlack17px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-regular);
   font-size: var(--font-size-17);
+  font-weight: 400;
+  font-style: normal;
+`;
+
+export const PptelegrafRegularUltrabold36px = css`
+  color: var(--second);
+  font-family: var(--font-family-pp_telegraf-ultrabold);
+  font-size: var(--font-size-36);
+  font-weight: 800;
+  font-style: normal;
+  line-height: 38.16px;
+`;
+
+export const RobotoRegularNormalPurple36px = css`
+  color: var(--purple);
+  font-family: var(--font-family-roboto);
+  font-size: var(--font-size-36);
   font-weight: 400;
   font-style: normal;
 `;

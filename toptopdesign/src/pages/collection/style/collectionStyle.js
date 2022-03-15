@@ -10,7 +10,7 @@ import {
 } from '../../../assets/styledMixins';
 
 export const Styles = styled.div`
-    .before-container{
+    .collection-before-container{
         display: flex;
         justify-content: center;
         .collection-container{
@@ -259,8 +259,6 @@ export const DialogStyles = styled.div`
     }
 `;
 
-
-
 export const DeleteDlgStyle = styled.div`
     margin: 0px;
     position: relative;
@@ -320,17 +318,3 @@ export const DeleteDlgStyle = styled.div`
         }
     }
 `;
-
-// @media screen and (max-width: 1200px) {
-//     margin: 130px 140px 0px 140px;
-// }
-// @media screen and (max-width: 1000px) {
-//     margin: 130px 100px 0px 100px;
-// }
-// @media screen and (max-width: 800px) {
-//     margin: 130px 60px 0px 60px;
-// }
-// @media screen and (max-width: 600px) {
-//     margin: 130px 20px 0px 20px;
-//     padding: 0px;
-// }

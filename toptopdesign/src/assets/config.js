@@ -466,3 +466,36 @@ export const oneCollection = [
 ]
 
 export const imageList = ['1', '2' ,'3', '4', '5', '6' ,'7', '8'];
+
+export const profileBtns = [
+    {
+        name: 'Edit Profile',
+        size: '116px !important',
+        path: 'edit',
+    },
+    {
+        name: 'Account Settings',
+        size: '173px !important',
+        path: 'accountsetting',
+    },
+    {
+        name: 'Password',
+        size: '100px !important',
+        path: 'password',
+    },
+    {
+        name: 'Social Profile',
+        size: '134px !important',
+        path: 'socialprofile',
+    },
+    {
+        name: 'Email Notification',
+        size: '177px !important',
+        path: 'emailnotification',
+    },
+    {
+        name: 'Message',
+        size: "96px !important",
+        path: 'message',
+    },
+]

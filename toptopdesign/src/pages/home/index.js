@@ -86,7 +86,7 @@ export default function Home(){
 
     return (
         <Styles>
-            <div className='before-container'>
+            <div className='home-before-container'>
                 <div className='home-container'>
                     <Grid container>
                         <Grid item sm={8} xs={12}>

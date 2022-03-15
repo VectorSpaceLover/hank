@@ -8,7 +8,7 @@ import {
 } from '../../../assets/styledMixins';
 
 export const Styles = styled.div`
-    .before-container {
+    .home-before-container {
         display: flex;
         justify-content: center;
         .home-container{

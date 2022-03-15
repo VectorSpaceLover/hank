@@ -239,7 +239,7 @@ export default function Collection({children}){
 
     return(
         <Styles>
-            <div className="before-container">
+            <div className="collection-before-container">
                 <div className="collection-container">
                     { viewCollection &&
                         <div className='back-btn'

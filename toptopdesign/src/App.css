@@ -61,3 +61,15 @@
   src: local('Manrope'), local('Manrope'), 
    url('https://fonts.google.com/specimen/Manrope')format("truetype");
 }
+
+@font-face {
+  font-family: "Roboto";
+  src: local('Roboto'), local('Roboto'), 
+   url('https://fonts.google.com/specimen/Roboto')format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto-bold";
+  src: local('Roboto-bold'), local('Roboto-bold'), 
+   url('https://allfont.net/allfont.css?fonts=roboto-bold')format("truetype");
+}

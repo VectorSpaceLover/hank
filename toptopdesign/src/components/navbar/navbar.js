@@ -89,7 +89,7 @@ const EditButton = withStyles((theme) => ({
 
 function Navbar() {
     const navigate = useNavigate();
-    const [isSigned, setSigned] = useState(false);
+    const [isSigned, setSigned] = useState(true);
 
     const [anchorGift, setAnchorGift] = useState(null);
     const [anchorAlarm, setAnchorAlarm] = useState(null);
@@ -110,7 +110,9 @@ function Navbar() {
     const viewMessage = (idx) =>  {
         navigate(`/myaccount?id=${idx}`);
     }
-
+    const goToAccount = () => {
+        navigate(`/myaccount/edit`);
+    }
     return (
         <Styles>
             <div className='before-container'>
@@ -186,7 +188,7 @@ function Navbar() {
                                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                             >
-                                <MenuItem onClick={closeGiftMenu} disableRipple>
+                                <MenuItem onClick={goToAccount} disableRipple>
                                     <ProfileIcon style={{ marginRight: 14 }} />
                                     My Profile
                                 </MenuItem>
