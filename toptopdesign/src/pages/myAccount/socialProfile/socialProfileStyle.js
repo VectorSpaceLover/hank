@@ -5,6 +5,9 @@ import {
 } from '../../../assets/styledMixins';
 
 export const Styles = styled.div`
+    @media screen and (max-width: 600px) {
+        width: 100%;
+    }
     .edit-profile-container{
         margin-top: 66px;
         max-width: 542px;
@@ -22,10 +25,12 @@ export const Styles = styled.div`
         }
         .edit-body{
             .social-login{
-                padding-top: 40px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                @media screen and (max-width: 600px) {
+                    flex-direction: column;
+                }
             }
         }
         .edit-footer{

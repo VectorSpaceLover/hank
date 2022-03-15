@@ -480,7 +480,7 @@ export const profileBtns = [
     },
     {
         name: 'Password',
-        size: '100px !important',
+        size: '103px !important',
         path: 'password',
     },
     {
@@ -497,5 +497,68 @@ export const profileBtns = [
         name: 'Message',
         size: "96px !important",
         path: 'message',
+    },
+]
+
+export const systemMsgs = [
+    {
+        senderName: 'Maxbert',
+        content: 'marked the due date complete',
+        date: 'Oct 16, 2020 at 9:12 AM',
+        isSystemMsg: false,
+    },
+    {
+        senderName: 'Lukman Sardi',
+        content: 'moved this card from Need Review to Done',
+        date: 'Oct 16, 2020 at 9:12 AM',
+        isSystemMsg: false,
+    },
+    {
+        senderName: 'Lukman Sardi',
+        content: 'marked the due date complete',
+        date: 'Oct 16, 2020 at 9:12 AM',
+        isSystemMsg: false,
+    },
+    {
+        senderName: 'System Notification',
+        content: 'Your password has been changed recently',
+        date: 'Oct 16, 2020 at 9:12 AM',
+        isSystemMsg: true,
+    },
+    {
+        senderName: 'System Notification',
+        content: 'marked the due date complete',
+        date: 'Oct 16, 2020 at 9:12 AM',
+        isSystemMsg: true,
+    },
+    {
+        senderName: 'Maxbert',
+        content: 'marked the due date complete',
+        date: 'Oct 16, 2020 at 9:12 AM',
+        isSystemMsg: false,
+    },
+    {
+        senderName: 'Lukman Sardi',
+        content: 'moved this card from Need Review to Done',
+        date: 'Oct 16, 2020 at 9:12 AM',
+        isSystemMsg: false,
+    },
+    {
+        senderName: 'Lukman Sardi',
+        content: 'marked the due date complete',
+        date: 'Oct 16, 2020 at 9:12 AM',
+        isSystemMsg: false,
+    },
+    {
+        senderName: 'System Notification',
+        content: 'Your password has been changed recently',
+        date: 'Oct 16, 2020 at 9:12 AM',
+        isSystemMsg: true,
+    },
+    {
+        senderName: 'System Notification',
+        content: 'marked the due date complete',
+        date: 'Oct 16, 2020 at 9:12 AM',
+        isSystemMsg: true,
     },
 ]

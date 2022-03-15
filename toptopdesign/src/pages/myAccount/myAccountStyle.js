@@ -8,11 +8,15 @@ export const Styles = styled.div`
     .myaccount-before-container{
         display: flex;
         justify-content: center;
+        position: relative;
         .myaccount-container{
             margin: 137px 0px 0px 0px;
             padding: 0px 22px 20px 22px;
             max-width: 1156px;
             width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
             .myaccount-header{
                 display: flex;
                 flex-direction: row;
@@ -21,10 +25,16 @@ export const Styles = styled.div`
                 max-width: 542px;
                 margin: auto;
                 .header-avatar{
+                    object-cover: fit;
                     width: 60px;
                     height: 60px;
                     border-radius: 60px;
                     background-color: var(--mist-gray);
+                    @media screen and (max-width: 600px) {
+                        min-width: 45px;
+                        height: 45px;
+                        max-width: 45px;
+                    }
                 }
                 .header-content{
                     display: flex;
@@ -37,7 +47,9 @@ export const Styles = styled.div`
                         ${RobotoRegularNormalPurple36px}
                     }
                 }
-                
+                @media screen and (max-width: 600px) {
+                    padding-left: 16px;
+                }
             }
             .myaccount-content{
                 display: flex;
@@ -49,12 +61,47 @@ export const Styles = styled.div`
                     font-weight: 800px !important;
                     text-decoration-line: underline !important;
                 }
-
+                .mr-30{
+                    margin-left: 30px;
+                }
+                @media screen and (max-width: 900px) {
+                    justify-content: flex-start;
+                }
+                @media screen and (max-width: 800px) {
+                    justify-content: flex-start;
+                    padding-left: 78px;
+                }
+                @media screen and (max-width: 600px) {
+                    justify-content: flex-start;
+                    padding-left: 5px;
+                }
+            }
+            .myaccount-message{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                @media screen and (max-width: 600px) {
+                    padding: 16px;
+                }
             }
             .myaccount-body{
                 display: flex;
                 justify-content: center;
+                @media screen and (max-width: 600px) {
+                    padding: 16px;
+                }
+            }
+            
+        }
+        .alert{
+            position: absolute;
+            top: 15px;
+            left: calc((100% - 441px) / 2);
+            .profile-success{
+                width: 441px;
+                height: 29px;
             }
         }
+        
     }
 `;

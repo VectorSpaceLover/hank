@@ -30,6 +30,7 @@ const IconButton = withStyles((theme) => ({
         fontSize: `var(--font-size-16) !important`,
         fontWeight: '700px !important',
         fontStyle: `normal !important`,
+        marginTop: `40px !important`,
         '&:hover': {
             color: `var(--white) !important`,
             backgroundColor: `var(--second) !important`,
@@ -68,7 +69,7 @@ const TextButton = withStyles((theme) => ({
         borderRadius: '64px !important',
         cursor: 'pointer !important',
         backgroundColor: `var(--main) !important`,
-        
+        marginTop: `40px !important`,
         [`@media screen and (max-width: 650px)`]: {
             width: '100% !important',
             height: '36px !important',

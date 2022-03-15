@@ -4,6 +4,9 @@ import {
 } from '../../../assets/styledMixins';
 
 export const Styles = styled.div`
+    @media screen and (max-width: 600px) {
+        width: 100%;
+    }
     .password-container{
         margin-top: 66px;
         max-width: 542px;

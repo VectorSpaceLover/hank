@@ -5,6 +5,7 @@ import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/footer";
+import { ReactComponent as ProfileSuccess } from '../../assets/img/account/profile_success.svg';
 
 const EditButton = withStyles((theme) => ({
     root: {
@@ -20,7 +21,6 @@ const EditButton = withStyles((theme) => ({
         justifyContent: 'center !important',
         alignItems: 'center !important',
         cursor: 'pointer !important',
-        marginLeft: '30px !important',
 
         [`@media screen and (max-width: 650px)`]: {
             width: '100% !important',
@@ -46,6 +46,7 @@ export default function MyAccount({children}){
     const navigate = useNavigate();
     const [userName, setUserName] = useState('username');
     const [currentPage, setCurrentPage] = useState('');
+    const [profileSuccess, setProfileSuccess] = useState(false);
 
     useEffect(() => {
         const urlParams = window.location.href.split("/").pop()
@@ -54,7 +55,7 @@ export default function MyAccount({children}){
                 setCurrentPage(item.name);
             }
         }) 
-    }, []);
+    }, [children]);
     const goToOthers = (path) => {
         navigate(`/myaccount/${path}`);
     }
@@ -78,7 +79,8 @@ export default function MyAccount({children}){
                     <div className="myaccount-content">
                         {profileBtns && profileBtns.map((item, idx) => {
                             return (
-                                <EditButton 
+                                <EditButton
+                                    className={idx === 0?'':'mr-30'}
                                     key={idx} 
                                     width={item.size}
                                     onClick={() => goToOthers(item.path)}
@@ -89,8 +91,14 @@ export default function MyAccount({children}){
                         })}
                     </div>
                     <div className="myaccount-body">
-                        {children && children}
+                        {(currentPage !== 'Message') && children}
                     </div>
+                    <div className="myaccount-message">
+                        {(currentPage === 'Message') && children}
+                    </div>
+                </div>
+                <div className="alert">
+                    {profileSuccess && <ProfileSuccess />}
                 </div>
             </div>
             <Footer />

@@ -27,12 +27,23 @@ const CustomedButton = withStyles((theme) => ({
             opacity: '.7 !important',
             backgroundColor: `var(--black-hover) !important`,
         },
+        [`@media screen and (max-width: 600px)`]: {
+            width: '100% !important',
+        },
     },
 }))(Button);
 
-export default function CustomedTextButton({text}){
+export default function CustomedTextButton({text, addMore, whichOne, saveOption}){
+    const handleClick = () => {
+        if(text === 'View More')
+            addMore();
+        else    
+            saveOption(whichOne);
+    }
     return (
-        <CustomedButton>
+        <CustomedButton 
+            onClick={() => handleClick()}
+        >
             {text}
         </CustomedButton>
     )

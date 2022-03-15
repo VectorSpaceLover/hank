@@ -25,7 +25,7 @@ export const Styles = styled.div`
         margin: 0px 60px;
       }
       @media screen and (max-width: 600px) {
-        margin: 0px 20px;
+        margin: 0px 16px;
       }
       @media screen and (min-width: 1900px) {
         margin-bottom: 30px;

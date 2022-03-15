@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Styles } from "./messageStyle";
-import CustomedInput from '../input';
 import CustomedTextButton from '../customedBtn';
-import PasswordInput from "../passwordInput";
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import { ReactComponent as MessageIcon } from '../../../assets/img/message.svg';
 import { ReactComponent as AlarmIcon } from '../../../assets/img/alarm.svg';
-
+import SystemMessage from "./systemMessage";
+import {
+    systemMsgs
+} from '../../../assets/config';
 
 const LeftIconButton = withStyles((theme) => ({
     root: {
@@ -26,11 +27,12 @@ const LeftIconButton = withStyles((theme) => ({
         width: '170px !important',
         textTransform: 'none !important',
         transition: '.3s ease !important',
-        color: `var(--second) !important`,
         fontFamily: `var(--font-family-pp_telegraf-regular) !important`,
         fontSize: `var(--font-size-14) !important`,
         fontWeight: '400px !important',
         fontStyle: `normal !important`,
+        backgroundColor: props => props.isclicked === 1?`var(--second)`:`var(--white)`,
+        color: props => props.isclicked === 1?`var(--white)`:`var(--second)`,
         '&:hover': {
             color: `var(--white) !important`,
             backgroundColor: `var(--second) !important`,
@@ -41,7 +43,7 @@ const LeftIconButton = withStyles((theme) => ({
             padding: '0 !important',
             marginTop: '10 !important',
         },
-        ['@media screen and (max-width: 650px)']: { // eslint-disable-line no-useless-computed-key
+        ['@media screen and (max-width: 600px)']: { // eslint-disable-line no-useless-computed-key
             width: '100% !important',
         },
         '& .icon': {
@@ -67,11 +69,12 @@ const RightIconButton = withStyles((theme) => ({
         width: '170px !important',
         textTransform: 'none !important',
         transition: '.3s ease !important',
-        color: `var(--second) !important`,
         fontFamily: `var(--font-family-pp_telegraf-regular) !important`,
         fontSize: `var(--font-size-14) !important`,
         fontWeight: '400px !important',
         fontStyle: `normal !important`,
+        backgroundColor: props => props.isclicked === 1?`var(--second)`:`var(--white)`,
+        color: props => props.isclicked === 1?`var(--white)`:`var(--second)`,
         '&:hover': {
             color: `var(--white) !important`,
             backgroundColor: `var(--second) !important`,
@@ -82,7 +85,7 @@ const RightIconButton = withStyles((theme) => ({
             padding: '0 !important',
             marginTop: '10 !important',
         },
-        ['@media screen and (max-width: 650px)']: { // eslint-disable-line no-useless-computed-key
+        ['@media screen and (max-width: 600px)']: { // eslint-disable-line no-useless-computed-key
             width: '100% !important',
         },
         '& .icon': {
@@ -92,44 +95,45 @@ const RightIconButton = withStyles((theme) => ({
   }))(Button);
 
 export default function Message(){
-    const [userName, setUserName] = useState('');
-    const [userEmail, setUserEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [isSystem, setSystem] = useState(true);
+    const [msgs, setMsgs] = useState([]);
+
+    const addMore = () => {
+        const newMsgs = systemMsgs.filter( (item, idx ) => idx < msgs.length + 5)
+        setMsgs(newMsgs)
+    }
+
+    useEffect(() => {
+        const newMsgs = systemMsgs.filter( (item, idx ) => idx < 5)
+        setMsgs(newMsgs)
+    }, [])
 
     return (
         <Styles>
             <div className="message-container">
                 <div className="message-header">
-                    <LeftIconButton>
+                    <LeftIconButton isclicked={isSystem?1:0} onClick={() => setSystem(true)}>
                         <MessageIcon className="icon"/>
                         <span>System Messages</span>
                     </LeftIconButton>
-                    <RightIconButton>
+                    <RightIconButton isclicked={!isSystem?1:0} onClick={() => setSystem(false)}>
                         <AlarmIcon className="icon"/>
                         <span>General Messages</span>
                     </RightIconButton>
                 </div>
+                <div className="divider">
+
+                </div>
                 <div className="message-body">
-                    <CustomedInput 
-                        inputValue={userName}
-                        inputHandler={setUserName}
-                        placeholderName="Username"
-                    />
-                    <CustomedInput 
-                        inputValue={userEmail}
-                        inputHandler={setUserEmail}
-                        placeholderName="123@gmail.com"
-                    />
-                    {userName && userEmail &&
-                        <PasswordInput 
-                            inputValue={password}
-                            inputHandler={setPassword}
-                            placeholderName="Enter your password to make the changes"
-                        />
+                    {isSystem &&
+                        <SystemMessage msgs={msgs} />
                     }
                 </div>
                 <div className='message-footer'>
-                    <CustomedTextButton text={"Save Changes"}/>
+                    <CustomedTextButton
+                        text={"View More"}
+                        addMore={addMore}
+                    />
                 </div>
             </div>
         </Styles>

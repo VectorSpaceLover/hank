@@ -26,14 +26,10 @@ const UploadButton = withStyles((theme) => ({
         cursor: 'pointer !important',
         
         [`@media screen and (max-width: 650px)`]: {
-            width: '100% !important',
-            height: '36px !important',
-            padding: '0px !important',
+            width: '150px !important',
+            fontSize: `var(--font-size-16) !important`,
         },
-        [`@media screen and (max-width: 900px)`]: {
-            marginRight: '0px !important',
-            marginTop: '10px !important',
-        },
+       
         textTransform: 'none !important',
         transition: '.3s ease !important',
         '&:hover': {
@@ -44,20 +40,36 @@ const UploadButton = withStyles((theme) => ({
 }))(Button);
 
 export default function EditProfile(){
+    const [image, setImage] = useState({ preview: "", raw: "" });
     const [userName, setUserName] = useState('');
     const [location, setLocation] = useState('');
     const [shortBio, setShortBio] = useState('');
+    
+    const saveOption = (val) => {
+        if(val === 'edit'){
+
+        }
+    }
+    const handleChange = e => {
+        console.log(e.target.files);
+        if (e.target.files.length) {
+          setImage({
+            preview: URL.createObjectURL(e.target.files[0]),
+            raw: e.target.files[0]
+          });
+        }
+      };
 
     return (
         <Styles>
             <div className="edit-profile-container">
                 <div className="edit-header">
-                    <div className="edit-avatar">
-                    </div>
-                    <UploadButton>
-                        Upload picture
-                    </UploadButton>
-                    <RemoveButton text={"Remove"}/>
+                    
+                    
+                    <RemoveButton 
+                        text={"Remove"}
+                        onClick={()=>setImage({ preview: "", raw: "" })}
+                    />
                 </div>
                 <div className="edit-body">
                     <CustomedInput 
@@ -77,7 +89,11 @@ export default function EditProfile(){
                     />
                 </div>
                 <div className='edit-footer'>
-                    <CustomedTextButton text={"Save Changes"}/>
+                    <CustomedTextButton 
+                        text={"Save Changes"}
+                        whichOne="edit"
+                        saveOption={saveOption}
+                    />
                 </div>
             </div>
         </Styles>
