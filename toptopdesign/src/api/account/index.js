@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getUserInfoById = async () => {
-    const id = '62312a93a23e76275cbff408';
+    const id = '62310b9a2ff64ff3fc178beb';
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/account/detail?id=${id}`);
     return res.data;
 }
@@ -18,7 +18,7 @@ export const uploadAvatar = async (formData) => {
 }
 
 export const upDateProfile = async (avatarPath, userName, location, shortBio) => {
-    const id = '62312a93a23e76275cbff408';
+    const id = '62310b9a2ff64ff3fc178beb';
     const res = await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/account/editprofile/${id}`, 
         {
@@ -32,7 +32,7 @@ export const upDateProfile = async (avatarPath, userName, location, shortBio) =>
 }
 
 export const upDateAccountSetting = async (userName, userEmail, password) => {
-    const id = '62312a93a23e76275cbff408';
+    const id = '62310b9a2ff64ff3fc178beb';
     const res = await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/account/accountsetting/${id}`, 
         {
@@ -45,7 +45,7 @@ export const upDateAccountSetting = async (userName, userEmail, password) => {
 }
 
 export const upDatePassword = async (oldPassword, newPassword) => {
-    const id = '62312a93a23e76275cbff408';
+    const id = '62310b9a2ff64ff3fc178beb';
     const res = await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/account/password/${id}`, 
         {
@@ -64,7 +64,7 @@ export const upDateSocialProfile = async (
     isGoogle,
     isFacebook
 ) => {
-    const id = '62312a93a23e76275cbff408';
+    const id = '62310b9a2ff64ff3fc178beb';
     const res = await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/account/social/${id}`, 
         {
@@ -80,7 +80,7 @@ export const upDateSocialProfile = async (
 }
 
 export const upDateEmailNotification = async (checked) => {
-    const id = '62312a93a23e76275cbff408';
+    const id = '62310b9a2ff64ff3fc178beb';
     const res = await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/account/emailnotification/${id}`, 
         {
