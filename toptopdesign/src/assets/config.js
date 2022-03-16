@@ -1,15 +1,9 @@
+import { ReactComponent as OverViewIcon } from '../assets/img/admin/overview.svg';
+import { ReactComponent as ProductsIcon } from '../assets/img/admin/products.svg';
+import { ReactComponent as UserIcon } from '../assets/img/admin/user.svg';
+import { ReactComponent as CollectionIcon } from '../assets/img/admin/collection.svg';
+import { ReactComponent as SettingIcon } from '../assets/img/admin/setting.svg';
 
-export const navbarData = {
-    items: [
-        "ITEM",
-        "ITEM",
-        "ITEM",
-        "ITEM",
-    ],
-    titleImage: "https://anima-uploads.s3.amazonaws.com/projects/621ea468b7b66445f330bb3a/releases/621ea67598af0465c7322215/img/group-564-2@2x.svg",
-    signIn: "SIGN IN",
-    line154: "https://anima-uploads.s3.amazonaws.com/projects/621ea468b7b66445f330bb3a/releases/621ea5127008b16657f7b4ca/img/line-154@1x.svg",
-};
 
 export const allPatternItems = [
     {
@@ -561,4 +555,27 @@ export const systemMsgs = [
         date: 'Oct 16, 2020 at 9:12 AM',
         isSystemMsg: true,
     },
+]
+
+export const sidebar = [
+    {
+        label: 'Overview',
+        icon: OverViewIcon
+    },
+    {
+        label: 'Products',
+        icon: ProductsIcon
+    },
+    {
+        label: 'Users',
+        icon: UserIcon
+    },
+    {
+        label: 'Collections',
+        icon: CollectionIcon
+    },
+    {
+        label: 'Settings',
+        icon: SettingIcon
+    }
 ]

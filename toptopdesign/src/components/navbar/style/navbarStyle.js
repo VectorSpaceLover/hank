@@ -91,16 +91,6 @@ export const Styles = styled.div`
     
 `;
 
-// @media screen and (max-width: 1200px) {
-//     margin: 0px 140px 0px 140px;
-// }
-// @media screen and (max-width: 1000px) {
-//     margin: 0px 100px 0px 100px;
-// }
-// @media screen and (max-width: 800px) {
-//     margin: 0px 60px 0px 60px;
-// }
-// @media screen and (max-width: 600px) {
-//     margin: 0px 20px 0px 20px;
-//     padding: 0px;
-// }
+export const AdminStyle = styled.div`
+    
+`;

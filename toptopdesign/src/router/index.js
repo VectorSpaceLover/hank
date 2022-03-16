@@ -12,6 +12,8 @@ import Password from "../pages/myAccount/password";
 import SocialProfile from "../pages/myAccount/socialProfile";
 import EmailNotification from "../pages/myAccount/emailNotification";
 import Message from "../pages/myAccount/message";
+import OverView from "../pages/admin/overView";
+import Admin from "../pages/admin";
 
 const Routers = () => {
 
@@ -19,6 +21,7 @@ const Routers = () => {
     <Router>
         <Navbar />
         <Routes>
+          {/* User panel */}
             <Route exact path="/" element={<Home/>}/>
             <Route exact path="/home" element={<Home/>}/>
             <Route exact path="/collection" element={
@@ -61,6 +64,13 @@ const Routers = () => {
                 <Message />
               </MyAccount>
             }/>
+            {/* Admin panel */}
+            <Route exact path="/admin/overview" element={
+                <Admin>
+                  <OverView />
+                </Admin>
+            }/>
+
         </Routes>
     </Router>
   )
