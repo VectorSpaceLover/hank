@@ -1,14 +1,12 @@
-import * as React from 'react';
+import { useState } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Typography } from '@mui/material';
 
-export default function CutomedCheckBox({label, idx, checkedItem}) {
-  const [checked, setChecked] = React.useState(false);
 
+export default function CutomedCheckBox({isChecked, label, idx, checkedItem}) {
   const handleChange = (event) => {
-    setChecked(!checked);
-    checkedItem(idx, !checked);
+    checkedItem(idx);
   };
   return (
     <div style={{paddingBottom: 24}}>
@@ -21,7 +19,7 @@ export default function CutomedCheckBox({label, idx, checkedItem}) {
                 }}>
                   {label}</Typography>}
               control={<Checkbox 
-                          checked={checked} 
+                          checked={isChecked} 
                           sx={{
                                 color: "black",
                                 '&.Mui-checked': {
