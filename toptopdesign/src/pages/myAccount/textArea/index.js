@@ -5,7 +5,7 @@ export default function CustomedTextArea({ inputValue, inputHandler, placeholder
         <Styles>
             <textarea 
                 className='cutomed-textarea'
-                onChange={e => inputHandler(e)}
+                onChange={e => inputHandler(e.target.value)}
                 value={inputValue}
                 rows="5" 
                 cols="100" 

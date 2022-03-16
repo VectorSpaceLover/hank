@@ -9,7 +9,7 @@ export const Styles = styled.div`
   .txt-button {
     ${OpensansNormalElectricViolet14px}
     min-height: 19px;
-    text-align: right;
+    text-align: center;
     letter-spacing: 0;
     text-decoration: underline;
     display: inline-block;

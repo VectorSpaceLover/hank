@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Styles } from "./emailNotificationStyle";
 import CustomedTextButton from '../customedBtn';
 import CustomedCheckBox from './checkBox';
+import {
+    upDateEmailNotification
+} from '../../../api/account';
 
 const checkLs = [
     {label: 'Notify me when new app screens have been added  '},
@@ -10,6 +13,18 @@ const checkLs = [
 ]
 
 export default function EmailNotification(){
+    const [checked, setChecked] = useState([false, false, false]);
+    const checkedItem = (idx, val) => {
+        let newChecked = checked;
+        newChecked[idx] = val;
+        setChecked(newChecked);
+    }
+
+    const saveOption = async (val) => {
+        if(val === 'accountsetting'){
+            await upDateEmailNotification(checked);
+        }
+    }
 
     return (
         <Styles>
@@ -18,10 +33,14 @@ export default function EmailNotification(){
                     Alerts
                 </div>
                 <div className="email-notification-body">
-                    {checkLs.map((item, idx) => <CustomedCheckBox label={item.label} key={idx}/>)}
+                    {checkLs.map((item, idx) => <CustomedCheckBox label={item.label} idx={idx} key={idx} checkedItem={checkedItem}/>)}
                 </div>
                 <div className='email-notification-footer'>
-                    <CustomedTextButton text={"Save Changes"}/>
+                    <CustomedTextButton 
+                        text={"Save Changes"}
+                        whichOne="accountsetting"
+                        saveOption={saveOption}
+                    />
                 </div>
             </div>
         </Styles>

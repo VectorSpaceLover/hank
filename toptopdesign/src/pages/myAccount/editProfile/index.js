@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Styles } from "./editProfileStyle";
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
@@ -6,6 +6,13 @@ import RemoveButton from './txtButton';
 import CustomedInput from '../input';
 import CustomedTextArea from '../textArea';
 import CustomedTextButton from '../customedBtn';
+import { 
+    uploadAvatar,
+    upDateProfile,
+    getUserInfoById,
+} from '../../../api/account';
+import { ReactComponent as ProfileSuccess } from '../../../assets/img/account/profile_success.svg';
+
 
 const UploadButton = withStyles((theme) => ({
     root: {
@@ -40,35 +47,76 @@ const UploadButton = withStyles((theme) => ({
 }))(Button);
 
 export default function EditProfile(){
-    const [image, setImage] = useState({ preview: "", raw: "" });
+    const [userAvatarPath, setUserAvatarPath] = useState(null);
+    const [userAvatar, setUserAvatar] = useState(null);
     const [userName, setUserName] = useState('');
     const [location, setLocation] = useState('');
     const [shortBio, setShortBio] = useState('');
-    
-    const saveOption = (val) => {
-        if(val === 'edit'){
+    const [profileSuccess, setProfileSuccess] = useState(false);
 
+    const uploadRef = useRef();
+    
+    const uploadImage = async() => {
+        const formData = new FormData()
+        formData.append('image', userAvatar);
+        return await uploadAvatar(formData);
+    }
+
+    const saveOption = async (val) => {
+        if(val === 'edit'){
+            const res = await uploadImage();
+            if(res?.filePath){
+                const result = await upDateProfile(res.filePath, userName, location, shortBio);
+                if(result.status === 'ok'){
+                    setProfileSuccess(true);
+                }else{
+                    setProfileSuccess(false);
+                }
+            }
         }
     }
-    const handleChange = e => {
-        console.log(e.target.files);
-        if (e.target.files.length) {
-          setImage({
-            preview: URL.createObjectURL(e.target.files[0]),
-            raw: e.target.files[0]
-          });
-        }
-      };
+
+    const getInitialData = useCallback(async() => {
+        const res = await getUserInfoById();
+        const userInfo = res.user[0];
+        setUserAvatarPath(`${process.env.REACT_APP_UPLOAD_URL}${userInfo.avatarPath}`);
+        setUserName(userInfo.userName);
+        setLocation(userInfo.location);
+        setShortBio(userInfo.shortBio);
+    }, [])
+
+    useEffect(() => {
+        getInitialData();
+    }, [getInitialData])
 
     return (
         <Styles>
             <div className="edit-profile-container">
                 <div className="edit-header">
-                    
-                    
+                    <div className="edit-avatar">
+                        {userAvatarPath &&
+                            <img
+                                className='avatar-size'
+                                alt="" 
+                                src={userAvatarPath} 
+                            />
+                        }
+                    </div>
+                    <UploadButton onClick={() => uploadRef.current.click()}>
+                        Upload picture
+                    </UploadButton>
+                    <input
+                        ref={uploadRef}
+                        type="file"
+                        hidden
+                        onChange={(event) => {
+                            setUserAvatarPath(URL.createObjectURL(event.target.files[0]));
+                            setUserAvatar(event.target.files[0]);
+                        }}
+                    />
                     <RemoveButton 
                         text={"Remove"}
-                        onClick={()=>setImage({ preview: "", raw: "" })}
+                        onClick={()=>setUserAvatar(null)}
                     />
                 </div>
                 <div className="edit-body">
@@ -95,6 +143,9 @@ export default function EditProfile(){
                         saveOption={saveOption}
                     />
                 </div>
+            </div>
+            <div className="alert">
+                {profileSuccess && <ProfileSuccess />}
             </div>
         </Styles>
     )

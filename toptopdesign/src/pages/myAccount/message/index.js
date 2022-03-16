@@ -9,6 +9,7 @@ import SystemMessage from "./systemMessage";
 import {
     systemMsgs
 } from '../../../assets/config';
+import GeneralMessage from "./generalMessage";
 
 const LeftIconButton = withStyles((theme) => ({
     root: {
@@ -96,16 +97,17 @@ const RightIconButton = withStyles((theme) => ({
 
 export default function Message(){
     const [isSystem, setSystem] = useState(true);
-    const [msgs, setMsgs] = useState([]);
+    const [sysMsg, setSysMsgs] = useState([]);
+    const [generalMsg, setGeneralMsgs] = useState([]);
 
     const addMore = () => {
-        const newMsgs = systemMsgs.filter( (item, idx ) => idx < msgs.length + 5)
-        setMsgs(newMsgs)
+        const newMsgs = systemMsgs.filter( (item, idx ) => idx < sysMsg.length + 5)
+        setSysMsgs(newMsgs)
     }
 
     useEffect(() => {
         const newMsgs = systemMsgs.filter( (item, idx ) => idx < 5)
-        setMsgs(newMsgs)
+        setSysMsgs(newMsgs)
     }, [])
 
     return (
@@ -125,15 +127,24 @@ export default function Message(){
 
                 </div>
                 <div className="message-body">
-                    {isSystem &&
-                        <SystemMessage msgs={msgs} />
-                    }
+                    {isSystem?<SystemMessage msgs={sysMsg} />:<GeneralMessage />}
+                    
                 </div>
                 <div className='message-footer'>
-                    <CustomedTextButton
-                        text={"View More"}
-                        addMore={addMore}
-                    />
+                    {isSystem?(
+                        sysMsg && sysMsg.length > 0 && 
+                            <CustomedTextButton
+                                text={"View More"}
+                                addMore={addMore}
+                            />
+                    ):(
+                        generalMsg && generalMsg.length > 0 && 
+                            <CustomedTextButton
+                                text={"View More"}
+                                addMore={addMore}
+                            />
+                    )}
+                    
                 </div>
             </div>
         </Styles>

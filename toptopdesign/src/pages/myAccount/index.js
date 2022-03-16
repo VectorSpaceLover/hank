@@ -5,7 +5,6 @@ import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/footer";
-import { ReactComponent as ProfileSuccess } from '../../assets/img/account/profile_success.svg';
 
 const EditButton = withStyles((theme) => ({
     root: {
@@ -46,7 +45,6 @@ export default function MyAccount({children}){
     const navigate = useNavigate();
     const [userName, setUserName] = useState('username');
     const [currentPage, setCurrentPage] = useState('');
-    const [profileSuccess, setProfileSuccess] = useState(false);
 
     useEffect(() => {
         const urlParams = window.location.href.split("/").pop()
@@ -96,9 +94,6 @@ export default function MyAccount({children}){
                     <div className="myaccount-message">
                         {(currentPage === 'Message') && children}
                     </div>
-                </div>
-                <div className="alert">
-                    {profileSuccess && <ProfileSuccess />}
                 </div>
             </div>
             <Footer />

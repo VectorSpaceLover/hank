@@ -1,4 +1,4 @@
-import { Styles, ViewCollectionDlgStyle } from "./socialProfileStyle";
+import { Styles, ViewCollectionDlgStyle, ConfirmDlgStyle } from "./socialProfileStyle";
 import { useEffect, useState } from "react";
 import CustomedInput from "../input";
 import CustomedTextButton from "../customedBtn";
@@ -9,10 +9,12 @@ import { ReactComponent as FacebookIcon } from '../../../assets/img/account/face
 import { ReactComponent as DisconnectIcon } from '../../../assets/img/account/disconnect.svg';
 import Dialog from '@mui/material/Dialog';
 import CancelButton from "../cancelButton";
+import { upDateSocialProfile } from '../../../api/account';
+import { ReactComponent as ProfileSuccess } from '../../../assets/img/account/profile_success.svg';
+import { ReactComponent as ConfirmIcon } from '../../../assets/img/account/confirm.svg';
 
 const IconButton = withStyles((theme) => ({
     root: {
-        marginLeft: '14px !important',
         height: '48px !important',
         display: 'flex !important',
         padding: '0px 17px !important',
@@ -37,17 +39,16 @@ const IconButton = withStyles((theme) => ({
         },
         ['@media screen and (max-width: 900px)']: { // eslint-disable-line no-useless-computed-key
             width: '255px !important',
-            marginLeft: '0px !important',
             padding: '0 !important',
-            marginTop: '10 !important',
+            marginTop: '10px !important',
         },
-        ['@media screen and (max-width: 650px)']: { // eslint-disable-line no-useless-computed-key
+        ['@media screen and (max-width: 600px)']: { // eslint-disable-line no-useless-computed-key
             width: '100% !important',
         },
         '& .icon': {
             marginRight: '8px !important',
         }
-    },
+    }
   }))(Button);
 
 const TextButton = withStyles((theme) => ({
@@ -70,7 +71,7 @@ const TextButton = withStyles((theme) => ({
         cursor: 'pointer !important',
         backgroundColor: `var(--main) !important`,
         marginTop: `40px !important`,
-        [`@media screen and (max-width: 650px)`]: {
+        [`@media screen and (max-width: 600px)`]: {
             width: '100% !important',
             height: '36px !important',
             padding: '0px !important',
@@ -115,14 +116,21 @@ const DlgButton = withStyles((theme) => ({
         [`@media screen and (max-width: 768px)`]: {
             fontWeight: '400px !important',
             border: `1px solid var(--purple)`,
-            width: '275px !important',
             borderRadius: '100px !important',
-          }
+        },
+        [`@media screen and (max-width: 750px)`]: {
+            width: '100% !important',
+            margin: '0px 10px !important',
+        },
+        [`@media screen and (max-width: 600px)`]: {
+            width: '100% !important',
+            margin: '0px 10px !important',
+        }
     },
 }))(Button);
 
 export default function SocialProfile(){
-    const [regiserWithEmail, setRegisterWithEmail] = useState(false);
+    const [regiserWithEmail, setRegisterWithEmail] = useState(true);
     const [twitter, setTwitter] = useState('');
     const [instagram, setInstagram] = useState('');
     const [dribbble, setDribbble] = useState('');
@@ -130,31 +138,78 @@ export default function SocialProfile(){
 
     const [isGoogle, setGoogle] = useState(false);
     const [isFacebook, setFacebook] = useState(false);
+    const [current, setCurrent] = useState(null);
+
+    const [socialStatus, setSocialStatus] = useState(false);
 
     const [disconnectedOpen, setDisconnectedOpen] = useState(false);
+    const [confirmOpen, setConfirmOpen] = useState(false);
 
 
     const closeDisconnectedDlg = () => {
         setDisconnectedOpen(false);
     };
 
+    const closeconfirmDlg = () => {
+        setConfirmOpen(false);
+    }
+
+    const handleConfirm = () => {
+        if(current === 'google')
+            setGoogle(false);
+        else{
+            if(current === 'facebook')
+                setFacebook(false);
+        }
+        setCurrent(null);
+        setConfirmOpen(false);
+    }
+
     const handleGoogle = (value) => {
         if(!value){
+            setCurrent('google');
             setDisconnectedOpen(true);
         }
-        setGoogle(false);
     }
 
     const handleFacebook = (value) => {
         if(!value){
+            setCurrent('facebook');
             setDisconnectedOpen(true);
         }
-        setFacebook(false);
     }
+
+    const handleDisconnect = () => {
+        setConfirmOpen(true);
+        closeDisconnectedDlg();
+    }
+
+    const saveOption = async (val) => {
+        if(val === 'social'){
+            const result = await upDateSocialProfile(
+                twitter,
+                instagram,
+                dribbble,
+                behance,
+                isGoogle,
+                isFacebook
+            );
+            const changeTxt = () => {
+                setSocialStatus(false);
+            }
+            if(result.status === 'ok'){
+                setSocialStatus(true);
+            }else{
+                setSocialStatus(false);
+            }
+            await setTimeout(changeTxt, 3000);
+        }
+    }
+
     return (
         <Styles>
-            <div className="edit-profile-container">
-                <div className="edit-body">
+            <div className="social-profile-container">
+                <div className="social-body">
                     <CustomedInput 
                         inputValue={twitter}
                         inputHandler={setTwitter}
@@ -194,6 +249,7 @@ export default function SocialProfile(){
                         }
                         {isFacebook === false?
                             <IconButton
+                                className='ml-20'
                                 onClick={() => setFacebook(true)}
                             >
                                 <FacebookIcon 
@@ -202,6 +258,7 @@ export default function SocialProfile(){
                                 <span>Facebook</span>
                             </IconButton>:
                             <TextButton
+                                className='ml-20'
                                 onClick={() => handleFacebook(false)}
                             >
                                 Facebook Connected
@@ -209,58 +266,112 @@ export default function SocialProfile(){
                         }
                     </div>
                 </div>
-                <div className='edit-footer'>
-                    <CustomedTextButton text={"Save Changes"}/>
+                <div className='social-footer'>
+                    <CustomedTextButton 
+                        text={"Save Changes"}
+                        whichOne="social"
+                        saveOption={saveOption}
+                    />
                 </div>
             </div>
+            <div className="alert">
+                { socialStatus && <ProfileSuccess />}
+            </div>
             <Dialog
-                    open={disconnectedOpen} 
-                    onClose={closeDisconnectedDlg}
-                    maxWidth='md'
-                    fullWidth={true}
-                    PaperProps={{
-                        style: {
-                            display: 'flex',
-                            alignItems: 'center',
-                            borderRadius: 24,
-                            overflowY: 'auto',
-                            backgroundColor: 'transparent',
-                            boxShadow: 'none',
-                            padding: 30,
-                            height: 762,
-                            '@media(minWidth: 780px)' : {
-                            height: 486,
-                            }
+                open={disconnectedOpen} 
+                onClose={closeDisconnectedDlg}
+                maxWidth='md'
+                fullWidth={true}
+                PaperProps={{
+                    style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        borderRadius: 24,
+                        overflowY: 'auto',
+                        overflowX: 'hidden',
+                        backgroundColor: 'transparent',
+                        boxShadow: 'none',
+                        padding: 30,
+                        height: 762,
+                        '@media(minWidth: 780px)' : {
+                            height: 675,
                         },
-                    }}
-                >
-                    <ViewCollectionDlgStyle>
-                        <div className='dialog-container'>
-                            <div className="content">
-                                <div className={regiserWithEmail?"header":"second-header"}>
-                                    {`Disconnect {Google/Facebook}`}
-                                </div>
-                                <div className="body">
-                                    <div className="des-txt">
-                                        {regiserWithEmail?`Are you sure you want to disconnect {Google/Facebook} from your account? You can reconnect at any time in the future.`:
-                                            `You are using {Google/FB} account to log in to the site, if you disconnect {Google/FB} you will lose your account. So before disconnecting, please set up your email and password first. `
-                                        }
-                                    </div>
-                                    <DisconnectIcon className={regiserWithEmail?"picture":"picture pt-28"}/>
-                                </div>
-                                <div className="footer">
-                                    <DlgButton>
-                                        {regiserWithEmail?`Disconnect`:`Set up email & password`}
-                                    </DlgButton>
-                                </div>   
-                                <CancelButton 
-                                    text={"Cancel"} 
-                                    onClick={closeDisconnectedDlg}
-                                />
+                        '@media(minWidth: 600px)' : {
+                            height: 601,
+                        }
+                    },
+                }}
+            >
+                <ViewCollectionDlgStyle>
+                    <div className='dialog-container'>
+                        <div className="content">
+                            <div className={regiserWithEmail?"header":"second-header"}>
+                                {`Disconnect {Google/Facebook}`}
                             </div>
+                            <div className="body">
+                                <div className="des-txt">
+                                    {regiserWithEmail?`Are you sure you want to disconnect {Google/Facebook} from your account? You can reconnect at any time in the future.`:
+                                        `You are using {Google/FB} account to log in to the site, if you disconnect {Google/FB} you will lose your account. So before disconnecting, please set up your email and password first. `
+                                    }
+                                </div>
+                                <DisconnectIcon className={regiserWithEmail?"picture":"picture pt-28"}/>
+                            </div>
+                            <div className="footer">
+                                <DlgButton onClick={() => handleDisconnect()}>
+                                    {regiserWithEmail?`Disconnect`:`Set up email & password`}
+                                </DlgButton>
+                            </div>   
+                            <CancelButton 
+                                text={"Cancel"} 
+                                onClick={closeDisconnectedDlg}
+                            />
                         </div>
-                    </ViewCollectionDlgStyle>
-                </Dialog>
+                    </div>
+                </ViewCollectionDlgStyle>
+            </Dialog>
+            <Dialog
+                open={confirmOpen} 
+                onClose={closeconfirmDlg}
+                maxWidth='md'
+                fullWidth={true}
+                PaperProps={{
+                    style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        borderRadius: 24,
+                        overflowY: 'auto',
+                        overflowX: 'hidden',
+                        backgroundColor: 'transparent',
+                        boxShadow: 'none',
+                        padding: 30,
+                        height: 762,
+                        '@media(minWidth: 780px)' : {
+                            height: 675,
+                        },
+                        '@media(minWidth: 600px)' : {
+                            height: 601,
+                        }
+                    },
+                }}
+            >
+                <ConfirmDlgStyle>
+                    <div className='dialog-container'>
+                        <div className="content">
+                            <div className="header">
+                                Disconnected.
+                            </div>
+                            <div className="body">
+                                <ConfirmIcon className="picture"/>
+                            </div>
+                            <div className="footer">
+                                <DlgButton onClick={() => handleConfirm()}>
+                                    OK
+                                </DlgButton>
+                            </div>   
+                        </div>
+                    </div>
+                </ConfirmDlgStyle>
+            </Dialog>
         </Styles>
     )
 }

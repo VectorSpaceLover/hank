@@ -3,11 +3,12 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Typography } from '@mui/material';
 
-export default function CutomedCheckBox({label}) {
+export default function CutomedCheckBox({label, idx, checkedItem}) {
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = (event) => {
     setChecked(!checked);
+    checkedItem(idx, !checked);
   };
   return (
     <div style={{paddingBottom: 24}}>

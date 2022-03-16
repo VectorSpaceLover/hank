@@ -17,7 +17,7 @@ const createNewCollection = async (req, res) => {
         status: 'ok',
         data: JSON.stringify(savedCollection)
     });
-} 
+}
 
 const getCollections = async (req, res) => {
     const collections = await Collection.find({});

@@ -3,11 +3,30 @@ import { Styles } from "./accountSettingStyle";
 import CustomedInput from '../input';
 import CustomedTextButton from '../customedBtn';
 import PasswordInput from "../passwordInput";
+import { upDateAccountSetting } from '../../../api/account';
+import { ReactComponent as AccountSettingError } from '../../../assets/img/account/accountsetting_error.svg';
+import { ReactComponent as AccountSettingSuccess } from '../../../assets/img/account/accountsetting_success.svg';
 
 export default function AccountSetting(){
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [accountSettingSuccess, setAccountSettingSuccess] = useState(-1);
+
+    const saveOption = async (val) => {
+        if(val === 'accountsetting'){
+            const result = await upDateAccountSetting(userName, userEmail, password);
+            const changeTxt = () => {
+                setAccountSettingSuccess(-1);
+            }
+            if(result.status === 'ok'){
+                setAccountSettingSuccess(true);
+            }else{
+                setAccountSettingSuccess(false);
+            }
+            await setTimeout(changeTxt, 3000);
+        }
+    }
 
     return (
         <Styles>
@@ -33,8 +52,16 @@ export default function AccountSetting(){
                     
                 </div>
                 <div className='account-setting-footer'>
-                    <CustomedTextButton text={"Save Changes"}/>
+                    <CustomedTextButton 
+                        text={"Save Changes"}
+                        whichOne="accountsetting"
+                        saveOption={saveOption}
+                    />
                 </div>
+            </div>
+            <div className="alert">
+                { accountSettingSuccess === true && <AccountSettingSuccess />}
+                { accountSettingSuccess === false && <AccountSettingError />}
             </div>
         </Styles>
     )

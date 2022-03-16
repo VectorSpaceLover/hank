@@ -12,4 +12,13 @@ export const Styles = styled.div`
             padding-top: 40px;
         }
     }
+    .alert{
+        position: absolute;
+        top: 15px;
+        left: calc((100% - 441px) / 2);
+        .profile-success{
+            width: 441px;
+            height: 29px;
+        }
+    }
 `;
