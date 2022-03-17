@@ -37,7 +37,8 @@ export default function AccountSetting(){
                         inputHandler={setUserName}
                         placeholderName="Username"
                     />
-                    <CustomedInput 
+                    <CustomedInput
+                        type='email'
                         inputValue={userEmail}
                         inputHandler={setUserEmail}
                         placeholderName="123@gmail.com"

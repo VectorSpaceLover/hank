@@ -6,6 +6,7 @@ import {
     upDateEmailNotification,
     getUserInfoById,
 } from '../../../api/account';
+import { ReactComponent as ProfileSuccess } from '../../../assets/img/account/profile_success.svg';
 
 const checkLs = [
     {label: 'Notify me when new app screens have been added  '},
@@ -15,6 +16,8 @@ const checkLs = [
 
 export default function EmailNotification(){
     const [checked, setChecked] = useState([false, false, false]);
+    const [profileSuccess, setProfileSuccess] = useState(false);
+
     const checkedItem = (idx) => {
         let newChecked = [...checked];
         newChecked[idx] = !checked[idx];
@@ -23,14 +26,22 @@ export default function EmailNotification(){
 
     const saveOption = async (val) => {
         if(val === 'accountsetting'){
-            await upDateEmailNotification(checked);
+            const result = await upDateEmailNotification(checked);
+            const changeTxt = () => {
+                setProfileSuccess(false);
+            }
+            if(result.status === 'ok'){
+                setProfileSuccess(true);
+            }else{
+                setProfileSuccess(false);
+            }
+            await setTimeout(changeTxt, 3000);
         }
     }
 
     const getInitialData = useCallback(async() => {
         const res = await getUserInfoById();
         const userInfo = res.user[0];
-        console.log(userInfo.emailNotification)
         setChecked(userInfo.emailNotification);
       }, [])
     
@@ -54,6 +65,9 @@ export default function EmailNotification(){
                         saveOption={saveOption}
                     />
                 </div>
+            </div>
+            <div className="alert">
+                {profileSuccess && <ProfileSuccess />}
             </div>
         </Styles>
     )

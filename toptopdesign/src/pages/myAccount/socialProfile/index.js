@@ -1,5 +1,5 @@
 import { Styles, ViewCollectionDlgStyle, ConfirmDlgStyle } from "./socialProfileStyle";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import CustomedInput from "../input";
 import CustomedTextButton from "../customedBtn";
 import { withStyles } from '@mui/styles';
@@ -12,6 +12,7 @@ import CancelButton from "../cancelButton";
 import { upDateSocialProfile } from '../../../api/account';
 import { ReactComponent as ProfileSuccess } from '../../../assets/img/account/profile_success.svg';
 import { ReactComponent as ConfirmIcon } from '../../../assets/img/account/confirm.svg';
+import { UserInfoContext } from '../../../context/userInfo';
 
 const IconButton = withStyles((theme) => ({
     root: {
@@ -40,7 +41,6 @@ const IconButton = withStyles((theme) => ({
         ['@media screen and (max-width: 900px)']: { // eslint-disable-line no-useless-computed-key
             width: '255px !important',
             padding: '0 !important',
-            marginTop: '10px !important',
         },
         ['@media screen and (max-width: 600px)']: { // eslint-disable-line no-useless-computed-key
             width: '100% !important',
@@ -54,7 +54,6 @@ const IconButton = withStyles((theme) => ({
 const TextButton = withStyles((theme) => ({
     root: {
         color: `var(--white) !important`,
-        border: '1px solid var(--second) !important',
         fontFamily: `var(--font-family-roboto-bold) !important`,
         fontSize: `var(--font-size-16) !important`,
         fontWeight: '700px !important',
@@ -130,6 +129,7 @@ const DlgButton = withStyles((theme) => ({
 }))(Button);
 
 export default function SocialProfile(){
+    const [userInfo, setUserInfo] = useContext(UserInfoContext);
     const [regiserWithEmail, setRegisterWithEmail] = useState(true);
     const [twitter, setTwitter] = useState('');
     const [instagram, setInstagram] = useState('');
@@ -205,6 +205,15 @@ export default function SocialProfile(){
             await setTimeout(changeTxt, 3000);
         }
     }
+
+    useEffect(() => {
+        setTwitter(userInfo.twitter);
+        setInstagram(userInfo.instagram);
+        setBehance(userInfo.behance);
+        setDribbble(userInfo.dribbble);
+        setGoogle(userInfo.isGoogle);
+        setFacebook(userInfo.isFacebook);
+    }, [userInfo])
 
     return (
         <Styles>

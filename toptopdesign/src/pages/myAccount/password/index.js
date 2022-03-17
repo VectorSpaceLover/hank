@@ -12,6 +12,7 @@ export default function Password(){
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [passwordStatus, setPasswordStatus] = useState(-1);
+    const [isAllowed, setAllowed] = useState(false);
 
     const saveOption = async (val) => {
         if(val === 'password'){
@@ -31,6 +32,21 @@ export default function Password(){
         }
     }
 
+    const handleChange = (value) => {
+        setNewPassword(value);
+        const ck =value;
+       
+        function isAlphaOrParen(str) {
+            return /[a-zA-Z]/.test(str);
+        }
+        
+        function containsNumber(str) {
+            return /\d/.test(str);
+        }
+        if(isAlphaOrParen(value) && containsNumber(ck) && ck.length >= 8) setAllowed(true);
+        else setAllowed(false);
+    }
+
     return (
         <Styles>
             <div className="password-container">
@@ -42,10 +58,10 @@ export default function Password(){
                     />
                     <PasswordInput 
                         inputValue={newPassword}
-                        inputHandler={setNewPassword}
+                        inputHandler={handleChange}
                         placeholderName="New Password"
                     />
-                    <div className="password-alarm">
+                    <div className={isAllowed?"password-alarm": "password-alarm warning"}>
                         Minimum 8 characters including one number and one alphabet
                     </div>
                 </div>

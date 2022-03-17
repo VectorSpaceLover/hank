@@ -63,9 +63,9 @@
 }
 
 @font-face {
-  font-family: "Roboto";
-  src: local('Roboto'), local('Roboto'), 
-   url('https://fonts.google.com/specimen/Roboto')format("truetype");
+  font-family: "Roboto-Regular";
+  src: local('Roboto-Regular'), local('Roboto-Regular'), 
+   url('./assets/font/Roboto-Regular.ttf')format("truetype");
 }
 
 @font-face {

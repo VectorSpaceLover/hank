@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import { Styles } from "./myAccountStyle";
 import { profileBtns } from "../../assets/config";
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/footer";
+import { UserInfoContext } from "../../context/userInfo";
+import { getUserInfoById } from "../../api/account";
 
 const EditButton = withStyles((theme) => ({
     root: {
@@ -43,6 +45,7 @@ const EditButton = withStyles((theme) => ({
 
 export default function MyAccount({children}){
     const navigate = useNavigate();
+    const [userInfo, setUserInfo] = useContext(UserInfoContext);
     const [userName, setUserName] = useState('username');
     const [currentPage, setCurrentPage] = useState('');
 
@@ -57,6 +60,17 @@ export default function MyAccount({children}){
     const goToOthers = (path) => {
         navigate(`/myaccount/${path}`);
     }
+
+    const getInitialData = useCallback(async() => {
+        const res = await getUserInfoById();
+        const userInfo = res.user[0];
+        setUserInfo(userInfo);
+        setUserName(userInfo.userName);
+    }, [setUserInfo])
+
+    useEffect(() => {
+        getInitialData();
+    }, [getInitialData])
     return (
         <Styles>
             <div className="myaccount-before-container">
@@ -70,7 +84,7 @@ export default function MyAccount({children}){
                                 {`[${userName}] / `}
                             </div>
                             <div className="profile-name">
-                                Edit Profile
+                                {currentPage}
                             </div>
                         </div>
                     </div>

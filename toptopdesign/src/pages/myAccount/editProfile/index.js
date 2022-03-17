@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Styles } from "./editProfileStyle";
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
@@ -9,10 +9,9 @@ import CustomedTextButton from '../customedBtn';
 import { 
     uploadAvatar,
     upDateProfile,
-    getUserInfoById,
 } from '../../../api/account';
 import { ReactComponent as ProfileSuccess } from '../../../assets/img/account/profile_success.svg';
-
+import { UserInfoContext } from '../../../context/userInfo';
 
 const UploadButton = withStyles((theme) => ({
     root: {
@@ -47,6 +46,8 @@ const UploadButton = withStyles((theme) => ({
 }))(Button);
 
 export default function EditProfile(){
+    const [userInfo, setUserInfo] = useContext(UserInfoContext);
+
     const [userAvatarPath, setUserAvatarPath] = useState(null);
     const [userAvatar, setUserAvatar] = useState(null);
     const [userName, setUserName] = useState('');
@@ -64,30 +65,35 @@ export default function EditProfile(){
 
     const saveOption = async (val) => {
         if(val === 'edit'){
-            const res = await uploadImage();
-            if(res?.filePath){
-                const result = await upDateProfile(res.filePath, userName, location, shortBio);
-                if(result.status === 'ok'){
-                    setProfileSuccess(true);
-                }else{
-                    setProfileSuccess(false);
+            let result = [];
+            if(userAvatarPath && userAvatar){
+                const res = await uploadImage();
+                if(res?.filePath){
+                    result = await upDateProfile(res?.filePath, userName, location, shortBio);
+                    
                 }
+            }else{
+                result = await upDateProfile(userInfo.avatarPath, userName, location, shortBio);
             }
+            if(result.status === 'ok'){
+                setProfileSuccess(true);
+            }else{
+                setProfileSuccess(false);
+            }
+            const changeTxt = () => {
+                setProfileSuccess(false);
+            }
+            
+            await setTimeout(changeTxt, 3000);
         }
     }
 
-    const getInitialData = useCallback(async() => {
-        const res = await getUserInfoById();
-        const userInfo = res.user[0];
+    useEffect(() => {
         setUserAvatarPath(`${process.env.REACT_APP_UPLOAD_URL}${userInfo.avatarPath}`);
         setUserName(userInfo.userName);
         setLocation(userInfo.location);
         setShortBio(userInfo.shortBio);
-    }, [])
-
-    useEffect(() => {
-        getInitialData();
-    }, [getInitialData])
+    }, [userInfo])
 
     return (
         <Styles>
@@ -116,7 +122,10 @@ export default function EditProfile(){
                     />
                     <RemoveButton 
                         text={"Remove"}
-                        onClick={()=>setUserAvatar(null)}
+                        onClick={()=>{
+                            setUserAvatarPath(null);
+                            setUserAvatar(null);
+                        }}
                     />
                 </div>
                 <div className="edit-body">

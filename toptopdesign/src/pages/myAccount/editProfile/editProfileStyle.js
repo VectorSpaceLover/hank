@@ -30,6 +30,7 @@ export const Styles = styled.div`
                     width: 89px;
                     height: 89px;
                     border-radius: 89px;
+                    object-fit: cover;
                     @media screen and (max-width: 800px) {
                         min-width: 60px;
                         min-height: 60px;

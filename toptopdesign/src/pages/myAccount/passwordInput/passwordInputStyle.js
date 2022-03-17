@@ -29,4 +29,9 @@ export const Styles = styled.div`
         right: 0px;
         top: 41px;
     }
+    .non-eye-icon{
+        position: absolute;
+        right: 0px;
+        top: 36px;
+    }
 `;

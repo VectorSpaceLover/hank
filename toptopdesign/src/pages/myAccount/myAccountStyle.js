@@ -65,15 +65,13 @@ export const Styles = styled.div`
                     margin-left: 30px;
                 }
                 @media screen and (max-width: 900px) {
-                    justify-content: flex-start;
                 }
                 @media screen and (max-width: 800px) {
-                    justify-content: flex-start;
-                    padding-left: 78px;
+                    height: 50px;
+                    overflow-x: auto;
+                    justify-content: initial;
                 }
                 @media screen and (max-width: 600px) {
-                    justify-content: flex-start;
-                    padding-left: 5px;
                 }
             }
             .myaccount-message{

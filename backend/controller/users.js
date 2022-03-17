@@ -186,7 +186,9 @@ const upDateSocialProfile = async (req, res) => {
         twitter: twitter, 
         instagram: instagram, 
         dribbble: dribbble, 
-        behance: behance
+        behance: behance,
+        isGoogle: isGoogle,
+        isFacebook: isFacebook
     } = req.body;
     
     const user = await Users.findById(id);
@@ -201,6 +203,8 @@ const upDateSocialProfile = async (req, res) => {
     user.instagram = instagram;
     user.dribbble = dribbble;
     user.behance = behance;
+    user.isGoogle = isGoogle;
+    user.isFacebook = isFacebook;
 
     const saveduser = await user.save();
     return res.send({

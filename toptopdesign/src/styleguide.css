@@ -1,6 +1,7 @@
 /* Variables */
 
 :root {
+    --warnig: #FF005C;
     --second: #000000;
     --blue-ribbon: #0065ff;
     --mirage: #171d29;
@@ -38,7 +39,7 @@
     --font-size-40: 40px;
     --font-size-48: 48px;
   
-    --font-family-roboto: "Roboto";
+    --font-family-roboto: "Roboto-Regular";
     --font-family-roboto-bold: "Roboto-bold";
     --font-family-manrope: "Manrope";
     --font-family-open_sans: "Open Sans";

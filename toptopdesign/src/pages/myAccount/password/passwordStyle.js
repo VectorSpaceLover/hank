@@ -16,6 +16,9 @@ export const Styles = styled.div`
                 ${PptelegrafRegularNormalGray11px}
                 padding-top: 5px;
             }
+            .warning{
+                color: var(--warnig);
+            }
         }
         .password-footer{
             padding-top: 40px;
