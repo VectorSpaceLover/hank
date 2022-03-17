@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
     PptelegrafRegularUltrabold36px,
-    RobotoRegularNormalPurple36px,
+    PptelegrafRegularUltraboldPurple36px,
 } from '../../assets/styledMixins';
 
 export const Styles = styled.div`
@@ -44,7 +44,7 @@ export const Styles = styled.div`
                         ${PptelegrafRegularUltrabold36px}
                     }
                     .profile-name{
-                        ${RobotoRegularNormalPurple36px}
+                        ${PptelegrafRegularUltraboldPurple36px}
                     }
                 }
                 @media screen and (max-width: 600px) {
@@ -54,6 +54,7 @@ export const Styles = styled.div`
             .myaccount-content{
                 display: flex;
                 flex-direction: row;
+                overflow-y: hidden;
                 margin-top: 56px;
                 justify-content: center;
                 .active-item{

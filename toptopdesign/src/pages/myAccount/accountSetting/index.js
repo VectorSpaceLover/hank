@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Styles } from "./accountSettingStyle";
 import CustomedInput from '../input';
 import CustomedTextButton from '../customedBtn';
@@ -6,8 +6,10 @@ import PasswordInput from "../passwordInput";
 import { upDateAccountSetting } from '../../../api/account';
 import { ReactComponent as AccountSettingError } from '../../../assets/img/account/accountsetting_error.svg';
 import { ReactComponent as AccountSettingSuccess } from '../../../assets/img/account/accountsetting_success.svg';
+import { UserInfoContext } from "../../../context/userInfo";
 
 export default function AccountSetting(){
+    const [userInfo, setUserInfo] = useContext(UserInfoContext);
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -28,6 +30,10 @@ export default function AccountSetting(){
         }
     }
 
+    useEffect(() => {
+        setUserName(userInfo.userName);
+    }, [userInfo])
+
     return (
         <Styles>
             <div className="account-setting-container">
@@ -41,7 +47,7 @@ export default function AccountSetting(){
                         type='email'
                         inputValue={userEmail}
                         inputHandler={setUserEmail}
-                        placeholderName="123@gmail.com"
+                        placeholderName={`${userInfo.userName}@${userInfo.userName}gmail.com`}
                     />
                     {userName && userEmail &&
                         <PasswordInput 

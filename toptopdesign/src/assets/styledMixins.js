@@ -238,6 +238,15 @@ export const PptelegrafRegularUltrabold36px = css`
   line-height: 38.16px;
 `;
 
+export const PptelegrafRegularUltraboldPurple36px = css`
+  color: var(--purple);
+  font-family: var(--font-family-pp_telegraf-ultrabold);
+  font-size: var(--font-size-36);
+  font-weight: 800;
+  font-style: normal;
+  line-height: 38.16px;
+`;
+
 export const RobotoRegularNormalPurple36px = css`
   color: var(--purple);
   font-family: var(--font-family-roboto);

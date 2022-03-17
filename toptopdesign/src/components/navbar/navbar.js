@@ -285,7 +285,7 @@ function Navbar() {
                                             if(idx === 5){
                                                 res = <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }} key={idx}>
                                                         <a
-                                                            href='/myaccount/all'
+                                                            href='/myaccount/message'
                                                             style={viewAllStyle}
                                                         >
                                                             View all messages

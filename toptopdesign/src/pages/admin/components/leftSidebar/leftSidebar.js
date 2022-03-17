@@ -25,16 +25,22 @@ const useTreeItemStyles = makeStyles(() => ({
     },
     width: 226,
     backgroundColor: '#FBFAFC',
+    '&.MuiCollapse-root':{
+      paddingLeft: 0,
+      marginLeft: 0,
+    }
   },
   childContent: {
-    flexDirection: "row-reverse",
+    padding: 0,
     height: 48,
-    padding: '0px 12px',
     '&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused': {
       backgroundColor: 'rgba(85, 66, 246, 0.1)',
     },
-    '&.MuiTreeItem-label': {
+    '& .MuiTreeItem-label': {
       paddingLeft: 0,
+    },
+    '& .MuiTreeItem-iconContainer':{
+      display: 'none',
     }
   },
   labelRoot: {
