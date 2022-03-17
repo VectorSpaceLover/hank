@@ -59,7 +59,7 @@ const TextButton = withStyles((theme) => ({
         fontWeight: '700px !important',
         fontStyle: 'normal !important',
         height: '48px !important',
-        width: '177px !important',
+        minWidth: '177px !important',
         marginLeft: `14px !important`,
         marginBottom: '0.78px !important',
         display: 'flex !important',
@@ -70,14 +70,12 @@ const TextButton = withStyles((theme) => ({
         cursor: 'pointer !important',
         backgroundColor: `var(--main) !important`,
         marginTop: `40px !important`,
-        [`@media screen and (max-width: 600px)`]: {
+        [`@media screen and (max-width: 650px)`]: {
             width: '100% !important',
-            height: '36px !important',
             padding: '0px !important',
         },
         [`@media screen and (max-width: 900px)`]: {
             marginRight: '0px !important',
-            marginTop: '10px !important',
         },
         textTransform: 'none !important',
         transition: '.3s ease !important',
