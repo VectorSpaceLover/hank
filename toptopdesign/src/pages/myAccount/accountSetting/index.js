@@ -47,7 +47,7 @@ export default function AccountSetting(){
                         type='email'
                         inputValue={userEmail}
                         inputHandler={setUserEmail}
-                        placeholderName={`${userInfo.userName}@${userInfo.userName}gmail.com`}
+                        placeholderName={`name@youremail.com`}
                     />
                     {userName && userEmail &&
                         <PasswordInput 

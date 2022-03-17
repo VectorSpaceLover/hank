@@ -80,12 +80,12 @@ export default function MyAccount({children}){
                             
                         </div>
                         <div className="header-content">
-                            <div className="user-name">
+                            <span className="user-name">
                                 {`[${userName}] / `}
-                            </div>
-                            <div className="profile-name">
+                            </span>
+                            <span className="profile-name">
                                 {currentPage}
-                            </div>
+                            </span>
                         </div>
                     </div>
                     <div className="myaccount-content">

@@ -16,7 +16,7 @@ export const Styles = styled.div`
         padding-bottom: 12px;
         padding-top: 40px;
         &::placeholder {
-            color: var(--second);
+            color: rgba(105, 105, 105, 0.5);
         }
         &:focus {
             &::placeholder {

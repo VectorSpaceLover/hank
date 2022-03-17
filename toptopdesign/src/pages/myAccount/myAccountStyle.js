@@ -22,7 +22,6 @@ export const Styles = styled.div`
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
-                max-width: 542px;
                 margin: auto;
                 .header-avatar{
                     object-cover: fit;
@@ -37,8 +36,6 @@ export const Styles = styled.div`
                     }
                 }
                 .header-content{
-                    display: flex;
-                    flex-direction: row;
                     margin-left: 31px;
                     .user-name{
                         ${PptelegrafRegularUltrabold36px}
@@ -52,6 +49,9 @@ export const Styles = styled.div`
                 }
             }
             .myaccount-content{
+                &::-webkit-scrollbar {
+                    display: none;
+                }
                 display: flex;
                 flex-direction: row;
                 overflow-y: hidden;
@@ -70,6 +70,9 @@ export const Styles = styled.div`
                 @media screen and (max-width: 800px) {
                     height: 50px;
                     overflow-x: auto;
+                      
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
                     justify-content: initial;
                 }
                 @media screen and (max-width: 600px) {
