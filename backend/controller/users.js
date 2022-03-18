@@ -390,7 +390,8 @@ const Sendblue = async (email, type, random, userToken) => {
       
         token = await hashToken({ random, email, token: userToken });
         link = process.env.CLIENTURL + `/setup/password/${token}`;
-
+        console.log(link);
+        console.log(email);
         sendSmtpEmail = {
             sender: { email: "fedirpiddu@outlook.com" },
             to: [
@@ -499,7 +500,7 @@ const Sendblue = async (email, type, random, userToken) => {
             `,
         };
         apiInstance.sendTransacEmail(sendSmtpEmail)
-        .then()
+        .then((res) => console.log('success', res))
         .catch(er => console.log(er.response.body.errors))
   
         return {
