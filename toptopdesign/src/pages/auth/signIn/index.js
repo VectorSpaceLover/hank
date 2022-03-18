@@ -11,9 +11,14 @@ import ForgotButton from "../components/forgotButton";
 import CustomedTextButton from "../components/customedBtn";
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from "react-router-dom";
-import { signInWithEmail } from '../../../api/auth';
+import { 
+    signInWithEmail, 
+    signInWithGoogle,
+    signInWithFacebook,
+} from '../../../api/auth';
 import { AuthContext } from "../../../context/auth";
-import { InfoRounded } from "@mui/icons-material";
+import { GoogleLogin } from "react-google-login";
+import FacebookLogin from "react-facebook-login-typed";
 
 const LeftIconButton = withStyles((theme) => ({
     root: {
@@ -158,9 +163,12 @@ export default function SignIn(){
 
     }
 
+    const changeTxt = () => {
+        setSignInStatus(SIGN_IN_MSG_NONE);
+    }
+
     const signIn = async() => {
         const res = await signInWithEmail(userName, password);
-        console.log(res);
         if(res.status === 'ok'){
             setAuth(res.userInfo);
             navigate('/');
@@ -171,8 +179,32 @@ export default function SignIn(){
                 setSignInStatus(SIGN_IN_MSG_NOT_EXIST);
             }
         }
-        const changeTxt = () => {
-            setSignInStatus(SIGN_IN_MSG_NONE);
+        
+        await setTimeout(changeTxt, 3000);
+    }
+
+    const handleGoogleSuccess = async(data) => {
+        const res = await signInWithGoogle(data.profileObj.email)
+        if(res.status === 'ok'){
+            setAuth(res.userInfo);
+            navigate('/');
+        }else{
+            setSignInStatus(SIGN_IN_MSG_NOT_EXIST);
+        }
+        await setTimeout(changeTxt, 3000);
+    }
+
+    const handleGoogleFailure = (err) => {
+        console.log(err);
+    }
+
+    const responseFacebook = async(response) => {
+        const res = await signInWithFacebook(response);
+        if(res.status === 'ok'){
+            setAuth(res.userInfo);
+            navigate('/');
+        }else{
+            setSignInStatus(SIGN_IN_MSG_NOT_EXIST);
         }
         await setTimeout(changeTxt, 3000);
     }
@@ -192,18 +224,36 @@ export default function SignIn(){
                         </div>
                         <div className="main">
                             <div className={signInStatus===SIGN_IN_MSG_NONE?"social-group":"social-group mt-55"}>
-                                <SocialButton>
-                                    <GoogleIcon
-                                        className="icon"
-                                    />
-                                    <span>Google</span>
-                                </SocialButton>
-                                <SocialButton className="ml-16">
-                                    <FacebookIcon
-                                        className="icon"
-                                    />
-                                    <span>Facebook</span>
-                                </SocialButton>
+                            <GoogleLogin
+                                    clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
+                                    buttonText="Login"
+                                    onSuccess={handleGoogleSuccess}
+                                    // uxMode={"redirect"}
+                                    onFailure={handleGoogleFailure}
+                                    cookiePolicy={"single_host_origin"}
+                                    render={(renderProps) => (
+                                        <SocialButton onClick={renderProps.onClick}>
+                                            <GoogleIcon
+                                                className="icon"
+                                            />
+                                            <span>Google</span>
+                                        </SocialButton>
+                                    )}
+                                />
+                                <FacebookLogin
+                                    appId={process.env.REACT_APP_FACEBOOK_APIKEY}
+                                    autoLoad={false}
+                                    fields="name,email,picture"
+                                    callback={responseFacebook}
+                                    render={(renderProps) => (
+                                        <SocialButton className="ml-16" onClick={renderProps.onClick}>
+                                            <FacebookIcon
+                                                className="icon"
+                                            />
+                                            <span>Facebook</span>
+                                        </SocialButton>
+                                    )}
+                                />
                             </div>
                             <div className="form-group">
                                 <CustomedInput 

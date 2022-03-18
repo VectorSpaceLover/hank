@@ -13,8 +13,15 @@ import IconButton from '@mui/material/IconButton';
 import Dialog from '@mui/material/Dialog';
 import { ReactComponent as ConfirmIcon } from '../../../assets/img/account/confirm.svg';
 import CancelButton from '../components/cancelButton';
-import { signUpWithEmail } from '../../../api/auth';
+import { 
+    signUpWithEmail,
+    signUpWithGoogle,
+    signUpWithFacebook,
+    forgotPassword,
+} from '../../../api/auth';
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "react-google-login";
+import FacebookLogin from "react-facebook-login-typed";
 
 const LeftIconButton = withStyles((theme) => ({
     root: {
@@ -217,7 +224,12 @@ export default function SignUp(){
     }
 
     const forgetPassword = () => {
+        setEmailSuccessed(EMAIL_STATUS_NONE);
         setForgotOpen(true);
+    }
+
+    const changeTxt = () => {
+        setSignUpStatus(SIGN_UP_MSG_NONE);
     }
 
     const signUp = async() => {
@@ -232,9 +244,7 @@ export default function SignUp(){
                 setSuccessOpen(true);
             }
         }
-        const changeTxt = () => {
-            setSignUpStatus(SIGN_UP_MSG_NONE);
-        }
+        
         await setTimeout(changeTxt, 3000);
     }
 
@@ -257,12 +267,37 @@ export default function SignUp(){
         setSuccessOpen(false);
     }
 
-    const handleForgot = () => {
+    const handleForgot = async() => {
         if(emailSuccessed === EMAIL_STATUS_SUCCESS){
             closeForgotDlg();
             return;
         }
+        const res = await forgotPassword(newEmail);
         setEmailSuccessed(EMAIL_STATUS_SUCCESS);
+    }
+
+    const handleGoogleSuccess = async(data) => {
+        const res = await signUpWithGoogle(data.profileObj.email)
+        if(res?.oldUser){
+            setSignUpStatus(SIGN_UP_MSG_ALREADY);
+        }else{
+            navigate('/');
+        }
+        await setTimeout(changeTxt, 3000);
+    }
+
+    const handleGoogleFailure = (err) => {
+        console.log(err);
+    }
+
+    const responseFacebook = async(response) => {
+        const res = await signUpWithFacebook(response);
+        if(res?.oldUser){
+            setSignUpStatus(SIGN_UP_MSG_ALREADY);
+        }else{
+            navigate('/');
+        }
+        await setTimeout(changeTxt, 3000);
     }
 
     return (
@@ -280,18 +315,37 @@ export default function SignUp(){
                         </div>
                         <div className="main">
                             <div className={signUpStatus===SIGN_UP_MSG_NONE?"social-group":"social-group mt-55"}>
-                                <SocialButton>
-                                    <GoogleIcon
-                                        className="icon"
-                                    />
-                                    <span>Google</span>
-                                </SocialButton>
-                                <SocialButton className="ml-16">
-                                    <FacebookIcon
-                                        className="icon"
-                                    />
-                                    <span>Facebook</span>
-                                </SocialButton>
+                                <GoogleLogin
+                                    clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
+                                    buttonText="Login"
+                                    onSuccess={handleGoogleSuccess}
+                                    // uxMode={"redirect"}
+                                    onFailure={handleGoogleFailure}
+                                    cookiePolicy={"single_host_origin"}
+                                    render={(renderProps) => (
+                                        <SocialButton onClick={renderProps.onClick}>
+                                            <GoogleIcon
+                                                className="icon"
+                                            />
+                                            <span>Google</span>
+                                        </SocialButton>
+                                    )}
+                                />
+                                <FacebookLogin
+                                    appId={process.env.REACT_APP_FACEBOOK_APIKEY}
+                                    autoLoad={false}
+                                    fields="name,email,picture"
+                                    callback={responseFacebook}
+                                    render={(renderProps) => (
+                                        <SocialButton className="ml-16" onClick={renderProps.onClick}>
+                                            <FacebookIcon
+                                                className="icon"
+                                            />
+                                            <span>Facebook</span>
+                                        </SocialButton>
+                                    )}
+                                />
+                                
                             </div>
                             <div className="input-group">
                                 <CustomedInput 

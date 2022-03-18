@@ -5,6 +5,7 @@ export const Styles = styled.div`
     align-items: center;
     justify-content: center;
     .sign-in-container{
+        position: relative;
         border-radius: 24px;
         box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
         .mobile-cover{

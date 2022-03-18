@@ -2,6 +2,29 @@ const Users = require('../model/Users');
 const multer = require('multer');
 const path = require('path');
 let fs = require('fs-extra');
+const jwt = require("jsonwebtoken");
+
+var SibApiV3Sdk = require("sib-api-v3-sdk");
+var defaultClient = SibApiV3Sdk.ApiClient.instance;
+// Configure API key authorization: api-key
+var apiKey = defaultClient.authentications["api-key"];
+apiKey.apiKey = "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";
+
+const hashToken = async (params) => {
+    const token = await jwt.sign(
+      {
+        rand: params.random,
+        email: params.email,
+        token: params.token
+      },
+      process.env.SECRET_JWT,
+      {
+        expiresIn: "1h",
+        algorithm: "HS256",
+      }
+    );
+    return token;
+};
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -93,6 +116,56 @@ const signUpWithEmail = async (req, res) => {
     });
 }
 
+const signUpWithGoogle = async(req, res) => {
+    const { email } = req.body;
+    const oldUser = await Users.find({email: email});
+    if(oldUser && oldUser.length > 0){
+        return res.send({
+            status: 'already Exist',
+            oldUser: oldUser
+        })
+    }
+
+    const newUsers = new Users({
+        email: email,
+        password: '123456',
+        isGoogle: true,
+    })
+
+    const savedUser = await newUsers.save();
+
+    return res.send({
+        status: 'ok',
+        data: JSON.stringify(savedUser)
+    });
+}
+
+const signUpWithFacebook = async(req, res) => {
+    const { email, name } = req.body;
+    const oldUser = await Users.find({email: email});
+    if(oldUser && oldUser.length > 0){
+        return res.send({
+            status: 'already Exist',
+            oldUser: oldUser
+        })
+    }
+
+    const newUsers = new Users({
+        userName: name,
+        email: email,
+        password: '123456',
+        isFacebook: true,
+    })
+
+    const savedUser = await newUsers.save();
+
+    return res.send({
+        status: 'ok',
+        data: JSON.stringify(savedUser)
+    });
+}
+
+
 const signInWithEmail = async (req, res) => {
     const {
         userEmail,
@@ -113,7 +186,6 @@ const signInWithEmail = async (req, res) => {
             })
         }
     }else{
-        
         return res.send({
             status: 'error',
             message: 'User is not existed'
@@ -121,6 +193,44 @@ const signInWithEmail = async (req, res) => {
     }
 }
 
+const signInWithGoogle = async (req, res) => {
+    const {
+        email,
+    } = req.body;
+    const users = await Users.find({email: email});
+    const user = users[0];
+    if(user){
+        return res.send({
+            status: 'ok',
+            userInfo: user
+        })
+    }else{
+        return res.send({
+            status: 'error',
+            message: 'User is not existed'
+        });
+    }
+}
+
+const signInWithFacebook = async (req, res) => {
+    const {
+        email,
+        password,
+    } = req.body;
+    const users = await Users.find({email: email});
+    const user = users[0];
+    if(user){
+        return res.send({
+            status: 'ok',
+            userInfo: user
+        })
+    }else{
+        return res.send({
+            status: 'error',
+            message: 'User is not existed'
+        });
+    }
+}
 
 
 const upDateProfile = async (req, res) => {
@@ -272,15 +382,187 @@ const upDateEmailNotification = async (req, res) => {
     });
 }
 
+const Sendblue = async (email, type, random, userToken) => {
+    let link;
+    try {
+        var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+        var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail(); // SendSmtpEmail | Values to send a transactional email
+      
+        token = await hashToken({ random, email, token: userToken });
+        link = process.env.CLIENTURL + `/setup/password/${token}`;
+
+        sendSmtpEmail = {
+            sender: { email: "fedirpiddu@outlook.com" },
+            to: [
+              {
+                email: email,
+              },
+            ],
+            subject: "Forgot your password? It happends to the bet of us.",
+            textContent: `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Document</title>
+                <style>
+                .container {
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 100%;
+                    max-width: 700px;
+                    line-height: 1.8rem;
+                    font: small/ 1.5 Arial, Helvetica, sans-serif;
+                    padding: 10px 20px;
+                    border: solid 1px #d5d0d0;
+                    border-radius: 10px;
+                    font-size: 15px;
+                    color: black;
+                }
+                .btn {
+                    display: inline-block;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    color: #212529;
+                    text-align: center;
+                    text-decoration: none;
+                    vertical-align: middle;
+                    cursor: pointer;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    user-select: none;
+                    background-color: transparent;
+                    border: 1px solid transparent;
+                    padding: 0.375rem 0.75rem;
+                    font-size: 1rem;
+                    border-radius: 0.25rem;
+                    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+                    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                    color: #fff;
+                    background-color: #0d6efd;
+                    border-color: #0d6efd;
+                }
+                table {
+                    width: 100%;
+                }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td style="text-align: center;"><img src="https://mindmail-dev.s3.amazonaws.com/logo/logo.png"></img></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>
+                        <h2 style="text-align: center">Dear Mindmail User</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            We have received your request to reset your password.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Please click the link below to complete the reset:</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center">
+                        <a
+                            href="${link}"
+                            class="btn"
+                            style="margin-top: 1.2rem; margin-bottom: 1.2rem; color: white;"
+                            >Reset password</a
+                        >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">If you need additional assistance, or you did not make this change,</td>
+                    </tr>
+                    <tr><td style="text-align: center;">Please contact <a href="mailto: help@getpostman.com">help@getpostman.com</a></td></tr>
+                    <tr><td style="text-align: center; font-style: italic;">Cheers</td></tr>
+                    <tr>
+                        <td style="text-align: center;">The Mindmail</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </body>
+            </html>
+            `,
+        };
+        apiInstance.sendTransacEmail(sendSmtpEmail)
+        .then()
+        .catch(er => console.dir(er.response.body.errors))
+  
+        return {
+            state: true,
+        };
+  
+    } catch (e) {
+      return {
+        state: false,
+      };
+    }
+  };
+
+const forgetsendmail = async (req, res) => {
+    const { email } = req.body;
+    const result = await Users.find({ email: email });
+    const user = result[0];
+    if (!user) {
+        return res.send({
+            status: 'error',
+            message: 'user is not existed'
+        })
+    }
+  
+    // if (user.password === '123456' || user.isGoogle || user.isFacebook) {
+    //   throw new HttpException(
+    //     400,
+    //     `This Email already exist with ${result.user.signtype}`
+    //   );
+    // }
+  
+    let random = Math.floor(Math.random() * 100 + 54);
+    user.resetcode = random;
+    const saved = await user.save();
+  
+    const smtp_result = await Sendblue(email, "forgot", random, "");
+    if (!smtp_result.state) {
+      return res.send({
+            status: 'error',
+            message: 'something is wrong'
+        })
+    }
+  
+    return res.send({
+        status: 'ok',
+        user: saved
+    })
+  };
+
 module.exports = {
     getUserInfoById,
     uploadAvatar,
     signUpWithEmail,
+    signUpWithGoogle,
+    signUpWithFacebook,
     signInWithEmail,
+    signInWithGoogle,
+    signInWithFacebook,
     upDateProfile,
     upDateAccountSetting,
     upDatePassword,
     upDateSocialProfile,
-    upDateEmailNotification
+    upDateEmailNotification,
+    forgetsendmail,
 };
   

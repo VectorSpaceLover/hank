@@ -53,6 +53,10 @@ const usersSchema = new mongoose.Schema({
     type: Array,
     required: false,
   },
+  resetcode: {
+    type: Number,
+    required: false,
+  },
   createdDate: {
     type: Date,
     default: Date.now,
