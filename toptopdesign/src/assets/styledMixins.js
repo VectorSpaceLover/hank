@@ -38,6 +38,14 @@ export const PptelegrafRegularNormalBlack14px = css`
   font-style: normal;
 `;
 
+export const PptelegrafRegularNormalBlack12px = css`
+  color: var(--second);
+  font-family: var(--font-family-pp_telegraf-regular);
+  font-size: var(--font-size-12);
+  font-weight: 400;
+  font-style: normal;
+`;
+
 export const PptelegrafRegularNormalWhite24px = css`
   color: var(--white);
   font-family: var(--font-family-pp_telegraf-regular);
@@ -257,6 +265,14 @@ export const RobotoRegularNormalPurple36px = css`
 
 export const OpensansNormalElectricViolet14px = css`
   color: var(--main);
+  font-family: var(--font-family-open_sans);
+  font-size: var(--font-size-14);
+  font-weight: 400;
+  font-style: normal;
+`;
+
+export const OpensansNormalElectricVioletBlack14px = css`
+  color: var(--second);
   font-family: var(--font-family-open_sans);
   font-size: var(--font-size-14);
   font-weight: 400;

@@ -67,14 +67,21 @@ const uploadAvatar = async (req, res) => {
     
 }
 
-const signUp = async (req, res) => {
+const signUpWithEmail = async (req, res) => {
     const {
-        userName,
+        userEmail,
         password,
     } = req.body;
+    const oldUser = await Users.find({email: userEmail});
+    if(oldUser && oldUser.length > 0){
+        return res.send({
+            status: 'already Exist',
+            oldUser: oldUser
+        })
+    }
 
     const newUsers = new Users({
-        userName: userName,
+        email: userEmail,
         password: password,
     })
 
@@ -85,6 +92,35 @@ const signUp = async (req, res) => {
         data: JSON.stringify(savedUser)
     });
 }
+
+const signInWithEmail = async (req, res) => {
+    const {
+        userEmail,
+        password,
+    } = req.body;
+    const users = await Users.find({email: userEmail});
+    const user = users[0];
+    if(user){
+        if(password === user.password){
+            return res.send({
+                status: 'ok',
+                userInfo: user
+            })
+        }else{
+            return res.send({
+                status: 'error',
+                message: 'passwrod not matched'
+            })
+        }
+    }else{
+        
+        return res.send({
+            status: 'error',
+            message: 'User is not existed'
+        });
+    }
+}
+
 
 
 const upDateProfile = async (req, res) => {
@@ -239,7 +275,8 @@ const upDateEmailNotification = async (req, res) => {
 module.exports = {
     getUserInfoById,
     uploadAvatar,
-    signUp,
+    signUpWithEmail,
+    signInWithEmail,
     upDateProfile,
     upDateAccountSetting,
     upDatePassword,

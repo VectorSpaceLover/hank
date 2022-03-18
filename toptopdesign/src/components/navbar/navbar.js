@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Styles, AdminStyle } from './style/navbarStyle';
 import IconButton from '@mui/material/IconButton';
 import { ReactComponent as Alarm } from '../../assets/img/user/home/alarm.svg';
@@ -16,6 +16,7 @@ import {messages} from '../../assets/config';
 import { useNavigate } from "react-router-dom";
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
+import { AuthContext } from '../../context/auth';
 
 const dateStyle = {
     fontFamily: "PP Telegraf-Regular", 
@@ -91,6 +92,7 @@ function Navbar() {
     const navigate = useNavigate();
     const [isSigned, setSigned] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [auth, setAuth] = useContext(AuthContext);
 
     const [anchorGift, setAnchorGift] = useState(null);
     const [anchorAlarm, setAnchorAlarm] = useState(null);
@@ -123,188 +125,184 @@ function Navbar() {
     }, [])
 
     return (
-        <>
-        {!isAdmin?(
-            <Styles>
-                <div className='before-container'>
-                    <div className='navbar'>
-                        <div className='home'>
-                            Home
-                        </div>
-                        <img className='title-img'  src='/img/user/banner.svg' alt='banner' />
-                        {!isSigned? (
-                            // <div className='small-btn-outline' >
-                            //     <div className='sign-in-btn' >SIGN IN</div>
-                            //     <img className='sign-in-arrow' src='/img/arrowright.svg' alt='arrow' />
-                            // </div>
-                            <SignInButton
-                                className="mr-24"
-                            >
-                                <span className='sign-in-txt'>SIGN IN</span>
-                                <img className='sign-in-arrow' src='/img/arrowright.svg' alt='arrow' />
-                            </SignInButton>
-                        ):(
-                            <div className='icon-group'>
-                                <IconButton 
-                                    aria-label="delete"
-                                    onClick={openAlarmMenu}
-                                >
-                                    <Alarm className='icon alarm' />
-                                </IconButton>
-                                <IconButton 
-                                    className='gift' 
-                                    aria-label="gift"
-                                    onClick={openGiftMenu}
-                                >
-                                    <Gift className='icon' />
-                                </IconButton>
-                                <Menu
-                                    anchorEl={anchorGift}
-                                    id="account-menu"
-                                    open={openGift}
-                                    onClose={closeGiftMenu}
-                                    onClick={closeGiftMenu}
-                                    PaperProps={{
-                                    elevation: 0,
-                                    sx: {
-                                        overflow: 'visible',
-                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                        mt: 1.5,
-                                        width: 286,
-                                        borderRadius: 4,
-                                        padding: '24px 23px 4px 23px',
-                                        '@media screen and (max-width: 600px)': {
-                                            width: 270,
-                                        },
-                                        '& .MuiAvatar-root': {
-                                            width: 32,
-                                            height: 32,
-                                            ml: -0.5,
-                                            mr: 1,
-                                        },
-                                        '&:before': {
-                                            content: '""',
-                                            display: 'block',
-                                            position: 'absolute',
-                                            top: 0,
-                                            right: 14,
-                                            width: 10,
-                                            height: 10,
-                                            bgcolor: 'background.paper',
-                                            transform: 'translateY(-50%) rotate(45deg)',
-                                            zIndex: 0,
-                                        },
-                                    },
-                                    }}
-                                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                                >
-                                    <MenuItem onClick={goToAccount} disableRipple>
-                                        <ProfileIcon style={{ marginRight: 14 }} />
-                                        My Profile
-                                    </MenuItem>
-                                    <Divider/>
-                                    <MenuItem onClick={closeGiftMenu} disableRipple>
-                                        <CollectionsIcon style={{ marginRight: 14 }}/>
-                                        Collections
-                                    </MenuItem>
-                                    <Divider/>
-                                    <MenuItem onClick={closeGiftMenu} disableRipple>
-                                        <SettingIcon style={{ marginRight: 14 }} />
-                                        Settings
-                                    </MenuItem>
-                                    <Divider/>
-                                    <MenuItem onClick={closeGiftMenu} disableRipple>
-                                        <SupportIcon style={{ marginRight: 14 }} />
-                                        Support
-                                    </MenuItem>
-                                    <Divider/>
-                                    <MenuItem onClick={closeGiftMenu} disableRipple>
-                                        <SignOutIcon style={{ marginRight: 14 }} />
-                                        Sign Out
-                                    </MenuItem>
-                                </Menu>
-                                <Menu
-                                    anchorEl={anchorAlarm}
-                                    id="account-menu"
-                                    open={openAlarm}
-                                    onClose={closeAlarmMenu}
-                                    onClick={closeAlarmMenu}
-                                    PaperProps={{
-                                    elevation: 0,
-                                    sx: {
-                                        overflow: 'visible',
-                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                        mt: 1.5,
-                                        width: 421,
-                                        '@media screen and (max-width: 600px)': {
-                                            width: 343,
-                                            height: 347,
-                                        },
-                                        borderRadius: 4,
-                                        padding: '24px 4px 14px 4px',
-                                        '& .MuiAvatar-root': {
-                                            width: 32,
-                                            height: 32,
-                                            ml: -0.5,
-                                            mr: 1,
-                                        },
-                                        '&:before': {
-                                            content: '""',
-                                            display: 'block',
-                                            position: 'absolute',
-                                            top: 0,
-                                            right: 14,
-                                            width: 10,
-                                            height: 10,
-                                            bgcolor: 'background.paper',
-                                            transform: 'translateY(-50%) rotate(45deg)',
-                                            zIndex: 0,
-                                        },
-                                    },
-                                    }}
-                                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                                >
-                                    {messages && messages.map((val, idx) => {
-                                        let res = '';
-                                        if(idx < 5){
-                                            res =   <div key={idx}>
-                                                        <MenuItem onClick={(event) => {viewMessage(idx);closeAlarmMenu(event)}} disableRipple disabled={idx===4?true:false}>
-                                                            <div style={menuItemStyle}>
-                                                                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
-                                                                    <VoiceIcon style={{ marginRight: 7 }} />
-                                                                    <div style={txtStyle}>{val.title}</div>
-                                                                </div>
-                                                                <div style={dateStyle}>{val.date}</div>
-                                                            </div>
-                                                        </MenuItem>
-                                                        <Divider/>
-                                                    </div>;
-                                        }else{
-                                            if(idx === 5){
-                                                res = <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }} key={idx}>
-                                                        <a
-                                                            href='/myaccount/message'
-                                                            style={viewAllStyle}
-                                                        >
-                                                            View all messages
-                                                        </a>
-                                                    </div>
-                                            };
-                                        }
-                                        return res;
-                                    })}
-                                </Menu>
+        <React.Fragment>
+            {Object.keys(auth).length !== 0?(!isAdmin?(
+                <Styles>
+                    <div className='before-container'>
+                        <div className='navbar'>
+                            <div className='home'>
+                                Home
                             </div>
-                        )}
+                            <img className='title-img'  src='/img/user/banner.svg' alt='banner' />
+                            {!isSigned? (
+                                <SignInButton
+                                    className="mr-24"
+                                >
+                                    <span className='sign-in-txt'>SIGN IN</span>
+                                    <img className='sign-in-arrow' src='/img/arrowright.svg' alt='arrow' />
+                                </SignInButton>
+                            ):(
+                                <div className='icon-group'>
+                                    <IconButton 
+                                        aria-label="delete"
+                                        onClick={openAlarmMenu}
+                                    >
+                                        <Alarm className='icon alarm' />
+                                    </IconButton>
+                                    <IconButton 
+                                        className='gift' 
+                                        aria-label="gift"
+                                        onClick={openGiftMenu}
+                                    >
+                                        <Gift className='icon' />
+                                    </IconButton>
+                                    <Menu
+                                        anchorEl={anchorGift}
+                                        id="account-menu"
+                                        open={openGift}
+                                        onClose={closeGiftMenu}
+                                        onClick={closeGiftMenu}
+                                        PaperProps={{
+                                        elevation: 0,
+                                        sx: {
+                                            overflow: 'visible',
+                                            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                            mt: 1.5,
+                                            width: 286,
+                                            borderRadius: 4,
+                                            padding: '24px 23px 4px 23px',
+                                            '@media screen and (max-width: 600px)': {
+                                                width: 270,
+                                            },
+                                            '& .MuiAvatar-root': {
+                                                width: 32,
+                                                height: 32,
+                                                ml: -0.5,
+                                                mr: 1,
+                                            },
+                                            '&:before': {
+                                                content: '""',
+                                                display: 'block',
+                                                position: 'absolute',
+                                                top: 0,
+                                                right: 14,
+                                                width: 10,
+                                                height: 10,
+                                                bgcolor: 'background.paper',
+                                                transform: 'translateY(-50%) rotate(45deg)',
+                                                zIndex: 0,
+                                            },
+                                        },
+                                        }}
+                                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                                    >
+                                        <MenuItem onClick={goToAccount} disableRipple>
+                                            <ProfileIcon style={{ marginRight: 14 }} />
+                                            My Profile
+                                        </MenuItem>
+                                        <Divider/>
+                                        <MenuItem onClick={closeGiftMenu} disableRipple>
+                                            <CollectionsIcon style={{ marginRight: 14 }}/>
+                                            Collections
+                                        </MenuItem>
+                                        <Divider/>
+                                        <MenuItem onClick={closeGiftMenu} disableRipple>
+                                            <SettingIcon style={{ marginRight: 14 }} />
+                                            Settings
+                                        </MenuItem>
+                                        <Divider/>
+                                        <MenuItem onClick={closeGiftMenu} disableRipple>
+                                            <SupportIcon style={{ marginRight: 14 }} />
+                                            Support
+                                        </MenuItem>
+                                        <Divider/>
+                                        <MenuItem onClick={closeGiftMenu} disableRipple>
+                                            <SignOutIcon style={{ marginRight: 14 }} />
+                                            Sign Out
+                                        </MenuItem>
+                                    </Menu>
+                                    <Menu
+                                        anchorEl={anchorAlarm}
+                                        id="account-menu"
+                                        open={openAlarm}
+                                        onClose={closeAlarmMenu}
+                                        onClick={closeAlarmMenu}
+                                        PaperProps={{
+                                        elevation: 0,
+                                        sx: {
+                                            overflow: 'visible',
+                                            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                            mt: 1.5,
+                                            width: 421,
+                                            '@media screen and (max-width: 600px)': {
+                                                width: 343,
+                                                height: 347,
+                                            },
+                                            borderRadius: 4,
+                                            padding: '24px 4px 14px 4px',
+                                            '& .MuiAvatar-root': {
+                                                width: 32,
+                                                height: 32,
+                                                ml: -0.5,
+                                                mr: 1,
+                                            },
+                                            '&:before': {
+                                                content: '""',
+                                                display: 'block',
+                                                position: 'absolute',
+                                                top: 0,
+                                                right: 14,
+                                                width: 10,
+                                                height: 10,
+                                                bgcolor: 'background.paper',
+                                                transform: 'translateY(-50%) rotate(45deg)',
+                                                zIndex: 0,
+                                            },
+                                        },
+                                        }}
+                                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                                    >
+                                        {messages && messages.map((val, idx) => {
+                                            let res = '';
+                                            if(idx < 5){
+                                                res =   <div key={idx}>
+                                                            <MenuItem onClick={(event) => {viewMessage(idx);closeAlarmMenu(event)}} disableRipple disabled={idx===4?true:false}>
+                                                                <div style={menuItemStyle}>
+                                                                    <div style={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
+                                                                        <VoiceIcon style={{ marginRight: 7 }} />
+                                                                        <div style={txtStyle}>{val.title}</div>
+                                                                    </div>
+                                                                    <div style={dateStyle}>{val.date}</div>
+                                                                </div>
+                                                            </MenuItem>
+                                                            <Divider/>
+                                                        </div>;
+                                            }else{
+                                                if(idx === 5){
+                                                    res = <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }} key={idx}>
+                                                            <a
+                                                                href='/myaccount/message'
+                                                                style={viewAllStyle}
+                                                            >
+                                                                View all messages
+                                                            </a>
+                                                        </div>
+                                                };
+                                            }
+                                            return res;
+                                        })}
+                                    </Menu>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </div>
-            </Styles>
-        ):(<AdminStyle>
+                </Styles>
+            ):(<AdminStyle>
 
-        </AdminStyle>)}
-        </>
+            </AdminStyle>)):<React.Fragment />}
+        </React.Fragment>
         
     );
 }

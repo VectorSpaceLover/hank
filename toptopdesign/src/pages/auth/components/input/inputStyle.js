@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import {
     PptelegrafRegularNormalBlack20px
-} from '../../../assets/styledMixins';
+} from '../../../../assets/styledMixins';
 
 export const Styles = styled.div`
-    position: relative;
-    .password-input{
+    width: 100%;
+    .customed-input{
         ${PptelegrafRegularNormalBlack20px}
         width: 100%;
         outline: none;
@@ -15,6 +15,10 @@ export const Styles = styled.div`
         border-bottom: 1px solid var(--second);
         padding-bottom: 12px;
         padding-top: 40px;
+        background-color: white !important;
+        @media screen and (max-width: 600px) {
+            padding-top: 32px;
+        }
         &::placeholder {
             color: rgba(105, 105, 105, 0.5);
         }
@@ -29,15 +33,5 @@ export const Styles = styled.div`
         &:-webkit-autofill:active{
             -webkit-box-shadow: 0 0 0 100px white inset !important;
         }
-    }
-    .eye-icon{
-        position: absolute;
-        right: 0px;
-        top: 41px;
-    }
-    .non-eye-icon{
-        position: absolute;
-        right: 0px;
-        top: 36px;
     }
 `;

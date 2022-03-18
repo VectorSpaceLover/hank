@@ -14,6 +14,7 @@ export const Styles = styled.div`
         border-bottom: 1px solid var(--second);
         padding-bottom: 12px;
         padding-top: 40px;
+        background-color: white !important;
         &::placeholder {
             color: rgba(105, 105, 105, 0.5);
         }
@@ -21,6 +22,12 @@ export const Styles = styled.div`
             &::placeholder {
                 color: var(--white);
             }
+        }
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover, 
+        &:-webkit-autofill:focus, 
+        &:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 100px white inset !important;
         }
     }
 `;

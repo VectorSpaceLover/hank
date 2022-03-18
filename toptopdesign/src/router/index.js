@@ -14,6 +14,8 @@ import EmailNotification from "../pages/myAccount/emailNotification";
 import Message from "../pages/myAccount/message";
 import OverView from "../pages/admin/overView";
 import Admin from "../pages/admin";
+import SignIn from "../pages/auth/signIn";
+import SignUp from "../pages/auth/signUp";
 
 const Routers = () => {
 
@@ -23,6 +25,8 @@ const Routers = () => {
         <Routes>
           {/* User panel */}
             <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/signIn" element={<SignIn />} />
+            <Route exact path="/signUp" element={<SignUp />} />
             <Route exact path="/home" element={<Home/>}/>
             <Route exact path="/collection" element={
               <Collection>

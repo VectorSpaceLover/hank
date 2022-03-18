@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
     PptelegrafRegularNormalBlack20px
-} from '../../../assets/styledMixins';
+} from '../../../../assets/styledMixins';
 
 export const Styles = styled.div`
     position: relative;
@@ -15,13 +15,19 @@ export const Styles = styled.div`
         border-bottom: 1px solid var(--second);
         padding-bottom: 12px;
         padding-top: 40px;
+        background-color: white !important;
         &::placeholder {
+            background-color: white !important;
             color: rgba(105, 105, 105, 0.5);
         }
         &:focus {
+            background-color: white !important;
             &::placeholder {
                 color: var(--white);
             }
+        }
+        @media screen and (max-width: 600px) {
+            padding-top: 32px;
         }
         &:-webkit-autofill,
         &:-webkit-autofill:hover, 
