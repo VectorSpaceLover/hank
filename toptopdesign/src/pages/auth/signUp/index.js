@@ -273,7 +273,11 @@ export default function SignUp(){
             return;
         }
         const res = await forgotPassword(newEmail);
-        setEmailSuccessed(EMAIL_STATUS_SUCCESS);
+        if(res.status === 'ok'){
+            setEmailSuccessed(EMAIL_STATUS_SUCCESS);
+        }else{
+            setEmailSuccessed(EMAIL_STATUS_FAIL);
+        }
     }
 
     const handleGoogleSuccess = async(data) => {
@@ -464,7 +468,7 @@ export default function SignUp(){
                 }}
             >
                 <ForgotStyle>
-                    <div className={emailSuccessed === EMAIL_STATUS_NONE?'dialog-container':'dialog-container small-dlg'}>
+                    <div className={emailSuccessed !== EMAIL_STATUS_SUCCESS?'dialog-container':'dialog-container small-dlg'}>
                         <div className="content">
                             <div className="header">
                                 {emailSuccessed === EMAIL_STATUS_SUCCESS?'We Found It!':'Forgot your password'}
@@ -473,7 +477,7 @@ export default function SignUp(){
                                 <div className="des-txt">
                                     {emailSuccessed === EMAIL_STATUS_SUCCESS?'You’ll receive an email to reset your password shortly.':'Enter the username or email you remember'}
                                 </div>
-                                {emailSuccessed === EMAIL_STATUS_NONE &&
+                                {emailSuccessed !== EMAIL_STATUS_SUCCESS &&
                                     <CustomedInput 
                                         inputValue={newEmail}
                                         inputHandler={setNewEmail}
@@ -483,10 +487,10 @@ export default function SignUp(){
                             </div>
                             <div className="footer">
                                 <DlgButton onClick={() => handleForgot()}>
-                                    {emailSuccessed === EMAIL_STATUS_NONE?'Next':'OK'}
+                                    {emailSuccessed !== EMAIL_STATUS_SUCCESS?'Next':'OK'}
                                 </DlgButton>
                             </div>
-                            {emailSuccessed === EMAIL_STATUS_NONE &&
+                            {emailSuccessed !== EMAIL_STATUS_SUCCESS &&
                                 <CancelButton 
                                     text={"Back"} 
                                     onClick={closeForgotDlg}
