@@ -500,7 +500,7 @@ const Sendblue = async (email, type, random, userToken) => {
         };
         apiInstance.sendTransacEmail(sendSmtpEmail)
         .then()
-        .catch(er => console.dir(er.response.body.errors))
+        .catch(er => console.log(er.response.body.errors))
   
         return {
             state: true,
