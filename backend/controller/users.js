@@ -378,7 +378,7 @@ const upDateEmailNotification = async (req, res) => {
 }
 
 const Sendblue = async (email, type, random, userToken) => {
-    token = await hashToken({ random, email, token: userToken });
+    const token = await hashToken({ random, email, token: userToken });
     const link = process.env.CLIENTURL + `/reset/password/${token}`;
     var options = {
         method: 'POST',
@@ -390,13 +390,7 @@ const Sendblue = async (email, type, random, userToken) => {
         },
         body: {
           sender: {name: 'fedir', email: 'fedirpiddu@outlook.com'},
-          to: [{email: 'venus9023gold@mail.ru', name: 'venus'}],
-          attachment: [
-            {
-              url: 'http://personal.psu.edu/xqz5228/jpg.jpg', // Should be publicly available and shouldn't be a local file
-              name: 'myAttachment.jpg'
-            }
-          ],
+          to: [{email: email}],
           subject: 'Forgot your password? It happends to the bet of us.',
           htmlContent: `
                   <!DOCTYPE html>
@@ -452,16 +446,13 @@ const Sendblue = async (email, type, random, userToken) => {
                       <div class="container">
                       <table>
                           <tbody>
-                          <tr>
-                              <td style="text-align: center;"><img src="https://mindmail-dev.s3.amazonaws.com/logo/logo.png"></img></td>
-                          </tr>
                           </tbody>
                       </table>
                       <table>
                           <tbody>
                           <tr>
                               <td>
-                              <h2 style="text-align: center">Dear Mindmail User</h2>
+                              <h2 style="text-align: center">Dear toptopdesign User</h2>
                               </td>
                           </tr>
                           <tr>
@@ -482,14 +473,6 @@ const Sendblue = async (email, type, random, userToken) => {
                               >
                               </td>
                           </tr>
-                          <tr>
-                              <td style="text-align: center;">If you need additional assistance, or you did not make this change,</td>
-                          </tr>
-                          <tr><td style="text-align: center;">Please contact <a href="mailto: help@getpostman.com">help@getpostman.com</a></td></tr>
-                          <tr><td style="text-align: center; font-style: italic;">Cheers</td></tr>
-                          <tr>
-                              <td style="text-align: center;">The Mindmail</td>
-                          </tr>
                           </tbody>
                       </table>
                       </div>
@@ -507,6 +490,7 @@ const Sendblue = async (email, type, random, userToken) => {
       
         return {
             state: true,
+            token: token,
         };
       });
   };
@@ -530,8 +514,7 @@ const forgetsendmail = async (req, res) => {
     // }
   
     let random = Math.floor(Math.random() * 100 + 54);
-    user.resetcode = random;
-    const saved = await user.save();
+    
   
     const smtp_result = await Sendblue(email, "forgot", random, "");
     if (!smtp_result.state) {
@@ -540,7 +523,8 @@ const forgetsendmail = async (req, res) => {
             message: 'something is wrong'
         })
     }
-  
+    user.resetcode = smtp_result.token;
+    const saved = await user.save();
     return res.send({
         status: 'ok',
         user: saved
