@@ -515,7 +515,6 @@ const forgetsendmail = async (req, res) => {
 const resetPassword = async(req, res) => {
     const { token, password } = req.body;
     const result = await Users.find({ resetcode: token });
-
     if(result[0].password === password){
         return res.send({
             status: 'ok',
