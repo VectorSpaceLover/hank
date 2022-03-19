@@ -8,8 +8,10 @@ import { ReactComponent as PasswordInCorrect } from '../../../assets/img/account
 import { ReactComponent as PassowrdSuccess } from '../../../assets/img/account/password_success.svg';
 import { useParams } from "react-router-dom";
 import { resetPassword } from '../../../api/auth';
+import { useNavigate } from "react-router-dom";
 
 export default function Password(){
+    const navigate = useNavigate();
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [passwordStatus, setPasswordStatus] = useState(-1);
@@ -57,11 +59,12 @@ export default function Password(){
         if(id){
             setIsReset(true);
             const res = await resetPassword(id, password);
+            console.log(res);
             if(res.status === 'ok'){
                 localStorage.setItem('auth', JSON.stringify(res.userInfo));
-                navigator('/');
+                navigate('/');
             }else{
-                navigator('/signup');
+                navigate('/signup');
             }
         }
     }, [id])
