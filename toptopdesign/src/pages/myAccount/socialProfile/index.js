@@ -15,7 +15,6 @@ import { upDateSocialProfile } from '../../../api/account';
 import {signUpWithGoogle, signUpWithFacebook} from '../../../api/auth';
 import { ReactComponent as ProfileSuccess } from '../../../assets/img/account/profile_success.svg';
 import { ReactComponent as ConfirmIcon } from '../../../assets/img/account/confirm.svg';
-import { UserInfoContext } from '../../../context/userInfo';
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login-typed";
 
@@ -132,7 +131,6 @@ const DlgButton = withStyles((theme) => ({
 }))(Button);
 
 export default function SocialProfile(){
-    const [userInfo, setUserInfo] = useContext(UserInfoContext);
     const [regiserWithEmail, setRegisterWithEmail] = useState(true);
     const [twitter, setTwitter] = useState('');
     const [instagram, setInstagram] = useState('');
@@ -190,8 +188,10 @@ export default function SocialProfile(){
     }
 
     const saveOption = async (val) => {
+        const currentAuth = JSON.parse(localStorage.getItem('auth'));
         if(val === 'social'){
             const result = await upDateSocialProfile(
+                currentAuth._id,
                 twitter,
                 instagram,
                 dribbble,
@@ -204,6 +204,7 @@ export default function SocialProfile(){
             }
             if(result.status === 'ok'){
                 setSocialStatus(true);
+                localStorage.setItem('auth', JSON.stringify(result.user));
             }else{
                 setSocialStatus(false);
             }
@@ -212,13 +213,14 @@ export default function SocialProfile(){
     }
 
     useEffect(() => {
-        setTwitter(userInfo.twitter);
-        setInstagram(userInfo.instagram);
-        setBehance(userInfo.behance);
-        setDribbble(userInfo.dribbble);
-        setGoogle(userInfo.isGoogle);
-        setFacebook(userInfo.isFacebook);
-    }, [userInfo])
+        const auth = JSON.parse(localStorage.getItem('auth'));
+        setTwitter(auth.twitter);
+        setInstagram(auth.instagram);
+        setBehance(auth.behance);
+        setDribbble(auth.dribbble);
+        setGoogle(auth.isGoogle);
+        setFacebook(auth.isFacebook);
+    }, [])
 
     const handleGoogleSuccess = async(data) => {
         const res = await signUpWithGoogle(data.profileObj.email)

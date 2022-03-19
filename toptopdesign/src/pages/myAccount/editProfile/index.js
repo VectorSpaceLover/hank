@@ -11,7 +11,6 @@ import {
     upDateProfile,
 } from '../../../api/account';
 import { ReactComponent as ProfileSuccess } from '../../../assets/img/account/profile_success.svg';
-import { UserInfoContext } from '../../../context/userInfo';
 
 const UploadButton = withStyles((theme) => ({
     root: {
@@ -46,7 +45,6 @@ const UploadButton = withStyles((theme) => ({
 }))(Button);
 
 export default function EditProfile(){
-    const [userInfo, setUserInfo] = useContext(UserInfoContext);
 
     const [userAvatarPath, setUserAvatarPath] = useState(null);
     const [userAvatar, setUserAvatar] = useState(null);
@@ -64,17 +62,19 @@ export default function EditProfile(){
     }
 
     const saveOption = async (val) => {
+        const currentAuth = JSON.parse(localStorage.getItem('auth'));
         if(val === 'edit'){
             let result = [];
             if(userAvatarPath && userAvatar){
                 const res = await uploadImage();
                 if(res?.filePath){
-                    result = await upDateProfile(res?.filePath, userName, location, shortBio);
-                    
+                    result = await upDateProfile(currentAuth._id, res?.filePath, userName, location, shortBio);
                 }
             }else{
-                result = await upDateProfile(userInfo.avatarPath, userName, location, shortBio);
+                
+                result = await upDateProfile(currentAuth._id, currentAuth.avatarPath, userName, location, shortBio);
             }
+            localStorage.setItem('auth', JSON.stringify(result.user));
             if(result.status === 'ok'){
                 setProfileSuccess(true);
             }else{
@@ -89,11 +89,20 @@ export default function EditProfile(){
     }
 
     useEffect(() => {
-        setUserAvatarPath(`${process.env.REACT_APP_UPLOAD_URL}${userInfo.avatarPath}`);
-        setUserName(userInfo.userName);
-        setLocation(userInfo.location);
-        setShortBio(userInfo.shortBio);
-    }, [userInfo])
+        try{
+            const auth = JSON.parse(localStorage.getItem('auth'));
+            console.log(auth)
+            if(auth?.avatarPath)
+                setUserAvatarPath(`${process.env.REACT_APP_UPLOAD_URL}${auth?.avatarPath}`);
+            else
+                setUserAvatarPath('');
+            setUserName(auth?.userName);
+            setLocation(auth?.location);
+            setShortBio(auth?.shortBio);
+        }catch(err){
+            console.log(err);
+        }
+    }, [])
 
     return (
         <Styles>

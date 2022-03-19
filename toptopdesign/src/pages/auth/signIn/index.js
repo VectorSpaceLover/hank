@@ -1,5 +1,5 @@
 import { Styles, ForgotStyle } from "./style";   
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import { ReactComponent as GoogleIcon } from '../../../assets/img/account/google.svg';
@@ -20,7 +20,6 @@ import {
     signInWithFacebook,
     forgotPassword,
 } from '../../../api/auth';
-import { AuthContext } from "../../../context/auth";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login-typed";
 import CancelButton from '../components/cancelButton';
@@ -204,7 +203,6 @@ const SIGN_IN_MSG_NONE = 1;
 export default function SignIn(){
     const navigate = useNavigate();
     const [isSignIn, setSignIn] = useState(true);
-    const [auth, setAuth] = useContext(AuthContext);
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [signInStatus, setSignInStatus] = useState(SIGN_IN_MSG_NONE);
@@ -247,7 +245,7 @@ export default function SignIn(){
     const signIn = async() => {
         const res = await signInWithEmail(userName, password);
         if(res.status === 'ok'){
-            setAuth(res.userInfo);
+            localStorage.setItem('auth', JSON.stringify(res.userInfo));
             navigate('/');
         }else{
             if(res.message === 'passwrod not matched'){
@@ -263,7 +261,7 @@ export default function SignIn(){
     const handleGoogleSuccess = async(data) => {
         const res = await signInWithGoogle(data.profileObj.email)
         if(res.status === 'ok'){
-            setAuth(res.userInfo);
+            localStorage.setItem('auth', JSON.stringify(res.userInfo));
             navigate('/');
         }else{
             setSignInStatus(SIGN_IN_MSG_NOT_EXIST);
@@ -278,14 +276,14 @@ export default function SignIn(){
     const responseFacebook = async(response) => {
         const res = await signInWithFacebook(response);
         if(res.status === 'ok'){
-            setAuth(res.userInfo);
+            localStorage.setItem('auth', JSON.stringify(res.userInfo));
             navigate('/');
         }else{
             setSignInStatus(SIGN_IN_MSG_NOT_EXIST);
         }
         await setTimeout(changeTxt, 3000);
     }
-
+  
     return (
         <Styles>
             <div className="sign-in-container">

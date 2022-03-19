@@ -8,27 +8,26 @@ import { ReactComponent as PasswordInCorrect } from '../../../assets/img/account
 import { ReactComponent as PassowrdSuccess } from '../../../assets/img/account/password_success.svg';
 import { useParams } from "react-router-dom";
 import { resetPassword } from '../../../api/auth';
-import { UserInfoContext } from '../../../context/userInfo';
 
 export default function Password(){
-    const [userInfo, setUserInfo] = useContext(UserInfoContext);
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [passwordStatus, setPasswordStatus] = useState(-1);
     const [isAllowed, setAllowed] = useState(false);
     const { id, password } = useParams();
 
-
     const [isReset, setIsReset] = useState(false);
 
     const saveOption = async (val) => {
+        const currentAuth = JSON.parse(localStorage.getItem('auth'));
         if(val === 'password'){
-            const result = await upDatePassword(oldPassword, newPassword);
+            const result = await upDatePassword(currentAuth._id, oldPassword, newPassword);
             const changeTxt = () => {
                 setPasswordStatus(-1);
             }
             if(result.status === 'ok'){
                 setPasswordStatus(2);
+                localStorage.setItem('auth', JSON.stringify(result.user));
             }else{
                 if(result.error === 'password incorrect')
                     setPasswordStatus(0);
@@ -54,12 +53,12 @@ export default function Password(){
         else setAllowed(false);
     }
 
-    useEffect(() => {
+    useEffect(async() => {
         if(id){
             setIsReset(true);
-            const res = resetPassword(id, password);
+            const res = await resetPassword(id, password);
             if(res.status === 'ok'){
-                setUserInfo(res.userInfo);
+                localStorage.setItem('auth', JSON.stringify(res.userInfo));
                 navigator('/');
             }else{
                 navigator('/signup');

@@ -16,8 +16,7 @@ export const uploadAvatar = async (formData) => {
     return res.data;
 }
 
-export const upDateProfile = async (avatarPath, userName, location, shortBio) => {
-    const id = '62312a93a23e76275cbff408';
+export const upDateProfile = async (id, avatarPath, userName, location, shortBio) => {
     const res = await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/account/editprofile/${id}`, 
         {
@@ -30,8 +29,7 @@ export const upDateProfile = async (avatarPath, userName, location, shortBio) =>
     return res.data;
 }
 
-export const upDateAccountSetting = async (userName, userEmail, password) => {
-    const id = '62312a93a23e76275cbff408';
+export const upDateAccountSetting = async (id, userName, userEmail, password) => {
     const res = await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/account/accountsetting/${id}`, 
         {
@@ -43,8 +41,7 @@ export const upDateAccountSetting = async (userName, userEmail, password) => {
     return res.data;
 }
 
-export const upDatePassword = async (oldPassword, newPassword) => {
-    const id = '62312a93a23e76275cbff408';
+export const upDatePassword = async (id, oldPassword, newPassword) => {
     const res = await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/account/password/${id}`, 
         {
@@ -56,6 +53,7 @@ export const upDatePassword = async (oldPassword, newPassword) => {
 }
 
 export const upDateSocialProfile = async (
+    id,
     twitter,
     instagram,
     dribbble,
@@ -63,7 +61,6 @@ export const upDateSocialProfile = async (
     isGoogle,
     isFacebook
 ) => {
-    const id = '62312a93a23e76275cbff408';
     const res = await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/account/social/${id}`, 
         {
@@ -78,8 +75,7 @@ export const upDateSocialProfile = async (
     return res.data;
 }
 
-export const upDateEmailNotification = async (checked) => {
-    const id = '62312a93a23e76275cbff408';
+export const upDateEmailNotification = async (id, checked) => {
     const res = await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/account/emailnotification/${id}`, 
         {

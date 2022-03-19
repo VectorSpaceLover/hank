@@ -5,7 +5,6 @@ import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/footer";
-import { UserInfoContext } from "../../context/userInfo";
 import { getUserInfoById } from "../../api/account";
 
 const EditButton = withStyles((theme) => ({
@@ -45,7 +44,6 @@ const EditButton = withStyles((theme) => ({
 
 export default function MyAccount({children}){
     const navigate = useNavigate();
-    const [userInfo, setUserInfo] = useContext(UserInfoContext);
     const [userName, setUserName] = useState('username');
     const [currentPage, setCurrentPage] = useState('');
 
@@ -62,9 +60,14 @@ export default function MyAccount({children}){
     }
 
     const getInitialData = useCallback(async() => {
-        const res = await getUserInfoById(userInfo._id);
+        const auth = JSON.parse(localStorage.getItem('auth'));
+        if(!auth || Object.keys(auth).length === 0){
+            navigate('/signin');
+            return;
+        }
+        const res = await getUserInfoById(auth._id);
         const user = res.user[0];
-        setUserInfo(user);
+        localStorage.setItem('auth', JSON.stringify(user));
         setUserName(user.userName);
     }, [])
 

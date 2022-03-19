@@ -7,7 +7,6 @@ import {
     getUserInfoById,
 } from '../../../api/account';
 import { ReactComponent as ProfileSuccess } from '../../../assets/img/account/profile_success.svg';
-import { UserInfoContext } from '../../../context/userInfo';
 
 const checkLs = [
     {label: 'Notify me when new app screens have been added  '},
@@ -18,7 +17,6 @@ const checkLs = [
 export default function EmailNotification(){
     const [checked, setChecked] = useState([false, false, false]);
     const [profileSuccess, setProfileSuccess] = useState(false);
-    const [userInfo, setUserInfo] = useContext(UserInfoContext);
 
     const checkedItem = (idx) => {
         let newChecked = [...checked];
@@ -27,13 +25,15 @@ export default function EmailNotification(){
     }
 
     const saveOption = async (val) => {
+        const currentAuth = JSON.parse(localStorage.getItem('auth'));
         if(val === 'accountsetting'){
-            const result = await upDateEmailNotification(checked);
+            const result = await upDateEmailNotification(currentAuth._id, checked);
             const changeTxt = () => {
                 setProfileSuccess(false);
             }
             if(result.status === 'ok'){
                 setProfileSuccess(true);
+                localStorage.setItem('auth', JSON.stringify(result.user));
             }else{
                 setProfileSuccess(false);
             }
@@ -42,7 +42,8 @@ export default function EmailNotification(){
     }
 
     const getInitialData = useCallback(async() => {
-        const res = await getUserInfoById(userInfo._id);
+        const auth = JSON.parse(localStorage.getItem('auth'));
+        const res = await getUserInfoById(auth._id);
         const user = res.user[0];
         setChecked(user.emailNotification);
       }, [])

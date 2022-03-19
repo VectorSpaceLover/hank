@@ -16,7 +16,6 @@ import {messages} from '../../assets/config';
 import { useNavigate } from "react-router-dom";
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
-import { AuthContext } from '../../context/auth';
 
 const dateStyle = {
     fontFamily: "PP Telegraf-Regular", 
@@ -92,12 +91,14 @@ function Navbar() {
     const navigate = useNavigate();
     const [isSigned, setSigned] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
-    const [auth, setAuth] = useContext(AuthContext);
+    const [auth, setAuth] = useState({});
 
     const [anchorGift, setAnchorGift] = useState(null);
     const [anchorAlarm, setAnchorAlarm] = useState(null);
     const openGift = Boolean(anchorGift);
     const openAlarm = Boolean(anchorAlarm);
+    const url = window.location.pathname;
+
     const openGiftMenu = (event) => {
         setAnchorGift(event.currentTarget);
     };
@@ -116,13 +117,22 @@ function Navbar() {
     const goToAccount = () => {
         navigate(`/myaccount/edit`);
     }
-
+    const signOut = () => {
+        localStorage.setItem('auth', JSON.stringify({}));
+        navigate('/signin');
+        closeGiftMenu();
+    }
     useEffect(() => {
-        const url = window.location.pathname;
         if(url.indexOf('/admin/') >= 0){
             setIsAdmin(true);
+        }else{
+            if(url.indexOf('/signin') >= 0 || url.indexOf('/signup') >= 0){
+                setAuth({});
+            }else{
+                setAuth(JSON.parse(localStorage.getItem('auth')));
+            }
         }
-    }, [])
+    }, [url])
 
     return (
         <React.Fragment>
@@ -217,7 +227,7 @@ function Navbar() {
                                             Support
                                         </MenuItem>
                                         <Divider/>
-                                        <MenuItem onClick={closeGiftMenu} disableRipple>
+                                        <MenuItem onClick={signOut} disableRipple>
                                             <SignOutIcon style={{ marginRight: 14 }} />
                                             Sign Out
                                         </MenuItem>

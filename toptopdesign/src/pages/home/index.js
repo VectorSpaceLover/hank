@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Styles } from "./style/homeStyle";
 import { Grid } from '@mui/material';
 import SearchBox from './components/searchBox';
@@ -14,6 +14,7 @@ import { getAllProducts, getSearchResults } from '../../api/home';
 import OutsideClickHandler from './components/outSide';
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
 const MoreButton = withStyles((theme) => ({
     root: {
@@ -41,6 +42,7 @@ const MoreButton = withStyles((theme) => ({
   }))(Button);
 
 export default function Home(){
+    const navigator = useNavigate();
     const [showPatternList, setShowPatternList] = useState(false);
     const [searchKey, setSearchKey] = useState('');
     const [showSearchKey, setShowSearchKey] = useState('');
@@ -75,6 +77,11 @@ export default function Home(){
     }
 
     useEffect(() => {
+        const auth = JSON.parse(localStorage.getItem('auth'));
+        if(!auth || Object.keys(auth).length === 0){
+            navigator('/signin');
+            return;
+        }
         async function getInitialData(){
             const { mobiles, recents, websites } = await getAllProducts();
             setPopularApps(mobiles);
