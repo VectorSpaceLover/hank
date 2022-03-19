@@ -8,6 +8,7 @@ const {
     signInWithGoogle,
     signInWithFacebook,
     forgetsendmail,
+    resetPassword,
 } = require('../controller/users');
 
 router.post('/signup', signUpWithEmail);
@@ -19,5 +20,6 @@ router.post('/signin/google', signInWithGoogle);
 router.post('/signin/facebook', signInWithFacebook);
 
 router.post('/forgot/confirm', forgetsendmail);
+router.post('/reset/password', resetPassword);
 
 module.exports = router;

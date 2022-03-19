@@ -54,7 +54,7 @@ const usersSchema = new mongoose.Schema({
     required: false,
   },
   resetcode: {
-    type: Number,
+    type: String,
     required: false,
   },
   createdDate: {

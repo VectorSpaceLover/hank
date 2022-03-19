@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import { ReactComponent as GoogleIcon } from '../../../assets/img/account/google.svg';
+import { ReactComponent as GoogleWhiteIcon } from '../../../assets/img/google_white.svg';
+import { ReactComponent as FacebookWhiteIcon } from '../../../assets/img/facebook_white.svg';
 import { ReactComponent as FacebookIcon } from '../../../assets/img/account/facebook.svg';
 import { ReactComponent as CloseIcon } from '../../../assets/img/auth/close.svg';
 import CustomedInput from "../components/input";
@@ -30,7 +32,6 @@ const LeftIconButton = withStyles((theme) => ({
         padding: '0px 7px !important',
         alignItems: 'center !important',
         justifyContent: 'center !important',
-        borderBottom: '1px solid var(--second) !important',
         borderTopLeftRadius: '24px !important',
         borderTopRightRadius: '0px !important',
         borderBottomRightRadius: '0px !important',
@@ -45,7 +46,8 @@ const LeftIconButton = withStyles((theme) => ({
         fontWeight: '400px !important',
         fontStyle: `normal !important`,
         backgroundColor: 'white !important',
-        color: 'var(--second) !important',
+        color: props => props.isclicked === 1?`#00000033 !important`:`var(--second) !important`,
+        borderBottom: props => props.isclicked === 1?'1px solid var(--gray-nurse) !important':'1px solid var(--second) !important',
         '&:hover': {
             color: '#00000033 !important',
             borderBottom: '1px solid var(--gray-nurse) !important',
@@ -76,7 +78,6 @@ const RightIconButton = withStyles((theme) => ({
         padding: '0px 7px !important',
         alignItems: 'center !important',
         justifyContent: 'center !important',
-        borderBottom: '1px solid var(--second) !important',
         borderTopRightRadius: '24px !important',
         borderTopLeftRadius: '0px !important',
         borderBottomLeftRadius: '0px !important',
@@ -91,7 +92,8 @@ const RightIconButton = withStyles((theme) => ({
         fontWeight: '400px !important',
         fontStyle: `normal !important`,
         backgroundColor: 'white !important',
-        color: 'var(--second) !important',
+        color: props => props.isclicked === 1?`#00000033 !important`:`var(--second) !important`,
+        borderBottom: props => props.isclicked === 1?'1px solid var(--gray-nurse) !important':'1px solid var(--second) !important',
         '&:hover': {
             color: '#00000033 !important',
             borderBottom: '1px solid var(--gray-nurse) !important',
@@ -203,6 +205,7 @@ const EMAIL_STATUS_FAIL = 1;
 
 export default function SignUp(){
     const navigate = useNavigate();
+    const [isSignup, setSignup] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -215,23 +218,24 @@ export default function SignUp(){
     const [successOpen, setSuccessOpen] = useState(false);
     // const [confirmOpen, setConfirmOpen] = useState(false);
 
+    const [isHoverGoole, setIsHoverGoogle] = useState(false);
+    const [isHoverFacebook, setIsHoverFacebook] = useState(false);
+
     const closeForgotDlg = () => {
+        setNewEmail('');
+        setEmailSuccessed(EMAIL_STATUS_NONE);
         setForgotOpen(false);
     };
-
     const closeSuccessDlg = () => {
         setSuccessOpen(false);
     }
-
     const forgetPassword = () => {
         setEmailSuccessed(EMAIL_STATUS_NONE);
         setForgotOpen(true);
     }
-
     const changeTxt = () => {
         setSignUpStatus(SIGN_UP_MSG_NONE);
     }
-
     const signUp = async() => {
         if(password !== confirmPassword){
             setSignUpStatus(SIGN_UP_MSG_NO_MATCH);
@@ -244,10 +248,8 @@ export default function SignUp(){
                 setSuccessOpen(true);
             }
         }
-        
         await setTimeout(changeTxt, 3000);
     }
-
     const handleChange = (value) => {
         setConfirmPassword(value);
         const ck =value;
@@ -310,10 +312,10 @@ export default function SignUp(){
                 <div className={signUpStatus===SIGN_UP_MSG_NONE?"out-body":"out-body mobile-cover"}>
                     <div className="inside-body">
                         <div className="btn-group">
-                            <LeftIconButton onClick={() => navigate('/signin')}>
+                            <LeftIconButton isclicked={isSignup?1:0} onClick={() => navigate('/signin')}>
                                 Sign In
                             </LeftIconButton>
-                            <RightIconButton onClick={() => navigate('/signup')}>
+                            <RightIconButton isclicked={!isSignup?1:0} onClick={() => navigate('/signup')}>
                                 Sign Up
                             </RightIconButton>
                         </div>
@@ -327,10 +329,19 @@ export default function SignUp(){
                                     onFailure={handleGoogleFailure}
                                     cookiePolicy={"single_host_origin"}
                                     render={(renderProps) => (
-                                        <SocialButton onClick={renderProps.onClick}>
-                                            <GoogleIcon
-                                                className="icon"
-                                            />
+                                        <SocialButton 
+                                            onClick={renderProps.onClick}
+                                            onMouseEnter={() => setIsHoverGoogle(true)}
+                                            onMouseLeave={() => setIsHoverGoogle(false)}
+                                        >
+                                            {isHoverGoole?
+                                                <GoogleWhiteIcon
+                                                    className="icon"
+                                                />:
+                                                <GoogleIcon
+                                                    className="icon"
+                                                />
+                                            }
                                             <span>Google</span>
                                         </SocialButton>
                                     )}
@@ -341,10 +352,20 @@ export default function SignUp(){
                                     fields="name,email,picture"
                                     callback={responseFacebook}
                                     render={(renderProps) => (
-                                        <SocialButton className="ml-16" onClick={renderProps.onClick}>
-                                            <FacebookIcon
-                                                className="icon"
-                                            />
+                                        <SocialButton 
+                                            className="ml-16" 
+                                            onClick={renderProps.onClick}
+                                            onMouseEnter={() => setIsHoverFacebook(true)}
+                                            onMouseLeave={() => setIsHoverFacebook(false)}
+                                        >
+                                            {isHoverFacebook?
+                                                <FacebookWhiteIcon
+                                                    className="icon"
+                                                />:
+                                                <FacebookIcon
+                                                    className="icon"
+                                                />
+                                            }
                                             <span>Facebook</span>
                                         </SocialButton>
                                     )}
@@ -497,6 +518,13 @@ export default function SignUp(){
                                 />
                             }
                         </div>
+                        {emailSuccessed === EMAIL_STATUS_FAIL && 
+                            <div className="email-alert">
+                                <div className="alert-content">
+                                    Sorry, we can’t find your account, please try again or Contact Support
+                                </div>
+                            </div>
+                        }
                     </div>
                 </ForgotStyle>
             </Dialog>

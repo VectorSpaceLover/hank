@@ -74,3 +74,14 @@ export const forgotPassword = async(email) => {
     );
     return res.data;
 }
+
+export const resetPassword = async(token, password) => {
+    const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/user/reset/password`, 
+        {
+            token: token,
+            password: password,
+        }
+    );
+    return res.data;
+}

@@ -62,15 +62,19 @@ export default function MyAccount({children}){
     }
 
     const getInitialData = useCallback(async() => {
-        const res = await getUserInfoById();
-        const userInfo = res.user[0];
-        setUserInfo(userInfo);
-        setUserName(userInfo.userName);
-    }, [setUserInfo])
+        const res = await getUserInfoById(userInfo._id);
+        const user = res.user[0];
+        setUserInfo(user);
+        setUserName(user.userName);
+    }, [])
 
     useEffect(() => {
         getInitialData();
     }, [getInitialData])
+
+    // useEffect(() => {
+    //     if(userInfo)
+    // }, [])
     return (
         <Styles>
             <div className="myaccount-before-container">

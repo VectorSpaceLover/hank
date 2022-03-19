@@ -223,6 +223,38 @@ export const ForgotStyle = styled.div`
             }
         }
     }
+    .email-alert{
+        position: absolute;
+        top: 88px;
+        left: calc((100% - 658px) / 2);
+        .alert-content{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            ${PptelegrafRegularNormalBlack12px}
+            width: 658px;
+            height: 23px;
+            background-color: #FF7373;
+            border-radius: 100px;
+            @media screen and (max-width: 800px) {
+                width: 492px;
+                height: 23px;
+            }
+            @media screen and (max-width: 600px) {
+                width: 256px;
+                height: 28px;
+            }
+        }
+        @media screen and (max-width: 800px) {
+            top: 45px;
+            left: calc((100% - 492px) / 2);
+        }
+        @media screen and (max-width: 600px) {
+            text-align: center;
+            top: 26px;
+            left: calc((100% - 256px) / 2);
+        }
+    }
 `;
 
 export const ViewCollectionDlgStyle = styled.div`

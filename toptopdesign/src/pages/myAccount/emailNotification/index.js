@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
 import { Styles } from "./emailNotificationStyle";
 import CustomedTextButton from '../customedBtn';
 import CustomedCheckBox from './checkBox';
@@ -7,6 +7,7 @@ import {
     getUserInfoById,
 } from '../../../api/account';
 import { ReactComponent as ProfileSuccess } from '../../../assets/img/account/profile_success.svg';
+import { UserInfoContext } from '../../../context/userInfo';
 
 const checkLs = [
     {label: 'Notify me when new app screens have been added  '},
@@ -17,6 +18,7 @@ const checkLs = [
 export default function EmailNotification(){
     const [checked, setChecked] = useState([false, false, false]);
     const [profileSuccess, setProfileSuccess] = useState(false);
+    const [userInfo, setUserInfo] = useContext(UserInfoContext);
 
     const checkedItem = (idx) => {
         let newChecked = [...checked];
@@ -40,9 +42,9 @@ export default function EmailNotification(){
     }
 
     const getInitialData = useCallback(async() => {
-        const res = await getUserInfoById();
-        const userInfo = res.user[0];
-        setChecked(userInfo.emailNotification);
+        const res = await getUserInfoById(userInfo._id);
+        const user = res.user[0];
+        setChecked(user.emailNotification);
       }, [])
     
     useEffect(() => {

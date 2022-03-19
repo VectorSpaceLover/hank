@@ -27,6 +27,12 @@ const Routers = () => {
             <Route exact path="/" element={<Home/>}/>
             <Route exact path="/signIn" element={<SignIn />} />
             <Route exact path="/signUp" element={<SignUp />} />
+            <Route exact path="/reset/password/:id/:password" element={
+              <MyAccount>
+                <Password />
+              </MyAccount>
+            } />
+
             <Route exact path="/home" element={<Home/>}/>
             <Route exact path="/collection" element={
               <Collection>

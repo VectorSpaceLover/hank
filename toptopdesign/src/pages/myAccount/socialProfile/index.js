@@ -6,13 +6,18 @@ import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import { ReactComponent as GoogleIcon } from '../../../assets/img/account/google.svg';
 import { ReactComponent as FacebookIcon } from '../../../assets/img/account/facebook.svg';
+import { ReactComponent as GoogleWhiteIcon } from '../../../assets/img/google_white.svg';
+import { ReactComponent as FacebookWhiteIcon } from '../../../assets/img/facebook_white.svg';
 import { ReactComponent as DisconnectIcon } from '../../../assets/img/account/disconnect.svg';
 import Dialog from '@mui/material/Dialog';
 import CancelButton from "../cancelButton";
 import { upDateSocialProfile } from '../../../api/account';
+import {signUpWithGoogle, signUpWithFacebook} from '../../../api/auth';
 import { ReactComponent as ProfileSuccess } from '../../../assets/img/account/profile_success.svg';
 import { ReactComponent as ConfirmIcon } from '../../../assets/img/account/confirm.svg';
 import { UserInfoContext } from '../../../context/userInfo';
+import { GoogleLogin } from "react-google-login";
+import FacebookLogin from "react-facebook-login-typed";
 
 const IconButton = withStyles((theme) => ({
     root: {
@@ -143,6 +148,8 @@ export default function SocialProfile(){
     const [disconnectedOpen, setDisconnectedOpen] = useState(false);
     const [confirmOpen, setConfirmOpen] = useState(false);
 
+    const [isHoverGoole, setIsHoverGoogle] = useState(false);
+    const [isHoverFacebook, setIsHoverFacebook] = useState(false);
 
     const closeDisconnectedDlg = () => {
         setDisconnectedOpen(false);
@@ -213,6 +220,21 @@ export default function SocialProfile(){
         setFacebook(userInfo.isFacebook);
     }, [userInfo])
 
+    const handleGoogleSuccess = async(data) => {
+        const res = await signUpWithGoogle(data.profileObj.email)
+        setGoogle(true);
+    }
+
+    const handleGoogleFailure = (err) => {
+        console.log(err);
+    }
+
+    
+    const responseFacebook = async(response) => {
+        const res = await signUpWithFacebook(response);
+        setFacebook(true);
+    }
+
     return (
         <Styles>
             <div className="social-profile-container">
@@ -240,14 +262,31 @@ export default function SocialProfile(){
                     <div className="social-login">
                         {console.log(isGoogle)}
                         {isGoogle === false?
-                            <IconButton
-                                onClick={() => setGoogle(true)}
-                            >
-                                <GoogleIcon
-                                    className="icon"
-                                />
-                                <span>Google</span>
-                            </IconButton>:
+                            <GoogleLogin
+                                clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
+                                buttonText="Login"
+                                onSuccess={handleGoogleSuccess}
+                                // uxMode={"redirect"}
+                                onFailure={handleGoogleFailure}
+                                cookiePolicy={"single_host_origin"}
+                                render={(renderProps) => (
+                                    <IconButton 
+                                        onClick={renderProps.onClick}
+                                        onMouseEnter={() => setIsHoverGoogle(true)}
+                                        onMouseLeave={() => setIsHoverGoogle(false)}
+                                    >
+                                        {isHoverGoole?
+                                            <GoogleWhiteIcon
+                                                className="icon"
+                                            />:
+                                            <GoogleIcon
+                                                className="icon"
+                                            />
+                                        }
+                                        <span>Google</span>
+                                    </IconButton>
+                                )}
+                            />:
                             <TextButton
                                 onClick={() => handleGoogle(false)}
                             >
@@ -255,15 +294,30 @@ export default function SocialProfile(){
                             </TextButton>
                         }
                         {isFacebook === false?
-                            <IconButton
-                                className='ml-20'
-                                onClick={() => setFacebook(true)}
-                            >
-                                <FacebookIcon 
-                                    className="icon"
-                                />
-                                <span>Facebook</span>
-                            </IconButton>:
+                            <FacebookLogin
+                                appId={process.env.REACT_APP_FACEBOOK_APIKEY}
+                                autoLoad={false}
+                                fields="name,email,picture"
+                                callback={responseFacebook}
+                                render={(renderProps) => (
+                                    <IconButton 
+                                        className="ml-20" 
+                                        onClick={renderProps.onClick}
+                                        onMouseEnter={() => setIsHoverFacebook(true)}
+                                        onMouseLeave={() => setIsHoverFacebook(false)}
+                                    >
+                                        {isHoverFacebook?
+                                            <FacebookWhiteIcon
+                                                className="icon"
+                                            />:
+                                            <FacebookIcon
+                                                className="icon"
+                                            />
+                                        }
+                                        <span>Facebook</span>
+                                    </IconButton>
+                                )}
+                            />:
                             <TextButton
                                 className='ml-20'
                                 onClick={() => handleFacebook(false)}

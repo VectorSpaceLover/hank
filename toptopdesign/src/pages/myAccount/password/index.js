@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import PasswordInput from "../passwordInput";
 import { Styles } from "./passwordStyle";
 import CustomedTextButton from '../customedBtn';
@@ -6,13 +6,20 @@ import { upDatePassword } from '../../../api/account';
 import { ReactComponent as PasswordNoMatch } from '../../../assets/img/account/password_no_match.svg';
 import { ReactComponent as PasswordInCorrect } from '../../../assets/img/account/password_incorrect.svg';
 import { ReactComponent as PassowrdSuccess } from '../../../assets/img/account/password_success.svg';
-
+import { useParams } from "react-router-dom";
+import { resetPassword } from '../../../api/auth';
+import { UserInfoContext } from '../../../context/userInfo';
 
 export default function Password(){
+    const [userInfo, setUserInfo] = useContext(UserInfoContext);
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [passwordStatus, setPasswordStatus] = useState(-1);
     const [isAllowed, setAllowed] = useState(false);
+    const { id, password } = useParams();
+
+
+    const [isReset, setIsReset] = useState(false);
 
     const saveOption = async (val) => {
         if(val === 'password'){
@@ -46,6 +53,19 @@ export default function Password(){
         if(isAlphaOrParen(value) && containsNumber(ck) && ck.length >= 8) setAllowed(true);
         else setAllowed(false);
     }
+
+    useEffect(() => {
+        if(id){
+            setIsReset(true);
+            const res = resetPassword(id, password);
+            if(res.status === 'ok'){
+                setUserInfo(res.userInfo);
+                navigator('/');
+            }else{
+                navigator('/signup');
+            }
+        }
+    }, [id])
 
     return (
         <Styles>

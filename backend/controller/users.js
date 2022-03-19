@@ -377,9 +377,7 @@ const upDateEmailNotification = async (req, res) => {
     });
 }
 
-const Sendblue = async (email, type, random, userToken) => {
-    const token = await hashToken({ random, email, token: userToken });
-    const link = process.env.CLIENTURL + `/reset/password/${token}`;
+const Sendblue = async (email, link) => {
     var options = {
         method: 'POST',
         url: 'https://api.sendinblue.com/v3/smtp/email',
@@ -483,15 +481,8 @@ const Sendblue = async (email, type, random, userToken) => {
         json: true
       };
       
-      request(options, function (error, response, body) {
-        if (error) return {
-            state: false,
-        };
-      
-        return {
-            state: true,
-            token: token,
-        };
+      await request(options, function (error, response, body) {
+          console.log(body);
       });
   };
 
@@ -505,32 +496,39 @@ const forgetsendmail = async (req, res) => {
             message: 'user is not existed'
         })
     }
-  
-    // if (user.password === '123456' || user.isGoogle || user.isFacebook) {
-    //   throw new HttpException(
-    //     400,
-    //     `This Email already exist with ${result.user.signtype}`
-    //   );
-    // }
-  
+
     let random = Math.floor(Math.random() * 100 + 54);
-    
-  
-    const smtp_result = await Sendblue(email, "forgot", random, "");
-    if (!smtp_result.state) {
-      return res.send({
-            status: 'error',
-            message: 'something is wrong'
-        })
-    }
-    user.resetcode = smtp_result.token;
+    const newPassword = 'user12345';
+    const token = await hashToken({ random, email, token: '' });
+    const link = process.env.CLIENTURL + `/reset/password/${token}/${newPassword}`;
+
+    await Sendblue(email, link);
+    user.resetcode = token;
+    user.password = newPassword;
     const saved = await user.save();
     return res.send({
         status: 'ok',
         user: saved
     })
-  };
+};
 
+const resetPassword = async(req, res) => {
+    const { token, password } = req.body;
+    const result = await Users.find({ resetcode: token });
+
+    if(result[0].password === password){
+        return res.send({
+            status: 'ok',
+            userInfo: result[0],
+        })
+    }else{
+        return res.send({
+            status: 'error',
+            message: 'password not match',
+        })
+    }
+
+}
 module.exports = {
     getUserInfoById,
     uploadAvatar,
@@ -546,5 +544,6 @@ module.exports = {
     upDateSocialProfile,
     upDateEmailNotification,
     forgetsendmail,
+    resetPassword,
 };
   

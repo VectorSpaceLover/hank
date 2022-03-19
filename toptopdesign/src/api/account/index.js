@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-export const getUserInfoById = async () => {
-    const id = '62312a93a23e76275cbff408';
+export const getUserInfoById = async (id) => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/account/detail?id=${id}`);
     return res.data;
 }
