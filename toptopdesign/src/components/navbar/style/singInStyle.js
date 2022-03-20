@@ -6,12 +6,12 @@ import {
     PptelegrafUltraBoldBlack20px,
     PptelegrafRegularNormalBlack20px,
 } from '../../../assets/styledMixins';
-export const Styles = styled.div`
+
+export const SignInStyle = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     .sign-in-container{
-        background-color: var(--white);
         position: relative;
         border-radius: 24px;
         box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);

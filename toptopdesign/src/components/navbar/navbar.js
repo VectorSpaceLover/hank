@@ -16,6 +16,9 @@ import {messages} from '../../assets/config';
 import { useNavigate } from "react-router-dom";
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import SignIn from '../../pages/auth/signIn';
+import SignUp from '../../pages/auth/signUp';
 
 const dateStyle = {
     fontFamily: "PP Telegraf-Regular", 
@@ -96,9 +99,20 @@ function Navbar() {
 
     const [anchorGift, setAnchorGift] = useState(null);
     const [anchorAlarm, setAnchorAlarm] = useState(null);
+
+    const [openSignin, setOpenSignin] = useState(false);
+    const [openSignup, setOpenSignup] = useState(false);
+
     const openGift = Boolean(anchorGift);
     const openAlarm = Boolean(anchorAlarm);
     const url = window.location.pathname;
+
+    const closeSignin = () => {
+        setOpenSignin(false);
+    };
+    const closeSignup = () => {
+        setOpenSignup(false);
+    };
 
     const openGiftMenu = (event) => {
         setAnchorGift(event.currentTarget);
@@ -120,12 +134,11 @@ function Navbar() {
     }
     const signOut = () => {
         localStorage.setItem('auth', JSON.stringify({}));
-        navigate('/signin');
         closeGiftMenu();
     }
 
     const signIn = () => {
-        navigate('/signin');
+        setOpenSignin(true)
     }
     useEffect(() => {
         if(url.indexOf('/admin/') >= 0){
@@ -319,6 +332,60 @@ function Navbar() {
                             )}
                         </div>
                     </div>
+                    <Dialog
+                        open={openSignin} 
+                        onClose={closeSignin}
+                        maxWidth='md'
+                        fullWidth={true}
+                        PaperProps={{
+                            style: {
+                                display: 'flex',
+                                alignItems: 'center',
+                                borderRadius: 24,
+                                overflowY: 'auto',
+                                overflowX: 'hidden',
+                                backgroundColor: 'transparent',
+                                boxShadow: 'none',
+                                padding: 30,
+                                height: 762,
+                                '@media(minWidth: 780px)' : {
+                                    height: 675,
+                                },
+                                '@media(minWidth: 600px)' : {
+                                    height: 601,
+                                }
+                            },
+                        }}
+                    >
+                        <SignIn setOpenSignin={setOpenSignin} setOpenSignup={setOpenSignup}/>
+                    </Dialog>
+                    <Dialog
+                        open={openSignup} 
+                        onClose={closeSignup}
+                        maxWidth='md'
+                        fullWidth={true}
+                        PaperProps={{
+                            style: {
+                                display: 'flex',
+                                alignItems: 'center',
+                                borderRadius: 24,
+                                overflowY: 'auto',
+                                overflowX: 'hidden',
+                                backgroundColor: 'transparent',
+                                boxShadow: 'none',
+                                padding: 30,
+                                height: 762,
+                                '@media(minWidth: 780px)' : {
+                                    height: 675,
+                                },
+                                '@media(minWidth: 600px)' : {
+                                    height: 601,
+                                }
+                            },
+                        }}
+                    >
+                        <SignUp setOpenSignin={setOpenSignin} setOpenSignup={setOpenSignup}/>
+                    </Dialog>
                 </Styles>
             ):(<AdminStyle>
 

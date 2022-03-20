@@ -203,7 +203,7 @@ const EMAIL_STATUS_NONE = -1;
 const EMAIL_STATUS_SUCCESS = 0;
 const EMAIL_STATUS_FAIL = 1;
 
-export default function SignUp(){
+export default function SignUp({setOpenSignup, setOpenSignin}){
     const navigate = useNavigate();
     const [isSignup, setSignup] = useState(true);
     const [email, setEmail] = useState('');
@@ -288,7 +288,7 @@ export default function SignUp(){
         if(res?.oldUser){
             setSignUpStatus(SIGN_UP_MSG_ALREADY);
         }else{
-            navigate('/');
+            setOpenSignup(false);
         }
         await setTimeout(changeTxt, 3000);
     }
@@ -309,14 +309,20 @@ export default function SignUp(){
 
     return (
         <Styles>
-            <div className="sign-in-container">
+            <div className="sign-up-container">
                 <div className={signUpStatus===SIGN_UP_MSG_NONE?"out-body":"out-body mobile-cover"}>
                     <div className="inside-body">
                         <div className="btn-group">
-                            <LeftIconButton isclicked={isSignup?1:0} onClick={() => navigate('/signin')}>
+                            <LeftIconButton 
+                                isclicked={isSignup?1:0} 
+                                onClick={() => {
+                                    setOpenSignin(true);
+                                    setOpenSignup(false);
+                                }}>
                                 Sign In
                             </LeftIconButton>
-                            <RightIconButton isclicked={!isSignup?1:0} onClick={() => navigate('/signup')}>
+                            <RightIconButton 
+                                isclicked={!isSignup?1:0}>
                                 Sign Up
                             </RightIconButton>
                         </div>
@@ -411,7 +417,8 @@ export default function SignUp(){
                     </div>
                 </div>
                 <IconButton
-                    className='close-btn' 
+                    className='close-btn'
+                    onClick={() => setOpenSignup(false)}
                 >
                     <CloseIcon className='icon' />
                 </IconButton>

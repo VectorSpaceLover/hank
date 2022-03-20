@@ -12,7 +12,8 @@ export const Styles = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    .sign-in-container{
+    .sign-up-container{
+        background-color: var(--white);
         position: relative;
         border-radius: 24px;
         box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);

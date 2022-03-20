@@ -200,7 +200,7 @@ const SIGN_IN_MSG_NOT_EXIST = -1;
 const SIGN_IN_MSG_NOT_MATCH = 0;
 const SIGN_IN_MSG_NONE = 1;
 
-export default function SignIn(){
+export default function SignIn({setOpenSignin, setOpenSignup}){
     const navigate = useNavigate();
     const [isSignIn, setSignIn] = useState(true);
     const [userName, setUserName] = useState('');
@@ -262,7 +262,7 @@ export default function SignIn(){
         const res = await signInWithGoogle(data.profileObj.email)
         if(res.status === 'ok'){
             localStorage.setItem('auth', JSON.stringify(res.userInfo));
-            navigate('/');
+            setOpenSignin(false);
         }else{
             setSignInStatus(SIGN_IN_MSG_NOT_EXIST);
         }
@@ -290,10 +290,15 @@ export default function SignIn(){
                 <div className={signInStatus===SIGN_IN_MSG_NONE?"out-body":"out-body mobile-cover"}>
                     <div className="inside-body">
                         <div className="btn-group">
-                            <LeftIconButton isclicked={!isSignIn?1:0} onClick={() => navigate('/signin')}>
+                            <LeftIconButton isclicked={!isSignIn?1:0}>
                                 Sign In
                             </LeftIconButton>
-                            <RightIconButton isclicked={isSignIn?1:0} onClick={() => navigate('/signup')}>
+                            <RightIconButton 
+                                isclicked={isSignIn?1:0} 
+                                onClick={() => {
+                                    setOpenSignin(false);
+                                    setOpenSignup(true);
+                                }}>
                                 Sign Up
                             </RightIconButton>
                         </div>
@@ -383,7 +388,8 @@ export default function SignIn(){
                     </div>
                 </div>
                 <IconButton 
-                    className='close-btn' 
+                    className='close-btn'
+                    onClick={() => setOpenSignin(false)}
                 >
                     <CloseIcon className='icon' />
                 </IconButton>
