@@ -239,10 +239,10 @@ export default function Collection({children}){
 
     useEffect(() => {
         const auth = JSON.parse(localStorage.getItem('auth'));
-        if(!auth || Object.keys(auth).length === 0){
-            navigate('/signin');
-            return;
-        }
+        // if(!auth || Object.keys(auth).length === 0){
+        //     navigate('/signin');
+        //     return;
+        // }
     }, [])
 
     return(

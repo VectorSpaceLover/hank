@@ -89,6 +89,7 @@ const SignInButton = withStyles((theme) => ({
 
 function Navbar() {
     const navigate = useNavigate();
+    const [isShow, setShow] = useState(true);
     const [isSigned, setSigned] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
     const [auth, setAuth] = useState({});
@@ -122,21 +123,30 @@ function Navbar() {
         navigate('/signin');
         closeGiftMenu();
     }
+
+    const signIn = () => {
+        navigate('/signin');
+    }
     useEffect(() => {
         if(url.indexOf('/admin/') >= 0){
             setIsAdmin(true);
         }else{
             if(url.indexOf('/signin') >= 0 || url.indexOf('/signup') >= 0){
                 setAuth({});
+                setShow(false);
             }else{
                 setAuth(JSON.parse(localStorage.getItem('auth')));
             }
         }
     }, [url])
 
+    useEffect(() => {
+        if(Object.keys(auth).length !== 0) setSigned(true);
+        else setSigned(false)
+    }, [auth])
     return (
         <React.Fragment>
-            {Object.keys(auth).length !== 0?(!isAdmin?(
+            {(Object.keys(auth).length !== 0 || isShow)?(!isAdmin?(
                 <Styles>
                     <div className='before-container'>
                         <div className='navbar'>
@@ -147,6 +157,7 @@ function Navbar() {
                             {!isSigned? (
                                 <SignInButton
                                     className="mr-24"
+                                    onClick={signIn}
                                 >
                                     <span className='sign-in-txt'>SIGN IN</span>
                                     <img className='sign-in-arrow' src='/img/arrowright.svg' alt='arrow' />

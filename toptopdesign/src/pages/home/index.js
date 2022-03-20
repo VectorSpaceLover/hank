@@ -78,10 +78,10 @@ export default function Home(){
 
     useEffect(() => {
         const auth = JSON.parse(localStorage.getItem('auth'));
-        if(!auth || Object.keys(auth).length === 0){
-            navigator('/signin');
-            return;
-        }
+        // if(!auth || Object.keys(auth).length === 0){
+        //     navigator('/signin');
+        //     return;
+        // }
         async function getInitialData(){
             const { mobiles, recents, websites } = await getAllProducts();
             setPopularApps(mobiles);
