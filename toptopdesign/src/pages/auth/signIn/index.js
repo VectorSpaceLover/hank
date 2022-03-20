@@ -200,7 +200,7 @@ const SIGN_IN_MSG_NOT_EXIST = -1;
 const SIGN_IN_MSG_NOT_MATCH = 0;
 const SIGN_IN_MSG_NONE = 1;
 
-export default function SignIn({setOpenSignin, setOpenSignup}){
+export default function SignIn({setSigned, setOpenSignin, setOpenSignup}){
     const navigate = useNavigate();
     const [isSignIn, setSignIn] = useState(true);
     const [userName, setUserName] = useState('');
@@ -246,7 +246,8 @@ export default function SignIn({setOpenSignin, setOpenSignup}){
         const res = await signInWithEmail(userName, password);
         if(res.status === 'ok'){
             localStorage.setItem('auth', JSON.stringify(res.userInfo));
-            navigate('/');
+            setOpenSignin(false);
+            setSigned(true);
         }else{
             if(res.message === 'passwrod not matched'){
                 setSignInStatus(SIGN_IN_MSG_NOT_MATCH);
@@ -263,6 +264,7 @@ export default function SignIn({setOpenSignin, setOpenSignup}){
         if(res.status === 'ok'){
             localStorage.setItem('auth', JSON.stringify(res.userInfo));
             setOpenSignin(false);
+            setSigned(true);
         }else{
             setSignInStatus(SIGN_IN_MSG_NOT_EXIST);
         }
@@ -277,7 +279,8 @@ export default function SignIn({setOpenSignin, setOpenSignup}){
         const res = await signInWithFacebook(response);
         if(res.status === 'ok'){
             localStorage.setItem('auth', JSON.stringify(res.userInfo));
-            navigate('/');
+            setOpenSignin(false);
+            setSigned(true);
         }else{
             setSignInStatus(SIGN_IN_MSG_NOT_EXIST);
         }

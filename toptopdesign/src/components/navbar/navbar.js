@@ -135,10 +135,11 @@ function Navbar() {
     const signOut = () => {
         localStorage.setItem('auth', JSON.stringify({}));
         closeGiftMenu();
+        setSigned(false);
     }
 
     const signIn = () => {
-        setOpenSignin(true)
+        setOpenSignin(true);
     }
     useEffect(() => {
         if(url.indexOf('/admin/') >= 0){
@@ -357,7 +358,7 @@ function Navbar() {
                             },
                         }}
                     >
-                        <SignIn setOpenSignin={setOpenSignin} setOpenSignup={setOpenSignup}/>
+                        <SignIn setSigned={setSigned} setOpenSignin={setOpenSignin} setOpenSignup={setOpenSignup}/>
                     </Dialog>
                     <Dialog
                         open={openSignup} 
