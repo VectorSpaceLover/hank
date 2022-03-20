@@ -4,6 +4,10 @@ import { ReactComponent as UserIcon } from '../assets/img/admin/user.svg';
 import { ReactComponent as CollectionIcon } from '../assets/img/admin/collection.svg';
 import { ReactComponent as SettingIcon } from '../assets/img/admin/setting.svg';
 
+import { ReactComponent as TotalUserIcon } from '../assets/img/admin/totaluser.svg';
+import { ReactComponent as TotalVisitorIcon } from '../assets/img/admin/totalvisitor.svg';
+import { ReactComponent as TotalProductIcon } from '../assets/img/admin/totalproduct.svg';
+import { ReactComponent as TotalNewUserIcon } from '../assets/img/admin/totalnewuser.svg';
 
 export const allPatternItems = [
     {
@@ -578,4 +582,40 @@ export const sidebar = [
         label: 'Settings',
         icon: SettingIcon
     }
+]
+
+export const adminbanner = [
+    {
+        icon: TotalUserIcon,
+        name: 'Total Users',
+        totalNumber: '391,820.75',
+        percent: 21.9,
+        todayUser: 67,
+        high: true,
+    },
+    {
+        icon: TotalVisitorIcon,
+        name: 'Visitors',
+        totalNumber: '831,071',
+        percent: 13,
+        todayUser: 67,
+        high: true,
+    },
+    {
+        icon: TotalProductIcon,
+        name: 'Total Products',
+        totalNumber: 321,
+        percent: 5.7,
+        todayUser: 67,
+        high: true,
+    },
+    {
+        icon: TotalNewUserIcon,
+        name: 'New Users',
+        totalNumber: 20,
+        percent: 11,
+        todayUser: 1,
+        high: false,
+    },
+
 ]

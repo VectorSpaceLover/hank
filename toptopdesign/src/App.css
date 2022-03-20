@@ -59,7 +59,13 @@
 @font-face {
   font-family: "Manrope";
   src: local('Manrope'), local('Manrope'), 
-   url('https://fonts.google.com/specimen/Manrope')format("truetype");
+   url('./assets/font/manrope.regular.otf')format("truetype");
+}
+
+@font-face {
+  font-family: "Manrope-Semi-bold";
+  src: local('Manrope-Semi-bold'), local('Manrope-Semi-bold'), 
+   url('./assets/font/manrope.semibold.otf')format("truetype");
 }
 
 @font-face {
@@ -72,4 +78,10 @@
   font-family: "Roboto-bold";
   src: local('Roboto-bold'), local('Roboto-bold'), 
    url('https://allfont.net/allfont.css?fonts=roboto-bold')format("truetype");
+}
+
+@font-face {
+  font-family: "Inter-Semi-bold";
+  src: local('Inter-Semi-bold'), local('Inter-Semi-bold'), 
+   url('./assets/font/Inter-SemiBold.otf')format("truetype");
 }

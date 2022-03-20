@@ -4,12 +4,12 @@ import { Typography } from '@mui/material';
 import { TreeItem, TreeView } from '@mui/lab';
 import { ReactComponent as ExpandMoreIcon } from '../../../../assets/img/admin/expand.svg';
 import { ReactComponent as CollapseIcon } from '../../../../assets/img/admin/collapse.svg';
+import { ReactComponent as LogoIcon } from '../../../../assets/img/logo.svg';
 import { sidebar } from '../../../../assets/config';
 import './style.css';
 
 const useTreeItemStyles = makeStyles(() => ({
   root: {
-    height: 216,
     flexGrow: 1,
     width: 250
   },
@@ -49,14 +49,24 @@ const useTreeItemStyles = makeStyles(() => ({
     margin: 0,
     padding: 12,
   },
+  childLabelRoot: {
+    display: "flex",
+    alignItems: "center",
+    margin: 0,
+    paddingLeft: 50,
+  },
   labelIcon: {
     marginRight: 6,
   },
   labelText: {
     fontWeight: "inherit",
     flexGrow: 1
+  },
+  logoIcon: {
+    padding: '20px 32px 47px 32px',
   }
 }));
+
 
 function StyledTreeItem(props) {
   const classes = useTreeItemStyles();
@@ -89,7 +99,7 @@ function StyledChildTreeItem(props) {
   return (
     <TreeItem
       label={
-        <div className={classes.labelRoot}>
+        <div className={classes.childLabelRoot}>
           {LabelIcon && <LabelIcon color="action" className={classes.labelIcon} />}
           
           <Typography variant="body2" className={classes.labelText}>
@@ -122,24 +132,31 @@ export default function LeftSideBar() {
       defaultExpandIcon={<ExpandMoreIcon />}
       expanded={expanded}
       onNodeToggle={handleChange}
+      style={{width: 250}}
     >
+      <LogoIcon className={classes.logoIcon}/>
       {sidebar.map((item, idx) => {
         return (
           <React.Fragment key={idx}>
-            {idx === 1?(
-              <StyledTreeItem nodeId={(idx + 1).toString()} labelText={item.label} labelIcon={item.icon}>
-                <StyledChildTreeItem
-                  nodeId={(sidebar.length + 1).toString()}
-                  labelText="All Products"
-                />
-                <StyledChildTreeItem
-                  nodeId={(sidebar.length + 2).toString()}
-                  labelText="Tag Management"
-                />
+            <StyledTreeItem 
+              nodeId={(idx).toString()}
+              labelText={item.label} 
+              labelIcon={item.icon}
+            >
+                {idx === 1 &&
+                  <React.Fragment>
+                      <StyledChildTreeItem
+                        nodeId={(sidebar.length).toString()}
+                        labelText="All Products"
+                      />
+                      <StyledChildTreeItem
+                        nodeId={(sidebar.length + 1).toString()}
+                        labelText="Tag Management"
+                      />
+                  </React.Fragment>
+                }
               </StyledTreeItem>
-            ):<StyledTreeItem nodeId={(idx + 1).toString()} labelText={item.label} labelIcon={item.icon} key={idx}/>}
-          </React.Fragment>
-          
+          </React.Fragment>          
         )
       })}
     </TreeView>

@@ -221,14 +221,6 @@ export const PptelegrafUltraBoldBlack17px = css`
   font-style: normal;
 `;
 
-export const ManropeSemiBoldCharade28px = css`
-  color: var(--charade);
-  font-family: var(--font-family-manrope);
-  font-size: var(--font-size-28);
-  font-weight: 600;
-  font-style: normal;
-`;
-
 export const PptelegrafRegularNormalBlack17px = css`
   color: var(--second);
   font-family: var(--font-family-pp_telegraf-regular);
@@ -276,6 +268,62 @@ export const OpensansNormalElectricVioletBlack14px = css`
   font-family: var(--font-family-open_sans);
   font-size: var(--font-size-14);
   font-weight: 400;
+  font-style: normal;
+`;
+
+export const ManropeSemiboldCharade14px = css`
+  color: var(--charade);
+  font-family: var(--font-family-manrope-semi-bold);
+  font-size: var(--font-size-14);
+  font-weight: 600;
+  font-style: normal;
+`;
+
+export const ManropeNormalCharade14px = css`
+  color: var(--charade);
+  font-family: var(--font-family-manrope);
+  font-size: var(--font-size-14);
+  font-weight: 400;
+  font-style: normal;
+`;
+
+export const ManropeSemiboldCharade16px = css`
+  color: var(--charade);
+  font-family: var(--font-family-manrope-semi-bold);
+  font-size: var(--font-size-16);
+  font-weight: 600;
+  font-style: normal;
+`;
+
+export const ManropeSemiBoldCharade28px = css`
+  color: var(--charade);
+  font-family: var(--font-family-manrope);
+  font-size: var(--font-size-28);
+  font-weight: 600;
+  font-style: normal;
+`;
+
+export const InterCharadeSemiBoldCharade32px = css`
+  color: var(--charade);
+  font-family: var(--font-family-inter-semi-bold);
+  font-size: var(--font-size-32);
+  font-weight: 600;
+  font-style: normal;
+`;
+
+export const InterWhiteSemiBoldCharade32px = css`
+  color: var(--white);
+  font-family: var(--font-family-inter-semi-bold);
+  font-size: var(--font-size-32);
+  font-weight: 600;
+  font-style: normal;
+`;
+
+export const ManropeNormalCharade36px = css`
+  color: var(--charade);
+  font-family: var(--font-family-manrope);
+  font-size: var(--font-size-36);
+  font-weight: 600;
   font-style: normal;
 `;
 

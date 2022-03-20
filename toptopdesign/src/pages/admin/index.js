@@ -1,14 +1,20 @@
+import AdminNavbar from "./components/adminNavbar";
 import LeftSideBar from "./components/leftSidebar/leftSidebar";
-
+import { Styles } from './style';
 
 export default function Admin({children}){
     return (
-        <div>
-            <LeftSideBar />
-            <div>
-                {children}
+        <Styles>
+            <div className="admin-container">
+                <div className="side-bar">
+                    <LeftSideBar />
+                </div>
+                <div className="right-panel">
+                    <AdminNavbar />
+                    {children}
+                </div>
             </div>
-        </div>
+        </Styles>
     )
 
 }
