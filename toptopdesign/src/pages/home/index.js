@@ -115,7 +115,7 @@ export default function Home(){
                                     <div>
                                         <div className="des-txt">Collect your inspirations</div>
                                         <div 
-                                            className="des-color-txt"
+                                            className="des-color-txt ms-hover"
                                             onClick={() => navigate('/collection')}
                                         >
                                             Access your collections

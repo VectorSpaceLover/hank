@@ -56,6 +56,9 @@ export const Styles = styled.div`
                         min-height: 15px;
                         letter-spacing: 0;
                     }
+                    .ms-hover{
+                        cursor: pointer;
+                    }
                 }
             }
             .center-container{
