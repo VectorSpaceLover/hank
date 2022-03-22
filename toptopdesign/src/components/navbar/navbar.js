@@ -395,7 +395,7 @@ function Navbar() {
                             },
                         }}
                     >
-                        <SignUp setOpenSignin={setOpenSignin} setOpenSignup={setOpenSignup}/>
+                        <SignUp setSigned={setSigned} setOpenSignin={setOpenSignin} setOpenSignup={setOpenSignup}/>
                     </Dialog>
                 </Styles>
             ):(<AdminStyle>

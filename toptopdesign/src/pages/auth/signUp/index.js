@@ -203,7 +203,7 @@ const EMAIL_STATUS_NONE = -1;
 const EMAIL_STATUS_SUCCESS = 0;
 const EMAIL_STATUS_FAIL = 1;
 
-export default function SignUp({setOpenSignup, setOpenSignin}){
+export default function SignUp({setSigned, setOpenSignup, setOpenSignin}){
     const navigate = useNavigate();
     const [isSignup, setSignup] = useState(true);
     const [email, setEmail] = useState('');
@@ -288,7 +288,10 @@ export default function SignUp({setOpenSignup, setOpenSignin}){
         if(res?.oldUser){
             setSignUpStatus(SIGN_UP_MSG_ALREADY);
         }else{
+            setSigned(true);
+            localStorage.setItem('auth', JSON.stringify(res.data));
             setOpenSignup(false);
+            navigate('/');
         }
         await setTimeout(changeTxt, 3000);
     }
@@ -302,6 +305,8 @@ export default function SignUp({setOpenSignup, setOpenSignin}){
         if(res?.oldUser){
             setSignUpStatus(SIGN_UP_MSG_ALREADY);
         }else{
+            setSigned(true);
+            localStorage.setItem('auth', JSON.stringify(res.data));
             navigate('/');
         }
         await setTimeout(changeTxt, 3000);
