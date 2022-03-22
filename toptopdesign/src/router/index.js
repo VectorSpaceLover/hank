@@ -14,6 +14,7 @@ import EmailNotification from "../pages/myAccount/emailNotification";
 import Message from "../pages/myAccount/message";
 import OverView from "../pages/admin/overView";
 import Admin from "../pages/admin";
+import AllUsers from "../pages/admin/users/allUsers";
 
 const Routers = () => {
 
@@ -73,6 +74,21 @@ const Routers = () => {
             <Route exact path="/admin/overview" element={
                 <Admin>
                   <OverView />
+                </Admin>
+            }/>
+            <Route exact path="/admin/users" element={
+                <Admin>
+                  <AllUsers />
+                </Admin>
+            }/>
+            <Route exact path="/admin/users/add" element={
+                <Admin>
+                  <AllUsers />
+                </Admin>
+            }/>
+            <Route exact path="/admin/users/detail" element={
+                <Admin>
+                  <AllUsers />
                 </Admin>
             }/>
         </Routes>

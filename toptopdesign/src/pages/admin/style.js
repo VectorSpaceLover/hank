@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Styles = styled.div`
-background-color: var(--background-gray);
+    background-color: var(--background-gray);
     .admin-container{
         display: flex;
         flex-direction: row;

@@ -14,6 +14,7 @@ const productsRoute = require('./routes/products');
 const collectionRoute = require('./routes/collection');
 const accountRoute = require('./routes/account');
 const userRoute = require('./routes/user');
+const adminRoute = require('./routes/admin');
 
 dotenv.config();
 mongoose.connect(process.env.MONGO_URL,
@@ -34,5 +35,6 @@ app.use('/api/products', productsRoute);
 app.use('/api/collection', collectionRoute);
 app.use('/api/account', accountRoute);
 app.use('/api/user', userRoute);
+app.use('/api/admin', adminRoute);
 
 app.listen(443,() => console.log("Server listening at port 443"));

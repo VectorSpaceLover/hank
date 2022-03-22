@@ -72,6 +72,7 @@ export const Styles = styled.div`
             .title-img{
                 width: 85px;
                 height: 37px;
+                cursor: pointer;
             }
             .home{
                 ${PptelegrafRegularNormalBlack14px}
@@ -80,6 +81,7 @@ export const Styles = styled.div`
                 min-height: 15px;
                 min-width: 36px;
                 letter-spacing: 0;
+                cursor: pointer;
                 &:hover {
                     color: #867d7d;
                 }

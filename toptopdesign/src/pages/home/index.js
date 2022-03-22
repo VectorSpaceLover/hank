@@ -42,7 +42,7 @@ const MoreButton = withStyles((theme) => ({
   }))(Button);
 
 export default function Home(){
-    const navigator = useNavigate();
+    const navigate = useNavigate();
     const [showPatternList, setShowPatternList] = useState(false);
     const [searchKey, setSearchKey] = useState('');
     const [showSearchKey, setShowSearchKey] = useState('');
@@ -77,18 +77,18 @@ export default function Home(){
     }
 
     useEffect(() => {
-        const auth = JSON.parse(localStorage.getItem('auth'));
-        // if(!auth || Object.keys(auth).length === 0){
-        //     navigator('/signin');
-        //     return;
-        // }
-        async function getInitialData(){
-            const { mobiles, recents, websites } = await getAllProducts();
-            setPopularApps(mobiles);
-            setPopularWebsites(websites);
-            setAddedApps(recents);
+        try{
+            async function getInitialData(){
+                const { mobiles, recents, websites } = await getAllProducts();
+                setPopularApps(mobiles);
+                setPopularWebsites(websites);
+                setAddedApps(recents);
+            }
+            getInitialData();
+        }catch(err){
+            console.log(err);
         }
-        getInitialData();
+        
     }, []);
 
     return (
@@ -114,7 +114,12 @@ export default function Home(){
                                     <img className="des-img" src="/img/user/home/thech-peeps-learning.png" alt=""/>
                                     <div>
                                         <div className="des-txt">Collect your inspirations</div>
-                                        <div className="des-color-txt">Access your collections</div>
+                                        <div 
+                                            className="des-color-txt"
+                                            onClick={() => navigate('/collection')}
+                                        >
+                                            Access your collections
+                                        </div>
                                     </div>
                                 </div>
                             </div>

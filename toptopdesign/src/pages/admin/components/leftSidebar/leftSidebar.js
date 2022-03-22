@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { makeStyles } from '@mui/styles';
 import { Typography } from '@mui/material';
 import { TreeItem, TreeView } from '@mui/lab';
@@ -117,13 +118,24 @@ function StyledChildTreeItem(props) {
 
 
 
-export default function LeftSideBar() {
+export default function LeftSideBar({children}) {
+  const navigate = useNavigate();
   const classes = useTreeItemStyles();
   const [expanded, setExpanded] = React.useState([]);
+  const [currentPage, setCurrentPage] = React.useState([]);
 
   const handleChange = (event, nodes) => {
     setExpanded(nodes);
   };
+
+  useEffect(() => {
+    const urlParams = window.location.href.split("/").pop()
+    sidebar.forEach((item) => {
+        if(item.label.toLowerCase() === urlParams.toLowerCase()){
+            setCurrentPage(item.label);
+        }
+    }) 
+}, [children]);
 
   return (
     <TreeView
@@ -141,21 +153,24 @@ export default function LeftSideBar() {
             <StyledTreeItem 
               nodeId={(idx).toString()}
               labelText={item.label} 
-              labelIcon={item.icon}
+              labelIcon={currentPage === item.label?item.focusIcon:item.icon}
+              onClick={() => idx !== 1?navigate(`${item.path}`):undefined}
             >
-                {idx === 1 &&
-                  <React.Fragment>
-                      <StyledChildTreeItem
-                        nodeId={(sidebar.length).toString()}
-                        labelText="All Products"
-                      />
-                      <StyledChildTreeItem
-                        nodeId={(sidebar.length + 1).toString()}
-                        labelText="Tag Management"
-                      />
-                  </React.Fragment>
-                }
-              </StyledTreeItem>
+              {idx === 1 &&
+                <React.Fragment>
+                    <StyledChildTreeItem
+                      nodeId={(sidebar.length).toString()}
+                      labelText="All Products"
+                      onClick={() => navigate(`${item.path}/allproducts`)}
+                    />
+                    <StyledChildTreeItem
+                      nodeId={(sidebar.length + 1).toString()}
+                      labelText="Tag Management"
+                      onClick={() => navigate(`${item.path}/tagmanagement`)}
+                    />
+                </React.Fragment>
+              }
+            </StyledTreeItem>
           </React.Fragment>          
         )
       })}

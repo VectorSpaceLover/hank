@@ -142,16 +142,21 @@ function Navbar() {
         setOpenSignin(true);
     }
     useEffect(() => {
-        if(url.indexOf('/admin/') >= 0){
-            setIsAdmin(true);
-        }else{
-            if(url.indexOf('/signin') >= 0 || url.indexOf('/signup') >= 0){
-                setAuth({});
-                setShow(false);
+        try{
+            if(url.indexOf('/admin/') >= 0){
+                setIsAdmin(true);
             }else{
-                setAuth(JSON.parse(localStorage.getItem('auth')));
+                if(url.indexOf('/signin') >= 0 || url.indexOf('/signup') >= 0){
+                    setAuth({});
+                    setShow(false);
+                }else{
+                    setAuth(JSON.parse(localStorage.getItem('auth')));
+                }
             }
+        }catch(err){
+            console.log(err);
         }
+        
     }, [url])
 
     useEffect(() => {
@@ -164,10 +169,15 @@ function Navbar() {
                 <Styles>
                     <div className='before-container'>
                         <div className='navbar'>
-                            <div className='home'>
+                            <div className='home' onClick={() => navigate('/')}>
                                 Home
                             </div>
-                            <img className='title-img'  src='/img/user/banner.svg' alt='banner' />
+                            <img 
+                                className='title-img' 
+                                src='/img/user/banner.svg' 
+                                alt='banner' 
+                                onClick={() => navigate('/')}
+                            />
                             {!isSigned? (
                                 <SignInButton
                                     className="mr-24"

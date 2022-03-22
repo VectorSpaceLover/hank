@@ -68,6 +68,13 @@
    url('./assets/font/manrope.semibold.otf')format("truetype");
 }
 
+
+@font-face {
+  font-family: "Manrope-Medium";
+  src: local('Manrope-Medium'), local('Manrope-Medium'), 
+   url('./assets/font/manrope-medium.otf')format("truetype");
+}
+
 @font-face {
   font-family: "Roboto-Regular";
   src: local('Roboto-Regular'), local('Roboto-Regular'), 

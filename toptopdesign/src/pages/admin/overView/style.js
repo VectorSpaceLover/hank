@@ -22,5 +22,9 @@ export const Styles = styled.div`
         display: flex;
         
     }
+    .tables{
+        display: flex;
+        flex-wrap: wrap;
+    }
     
 `;

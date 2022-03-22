@@ -1,6 +1,8 @@
 import { ReactComponent as OverViewIcon } from '../assets/img/admin/overview.svg';
+import { ReactComponent as OverViewFocusIcon } from '../assets/img/admin/overview_sel.svg';
 import { ReactComponent as ProductsIcon } from '../assets/img/admin/products.svg';
 import { ReactComponent as UserIcon } from '../assets/img/admin/user.svg';
+import { ReactComponent as UserFocusIcon } from '../assets/img/admin/user_sel.svg';
 import { ReactComponent as CollectionIcon } from '../assets/img/admin/collection.svg';
 import { ReactComponent as SettingIcon } from '../assets/img/admin/setting.svg';
 
@@ -564,23 +566,33 @@ export const systemMsgs = [
 export const sidebar = [
     {
         label: 'Overview',
-        icon: OverViewIcon
+        icon: OverViewIcon,
+        focusIcon: OverViewFocusIcon,
+        path: '/admin/overview',
     },
     {
         label: 'Products',
-        icon: ProductsIcon
+        icon: ProductsIcon,
+        focusIcon: OverViewIcon,
+        path: '/admin/products',
     },
     {
         label: 'Users',
-        icon: UserIcon
+        icon: UserIcon,
+        focusIcon: UserFocusIcon,
+        path: '/admin/users',
     },
     {
         label: 'Collections',
-        icon: CollectionIcon
+        icon: CollectionIcon,
+        focusIcon: OverViewIcon,
+        path: 'collections',
     },
     {
         label: 'Settings',
-        icon: SettingIcon
+        icon: SettingIcon,
+        focusIcon: OverViewIcon,
+        path: 'settings',
     }
 ]
 

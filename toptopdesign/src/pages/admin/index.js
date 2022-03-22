@@ -7,7 +7,7 @@ export default function Admin({children}){
         <Styles>
             <div className="admin-container">
                 <div className="side-bar">
-                    <LeftSideBar />
+                    <LeftSideBar children={children}/>
                 </div>
                 <div className="right-panel">
                     <AdminNavbar />
