@@ -1,5 +1,6 @@
 const LikedProducts = require('../../model/LikedProducts');
 const Products = require('../../model/Products');
+const Users = require('../../model/Users');
 
 const getTopProducts = async (req, res) => {
     const query = {};
@@ -33,8 +34,23 @@ const getNewProducts = async (req, res) => {
     });
 }
 
+const getSiteInfo = async (req, res) => {
+    const totalUser = await Users.count();
+    const totalProduct = await Products.count();
+    var start = new Date();
+    start.setHours(0,0,0,0);
+
+    var end = new Date();
+    end.setHours(23,59,59,999);
+    const newUsers = await Users.find({createdDate: {$gte: start, $lt: end}}).count();
+    return res.send({
+        status: 'ok',
+        data: {totalUser, totalProduct, newUsers},
+    })
+}
 module.exports = {
     getTopProducts,
     getAllProducts,
+    getSiteInfo
 };
   

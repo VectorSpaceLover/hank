@@ -5,7 +5,7 @@ const likedProductsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  productName: {
+  productId: {
     type: String,
     required: true,
   },

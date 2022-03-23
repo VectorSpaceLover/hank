@@ -15,7 +15,7 @@ const createNewCollection = async (req, res) => {
 
     return res.send({
         status: 'ok',
-        data: JSON.stringify(savedCollection)
+        data: savedCollection
     });
 }
 

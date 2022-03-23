@@ -17,10 +17,6 @@ const productsSchema = new mongoose.Schema({
     type: Array,
     required: false,
   },
-  favourited: {
-    type: Boolean,
-    required: false,
-  },
   createdDate: {
     type: Date,
     default: Date.now,

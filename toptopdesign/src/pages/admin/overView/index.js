@@ -5,23 +5,28 @@ import { Styles } from './style';
 import ProductsTable from './components/productsTable';
 import UsersTable from './components/usersTable';
 import { useEffect } from 'react';
-import { getTopProducts } from '../../../api/admin/overview';
+import { getTopProducts, getSiteInfo } from '../../../api/admin/overview';
 
 export default function OverView(){
     const [topProducts, setTopProducts] = useState([]);
     const [newUsers, setNewUsers] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
 
+    const [siteinfo, setSiteInfo] = useState({});
+
     const getInitialData = useCallback( async() => {
-        await getTopProducts()
-        .then((res) => {
-            setTopProducts(res.products);
-        })
-        .catch((err) => console.log(err));
+        const res = await getSiteInfo();
+        setSiteInfo(res.data);
+        // await getTopProducts()
+        // .then((res) => {
+        //     setTopProducts(res.products);
+        // })
+        // .catch((err) => console.log(err));
+
     }, [])
 
     useEffect(() => {
-        
+        getInitialData();
     }, [])
     return (
         <Styles>
@@ -36,7 +41,11 @@ export default function OverView(){
             <div className='banner'>
                 {adminbanner.map((item, idx) => {
                     return (
-                        <BannerItem info={item} key={idx}/>
+                        <BannerItem 
+                            info={item} 
+                            siteinfo={siteinfo} 
+                            key={idx}
+                        />
                     )
                 })}
             </div>

@@ -107,7 +107,7 @@ const signUpWithEmail = async (req, res) => {
 
     return res.send({
         status: 'ok',
-        data: JSON.stringify(savedUser)
+        data: savedUser
     });
 }
 
@@ -131,7 +131,7 @@ const signUpWithGoogle = async(req, res) => {
 
     return res.send({
         status: 'ok',
-        data: JSON.stringify(savedUser)
+        data: savedUser
     });
 }
 
@@ -156,7 +156,7 @@ const signUpWithFacebook = async(req, res) => {
 
     return res.send({
         status: 'ok',
-        data: JSON.stringify(savedUser)
+        data: savedUser
     });
 }
 
@@ -526,8 +526,8 @@ const resetPassword = async(req, res) => {
             message: 'password not match',
         })
     }
-
 }
+
 module.exports = {
     getUserInfoById,
     uploadAvatar,

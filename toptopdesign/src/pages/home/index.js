@@ -10,7 +10,11 @@ import IndeterminateCheckbox from '../../components/checkBox';
 import { ReactComponent as SearchIcon } from '../../assets/img/user/home/search.svg';
 import ImageView from '../../components/imageView';
 import Footer from '../../components/footer';
-import { getAllProducts, getSearchResults } from '../../api/home';
+import { 
+    getAllProducts, 
+    getSearchResults,
+    sendVisitor,
+} from '../../api/home';
 import OutsideClickHandler from './components/outSide';
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
@@ -60,7 +64,8 @@ export default function Home(){
         else
         {
             setShowSearchKey(true);
-            const res = await getSearchResults(key);
+            const auth = JSON.parse(localStorage.getItem('auth'));
+            const res = await getSearchResults(auth._id, key);
             if(res.data && res.data.searchResults && res.data.searchResults.length > 1)
                 setSearchResults(res.data.searchResults);
             else
@@ -85,6 +90,8 @@ export default function Home(){
                 setAddedApps(recents);
             }
             getInitialData();
+
+            sendVisitor();
         }catch(err){
             console.log(err);
         }

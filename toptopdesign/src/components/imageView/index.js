@@ -21,6 +21,7 @@ import {
 import Input from '../../pages/collection/components/input';
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
+import { addLikedProduct } from '../../api/home';
 
 const CreateCollectionButton = withStyles((theme) => ({
     root: {
@@ -94,7 +95,8 @@ const GoButton = withStyles((theme) => ({
 }))(Button);
 
 
-export default function ImageView({ favourited, imageList }){
+export default function ImageView({ info }){
+    const {liked, imageList, productName, _id} = info;
     const navigate = useNavigate();
 
     const [collections, setCollections] = useContext(CollectionsContext);
@@ -105,7 +107,7 @@ export default function ImageView({ favourited, imageList }){
     const [createdOpen, setCreatedOpen] = useState(false);
     const [collectionName, setCollectionName] = useState('');
     const [description, setDescription] = useState('');
-
+    const [favourite, setFavourite] = useState(liked);
     const [selectedId, setSelectedId] = useState('');
 
     const [goTxt, setGoTxt] = useState("Let’s go!");
@@ -149,12 +151,19 @@ export default function ImageView({ favourited, imageList }){
     }
 
     const gotoFunc = async() => {
-        if(selectedId !== ''){
-            setGoTxt("Successfully Added!");
-            const changeTxt = () => {
-                setGoTxt("Let’s go!");
+        try{
+            if(selectedId !== ''){
+               const auth = JSON.parse(localStorage.getItem('auth'));
+                await addLikedProduct(auth._id, _id);
+                setFavourite(true);
+                setGoTxt("Successfully Added!");
+                const changeTxt = () => {
+                    setGoTxt("Let’s go!");
+                }
+                await setTimeout(changeTxt, 3000);
             }
-            await setTimeout(changeTxt, 3000);
+        }catch(err){
+            console.log(err);
         }
     }
     
@@ -166,7 +175,7 @@ export default function ImageView({ favourited, imageList }){
         <Styles>
             <div className='image-container'>
                 <div className='favourite'>
-                    {favourited?
+                    {favourite?
                         <IconButton 
                             aria-label="delete"
                             onClick={viewCollections}

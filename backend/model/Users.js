@@ -57,6 +57,10 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  isActive: {
+    type: Boolean,
+    required: false,
+  },
   createdDate: {
     type: Date,
     default: Date.now,
