@@ -7,7 +7,6 @@ export const getCollectionById = async (id) => {
 
 export const getCollectionByName = async (key) => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/collection/search?keyword=${key}`);
-    console.log(res.data);
     return res.data;
 }
 

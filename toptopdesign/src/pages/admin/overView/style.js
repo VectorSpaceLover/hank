@@ -9,7 +9,8 @@ export const Styles = styled.div`
     .header{
         display: flex;
         .sort{
-            padding: 26px 32px;
+            padding-bottom: 26px;
+            margin-left: auto;
         }
         .welcom{
             ${ManropeNormalCharade36px}

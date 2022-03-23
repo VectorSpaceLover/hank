@@ -40,9 +40,11 @@ const useStyles = makeStyles(() => ({
     divider: {
         height: 1,
         backgroundColor: '#EBEAED',
-        marginLeft: '24px',
-        width: '202%',
+        width: '693px',
         marginBottom: '24px',
+        position: 'absolute',
+        top: 115,
+        left: 24,
     },
     header: {
         display: 'flex',
@@ -61,7 +63,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontFamily: 'var(--font-family-manrope-medium)',
     fontSize: 'var(--font-size-12)',
     height: 18,
-    paddingBottom: 10,
+    marginBottom: 34,
   },
   '&': {
     height: 36,
@@ -85,24 +87,29 @@ const rows = [
     {name: 'Frozen yoghurt', imagePath: '/img/avatars/5.png', id: 159, liked: 6.0, carbs: 24, views: 4.0},
 ];
 
-export default function ProductsTable({topProducts}) {
+export default function ProductsTable({tableName, topProducts, viewAllProducts}) {
     const classes = useStyles();
   return (
     <TableContainer 
         component={Paper} 
         style ={{ 
             width: 743,
-            height: 476, 
+            height: 496, 
             overFlowY: 'auto', 
             marginTop: 24, 
             marginRight: 22,
             boxShadow: 'none',
+            position: 'relative'
         }}>
-    <div className={classes.header}>
-        <div className={classes.tableName}>Top Poducts</div>
-        <ViewAllButton text={"View All"}/>
-    </div>    
-      <Table aria-label="customized table">
+        <div className={classes.header}>
+            <div className={classes.tableName}>{tableName}</div>
+            <ViewAllButton 
+              text={"View All"}
+              onClick={viewAllProducts}
+            />
+        </div>
+        <div className={classes.divider}></div>
+      <Table>
         <TableHead>
           <TableRow>
             <StyledTableCell>ITEM</StyledTableCell>
@@ -111,19 +118,18 @@ export default function ProductsTable({topProducts}) {
             <StyledTableCell align="right">VIEWS</StyledTableCell>
           </TableRow>
         </TableHead>
-        <div className={classes.divider}></div>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {topProducts.map((item, idx) => (
+            <StyledTableRow key={idx}>
               <StyledTableCell component="th" scope="row">
                   <div className={classes.product}>
-                    <img className={classes.image} src={row.imagePath} alt=''/>
-                    <div className={classes.productName}>{row.name}</div>
+                    <img className={classes.image} src='/img/avatars/1.png' alt=''/>
+                    <div className={classes.productName}>{item.productName}</div>
                   </div>
               </StyledTableCell>
-              <StyledTableCell align="right"><div className={classes.id}>{row.id}</div></StyledTableCell>
-              <StyledTableCell align="right"><div className={classes.liked}>{row.liked}</div></StyledTableCell>
-              <StyledTableCell align="right"><div className={classes.views}>{row.views}</div></StyledTableCell>
+              <StyledTableCell align="right"><div className={classes.id}>{item._id}</div></StyledTableCell>
+              <StyledTableCell align="right"><div className={classes.liked}>{item.liked}</div></StyledTableCell>
+              <StyledTableCell align="right"><div className={classes.views}>{item.viewed}</div></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

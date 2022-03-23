@@ -7,14 +7,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { makeStyles } from '@mui/styles';
-import ViewAllButton from '../viewAll';
 import IconButton from '@mui/material/IconButton';
 import {ReactComponent as DisableIcon} from '../../../../../assets/img/admin/disable.svg';
 import {ReactComponent as MailIcon} from '../../../../../assets/img/admin/mail.svg';
 import {ReactComponent as PersonAddIcon} from '../../../../../assets/img/admin/person_add.svg';
 import {ReactComponent as ArrowIcon} from '../../../../../assets/img/admin/arrow.svg';
+import {ReactComponent as RefreshIcon} from '../../../../../assets/img/admin/refresh.svg';
+import {ReactComponent as MoreIcon} from '../../../../../assets/img/admin/more.svg';
 import Button from '@mui/material/Button';
 import { withStyles } from '@mui/styles';
+import Tooltip from '@mui/material/Tooltip';
 
 const useStyles = makeStyles(() => ({
     
@@ -22,6 +24,7 @@ const useStyles = makeStyles(() => ({
         width: 32,
         height: 32,
         borderRadius: 32,
+        backgroundColor: 'var(--txt-gray)'
     },
     user: {
         display: 'flex',
@@ -40,13 +43,22 @@ const useStyles = makeStyles(() => ({
       paddingLeft: 8,
     },
     customerId: {
+      width: 115,
+      display: 'flex',
       color: 'var(--txt-gray)',
       fontFamily: 'var(--font-family-manrope-medium)',
       fontSize: 'var(--font-size-12)',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      overflowX: 'hidden',
     },
     header: {
         display: 'flex',
-        padding: '22px 26px 36px 24px'
+        padding: '22px 26px 23px 24px',
+        alignItems: 'center',
+    },
+    headerGroup: {
+      marginLeft: 'auto',
     },
     tableName: {
         fontFamily: 'var(--font-family-manrope-semi-bold)',
@@ -59,13 +71,13 @@ const useStyles = makeStyles(() => ({
       padding: 5,
     },
     footer: {
-      marginTop: 32,
       width: '100%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       borderTop: '1px solid #EBEAED',
-      paddingTop: 16,
+      paddingTop: 8,
+      paddingBottom: 8,
     }
 }))
 
@@ -134,36 +146,48 @@ const rows = [
     {name: 'Frozen yoghurt', imagePath: '/img/avatars/5.png', id: 159},
 ];
 
-export default function UsersTable() {
+export default function UsersTable({users, refresh, moreAction, viewAllUsers}) {
     const classes = useStyles();
   return (
     <TableContainer 
       component={Paper} 
       style = {{ 
         width: 359, 
-        height: 476, 
+        height: 496, 
         overFlowY: 'auto',
         marginTop: 24, 
         marginRight: 22,
         boxShadow: 'none',
-      }}>
+        overflowX: 'hidden'
+      }}
+    >
       <div className={classes.header}>
           <div className={classes.tableName}>New Users</div>
-          <ViewAllButton text={"View All"}/>
+          <div className={classes.headerGroup}>
+            <IconButton onClick={refresh}>
+              <RefreshIcon />
+            </IconButton>
+            <IconButton onClick={moreAction}>
+              <MoreIcon />
+            </IconButton>
+          </div>
       </div>    
       <Table aria-label="customized table">
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {users.map((user, idx) => (
+            <StyledTableRow key={idx}>
               <StyledTableCell component="th" scope="row">
                   <div className={classes.user}>
-                    <img className={classes.avatar} src={row.imagePath} alt=''/>
+                    {user?.avatarPath?
+                      <img className={classes.avatar} src={`${process.env.REACT_APP_UPLOAD_URL}${user?.avatarPath}`} alt=''/>
+                      :<div className={classes.avatar}></div>
+                    }
                     <div className={classes.userInfo}>
                       <div className={classes.userName}>
-                        {row.name}
+                        {user.userName}
                       </div>
                       <div className={classes.customerId}>
-                        {`Customer ID#${row.id}`}
+                        {`Customer ID#${user._id}`}
                       </div>
                     </div>
                   </div>
@@ -176,12 +200,15 @@ export default function UsersTable() {
                   >
                       <DisableIcon />
                   </IconButton>
-                  <IconButton 
-                      aria-label="delete"
-                      className={`${classes.iconBtn}`}
-                  >
-                      <MailIcon />
-                  </IconButton>
+                  <Tooltip title={user.email} placement="top-start">
+                    <IconButton 
+                        aria-label="delete"
+                        className={`${classes.iconBtn}`}
+                    >
+                        <MailIcon />
+                    </IconButton>
+                  </Tooltip>
+                  
                   <IconButton 
                       aria-label="delete"
                       className={`${classes.iconBtn}`}
@@ -195,7 +222,7 @@ export default function UsersTable() {
         </TableBody>
       </Table>
       <div className={classes.footer}>
-        <ViewMore>
+        <ViewMore onClick={viewAllUsers}>
           <div className='.sign-in-txt'>View More Customers</div>
           <ArrowIcon className='sign-in-arrow'/>
         </ViewMore>

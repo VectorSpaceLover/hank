@@ -66,7 +66,7 @@ export default function Home(){
             setShowSearchKey(true);
             const auth = JSON.parse(localStorage.getItem('auth'));
             const res = await getSearchResults(auth._id, key);
-            if(res.data && res.data.searchResults && res.data.searchResults.length > 1)
+            if(res.data && res.data.searchResults && res.data.searchResults.length > 0)
                 setSearchResults(res.data.searchResults);
             else
                 setSearchResults([]);
@@ -97,7 +97,6 @@ export default function Home(){
         }
         
     }, []);
-
     return (
         <Styles>
             <div className='home-before-container'>

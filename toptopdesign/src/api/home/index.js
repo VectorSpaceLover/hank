@@ -24,3 +24,15 @@ export const addLikedProduct = async (userId, productId) => {
     );
     return res;
 }
+
+export const addViewedProduct = async (userId, productId) => {
+    const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/products/add/viewed`, 
+        {
+            userId: userId, 
+            productId: productId,
+        }
+    );
+    return res;
+}
+

@@ -7,9 +7,10 @@ const {
     getDailyVisitors,
 } = require('../controller/visitors');
 
-router.get('/add', addVisitor)
-router.get('/get/yearly', getYearlyVisitors)
-router.get('/get/monthly', getMonthlyVisitors)
-router.get('/get/daily', getDailyVisitors)
+router.get('/add', addVisitor);
+router.get('/yearly', getYearlyVisitors);
+router.get('/monthly', getMonthlyVisitors);
+router.get('/daily', getDailyVisitors);
+
 
 module.exports = router;

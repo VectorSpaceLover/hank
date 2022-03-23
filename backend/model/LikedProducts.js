@@ -9,6 +9,10 @@ const likedProductsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  liked: {
+    type: Boolean,
+    required: false,
+  },
   createdDate: {
     type: Date,
     default: Date.now,

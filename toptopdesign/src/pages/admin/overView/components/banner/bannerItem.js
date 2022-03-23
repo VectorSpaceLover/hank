@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Styles } from './bannerItemStyle';
 import { ReactComponent as InCreaseIcon } from '../../../../../assets/img/admin/increase.svg';
 import { ReactComponent as DeCreaseIcon } from '../../../../../assets/img/admin/decrease.svg';
 
 export default function BannerItem(props){
-    const {icon, name, totalNumber, percent, todayUser, high} = props.info;
-    console.log(props.info);
+    const {icon, name, percent, todayUser, high} = props.info;
+    const {totalUsers, visitors, totalProducts, newUsers} = props;
+    const [totalNumber, setTotalNumber] = useState('');
+
+    useEffect(() => {
+        if(name === 'Total Users'){
+            setTotalNumber(totalUsers);
+        }
+        else{
+            if(name === 'Visitors')
+                setTotalNumber(visitors);
+            else{
+                if(name === 'Total Products')
+                    setTotalNumber(totalProducts);
+                else
+                    setTotalNumber(newUsers);
+            }
+        }
+    }, [props])
     return (
         <Styles>
             <div className={name === 'Total Users'?'banner-item banner-active': 'banner-item'}>

@@ -70,20 +70,6 @@ const deleteCollectionById = async (req, res) => {
         status: 'ok',
         deletedId: id,
     });
-
-
-    // await Collection.findByIdAndRemove(id, (err, doc) => {
-    //     if(!err){
-    //         return res.send({
-    //             status: 'ok',
-    //             deleted: id,
-    //         })
-    //     }else{
-    //         return res.status(404).send({
-    //             message: `cant save Collection with ID: ${id} in database.`,
-    //         });
-    //     }
-    // });
 }
 
 const upDateCollection = async (req, res) => {

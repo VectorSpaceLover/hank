@@ -528,6 +528,69 @@ const resetPassword = async(req, res) => {
     }
 }
 
+const getTotalUserCount = async(req, res) => {
+    const counts = await Users.find({}).count();
+    return res.send({
+        status: 'ok',
+        counts: counts,
+    });
+}
+
+const getYearlyUsers = async(req, res) => {
+    const date = new Date();
+    const firstDay = new Date(date.getFullYear(), 0, 1);
+    const lastDay = new Date(date.getFullYear(), 12, 30);
+    const counts = await Users.find({createdDate: {$gte: firstDay, $lt: lastDay}}).count();
+    return res.send({
+        status: 'ok',
+        counts: counts,
+    })
+}
+
+const getMonthlyUsers = async(req, res) => {
+    const date = new Date();
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    const counts = await Users.find({createdDate: {$gte: firstDay, $lt: lastDay}}).count();
+    return res.send({
+        status: 'ok',
+        counts: counts,
+    })
+}
+
+const getDailyUsers = async(req, res) => {
+    let start = new Date();
+    start.setHours(0,0,0,0);
+    let end = new Date();
+    end.setHours(23,59,59,999);
+    const counts = await Users.find({createdDate: {$gte: start, $lt: end}}).count();
+    return res.send({
+        status: 'ok',
+        counts: counts,
+    })
+}
+
+const getTopUsers = async (req, res) => {
+    const query = {};
+    const sort = { createdDate: 1 };
+    const limit = 6;
+    const topUsers = await Users.find(query).sort(sort).limit(limit);
+    return res.send({
+        status: 'ok',
+        users: topUsers,
+    });
+}
+
+const getAllUsers = async (req, res) => {
+    const query = {};
+    const sort = { createdDate: 1 };
+    const users = await Users.find(query).sort(sort);
+    return res.send({
+        status: 'ok',
+        users: users,
+    });
+}
+
 module.exports = {
     getUserInfoById,
     uploadAvatar,
@@ -544,5 +607,11 @@ module.exports = {
     upDateEmailNotification,
     forgetsendmail,
     resetPassword,
+    getYearlyUsers,
+    getMonthlyUsers,
+    getDailyUsers,
+    getTotalUserCount,
+    getTopUsers,
+    getAllUsers,
 };
   

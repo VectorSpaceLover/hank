@@ -21,7 +21,7 @@ import {
 import Input from '../../pages/collection/components/input';
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
-import { addLikedProduct } from '../../api/home';
+import { addLikedProduct, addViewedProduct } from '../../api/home';
 
 const CreateCollectionButton = withStyles((theme) => ({
     root: {
@@ -112,7 +112,9 @@ export default function ImageView({ info }){
 
     const [goTxt, setGoTxt] = useState("Let’s go!");
 
-    const viewCollections = () => {
+    const viewCollections = async() => {
+        const auth = JSON.parse(localStorage.getItem('auth'));
+        await addViewedProduct(auth._id, _id);
         setCollectionOpen(true);
     }
 

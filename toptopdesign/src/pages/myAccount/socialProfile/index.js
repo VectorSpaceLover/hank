@@ -262,7 +262,6 @@ export default function SocialProfile(){
                         placeholderName="Behance"
                     />
                     <div className="social-login">
-                        {console.log(isGoogle)}
                         {isGoogle === false?
                             <GoogleLogin
                                 clientId={process.env.REACT_APP_GOOGLE_CLIENTID}

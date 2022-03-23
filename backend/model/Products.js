@@ -17,11 +17,18 @@ const productsSchema = new mongoose.Schema({
     type: Array,
     required: false,
   },
+  liked: {
+    type: Number,
+    required: false,
+  },
+  viewed: {
+    type: Number,
+    required: false,
+  },
   createdDate: {
     type: Date,
     default: Date.now,
   },
 });
 
-// const User = mongoose.model('User', userSchema);
 module.exports = mongoose.model('Products', productsSchema);

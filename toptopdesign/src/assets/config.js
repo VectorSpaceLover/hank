@@ -600,7 +600,6 @@ export const adminbanner = [
     {
         icon: TotalUserIcon,
         name: 'Total Users',
-        totalNumber: 39182075,
         percent: 21.9,
         todayUser: 67,
         high: true,
@@ -608,7 +607,6 @@ export const adminbanner = [
     {
         icon: TotalVisitorIcon,
         name: 'Visitors',
-        totalNumber: 831071,
         percent: 13,
         todayUser: 67,
         high: true,
@@ -616,7 +614,6 @@ export const adminbanner = [
     {
         icon: TotalProductIcon,
         name: 'Total Products',
-        totalNumber: 321,
         percent: 5.7,
         todayUser: 67,
         high: true,
@@ -624,7 +621,6 @@ export const adminbanner = [
     {
         icon: TotalNewUserIcon,
         name: 'New Users',
-        totalNumber: 20,
         percent: 11,
         todayUser: 1,
         high: false,

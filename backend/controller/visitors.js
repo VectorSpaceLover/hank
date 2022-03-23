@@ -28,9 +28,13 @@ const getYearlyVisitors = async (req, res) => {
     const firstDay = new Date(date.getFullYear(), 0, 1);
     const lastDay = new Date(date.getFullYear(), 12, 30);
     const visitors = await Visitors.find({createdDate: {$gte: firstDay, $lt: lastDay}});
+    let counts = 0;
+    visitors.forEach(item => {
+        counts = counts + item.todayVisitors;
+    });
     return res.send({
         status: 'ok',
-        visitors: visitors,
+        counts: counts,
     })
 }
 
@@ -39,9 +43,13 @@ const getMonthlyVisitors = async (req, res) => {
     const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
     const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     const visitors = await Visitors.find({createdDate: {$gte: firstDay, $lt: lastDay}});
+    let counts = 0;
+    visitors.forEach(item => {
+        counts = counts + item.todayVisitors;
+    });
     return res.send({
         status: 'ok',
-        visitors: visitors,
+        counts: counts,
     })
 }
 
@@ -51,9 +59,13 @@ const getDailyVisitors = async (req, res) => {
     let end = new Date();
     end.setHours(23,59,59,999);
     const visitors = await Visitors.find({createdDate: {$gte: start, $lt: end}});
+    let counts = 0;
+    visitors.forEach(item => {
+        counts = counts + item.todayVisitors;
+    });
     return res.send({
         status: 'ok',
-        visitors: visitors,
+        counts: counts,
     })
 }
 
