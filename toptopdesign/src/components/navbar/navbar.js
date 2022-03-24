@@ -165,7 +165,7 @@ function Navbar() {
     }, [auth])
     return (
         <React.Fragment>
-            {(Object.keys(auth).length !== 0 || isShow)?(!isAdmin?(
+            {auth && (Object.keys(auth).length !== 0 || isShow)?(!isAdmin?(
                 <Styles>
                     <div className='before-container'>
                         <div className='navbar'>
