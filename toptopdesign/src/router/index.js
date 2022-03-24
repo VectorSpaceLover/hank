@@ -76,6 +76,11 @@ const Routers = () => {
                   <OverView />
                 </Admin>
             }/>
+            <Route exact path="/admin/products/all" element={
+                <Admin>
+                  <AllUsers />
+                </Admin>
+            }/>
             <Route exact path="/admin/users" element={
                 <Admin>
                   <AllUsers />

@@ -36,7 +36,6 @@ const StyledButton = styled('button')(
   background: var(--white);
   border: none;
   border-radius: 4px;
-  margin: 0.5em;
   padding: 10px;
   text-align: left;
   line-height: 1.5;

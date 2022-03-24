@@ -125,16 +125,22 @@ export default function LeftSideBar({children}) {
   const [currentPage, setCurrentPage] = React.useState([]);
 
   const handleChange = (event, nodes) => {
+    console.log(nodes);
     setExpanded(nodes);
   };
 
   useEffect(() => {
-    const urlParams = window.location.href.split("/").pop()
-    sidebar.forEach((item) => {
-        if(item.label.toLowerCase() === urlParams.toLowerCase()){
-            setCurrentPage(item.label);
-        }
-    }) 
+    if(window.location.href.indexOf('products/all') >= 0){
+      setExpanded(['1']);
+    }else{
+      const urlParams = window.location.href.split("/").pop()
+      sidebar.forEach((item) => {
+          if(item.label.toLowerCase() === urlParams.toLowerCase()){
+              setCurrentPage(item.label);
+          }
+      })
+    }
+     
 }, [children]);
 
   return (
@@ -161,7 +167,7 @@ export default function LeftSideBar({children}) {
                     <StyledChildTreeItem
                       nodeId={(sidebar.length).toString()}
                       labelText="All Products"
-                      onClick={() => navigate(`${item.path}/allproducts`)}
+                      onClick={() => navigate(`${item.path}/products/all`)}
                     />
                     <StyledChildTreeItem
                       nodeId={(sidebar.length + 1).toString()}

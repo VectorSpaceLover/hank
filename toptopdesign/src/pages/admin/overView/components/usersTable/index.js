@@ -10,7 +10,6 @@ import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';
 import {ReactComponent as DisableIcon} from '../../../../../assets/img/admin/disable.svg';
 import {ReactComponent as MailIcon} from '../../../../../assets/img/admin/mail.svg';
-import {ReactComponent as PersonAddIcon} from '../../../../../assets/img/admin/person_add.svg';
 import {ReactComponent as ArrowIcon} from '../../../../../assets/img/admin/arrow.svg';
 import {ReactComponent as RefreshIcon} from '../../../../../assets/img/admin/refresh.svg';
 import {ReactComponent as MoreIcon} from '../../../../../assets/img/admin/more.svg';
@@ -208,13 +207,6 @@ export default function UsersTable({users, refresh, moreAction, viewAllUsers}) {
                         <MailIcon />
                     </IconButton>
                   </Tooltip>
-                  
-                  <IconButton 
-                      aria-label="delete"
-                      className={`${classes.iconBtn}`}
-                  >
-                      <PersonAddIcon />
-                  </IconButton>
                 </div>  
               </StyledTableCell>
             </StyledTableRow>

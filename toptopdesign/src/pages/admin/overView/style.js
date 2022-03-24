@@ -7,6 +7,7 @@ export const Styles = styled.div`
     position: relative;
     padding: 32px;
     .header{
+        max-width: 1124px;
         display: flex;
         .sort{
             padding-bottom: 26px;

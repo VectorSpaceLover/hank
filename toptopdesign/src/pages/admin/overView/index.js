@@ -18,8 +18,10 @@ import {
 } from '../../../api/admin/overview';
 
 import SelectBox from './components/selectbox';
+import { useNavigate } from 'react-router-dom';
 
 export default function OverView(){
+    const navigate = useNavigate();
     const [topProducts, setTopProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
     const [users, setUsers] = useState([]);
@@ -62,11 +64,12 @@ export default function OverView(){
     }
 
     const viewAllProducts = async() => {
-        await getAllProducts()
-        .then((res) => {
-            setTopProducts(res.products);
-        })
-        .catch((err) => console.log(err));
+        // await getAllProducts()
+        // .then((res) => {
+        //     setTopProducts(res.products);
+        // })
+        // .catch((err) => console.log(err));
+        navigate('/admin/products/all');
     }
 
     const viewAllJustAdded = async() => {
