@@ -53,7 +53,7 @@ const useStyles = makeStyles(() => ({
     },
     header: {
         display: 'flex',
-        padding: '22px 26px 23px 24px',
+        padding: '22px 26px 22px 24px',
         alignItems: 'center',
     },
     headerGroup: {
