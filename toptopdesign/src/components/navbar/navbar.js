@@ -160,12 +160,17 @@ function Navbar() {
     }, [url])
 
     useEffect(() => {
-        if(Object.keys(auth).length !== 0) setSigned(true);
-        else setSigned(false)
+        try{
+            if(Object.keys(auth).length !== 0) setSigned(true);
+            else setSigned(false)
+        }catch(err){
+            setSigned(false)
+        }
     }, [auth])
     return (
         <React.Fragment>
-            {auth && (Object.keys(auth).length !== 0 || isShow)?(!isAdmin?(
+            {console.log(auth)}
+            {!isAdmin?(
                 <Styles>
                     <div className='before-container'>
                         <div className='navbar'>
@@ -398,9 +403,7 @@ function Navbar() {
                         <SignUp setSigned={setSigned} setOpenSignin={setOpenSignin} setOpenSignup={setOpenSignup}/>
                     </Dialog>
                 </Styles>
-            ):(<AdminStyle>
-
-            </AdminStyle>)):<React.Fragment />}
+            ):<React.Fragment />}
         </React.Fragment>
         
     );

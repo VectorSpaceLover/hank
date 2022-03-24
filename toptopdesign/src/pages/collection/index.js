@@ -237,14 +237,6 @@ export default function Collection({children}){
             getInitialData();
     }, [id, getInitialData])
 
-    useEffect(() => {
-        const auth = JSON.parse(localStorage.getItem('auth'));
-        // if(!auth || Object.keys(auth).length === 0){
-        //     navigate('/signin');
-        //     return;
-        // }
-    }, [])
-
     return(
         <Styles>
             <div className="collection-before-container">

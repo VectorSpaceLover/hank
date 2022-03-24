@@ -60,15 +60,20 @@ export default function MyAccount({children}){
     }
 
     const getInitialData = useCallback(async() => {
-        const auth = JSON.parse(localStorage.getItem('auth'));
-        if(!auth || Object.keys(auth).length === 0){
-            navigate('/signin');
-            return;
+        try{
+            const auth = JSON.parse(localStorage.getItem('auth'));
+            if(!auth || Object.keys(auth).length === 0){
+                navigate('/');
+                return;
+            }
+            const res = await getUserInfoById(auth._id);
+            const user = res.user[0];
+            localStorage.setItem('auth', JSON.stringify(user));
+            setUserName(user.userName);
+        }catch(err){
+            console.log(err);
         }
-        const res = await getUserInfoById(auth._id);
-        const user = res.user[0];
-        localStorage.setItem('auth', JSON.stringify(user));
-        setUserName(user.userName);
+        
     }, [])
 
     useEffect(() => {
