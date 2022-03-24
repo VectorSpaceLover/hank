@@ -74,3 +74,28 @@ export const getDailyData = async() => {
         newUsers: newUsers.data.counts,
     };
 }
+
+export const adminSignUp = async(email, firstName, lastName, password) => {
+    const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/admin/signup`, 
+        {
+            email,
+            firstName,
+            lastName,
+            password,
+        }
+    );
+    return res.data;
+}
+
+
+export const adminSignIn = async(email, password) => {
+    const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/admin/signin`, 
+        {
+            email,
+            password,
+        }
+    );
+    return res.data;
+}

@@ -15,6 +15,8 @@ import Message from "../pages/myAccount/message";
 import OverView from "../pages/admin/overView";
 import Admin from "../pages/admin";
 import AllUsers from "../pages/admin/users/allUsers";
+import AdminSignIn from "../pages/admin/signIn";
+import AdminSignUp from '../pages/admin/signUp';
 
 const Routers = () => {
 
@@ -71,6 +73,8 @@ const Routers = () => {
               </MyAccount>
             }/>
             {/* Admin panel */}
+            <Route exact path="/admin/signin" element={<AdminSignIn/>}/>
+            <Route exact path="/admin/signup" element={<AdminSignUp/>}/>
             <Route exact path="/admin/overview" element={
                 <Admin>
                   <OverView />

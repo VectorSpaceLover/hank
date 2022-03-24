@@ -169,7 +169,6 @@ function Navbar() {
     }, [auth])
     return (
         <React.Fragment>
-            {console.log(auth)}
             {!isAdmin?(
                 <Styles>
                     <div className='before-container'>

@@ -25,7 +25,7 @@ export default function BannerItem(props){
     }, [props])
     return (
         <Styles>
-            <div className={name === 'Total Users'?'banner-item banner-active': 'banner-item'}>
+            <div className='banner-item'>
                 <div className='item-header'>
                     {React.createElement(icon, { width: 24, height: 24})}
                     <div className='header-txt'>

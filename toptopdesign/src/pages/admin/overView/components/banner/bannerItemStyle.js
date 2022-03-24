@@ -10,7 +10,7 @@ export const Styles = styled.div`
     height: 168px;
     .banner-item{
         border-left: 1px solid var(--divider);
-        border-radius: 0px 4px 4px 0px;
+        border-radius: 4px;
         padding: 24px;
         background-color: var(--white);
         .item-header{
