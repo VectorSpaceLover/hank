@@ -5,9 +5,9 @@ import Button from '@mui/material/Button';
 const CustomedButton = withStyles((theme) => ({
     root: {
         color: `var(--white) !important`,
-        fontFamily: `var(--font-family-pp_telegraf-regular) !important`,
-        fontSize: `var(--font-size-24) !important`,
-        fontWeight: '400px !important',
+        fontFamily: `var(--font-family-manrope-semi-bold) !important`,
+        fontSize: `var(--font-size-14) !important`,
+        fontWeight: '600 !important',
         fontStyle: `normal !important`,
         backgroundColor: `var(--ocean-blue-pearl) !important`,
         cursor: 'pointer !important',
