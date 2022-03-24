@@ -125,7 +125,6 @@ export default function LeftSideBar({children}) {
   const [currentPage, setCurrentPage] = React.useState([]);
 
   const handleChange = (event, nodes) => {
-    console.log(nodes);
     setExpanded(nodes);
   };
 
