@@ -4,8 +4,10 @@ import IconButton from '@mui/material/IconButton';
 import {ReactComponent as DropIcon} from '../../../../assets/img/admin/drop.svg';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminNavbar(){
+    const navigate = useNavigate();
     const [anchorGift, setAnchorGift] = useState(null);
     const openGift = Boolean(anchorGift);
     const openGiftMenu = (event) => {
@@ -15,7 +17,7 @@ export default function AdminNavbar(){
         setAnchorGift(null);
     };
     const signOut = () => {
-
+        navigate('/admin/signin');
     }
     return (
         <Styles>
