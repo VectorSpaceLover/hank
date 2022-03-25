@@ -1,5 +1,4 @@
 import { Styles, ForgotStyle } from "./style";
-import { ReactComponent as LogoIcon } from '../../../assets/img/admin/logo.svg';
 import CustomedInput from './input';
 import PasswordInput from './passwordInput';
 import ForgotButton from "./forgotButton";
