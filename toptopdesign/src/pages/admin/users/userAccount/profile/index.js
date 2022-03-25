@@ -138,27 +138,24 @@ export default function Profile(){
                 </div>
                 <div className="edit-body">
                     <div className='edit-info'>Account Information</div>
-                    <div className='edit-name'>
-                        <Grid container spacing={2} direction="row">
-                            <Grid item xs={6} md={6}>
-                                <CustomedInput
-                                    label='First name*'
-                                    inputValue={userName}
-                                    inputHandler={setUserName}
-                                    placeholderName="Your first name"
-                                />
-                            </Grid>
-                            <Grid item xs={6} md={6}>
-                                <CustomedInput
-                                    label='Last name'
-                                    inputValue={userName}
-                                    inputHandler={setUserName}
-                                    placeholderName="Your last name"
-                                />
-                            </Grid>
-
+                    <Grid container spacing={2} direction="row" className='edit-name'>
+                        <Grid item xs={6} md={6}>
+                            <CustomedInput
+                                label='First name*'
+                                inputValue={userName}
+                                inputHandler={setUserName}
+                                placeholderName="Your first name"
+                            />
                         </Grid>
-                    </div>
+                        <Grid item xs={6} md={6}>
+                            <CustomedInput
+                                label='Last name'
+                                inputValue={userName}
+                                inputHandler={setUserName}
+                                placeholderName="Your last name"
+                            />
+                        </Grid>
+                    </Grid>
                     <CustomedInput
                         label='Location'
                         inputValue={location}

@@ -132,7 +132,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&': {
     backgroundColor: 'white',
   },
-  
 }));
 
 export default function UsersTable({users, refresh, moreAction, viewAllUsers}) {

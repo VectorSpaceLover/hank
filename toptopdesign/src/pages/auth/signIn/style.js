@@ -150,7 +150,6 @@ export const Styles = styled.div`
     }
 `;
 
-
 export const ForgotStyle = styled.div`
     margin: 0px;
     position: relative;

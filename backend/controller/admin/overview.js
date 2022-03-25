@@ -1,4 +1,4 @@
-const Admins = require('../../model/Admins');
+const Users = require('../../model/Users');
 
 const adminSignUp = async(req, res) => {
     const {
@@ -7,7 +7,7 @@ const adminSignUp = async(req, res) => {
         lastName,
         password,
     } = req.body;
-    const oldUser = await Admins.find({email: email});
+    const oldUser = await Users.find({email: email});
     if(oldUser && oldUser.length > 0){
         return res.send({
             status: 'already Exist',
@@ -15,7 +15,7 @@ const adminSignUp = async(req, res) => {
         })
     }
 
-    const newAdmin = new Admins({
+    const newAdmin = new Users({
         email,
         firstName,
         lastName,
@@ -36,7 +36,7 @@ const adminSignIn = async (req, res) => {
         email,
         password,
     } = req.body;
-    const users = await Admins.find({email: email});
+    const users = await Users.find({email: email});
     const user = users[0];
     if(user){
         if(password === user.password){

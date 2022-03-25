@@ -88,10 +88,10 @@ const Routers = () => {
                   </UserAccount>
                 </Admin>
             }/>
-            <Route exact path="/admin/users/all" element={
+            <Route exact path="/admin/users/" element={
                 <Admin>
-                  <UserAccount>
-                  </UserAccount>
+                  <AllUsers>
+                  </AllUsers>
                 </Admin>
             }/>
             <Route exact path="/admin/users/add" element={

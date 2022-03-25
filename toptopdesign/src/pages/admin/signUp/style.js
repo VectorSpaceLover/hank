@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {
     ManropeNormalCharade14px,
-    ManropeNormalCharade36px
+    ManropeNormalCharade36px,
 } from '../../../assets/styledMixins';
 
 export const Styles = styled.div`
