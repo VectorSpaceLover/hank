@@ -97,7 +97,8 @@ export default function AdminSignIn () {
     return (
         <Styles>
             <div className="sign-in-container">
-                <LogoIcon className='logo'/>
+                {/* <LogoIcon className='logo'/> */}
+                <img src='/img/admin_logo.svg' alt="" />
                 <div className="panel">
                     <div className="header">
                         <div className="type">
