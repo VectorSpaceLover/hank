@@ -26,6 +26,8 @@
     --blue-hover: #7C00FF;
     --txt-gray: #84818A;
     --divider: #EBEAED;
+    --red: #FC3400;
+    --admin-black: #504F54;
 
     --font-size-10: 10px;
     --font-size-11: 11px;
@@ -47,6 +49,7 @@
     --font-family-manrope: "Manrope";
     --font-family-manrope-medium: "Manrope-Medium";
     --font-family-manrope-semi-bold: "Manrope-Semi-bold";
+    --font-family-manrope-bold:"Manrope-bold";
     --font-family-open_sans: "Open Sans";
     --font-family-inter-semi-bold: "Inter-Semi-bold";
     --font-family-pp_telegraf-regular: "PP Telegraf-Regular";

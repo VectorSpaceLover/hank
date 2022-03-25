@@ -17,6 +17,7 @@ import Admin from "../pages/admin";
 import AllUsers from "../pages/admin/users/allUsers";
 import AdminSignIn from "../pages/admin/signIn";
 import AdminSignUp from '../pages/admin/signUp';
+import UserAccount from "../pages/admin/users/userAccount";
 
 const Routers = () => {
 
@@ -82,22 +83,27 @@ const Routers = () => {
             }/>
             <Route exact path="/admin/products/all" element={
                 <Admin>
-                  <AllUsers />
+                  <UserAccount>
+                    <AllUsers />
+                  </UserAccount>
                 </Admin>
             }/>
-            <Route exact path="/admin/users" element={
+            <Route exact path="/admin/users/all" element={
                 <Admin>
-                  <AllUsers />
+                  <UserAccount>
+                  </UserAccount>
                 </Admin>
             }/>
             <Route exact path="/admin/users/add" element={
                 <Admin>
-                  <AllUsers />
+                  <UserAccount>
+                  </UserAccount>
                 </Admin>
             }/>
             <Route exact path="/admin/users/detail" element={
                 <Admin>
-                  <AllUsers />
+                  <UserAccount>
+                  </UserAccount>
                 </Admin>
             }/>
         </Routes>

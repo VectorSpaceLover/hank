@@ -11,6 +11,14 @@ import { ReactComponent as TotalVisitorIcon } from '../assets/img/admin/totalvis
 import { ReactComponent as TotalProductIcon } from '../assets/img/admin/totalproduct.svg';
 import { ReactComponent as TotalNewUserIcon } from '../assets/img/admin/totalnewuser.svg';
 
+import { ReactComponent as ProfileIcon } from '../assets/img/admin/profile.svg';
+import { ReactComponent as ProfileFocusIcon } from '../assets/img/admin/profile_focus.svg';
+import { ReactComponent as NotificationIcon } from '../assets/img/admin/notification.svg';
+import { ReactComponent as NotificationFocusIcon } from '../assets/img/admin/notification_focus.svg';
+import { ReactComponent as PasswordIcon } from '../assets/img/admin/password.svg';
+import { ReactComponent as PasswordFocusIcon } from '../assets/img/admin/password_focus.svg';
+
+
 export const allPatternItems = [
     {
         name: 'All Patterns',
@@ -626,4 +634,37 @@ export const adminbanner = [
         high: false,
     },
 
+]
+
+export const accountBar = [
+    {
+        label: 'Profile',
+        icon: ProfileIcon,
+        focusIcon: ProfileFocusIcon,
+        path: 'profile',
+    },
+    {
+        label: 'Account Settings',
+        icon: NotificationIcon,
+        focusIcon: NotificationFocusIcon,
+        path: 'accountsetting',
+    },
+    {
+        label: 'Passwrods',
+        icon: PasswordIcon,
+        focusIcon: PasswordFocusIcon,
+        path: 'password',
+    },
+    {
+        label: 'Social Profile',
+        icon: NotificationIcon,
+        focusIcon: NotificationFocusIcon,
+        path: 'social',
+    },
+    {
+        label: 'Notification Settings',
+        icon: NotificationIcon,
+        focusIcon: NotificationFocusIcon,
+        path: 'notification',
+    }
 ]

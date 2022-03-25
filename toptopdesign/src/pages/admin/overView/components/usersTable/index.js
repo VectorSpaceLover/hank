@@ -18,7 +18,6 @@ import { withStyles } from '@mui/styles';
 import Tooltip from '@mui/material/Tooltip';
 
 const useStyles = makeStyles(() => ({
-    
     avatar: {
         width: 32,
         height: 32,
@@ -132,18 +131,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&': {
     backgroundColor: 'white',
-    
   },
   
 }));
-
-const rows = [
-    {name: 'Frozen yoghurt', imagePath: '/img/avatars/1.png', id: 159},
-    {name: 'Frozen yoghurt', imagePath: '/img/avatars/2.png', id: 159},
-    {name: 'Frozen yoghurt', imagePath: '/img/avatars/3.png', id: 159},
-    {name: 'Frozen yoghurt', imagePath: '/img/avatars/4.png', id: 159},
-    {name: 'Frozen yoghurt', imagePath: '/img/avatars/5.png', id: 159},
-];
 
 export default function UsersTable({users, refresh, moreAction, viewAllUsers}) {
     const classes = useStyles();

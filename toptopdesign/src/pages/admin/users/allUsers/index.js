@@ -7,7 +7,8 @@ import { ReactComponent as AddIcon } from '../../../../assets/img/user/collectio
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import CustomedTabs from '../../components/customedTab';
-
+import UserTable from './userTable';
+import { useNavigate } from 'react-router-dom';
 const DeleteButton = withStyles((theme) => ({
     root: {
         padding: 0,
@@ -63,6 +64,7 @@ const AddUser = withStyles((theme) => ({
   }))(Button);
 
 export default function AllUsers(){
+    const navigate = useNavigate();
     const [keyword, setKeyword] = useState('');
 
     const searchUser = () => {
@@ -88,13 +90,14 @@ export default function AllUsers(){
                     <DeleteButton onClick={deleteUser}>
                         <DeleteRed />
                     </DeleteButton>
-                    <AddUser>
+                    <AddUser onClick={() => navigate('/admin/users/add')}>
                         <AddIcon className='icon'/>
                         <span>Add User</span>
                     </AddUser>
                 </div>
             </div>
             <CustomedTabs />
+            <UserTable />
         </Styles>
     )
 }

@@ -20,7 +20,7 @@ export default function AdminSignUp () {
 
     const signUp = async() => {
         const res = await adminSignUp(userEmail, firstName, lastName, password);
-        navigate('/admin/signin');
+        navigate('/admin/overview');
     }
 
     return (

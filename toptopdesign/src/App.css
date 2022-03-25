@@ -68,6 +68,11 @@
    url('./assets/font/manrope.semibold.otf')format("truetype");
 }
 
+@font-face {
+  font-family: "Manrope-bold";
+  src: local('Manrope-bold'), local('Manrope-bold'), 
+   url('./assets/font/manrope.bold.otf')format("truetype");
+}
 
 @font-face {
   font-family: "Manrope-Medium";

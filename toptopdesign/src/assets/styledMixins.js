@@ -287,6 +287,14 @@ export const ManropeNormalCharade14px = css`
   font-style: normal;
 `;
 
+export const ManropeMediumCharade14px = css`
+  color: var(--charade);
+  font-family: var(--font-family-manrope-medium);
+  font-size: var(--font-size-14);
+  font-weight: 500;
+  font-style: normal;
+`;
+
 export const ManropeSemiboldCharade16px = css`
   color: var(--charade);
   font-family: var(--font-family-manrope-semi-bold);
@@ -327,11 +335,27 @@ export const ManropeNormalCharade36px = css`
   font-style: normal;
 `;
 
+export const ManropeSemiboldCharade32px = css`
+  color: var(--charade);
+  font-family: var(--font-family-manrope-semi-bold);
+  font-size: var(--font-size-32);
+  font-weight: 600;
+  font-style: normal;
+`;
+
 export const ManropeSemiboldCharade36px = css`
   color: var(--charade);
   font-family: var(--font-family-manrope-semi-bold);
   font-size: var(--font-size-36);
   font-weight: 600;
+  font-style: normal;
+`;
+
+export const ManropeBoldCharade18px = css`
+  color: var(--admin-black);
+  font-family: var(--font-family-manrope-bold);
+  font-size: var(--font-size-18);
+  font-weight: 700;
   font-style: normal;
 `;
 

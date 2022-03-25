@@ -43,9 +43,10 @@ export default function CustomedTabs() {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ bgcolor: '#fff' }}>
         <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-          <AntTab label="Tab 1" />
-          <AntTab label="Tab 2" />
-          <AntTab label="Tab 3" />
+          <AntTab label="All" />
+          <AntTab label="New" />
+          <AntTab label="Active" />
+          <AntTab label="Suspended" />
         </AntTabs>
       </Box>
     </Box>
