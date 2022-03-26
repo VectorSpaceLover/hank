@@ -198,7 +198,7 @@ export default function UserAccount(){
             <div className='account-container'>
                 <div className='account-header'>
                     <div className='first-line'>
-                        <span style={{color: '#B6B4BA'}}>Customer </span>
+                        <span style={{color: '#B6B4BA', cursor: 'pointer'}} onClick={() => navigate('/admin/users/')}>User </span>
                         <span>/ Add Customer</span>
                     </div>
                     <div className='second-line'>
