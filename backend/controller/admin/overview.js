@@ -232,10 +232,9 @@ const deleteUser = async(req, res) => {
     const {
         selected, 
     } = req.body;
-    selected.map(async(item) => {
-        await Users.findByIdAndDelete(item);
-    })
-
+    await Promise.all(selected.map(async (id) => {
+        await Users.findByIdAndDelete(id);
+    }));
     const users = await Users.find({});
     res.status(200).json(users);
 }
