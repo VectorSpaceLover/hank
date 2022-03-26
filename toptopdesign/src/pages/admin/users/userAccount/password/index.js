@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { Styles } from "./passwordStyle";
 import CustomedInput from '../input';
 
-export default function Password({setPassword, setIsFulled}){
+export default function Password({setPassword, password}){
 
-    const [oldPassword, setOldPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
+    const [oldPassword, setOldPassword] = useState(password);
+    const [newPassword, setNewPassword] = useState(password);
     const [isAllowed, setAllowed] = useState(false);
     
     const handleChange = (value) => {
@@ -24,16 +24,17 @@ export default function Password({setPassword, setIsFulled}){
     }
 
     useEffect(() => {
-        setPassword(newPassword);
-    }, [newPassword, setPassword])
+        if(isAllowed)
+            setPassword(newPassword);
+    }, [isAllowed, newPassword, setPassword])
 
-    useEffect(() => {
-        if(isAllowed && (newPassword === oldPassword))
-            setIsFulled(true);
-        else
-            setIsFulled(false);
-    }, [isAllowed, newPassword, oldPassword, setIsFulled])
-    
+    // useEffect(() => {
+    //     if(isAllowed && (newPassword === oldPassword))
+    //         setIsFulled(true);
+    //     else
+    //         setIsFulled(false);
+    // }, [isAllowed, newPassword, oldPassword, setIsFulled])
+
     return (
         <Styles>
             <div className="password-container">

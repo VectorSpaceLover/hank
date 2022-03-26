@@ -68,7 +68,7 @@ export default function UserAccount(){
     const [accountSetting, setAccountSetting] = useState({});
     const [password, setPassword] = useState('');
     const [social, setSocial] = useState({});
-    const [notification, setNotification] = useState([]);
+    const [notification, setNotification] = useState([false, false, false]);
     const [isFulled, setIsFulled] = useState(false);
 
     const handleClick = (idx) => {
@@ -85,7 +85,7 @@ export default function UserAccount(){
         if(currentIdx < accountBar.length - 1)
         {
             setCurrentIdx(currentIdx + 1);
-            setIsFulled(false);
+            // setIsFulled(false);
         }
         else{
             const res = await uploadImage();
@@ -100,8 +100,18 @@ export default function UserAccount(){
         }
     }
 
+    useEffect(() => {
+        if(profile?.userAvatarPath && profile?.firstName && profile?.lastName && profile?.location && profile?.shortBio &&
+            accountSetting?.userName && accountSetting?.email &&
+            password && social?.twitter && social?.instagram && social?.dribbble && social?.behance)
+            setIsFulled(true);
+        else
+            setIsFulled(false);
+    }, [accountSetting?.email, accountSetting?.userName, password, profile?.firstName, profile?.lastName, profile?.location, profile?.shortBio, profile?.userAvatarPath, social.behanc, social?.behance, social?.dribbble, social?.instagram, social?.twitter])
+
     return (
         <Styles>
+            {console.log(isFulled)}
             <div className='account-container'>
                 <div className='account-header'>
                     <div className='first-line'>
@@ -115,31 +125,36 @@ export default function UserAccount(){
                 <div className='account-body'>
                     <div className='left-panel'>
                         {currentIdx === 0 && 
-                            <Profile 
+                            <Profile
+                                profile={profile}
                                 setProfile={setProfile}
-                                setIsFulled={setIsFulled}
+                                // setIsFulled={setIsFulled}
                             />
                         }
                         {currentIdx === 1 && 
-                            <AccountSetting 
+                            <AccountSetting
+                                accountSetting={accountSetting}
                                 setAccountSetting={setAccountSetting}
-                                setIsFulled={setIsFulled}
+                                // setIsFulled={setIsFulled}
                             />
                         }
                         {currentIdx === 2 && 
                             <Password 
+                                password={password}
                                 setPassword={setPassword}
-                                setIsFulled={setIsFulled}
+                                // setIsFulled={setIsFulled}
                             />
                         }
                         {currentIdx === 3 && 
-                            <Social 
+                            <Social
+                                social={social}
                                 setSocial={setSocial}
-                                setIsFulled={setIsFulled}
+                                // setIsFulled={setIsFulled}
                             />
                         }
                         {currentIdx === 4 && 
-                            <NotificationSetting 
+                            <NotificationSetting
+                                notification={notification}
                                 setNotification={setNotification}
                             />
                         }
@@ -147,7 +162,7 @@ export default function UserAccount(){
                             <ColorButton onClick={() => navigate('/admin/users/')}>
                                 Discard
                             </ColorButton>
-                            {!isFulled && currentIdx !== 4?
+                            {!isFulled?
                                 <ColorButton 
                                     className='ml-24'
                                     onClick={() => next()}
@@ -173,7 +188,7 @@ export default function UserAccount(){
                                     <div 
                                         className='account-btn' 
                                         key={idx}
-                                        // onClick={() => handleClick(idx)}
+                                        onClick={() => handleClick(idx)}
                                     >
                                         {currentIdx !== idx?React.createElement(item.icon, { width: 40, height: 40 }):React.createElement(item.focusIcon, { width: 40, height: 40 })}
                                         <div className={currentIdx !== idx?'label':'label active'}>{item.label}</div>

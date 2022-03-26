@@ -38,14 +38,14 @@ const SocialButton = withStyles((theme) => ({
     }
 }))(Button);
 
-export default function Social({setSocial, setIsFulled}){
+export default function Social({setSocial, social}){
 
-    const [twitter, setTwitter] = useState('');
-    const [instagram, setInstagram] = useState('');
-    const [dribbble, setDribbble] = useState('');
-    const [behance, setBehance] = useState('');
-    const [isGoogle, setIsGoogle] = useState(false);
-    const [isFacebook, setIsFacebook] = useState(false);
+    const [twitter, setTwitter] = useState(social?.twitter);
+    const [instagram, setInstagram] = useState(social?.instagram);
+    const [dribbble, setDribbble] = useState(social?.dribbble);
+    const [behance, setBehance] = useState(social?.behance);
+    const [isGoogle, setIsGoogle] = useState(social?.isGoogle);
+    const [isFacebook, setIsFacebook] = useState(social?.isFacebook);
     
     const [isHoverGoole, setIsHoverGoogle] = useState(false);
     const [isHoverFacebook, setIsHoverFacebook] = useState(false);
@@ -67,12 +67,12 @@ export default function Social({setSocial, setIsFulled}){
         setSocial({ twitter, instagram, dribbble, behance, isFacebook, isGoogle });
     }, [behance, dribbble, instagram, isFacebook, isGoogle, setSocial, twitter])
 
-    useEffect(() => {
-        if( twitter && instagram && dribbble && behance )
-            setIsFulled(true);
-        else
-            setIsFulled(false);
-    }, [behance, dribbble, instagram, setIsFulled, twitter])
+    // useEffect(() => {
+    //     if( twitter && instagram && dribbble && behance )
+    //         setIsFulled(true);
+    //     else
+    //         setIsFulled(false);
+    // }, [behance, dribbble, instagram, setIsFulled, twitter])
     return (
         <Styles>
             <div className="account-setting-container">

@@ -5,11 +5,6 @@ import Button from '@mui/material/Button';
 import RemoveButton from './txtButton';
 import CustomedInput from '../input';
 import CustomedTextArea from '../textArea';
-import { 
-    uploadAvatar,
-    upDateProfile,
-} from '../../../../../api/account';
-import { ReactComponent as ProfileSuccess } from '../../../../../assets/img/account/profile_success.svg';
 import { Grid } from '@mui/material';
 
 const UploadButton = withStyles((theme) => ({
@@ -43,14 +38,14 @@ const UploadButton = withStyles((theme) => ({
     },
 }))(Button);
 
-export default function Profile({ setProfile, setIsFulled }){
+export default function Profile({ setProfile, profile }){
 
-    const [userAvatarPath, setUserAvatarPath] = useState(null);
-    const [userAvatar, setUserAvatar] = useState(null);
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [location, setLocation] = useState('');
-    const [shortBio, setShortBio] = useState('');
+    const [userAvatarPath, setUserAvatarPath] = useState(profile?.userAvatarPath);
+    const [userAvatar, setUserAvatar] = useState(profile?.userAvatar);
+    const [firstName, setFirstName] = useState(profile?.firstName);
+    const [lastName, setLastName] = useState(profile?.lastName);
+    const [location, setLocation] = useState(profile?.location);
+    const [shortBio, setShortBio] = useState(profile?.shortBio);
 
     const uploadRef = useRef();
 
@@ -58,12 +53,12 @@ export default function Profile({ setProfile, setIsFulled }){
         setProfile({ userAvatar, userAvatarPath, firstName, lastName, location, shortBio});
     }, [firstName, lastName, location, setProfile, shortBio, userAvatar, userAvatarPath])
     
-    useEffect(() => {
-        if(userAvatar && userAvatarPath && firstName && lastName && location && shortBio)
-            setIsFulled(true);
-        else
-            setIsFulled(false);
-    }, [firstName, lastName, location, setIsFulled, shortBio, userAvatar, userAvatarPath])
+    // useEffect(() => {
+    //     if(userAvatar && userAvatarPath && firstName && lastName && location && shortBio)
+    //         setIsFulled(true);
+    //     else
+    //         setIsFulled(false);
+    // }, [firstName, lastName, location, setIsFulled, shortBio, userAvatar, userAvatarPath])
     return (
         <Styles>
             <div className="edit-profile-container">

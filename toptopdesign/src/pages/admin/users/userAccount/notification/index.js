@@ -8,9 +8,9 @@ const checkLs = [
     {label: 'Notify me when the new design job is added'},
 ]
 
-export default function NotificationSetting({setNotification}){
+export default function NotificationSetting({setNotification, notification}){
 
-    const [checked, setChecked] = useState([false, false, false]);
+    const [checked, setChecked] = useState(notification);
     
     const checkedItem = (idx) => {
         let newChecked = [...checked];

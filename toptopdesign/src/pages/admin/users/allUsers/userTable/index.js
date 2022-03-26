@@ -345,6 +345,7 @@ export default function UserTable({users, getInitialData}) {
                                 tabIndex={-1}
                                 key={row._id}
                                 selected={isItemSelected}
+                                onClick={() => navigate(`/admin/users/detail/${row._id}`)}
                             >
                                 <StyledTableCell padding="checkbox">
                                     <Checkbox 
