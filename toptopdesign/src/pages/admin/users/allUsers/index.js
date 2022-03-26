@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import SearchBox from '../../components/searchBox';
 import {Styles} from './style';
 import { ReactComponent as DeleteRed } from '../../../../assets/img/admin/delete_red.svg';
@@ -9,6 +9,13 @@ import Button from '@mui/material/Button';
 import CustomedTabs from '../../components/customedTab';
 import UserTable from './userTable';
 import { useNavigate } from 'react-router-dom';
+import {
+    getAllUsers,
+    getActiveUsers,
+    getNewUsers,
+    getSuspendedUsers,
+} from '../../../../api/admin/users';
+
 const DeleteButton = withStyles((theme) => ({
     root: {
         padding: 0,
@@ -66,6 +73,7 @@ const AddUser = withStyles((theme) => ({
 export default function AllUsers(){
     const navigate = useNavigate();
     const [keyword, setKeyword] = useState('');
+    const [users, setUsers] = useState([]);
 
     const searchUser = () => {
 
@@ -74,6 +82,37 @@ export default function AllUsers(){
     const deleteUser = () => {
 
     }
+
+    const handleTabs = async (val) => {
+        if(val === 0){
+            const res = await getAllUsers();
+            setUsers(res);
+        }else{
+            if(val === 1){
+                const res = await getNewUsers();
+                setUsers(res);
+            }else{
+                if(val === 2){
+                    const res = await getActiveUsers();
+                    setUsers(res);
+                }else{
+                    if(val === 3){
+                        const res = await getSuspendedUsers();
+                        setUsers(res);
+                    }
+                }
+            }
+        }
+    }
+
+    const getInitialData = useCallback(async() => {
+        const res = await getAllUsers();
+        setUsers(res);
+    }, [])
+
+    useEffect(() => {
+        getInitialData();
+    }, [getInitialData])
 
     return (
         <Styles>
@@ -96,8 +135,13 @@ export default function AllUsers(){
                     </AddUser>
                 </div>
             </div>
-            <CustomedTabs />
-            <UserTable />
+            <CustomedTabs handleTabs={handleTabs}/>
+            {users && users.length > 0 && 
+                <UserTable 
+                    users={users}
+                    getInitialData={getInitialData}
+                />
+            }
         </Styles>
     )
 }

@@ -83,5 +83,4 @@ export const upDateEmailNotification = async (id, checked) => {
         }
     );
     return res.data;
-
 }

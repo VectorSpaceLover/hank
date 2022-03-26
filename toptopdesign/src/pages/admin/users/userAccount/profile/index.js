@@ -10,7 +10,7 @@ import {
     upDateProfile,
 } from '../../../../../api/account';
 import { ReactComponent as ProfileSuccess } from '../../../../../assets/img/account/profile_success.svg';
-import { Grid } from 'semantic-ui-react';
+import { Grid } from '@mui/material';
 
 const UploadButton = withStyles((theme) => ({
     root: {
@@ -43,66 +43,27 @@ const UploadButton = withStyles((theme) => ({
     },
 }))(Button);
 
-export default function Profile(){
+export default function Profile({ setProfile, setIsFulled }){
 
     const [userAvatarPath, setUserAvatarPath] = useState(null);
     const [userAvatar, setUserAvatar] = useState(null);
-    const [userName, setUserName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [location, setLocation] = useState('');
     const [shortBio, setShortBio] = useState('');
-    const [profileSuccess, setProfileSuccess] = useState(false);
 
     const uploadRef = useRef();
-    
-    const uploadImage = async() => {
-        const formData = new FormData()
-        formData.append('image', userAvatar);
-        return await uploadAvatar(formData);
-    }
-
-    const saveOption = async (val) => {
-        const currentAuth = JSON.parse(localStorage.getItem('auth'));
-        if(val === 'edit'){
-            let result = [];
-            if(userAvatarPath && userAvatar){
-                const res = await uploadImage();
-                if(res?.filePath){
-                    result = await upDateProfile(currentAuth._id, res?.filePath, userName, location, shortBio);
-                }
-            }else{
-                
-                result = await upDateProfile(currentAuth._id, currentAuth.avatarPath, userName, location, shortBio);
-            }
-            localStorage.setItem('auth', JSON.stringify(result.user));
-            if(result.status === 'ok'){
-                setProfileSuccess(true);
-            }else{
-                setProfileSuccess(false);
-            }
-            const changeTxt = () => {
-                setProfileSuccess(false);
-            }
-            
-            await setTimeout(changeTxt, 3000);
-        }
-    }
 
     useEffect(() => {
-        try{
-            const auth = JSON.parse(localStorage.getItem('auth'));
-            console.log(auth)
-            if(auth?.avatarPath)
-                setUserAvatarPath(`${process.env.REACT_APP_UPLOAD_URL}${auth?.avatarPath}`);
-            else
-                setUserAvatarPath('');
-            setUserName(auth?.userName);
-            setLocation(auth?.location);
-            setShortBio(auth?.shortBio);
-        }catch(err){
-            console.log(err);
-        }
-    }, [])
-
+        setProfile({ userAvatar, userAvatarPath, firstName, lastName, location, shortBio});
+    }, [firstName, lastName, location, setProfile, shortBio, userAvatar, userAvatarPath])
+    
+    useEffect(() => {
+        if(userAvatar && userAvatarPath && firstName && lastName && location && shortBio)
+            setIsFulled(true);
+        else
+            setIsFulled(false);
+    }, [firstName, lastName, location, setIsFulled, shortBio, userAvatar, userAvatarPath])
     return (
         <Styles>
             <div className="edit-profile-container">
@@ -138,20 +99,20 @@ export default function Profile(){
                 </div>
                 <div className="edit-body">
                     <div className='edit-info'>Account Information</div>
-                    <Grid container spacing={2} direction="row" className='edit-name'>
-                        <Grid item xs={6} md={6}>
+                    <Grid container spacing={2} className='edit-name'>
+                        <Grid item xs={6}>
                             <CustomedInput
                                 label='First name*'
-                                inputValue={userName}
-                                inputHandler={setUserName}
+                                inputValue={firstName}
+                                inputHandler={setFirstName}
                                 placeholderName="Your first name"
                             />
                         </Grid>
-                        <Grid item xs={6} md={6}>
+                        <Grid item xs={6}>
                             <CustomedInput
                                 label='Last name'
-                                inputValue={userName}
-                                inputHandler={setUserName}
+                                inputValue={lastName}
+                                inputHandler={setLastName}
                                 placeholderName="Your last name"
                             />
                         </Grid>
@@ -169,16 +130,6 @@ export default function Profile(){
                         placeholderName=""
                     />
                 </div>
-                {/* <div className='edit-footer'>
-                    <CustomedTextButton 
-                        text={"Save Changes"}
-                        whichOne="edit"
-                        saveOption={saveOption}
-                    />
-                </div> */}
-            </div>
-            <div className="alert">
-                {profileSuccess && <ProfileSuccess />}
             </div>
         </Styles>
     )

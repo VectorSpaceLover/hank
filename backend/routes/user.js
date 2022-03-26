@@ -15,8 +15,16 @@ const {
     getTotalUserCount,
     getTopUsers,
     getAllUsers,
+    deleteUsers,
+    getNewUsers,
+    getActiveUsers,
+    getSuspendedUsers,
+    suspendById,
+    unSuspendById
 } = require('../controller/users');
 const { route } = require('./admin');
+router.post('/suspend', suspendById);
+router.post('/unsuspend', unSuspendById);
 
 router.post('/signup', signUpWithEmail);
 router.post('/signup/google', signUpWithGoogle);
@@ -36,5 +44,10 @@ router.get('/daily', getDailyUsers);
 
 router.get('/top', getTopUsers);
 router.get('/all', getAllUsers);
+router.get('/new', getNewUsers);
+router.get('/active', getActiveUsers);
+router.get('/suspended', getSuspendedUsers);
+
+router.delete('/', deleteUsers);
 
 module.exports = router;

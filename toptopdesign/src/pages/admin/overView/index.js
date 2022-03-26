@@ -64,11 +64,6 @@ export default function OverView(){
     }
 
     const viewAllProducts = async() => {
-        // await getAllProducts()
-        // .then((res) => {
-        //     setTopProducts(res.products);
-        // })
-        // .catch((err) => console.log(err));
         navigate('/admin/products/all');
     }
 
@@ -83,7 +78,7 @@ export default function OverView(){
     const viewAllUsers = async() => {
         await getAllUsers()
         .then((res) => {
-            setUsers(res.users);
+            setUsers(res);
         })
         .catch((err) => console.log(err));
     }

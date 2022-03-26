@@ -18,6 +18,7 @@ import AllUsers from "../pages/admin/users/allUsers";
 import AdminSignIn from "../pages/admin/signIn";
 import AdminSignUp from '../pages/admin/signUp';
 import UserAccount from "../pages/admin/users/userAccount";
+import EditUserAccount from '../pages/admin/users/editUserAccount';
 
 const Routers = () => {
 
@@ -100,10 +101,9 @@ const Routers = () => {
                   </UserAccount>
                 </Admin>
             }/>
-            <Route exact path="/admin/users/detail" element={
+            <Route exact path="/admin/users/detail/:id" element={
                 <Admin>
-                  <UserAccount>
-                  </UserAccount>
+                  <EditUserAccount />
                 </Admin>
             }/>
         </Routes>

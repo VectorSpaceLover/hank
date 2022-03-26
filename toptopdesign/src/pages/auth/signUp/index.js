@@ -267,7 +267,7 @@ export default function SignUp({setSigned, setOpenSignup, setOpenSignin}){
 
     const handleSuccess = () => {
         setSuccessOpen(false);
-        navigate('/');
+        // setOpenSignup(false);
     }
 
     const handleForgot = async() => {

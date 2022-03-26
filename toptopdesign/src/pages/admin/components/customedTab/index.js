@@ -32,17 +32,22 @@ const AntTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) =
   },
 }));
 
-export default function CustomedTabs() {
+export default function CustomedTabs({handleTabs}) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    handleTabs(newValue);
   };
 
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ bgcolor: '#fff' }}>
-        <AntTabs value={value} onChange={handleChange} aria-label="ant example">
+        <AntTabs 
+          value={value} 
+          onChange={handleChange} 
+          aria-label="ant example"
+        >
           <AntTab label="All" />
           <AntTab label="New" />
           <AntTab label="Active" />

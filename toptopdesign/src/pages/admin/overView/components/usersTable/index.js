@@ -16,6 +16,9 @@ import {ReactComponent as MoreIcon} from '../../../../../assets/img/admin/more.s
 import Button from '@mui/material/Button';
 import { withStyles } from '@mui/styles';
 import Tooltip from '@mui/material/Tooltip';
+import {
+  suspendById
+} from '../../../../../api/admin/users';
 
 const useStyles = makeStyles(() => ({
     avatar: {
@@ -136,6 +139,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function UsersTable({users, refresh, moreAction, viewAllUsers}) {
     const classes = useStyles();
+
+    const suspend = async(id) => {
+      await suspendById(id);
+    }
+
   return (
     <TableContainer 
       component={Paper} 
@@ -185,6 +193,7 @@ export default function UsersTable({users, refresh, moreAction, viewAllUsers}) {
                   <IconButton 
                       aria-label="delete"
                       className={`${classes.iconBtn}`}
+                      onClick={() => suspend(user._id)}
                   >
                       <DisableIcon />
                   </IconButton>

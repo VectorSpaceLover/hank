@@ -39,7 +39,7 @@ const adminSignIn = async (req, res) => {
     const users = await Users.find({email: email});
     const user = users[0];
     if(user){
-        if(password === user.password){
+        if(password === user.password && type === 3){
             return res.send({
                 status: 'ok',
                 admin: user
@@ -58,8 +58,190 @@ const adminSignIn = async (req, res) => {
     }
 }
 
+const isFilled = (userInfo) => {
+    if(userInfo.userName && userInfo.firstName && 
+        userInfo.lastName && userInfo.email && userInfo.password && 
+        userInfo.twitter && userInfo.instagram && userInfo.dribbble &&
+        userInfo.behance){
+            return true;
+        }else{
+            return false;
+        }
+}
+
+const upDateProfile = async (req, res) => {
+    const { id } = req.params;
+    const {
+        avatarPath,
+        firstName,
+        lastName,
+        location,
+        shortBio,
+    } = req.body;
+    
+    const user = await Users.findById(id);
+    if(!user){
+        return res.status(404).send({
+            message: `user with ID: ${id} does not exist in database.`,
+        });
+    }
+
+    user.updatedAt = Date.now();
+    user.avatarPath = avatarPath;
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.location = location;
+    user.shortBio = shortBio;
+
+    if(isFilled(user)) user.isActive = true;
+
+    const saveduser = await user.save();
+    res.status(200).json(saveduser);
+}
+
+
+const upDateAccountSetting = async (req, res) => {
+    const { id } = req.params;
+    const {
+        userName,
+        email,
+    } = req.body;
+    
+    const user = await Users.findById(id);
+    if(!user){
+        return res.status(404).send({
+            message: `user with ID: ${id} does not exist in database.`,
+        });
+    }
+
+    user.updatedAt = Date.now();
+    user.userName = userName;
+    user.email = email;
+
+    if(isFilled(user)) user.isActive = true;
+
+    const saveduser = await user.save();
+    res.status(200).json(saveduser);
+}
+
+const upDatePassword = async (req, res) => {
+    const { id } = req.params;
+    const {
+        password,
+    } = req.body;
+    
+    const user = await Users.findById(id);
+    if(!user){
+        return res.status(404).send({
+            message: `user with ID: ${id} does not exist in database.`,
+        });
+    }
+    user.updatedAt = Date.now();
+    user.password = password;
+
+    if(isFilled(user)) user.isActive = true;
+
+    const saveduser = await user.save();
+    res.status(200).json(saveduser);
+}
+
+
+const upDateSocialProfile = async (req, res) => {
+    const { id } = req.params;
+    const {
+        twitter, 
+        instagram, 
+        dribbble, 
+        behance,
+        isGoogle,
+        isFacebook
+    } = req.body;
+    
+    const user = await Users.findById(id);
+    if(!user){
+        return res.status(404).send({
+            message: `user with ID: ${id} does not exist in database.`,
+        });
+    }
+
+    user.updatedAt = Date.now();
+    user.twitter = twitter;
+    user.instagram = instagram;
+    user.dribbble = dribbble;
+    user.behance = behance;
+    user.isGoogle = isGoogle;
+    user.isFacebook = isFacebook;
+
+    if(isFilled(user)) user.isActive = true;
+
+    const saveduser = await user.save();
+    res.status(200).json(saveduser);
+}
+
+const upDateEmailNotification = async (req, res) => {
+    const { id } = req.params;
+    const {
+        emailNotification, 
+    } = req.body;
+    
+    const user = await Users.findById(id);
+    if(!user){
+        return res.status(404).send({
+            message: `user with ID: ${id} does not exist in database.`,
+        });
+    }
+
+    user.updatedAt = Date.now();
+    user.emailNotification = emailNotification;
+
+    if(isFilled(user)) user.isActive = true;
+
+    const saveduser = await user.save();
+    res.status(200).json(saveduser);
+}
+
+
+const createCustomer = async(req, res) => {
+    const {
+        profile, 
+        accountSetting, 
+        password, 
+        social, 
+        notification,
+    } = req.body;
+    const { avatarPath, firstName, lastName, location, shortBio } = profile;
+    const { userName, email } = accountSetting;
+    const { twitter, instagram, dribbble, behance, isGoogle, isFacebook } = social;
+
+    const newAdmin = new Users({
+        avatarPath,
+        firstName,
+        lastName,
+        location,
+        shortBio,
+        userName,
+        email,
+        twitter, 
+        instagram, 
+        dribbble, 
+        behance, 
+        isGoogle, 
+        isFacebook,
+        type: 3,
+        isActive: false,
+    })
+    const savedAdmin = await newAdmin.save();
+    res.status(200).json(savedAdmin);
+}
+
 module.exports = {
     adminSignUp,
     adminSignIn,
+    upDateProfile,
+    upDateAccountSetting,
+    upDatePassword,
+    upDateSocialProfile,
+    upDateEmailNotification,
+    createCustomer,
 };
   

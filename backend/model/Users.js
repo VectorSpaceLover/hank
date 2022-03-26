@@ -15,7 +15,7 @@ const usersSchema = new mongoose.Schema({
   },
   type: {
     type: Number,
-    required: false,
+    required: true,
   },
   email: {
     type: String,
@@ -71,7 +71,7 @@ const usersSchema = new mongoose.Schema({
   },
   isActive: {
     type: Boolean,
-    required: false,
+    required: true,
   },
   createdDate: {
     type: Date,

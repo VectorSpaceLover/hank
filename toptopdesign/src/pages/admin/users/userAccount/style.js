@@ -24,13 +24,13 @@ export const Styles = styled.div`
         }
         .account-body{
             display: flex;
+            padding-bottom: 83px;
             .left-panel{
                 width: calc(100% - 400px);
                 height: 752px;
                 .left-panel-footer{
                     display: flex;
                     padding-top: 36px;
-                    padding-bottom: 83px;
                 }
                 .ml-24{
                     margin-left: 24px;

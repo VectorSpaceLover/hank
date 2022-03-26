@@ -48,7 +48,6 @@ const getUserInfoById = async (req, res) => {
             user: [],
         });
     }
-
 }
 
 const uploadAvatar = async (req, res) => {
@@ -101,6 +100,8 @@ const signUpWithEmail = async (req, res) => {
     const newUsers = new Users({
         email: userEmail,
         password: password,
+        type: 0,
+        isActive: false,
     })
 
     const savedUser = await newUsers.save();
@@ -125,6 +126,8 @@ const signUpWithGoogle = async(req, res) => {
         email: email,
         password: '123456',
         isGoogle: true,
+        type: 0,
+        isActive: false,
     })
 
     const savedUser = await newUsers.save();
@@ -150,6 +153,8 @@ const signUpWithFacebook = async(req, res) => {
         email: email,
         password: '123456',
         isFacebook: true,
+        type: 0,
+        isActive: false,
     })
 
     const savedUser = await newUsers.save();
@@ -484,7 +489,7 @@ const Sendblue = async (email, link) => {
       await request(options, function (error, response, body) {
           console.log(body);
       });
-  };
+};
 
 const forgetsendmail = async (req, res) => {
     const { email } = req.body;
@@ -585,12 +590,64 @@ const getAllUsers = async (req, res) => {
     const query = {};
     const sort = { createdDate: 1 };
     const users = await Users.find(query).sort(sort);
-    return res.send({
-        status: 'ok',
-        users: users,
-    });
+    // return res.send({
+    //     status: 'ok',
+    //     users: users,
+    // });
+    res.status(200).json(users);
 }
 
+const deleteUsers = async(req, res) => {
+    await Users.deleteMany({});
+}
+
+const getNewUsers = async(req, res) => {
+    const date = new Date();
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    const users = await Users.find({createdDate: {$gte: firstDay, $lt: lastDay}});
+    res.status(200).json(users);
+}
+
+const getActiveUsers = async (req, res) => {
+    const query = { isActive: true };
+    const sort = { createdDate: 1 };
+    const users = await Users.find(query).sort(sort);
+    res.status(200).json(users);
+}
+
+const getSuspendedUsers = async (req, res) => {
+    const query = { isActive: false };
+    const sort = { createdDate: 1 };
+    const users = await Users.find(query).sort(sort);
+    res.status(200).json(users);
+}
+
+const suspendById = async (req, res) => {
+    const { id } = req.body;
+    const users = await Users.find({_id: id});
+    if(users && users.length > 0){
+        const user = users[0];
+        user.isActive = false;
+        const savedUser = await user.save()
+        res.status(200).json(savedUser);
+    }else{
+        res.status(404).json('dont exist');
+    }
+}
+
+const unSuspendById = async (req, res) => {
+    const { id } = req.body;
+    const users = await Users.find({_id: id});
+    if(users && users.length > 0){
+        const user = users[0];
+        user.isActive = true;
+        const savedUser = await user.save()
+        res.status(200).json(savedUser);
+    }else{
+        res.status(404).json('dont exist');
+    }
+}
 module.exports = {
     getUserInfoById,
     uploadAvatar,
@@ -613,5 +670,11 @@ module.exports = {
     getTotalUserCount,
     getTopUsers,
     getAllUsers,
+    deleteUsers,
+    getNewUsers,
+    getActiveUsers,
+    getSuspendedUsers,
+    suspendById,
+    unSuspendById
 };
   

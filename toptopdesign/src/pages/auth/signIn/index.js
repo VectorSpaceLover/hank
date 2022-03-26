@@ -1,5 +1,5 @@
 import { Styles, ForgotStyle } from "./style";   
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import { ReactComponent as GoogleIcon } from '../../../assets/img/account/google.svg';

@@ -17,7 +17,8 @@ import { ReactComponent as NotificationIcon } from '../assets/img/admin/notifica
 import { ReactComponent as NotificationFocusIcon } from '../assets/img/admin/notification_focus.svg';
 import { ReactComponent as PasswordIcon } from '../assets/img/admin/password.svg';
 import { ReactComponent as PasswordFocusIcon } from '../assets/img/admin/password_focus.svg';
-
+import { ReactComponent as AccountCollectionIcon } from '../assets/img/admin/account_collection.svg';
+import { ReactComponent as AccountCollectionFocusIcon } from '../assets/img/admin/account_collection_focus.svg';
 
 export const allPatternItems = [
     {
@@ -666,5 +667,44 @@ export const accountBar = [
         icon: NotificationIcon,
         focusIcon: NotificationFocusIcon,
         path: 'notification',
+    }
+]
+
+export const editAccountBar = [
+    {
+        label: 'Profile',
+        icon: ProfileIcon,
+        focusIcon: ProfileFocusIcon,
+        path: 'profile',
+    },
+    {
+        label: 'Account Settings',
+        icon: NotificationIcon,
+        focusIcon: NotificationFocusIcon,
+        path: 'accountsetting',
+    },
+    {
+        label: 'Passwrods',
+        icon: PasswordIcon,
+        focusIcon: PasswordFocusIcon,
+        path: 'password',
+    },
+    {
+        label: 'Social Profile',
+        icon: NotificationIcon,
+        focusIcon: NotificationFocusIcon,
+        path: 'social',
+    },
+    {
+        label: 'Notification Settings',
+        icon: NotificationIcon,
+        focusIcon: NotificationFocusIcon,
+        path: 'notification',
+    },
+    {
+        label: 'Collections',
+        icon: AccountCollectionIcon,
+        focusIcon: AccountCollectionFocusIcon,
+        path: 'collection',
     }
 ]
