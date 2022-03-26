@@ -223,11 +223,10 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function UserTable({users, getInitialData}) {
+export default function UserTable({users, getInitialData, selected, setSelected}) {
     const navigate = useNavigate();
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
-    const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(8);
     const [selectedRow, setSelectedRow] = useState(null);
@@ -242,7 +241,7 @@ export default function UserTable({users, getInitialData}) {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-        const newSelecteds = users.map((n) => n.email);
+        const newSelecteds = users.map((n) => n._id);
         setSelected(newSelecteds);
         return;
         }
@@ -336,7 +335,7 @@ export default function UserTable({users, getInitialData}) {
                     {stableSort(users, getComparator(order, orderBy))
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map((row, index) => {
-                        const isItemSelected = isSelected(row.email);
+                        const isItemSelected = isSelected(row._id);
                         const labelId = `enhanced-table-checkbox-${index}`;
                         return (
                             <StyledTableRow
@@ -357,7 +356,7 @@ export default function UserTable({users, getInitialData}) {
                                             },
                                         }}
                                         // onChange={handleChange}
-                                        onClick={(event) => handleClick(event, row.email)}
+                                        onClick={(event) => handleClick(event, row._id)}
                                     />
                                 </StyledTableCell>
                                 <StyledIDTableCell

@@ -14,6 +14,7 @@ import {
     getActiveUsers,
     getNewUsers,
     getSuspendedUsers,
+    deleteUsers,
 } from '../../../../api/admin/users';
 
 const DeleteButton = withStyles((theme) => ({
@@ -74,13 +75,15 @@ export default function AllUsers(){
     const navigate = useNavigate();
     const [keyword, setKeyword] = useState('');
     const [users, setUsers] = useState([]);
+    const [selected, setSelected] = useState([]);
 
     const searchUser = () => {
 
     }
 
-    const deleteUser = () => {
-
+    const deleteUser = async() => {
+       const res = await deleteUsers(selected);
+       setUsers(res);
     }
 
     const handleTabs = async (val) => {
@@ -139,7 +142,9 @@ export default function AllUsers(){
             {users && users.length > 0 && 
                 <UserTable 
                     users={users}
+                    selected={selected}
                     getInitialData={getInitialData}
+                    setSelected={setSelected}
                 />
             }
         </Styles>

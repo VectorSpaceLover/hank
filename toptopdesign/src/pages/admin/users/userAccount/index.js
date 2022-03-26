@@ -102,18 +102,38 @@ export default function UserAccount(){
                 });
                 return;
             }
-            const res = await uploadImage();
-            const result = await createCustomer(
-                { ...profile, avatarPath: res?.filePath }, 
-                accountSetting, 
-                newPassword, 
-                social, 
-                notification
-            );
-            if(result.status === 200){
-                navigate('/admin/users/');
+
+            function isAlphaOrParen(str) {
+                return /[a-zA-Z]/.test(str);
+            }
+            
+            function containsNumber(str) {
+                return /\d/.test(str);
+            }
+            if(isAlphaOrParen(newPassword) && containsNumber(newPassword) && newPassword.length >= 8){
+                const res = await uploadImage();
+                const result = await createCustomer(
+                    { ...profile, avatarPath: res?.filePath }, 
+                    accountSetting, 
+                    newPassword, 
+                    social, 
+                    notification
+                );
+                if(result.status === 200){
+                    navigate('/admin/users/');
+                }else{
+                    toast.warn('Failed!', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
             }else{
-                toast.warn('Failed!', {
+                toast.warn('Password type error!', {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: false,

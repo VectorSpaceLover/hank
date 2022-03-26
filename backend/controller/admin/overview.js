@@ -228,6 +228,17 @@ const createCustomer = async(req, res) => {
     res.status(200).json(savedAdmin);
 }
 
+const deleteUser = async(req, res) => {
+    const {
+        selected, 
+    } = req.body;
+    selected.map(async(item) => {
+        await Users.findByIdAndDelete(item);
+    })
+
+    const users = await Users.find({});
+    res.status(200).json(users);
+}
 module.exports = {
     adminSignUp,
     adminSignIn,
@@ -237,5 +248,6 @@ module.exports = {
     upDateSocialProfile,
     upDateEmailNotification,
     createCustomer,
+    deleteUser,
 };
   

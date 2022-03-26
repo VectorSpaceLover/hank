@@ -147,3 +147,13 @@ export const createCustomer = async (
     );
     return res;
 }
+
+export const deleteUsers = async (selected) => {
+    const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/admin/delete`, 
+        {
+            selected
+        }
+    );
+    return res.data;
+}
