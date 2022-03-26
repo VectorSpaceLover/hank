@@ -88,6 +88,19 @@ export default function UserAccount(){
         return await uploadAvatar(formData);
     }, [profile?.userAvatar])
 
+    const goToMain = () => {
+        navigate('/admin/users/');
+    }
+
+    function ValidateEmail(input) {
+        var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (input.match(validRegex)) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
     const next = async() => {
         if(isFulled){
             if(oldPassword !== newPassword){
@@ -102,7 +115,18 @@ export default function UserAccount(){
                 });
                 return;
             }
-
+            if(!ValidateEmail(accountSetting?.email)){
+                toast.warn('Please type correct email!', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                return;
+            }
             function isAlphaOrParen(str) {
                 return /[a-zA-Z]/.test(str);
             }
@@ -120,7 +144,16 @@ export default function UserAccount(){
                     notification
                 );
                 if(result.status === 200){
-                    navigate('/admin/users/');
+                    await toast.warn('user created!', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    await setTimeout(goToMain, 3000);
                 }else{
                     toast.warn('Failed!', {
                         position: "top-right",

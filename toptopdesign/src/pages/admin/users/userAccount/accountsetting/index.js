@@ -29,6 +29,7 @@ export default function AccountSetting({setAccountSetting, accountSetting}){
                     />
                     <CustomedInput
                         label='Login Email*'
+                        type='email'
                         inputValue={email}
                         inputHandler={setEmail}
                         placeholderName="Your first name"

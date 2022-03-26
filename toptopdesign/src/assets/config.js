@@ -651,7 +651,7 @@ export const accountBar = [
         path: 'accountsetting',
     },
     {
-        label: 'Passwrods*',
+        label: 'Passwords*',
         icon: PasswordIcon,
         focusIcon: PasswordFocusIcon,
         path: 'password',
@@ -684,7 +684,7 @@ export const editAccountBar = [
         path: 'accountsetting',
     },
     {
-        label: 'Passwrods*',
+        label: 'Passwords*',
         icon: PasswordIcon,
         focusIcon: PasswordFocusIcon,
         path: 'password',
