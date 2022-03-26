@@ -21,7 +21,7 @@ const adminSignUp = async(req, res) => {
         lastName,
         password,
         type: 3,
-        isActive: false,
+        isActive: true,
     })
 
     const savedAdmin = await newAdmin.save();

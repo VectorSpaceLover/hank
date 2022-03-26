@@ -11,6 +11,8 @@ import Password from './password';
 import Social from './social';
 import NotificationSetting from './notification';
 import { createCustomer, uploadAvatar } from '../../../../api/admin/users';
+import { ToastContainer, toast } from 'react-toastify';
+import { injectStyle } from "react-toastify/dist/inject-style";
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -66,13 +68,18 @@ export default function UserAccount(){
     const [currentIdx, setCurrentIdx] = useState(0);
     const [profile, setProfile] = useState({});
     const [accountSetting, setAccountSetting] = useState({});
-    const [password, setPassword] = useState('');
+    const [oldPassword, setOldPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const [social, setSocial] = useState({});
     const [notification, setNotification] = useState([false, false, false]);
     const [isFulled, setIsFulled] = useState(false);
 
     const handleClick = (idx) => {
         setCurrentIdx(idx);
+    }
+
+    if (typeof window !== "undefined") {
+        injectStyle();
     }
 
     const uploadImage = useCallback(async() => {
@@ -82,36 +89,59 @@ export default function UserAccount(){
     }, [profile?.userAvatar])
 
     const next = async() => {
-        if(currentIdx < accountBar.length - 1)
-        {
-            setCurrentIdx(currentIdx + 1);
-            // setIsFulled(false);
-        }
-        else{
+        if(isFulled){
+            if(oldPassword !== newPassword){
+                toast.warn('Password not matched!', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                return;
+            }
             const res = await uploadImage();
-            await createCustomer(
+            const result = await createCustomer(
                 { ...profile, avatarPath: res?.filePath }, 
                 accountSetting, 
-                password, 
+                newPassword, 
                 social, 
                 notification
             );
-            navigate('/admin/users/');
+            if(result.status === 200){
+                navigate('/admin/users/');
+            }else{
+                toast.warn('Failed!', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+        }else{
+            if(currentIdx < accountBar.length - 1)
+            {
+                setCurrentIdx(currentIdx + 1);
+            }
         }
     }
 
     useEffect(() => {
         if(profile?.userAvatarPath && profile?.firstName && profile?.lastName && profile?.location && profile?.shortBio &&
             accountSetting?.userName && accountSetting?.email &&
-            password && social?.twitter && social?.instagram && social?.dribbble && social?.behance)
+            oldPassword && newPassword && social?.twitter && social?.instagram && social?.dribbble && social?.behance)
             setIsFulled(true);
         else
             setIsFulled(false);
-    }, [accountSetting?.email, accountSetting?.userName, password, profile?.firstName, profile?.lastName, profile?.location, profile?.shortBio, profile?.userAvatarPath, social.behanc, social?.behance, social?.dribbble, social?.instagram, social?.twitter])
+    }, [accountSetting?.email, accountSetting?.userName, newPassword, oldPassword, profile?.firstName, profile?.lastName, profile?.location, profile?.shortBio, profile?.userAvatarPath, social.behanc, social?.behance, social?.dribbble, social?.instagram, social?.twitter])
 
     return (
         <Styles>
-            {console.log(isFulled)}
             <div className='account-container'>
                 <div className='account-header'>
                     <div className='first-line'>
@@ -140,9 +170,10 @@ export default function UserAccount(){
                         }
                         {currentIdx === 2 && 
                             <Password 
-                                password={password}
-                                setPassword={setPassword}
-                                // setIsFulled={setIsFulled}
+                                oldPassword={oldPassword}
+                                newPassword={newPassword}
+                                setOldPassword={setOldPassword}
+                                setNewPassword={setNewPassword}
                             />
                         }
                         {currentIdx === 3 && 
@@ -176,6 +207,7 @@ export default function UserAccount(){
                                     Create
                                 </CreateButton>
                             }
+                            
                         </div>
                     </div>
                     <div className='right-panel'>
@@ -200,6 +232,7 @@ export default function UserAccount(){
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </Styles>
     )
 }

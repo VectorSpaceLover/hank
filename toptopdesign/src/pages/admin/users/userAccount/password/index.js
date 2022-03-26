@@ -2,10 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Styles } from "./passwordStyle";
 import CustomedInput from '../input';
 
-export default function Password({setPassword, password}){
+export default function Password({oldPassword, newPassword, setOldPassword, setNewPassword}){
 
-    const [oldPassword, setOldPassword] = useState(password);
-    const [newPassword, setNewPassword] = useState(password);
     const [isAllowed, setAllowed] = useState(false);
     
     const handleChange = (value) => {
@@ -22,11 +20,6 @@ export default function Password({setPassword, password}){
         if(isAlphaOrParen(value) && containsNumber(ck) && ck.length >= 8) setAllowed(true);
         else setAllowed(false);
     }
-
-    useEffect(() => {
-        if(isAllowed)
-            setPassword(newPassword);
-    }, [isAllowed, newPassword, setPassword])
 
     // useEffect(() => {
     //     if(isAllowed && (newPassword === oldPassword))

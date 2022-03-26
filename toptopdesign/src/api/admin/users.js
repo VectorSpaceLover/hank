@@ -145,5 +145,5 @@ export const createCustomer = async (
             notification
         }
     );
-    return res.data;
+    return res;
 }

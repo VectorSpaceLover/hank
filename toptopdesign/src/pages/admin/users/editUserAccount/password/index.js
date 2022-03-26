@@ -2,6 +2,8 @@ import { forwardRef, useCallback, useEffect, useState, useImperativeHandle } fro
 import { Styles } from "./passwordStyle";
 import CustomedInput from '../input';
 import { upDatePassword } from '../../../../../api/admin/users';
+import { ToastContainer, toast } from 'react-toastify';
+import { injectStyle } from "react-toastify/dist/inject-style";
 
 const Password = forwardRef((props, ref) => {
     const { setAccountInfo, accountInfo, setIsFulled, next } = props;
@@ -9,6 +11,10 @@ const Password = forwardRef((props, ref) => {
     const [newPassword, setNewPassword] = useState('');
     const [isAllowed, setAllowed] = useState(false);
     
+    if (typeof window !== "undefined") {
+        injectStyle();
+    }
+
     const handleChange = (value) => {
         setOldPassword(value);
         const ck =value;
@@ -30,7 +36,28 @@ const Password = forwardRef((props, ref) => {
                 const result = await upDatePassword(accountInfo._id, newPassword);
                 setAccountInfo(result);
                 next();
+            }else{
+                toast.warn('Password type error!', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
+        }
+        else{
+            toast.warn('Password not matched!', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     }, [accountInfo._id, isAllowed, newPassword, next, oldPassword, setAccountInfo])
 
@@ -66,6 +93,7 @@ const Password = forwardRef((props, ref) => {
                     />
                 </div>
             </div>
+            <ToastContainer />
         </Styles>
     )
 })

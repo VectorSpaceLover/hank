@@ -111,6 +111,7 @@ const StyledIDTableCell = styled(TableCell)(({ theme }) => ({
         border: 'none',
         padding: 0,
         borderCollapse: 'initial',
+        cursor: 'pointer',
     }
 }));
 
@@ -345,7 +346,6 @@ export default function UserTable({users, getInitialData}) {
                                 tabIndex={-1}
                                 key={row._id}
                                 selected={isItemSelected}
-                                onClick={() => navigate(`/admin/users/detail/${row._id}`)}
                             >
                                 <StyledTableCell padding="checkbox">
                                     <Checkbox 
@@ -365,6 +365,7 @@ export default function UserTable({users, getInitialData}) {
                                     id={labelId}
                                     scope="row"
                                     padding="none"
+                                    onClick={() => navigate(`/admin/users/detail/${row._id}`)}
                                 >
                                 <span>{row._id}</span>
                                 </StyledIDTableCell>
