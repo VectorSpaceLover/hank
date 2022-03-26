@@ -203,15 +203,15 @@ const createCustomer = async(req, res) => {
         social, 
         notification,
     } = req.body;
-    const { avatarPath, firstName, lastName, location, shortBio } = profile;
+    const { avatarPath, firstName, lastName } = profile;
     const { userName, email } = accountSetting;
 
     const newAdmin = new Users({
         avatarPath,
         firstName,
         lastName,
-        location,
-        shortBio,
+        location: profile?.location,
+        shortBio: profile?.shortBio,
         userName,
         email,
         twitter: social?.twitter, 

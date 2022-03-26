@@ -185,7 +185,7 @@ export default function UserAccount(){
     }
 
     useEffect(() => {
-        if(profile?.userAvatarPath && profile?.firstName && profile?.lastName && profile?.location && profile?.shortBio &&
+        if(profile?.userAvatarPath && profile?.firstName && profile?.lastName &&
             accountSetting?.userName && accountSetting?.email &&
             oldPassword && newPassword)
             setIsFulled(true);
