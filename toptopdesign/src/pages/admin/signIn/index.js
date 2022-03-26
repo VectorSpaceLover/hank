@@ -84,9 +84,10 @@ export default function AdminSignIn () {
 
     const signIn = async() => {
         const res = await adminSignIn(email, password);
-        console.log(res);
-        if(res.status === 'ok')
+        if(res.status === 200){
+            localStorage.setItem('adminAuth', JSON.stringify(res.data));
             navigate('/admin/overview');
+        }
     }
 
     const signUp = () => {
@@ -103,13 +104,13 @@ export default function AdminSignIn () {
                         <div className="type">
                             Sign in
                         </div>
-                        <div className="account">
+                        {/* <div className="account">
                             <span className="user">New user?</span>
                             <span 
                                 className="create"
                                 onClick={signUp}
                             >Create an acount </span>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="form-group">
                         <CustomedInput 

@@ -299,6 +299,11 @@ export default function UserTable({users, getInitialData}) {
         closeGiftMenu()
     }
 
+    const goToCollection = () => {
+        navigate(`/admin/collections`); 
+        closeGiftMenu()
+    }
+
     const handleSuspend = async() => {
         if(selectedRow.isActive){
             await suspendById(selectedRow._id);
@@ -363,7 +368,6 @@ export default function UserTable({users, getInitialData}) {
                                 <span>{row._id}</span>
                                 </StyledIDTableCell>
                                 <StyledBoldTableCell align="left">
-                                    {console.log(row)}
                                     {row?.avatarPath?
                                         <img 
                                             src={`${process.env.REACT_APP_UPLOAD_URL}${row?.avatarPath}`} 
@@ -419,7 +423,7 @@ export default function UserTable({users, getInitialData}) {
                                                 View Details
                                             </MenuItem>
                                             <Divider/>
-                                            <MenuItem onClick={closeGiftMenu} disableRipple>
+                                            <MenuItem onClick={goToCollection} disableRipple>
                                                 View Collection
                                             </MenuItem>
                                             <Divider/>

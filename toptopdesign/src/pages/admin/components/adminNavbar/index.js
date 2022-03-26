@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Styles } from "./style"
 import IconButton from '@mui/material/IconButton';
 import {ReactComponent as DropIcon} from '../../../../assets/img/admin/drop.svg';
@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 export default function AdminNavbar(){
     const navigate = useNavigate();
     const [anchorGift, setAnchorGift] = useState(null);
+    const [auth, setAuth] = useState(null);
+
     const openGift = Boolean(anchorGift);
     const openGiftMenu = (event) => {
         setAnchorGift(event.currentTarget);
@@ -19,13 +21,24 @@ export default function AdminNavbar(){
     const signOut = () => {
         navigate('/admin/signin');
     }
+
+    useEffect(() => {
+        try{
+            const adminAuth = JSON.parse(localStorage.getItem('adminAuth'));
+            console.log(adminAuth);
+            setAuth(adminAuth);
+        }catch(err){
+            console.log(err);
+        }
+    }, [])
     return (
         <Styles>
             <div className="admin-nav-container">
                 <div className="user-info">
-                    <img className="avatar" src='/img/fedir.png' alt=""/>
+                    {auth?.avatarPath?<img className="avatar" src={`${process.env.REACT_APP_UPLOAD_URL}${auth?.avatarPath}`} alt=""/>:<div className='avatar' style={{backgroundColor: 'var(--txt-gray)'}}></div>}
+                    
                     <div className="user-name">
-                        {`Maxbert`}
+                        {auth?.userName?auth.userName:`${auth?.firstName}`}
                     </div>
                     <IconButton 
                         aria-label="delete"

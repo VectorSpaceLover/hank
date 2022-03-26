@@ -19,7 +19,10 @@ export default function AdminSignUp () {
 
     const signUp = async() => {
         const res = await adminSignUp(userEmail, firstName, lastName, password);
-        navigate('/admin/overview');
+        if(res.status === 200){
+            localStorage.setItem('adminAuth', JSON.stringify(res));
+            navigate('/admin/overview');
+        }
     }
 
     return (

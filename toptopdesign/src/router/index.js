@@ -106,6 +106,12 @@ const Routers = () => {
                   <EditUserAccount />
                 </Admin>
             }/>
+            <Route exact path="/admin/collections" element={
+                <Admin>
+                  <UserAccount>
+                  </UserAccount>
+                </Admin>
+            }/>
         </Routes>
     </Router>
   )

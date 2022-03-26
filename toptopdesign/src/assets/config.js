@@ -595,7 +595,7 @@ export const sidebar = [
         label: 'Collections',
         icon: CollectionIcon,
         focusIcon: OverViewIcon,
-        path: 'collections',
+        path: '/admin/collections',
     },
     {
         label: 'Settings',

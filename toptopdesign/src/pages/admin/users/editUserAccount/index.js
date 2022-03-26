@@ -170,6 +170,7 @@ export default function EditUserAccount(){
                     }else{
                         if(currentIdx === 4){
                             refNotification.current.saveOption();
+                            navigate('/admin/users/');
                         }
                     }
                 }

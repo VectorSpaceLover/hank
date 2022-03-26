@@ -20,15 +20,12 @@ const adminSignUp = async(req, res) => {
         firstName,
         lastName,
         password,
-        type: 3
+        type: 3,
+        isActive: false,
     })
 
     const savedAdmin = await newAdmin.save();
-
-    return res.send({
-        status: 'ok',
-        admin: savedAdmin
-    });
+    res.status(200).json(savedAdmin);
 }
 
 const adminSignIn = async (req, res) => {
@@ -39,11 +36,8 @@ const adminSignIn = async (req, res) => {
     const users = await Users.find({email: email});
     const user = users[0];
     if(user){
-        if(password === user.password && type === 3){
-            return res.send({
-                status: 'ok',
-                admin: user
-            })
+        if(password === user.password && user.type === 3){
+            res.status(200).json(user);
         }else{
             return res.send({
                 status: 'error',

@@ -85,7 +85,7 @@ export const adminSignUp = async(email, firstName, lastName, password) => {
             password,
         }
     );
-    return res.data;
+    return res;
 }
 
 
@@ -97,5 +97,5 @@ export const adminSignIn = async(email, password) => {
             password,
         }
     );
-    return res.data;
+    return res;
 }
