@@ -639,19 +639,19 @@ export const adminbanner = [
 
 export const accountBar = [
     {
-        label: 'Profile',
+        label: 'Profile*',
         icon: ProfileIcon,
         focusIcon: ProfileFocusIcon,
         path: 'profile',
     },
     {
-        label: 'Account Settings',
+        label: 'Account Settings*',
         icon: NotificationIcon,
         focusIcon: NotificationFocusIcon,
         path: 'accountsetting',
     },
     {
-        label: 'Passwrods',
+        label: 'Passwrods*',
         icon: PasswordIcon,
         focusIcon: PasswordFocusIcon,
         path: 'password',
@@ -672,19 +672,19 @@ export const accountBar = [
 
 export const editAccountBar = [
     {
-        label: 'Profile',
+        label: 'Profile*',
         icon: ProfileIcon,
         focusIcon: ProfileFocusIcon,
         path: 'profile',
     },
     {
-        label: 'Account Settings',
+        label: 'Account Settings*',
         icon: NotificationIcon,
         focusIcon: NotificationFocusIcon,
         path: 'accountsetting',
     },
     {
-        label: 'Passwrods',
+        label: 'Passwrods*',
         icon: PasswordIcon,
         focusIcon: PasswordFocusIcon,
         path: 'password',

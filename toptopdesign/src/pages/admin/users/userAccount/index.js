@@ -116,7 +116,7 @@ export default function UserAccount(){
                     { ...profile, avatarPath: res?.filePath }, 
                     accountSetting, 
                     newPassword, 
-                    social, 
+                    social,
                     notification
                 );
                 if(result.status === 200){
@@ -154,7 +154,7 @@ export default function UserAccount(){
     useEffect(() => {
         if(profile?.userAvatarPath && profile?.firstName && profile?.lastName && profile?.location && profile?.shortBio &&
             accountSetting?.userName && accountSetting?.email &&
-            oldPassword && newPassword && social?.twitter && social?.instagram && social?.dribbble && social?.behance)
+            oldPassword && newPassword)
             setIsFulled(true);
         else
             setIsFulled(false);

@@ -209,7 +209,7 @@ export default function EditUserAccount(){
                 <div style={{display: 'flex', alignItems: 'center', width: '100%', borderBottom: '1px solid #EBEAED'}}>
                     <div className='account-header'>
                         <div className='first-line'>
-                            <span style={{color: '#B6B4BA'}}>{`User / ${accountInfo.userName}`} </span>
+                            <span style={{color: '#B6B4BA', cursor: 'pointer'}} onClick={() => navigate('/admin/users/')}>User</span><span style={{color: '#B6B4BA'}}>{` / ${accountInfo.userName}`} </span>
                             <span>/ Details</span>
                         </div>
                         <div className='second-line'>

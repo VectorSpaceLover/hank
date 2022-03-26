@@ -205,7 +205,6 @@ const createCustomer = async(req, res) => {
     } = req.body;
     const { avatarPath, firstName, lastName, location, shortBio } = profile;
     const { userName, email } = accountSetting;
-    const { twitter, instagram, dribbble, behance, isGoogle, isFacebook } = social;
 
     const newAdmin = new Users({
         avatarPath,
@@ -215,12 +214,12 @@ const createCustomer = async(req, res) => {
         shortBio,
         userName,
         email,
-        twitter, 
-        instagram, 
-        dribbble, 
-        behance, 
-        isGoogle, 
-        isFacebook,
+        twitter: social?.twitter, 
+        instagram: social?.instagram, 
+        dribbble: social?.dribbble, 
+        behance: social?.behance, 
+        isGoogle: social?.isGoogle, 
+        isFacebook: social?.isFacebook,
         type: 3,
         isActive: false,
     })

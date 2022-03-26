@@ -62,9 +62,13 @@ export const Styles = styled.div`
                         .active{
                             color: var(--ocean-blue-pearl);
                         }
+                        
                         .icon{
                             margin-left: auto;
                         }
+                    }
+                    .disable{
+                        background-color: #e6e5e9;
                     }
                 }
             }
