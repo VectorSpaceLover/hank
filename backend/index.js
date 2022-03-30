@@ -28,6 +28,7 @@ app.use(cors({
 app.use(fileUpload());
 
 fs.mkdirsSync('./public/uploads/avatars');
+fs.mkdirsSync('./public/uploads/products');
 
 app.use('/api/products', productsRoute);
 app.use('/api/collection', collectionRoute);

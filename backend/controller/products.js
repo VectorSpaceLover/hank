@@ -1,5 +1,20 @@
 const Products = require('../model/Products');
 const LikedProducts = require('../model/LikedProducts');
+const multer = require('multer');
+let fs = require('fs-extra');
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        console.log(__dirname);
+        fs.mkdirsSync(__dirname + '/uploads/images');
+        cb(null, 'uploads/images');
+    },
+
+    // By default, multer removes file extensions so let's add them back
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
 
 const getProducts = async (req, res) => {
     const mobiles = await Products.find({ type: 'mobile' });
@@ -37,25 +52,21 @@ const searchProducts = async (req, res) => {
 
 const createNewProduct = async (req, res) => {
     const {
-        productName,
-        subName,
-        type,
+        productInfo,
     } = req.body;
-
+    const { productName, category, year, imageList } = productInfo;
     const newProduct = new Products({
-        productName: productName,
-        subName: subName,
-        type: type,
+        productName,
+        category,
+        year,
+        imageList,
+        type: 'web',
         liked: false,
         viewed: false,
     })
 
-  const savedProduct = await newProduct.save();
-
-    return res.send({
-        status: 'ok',
-        data: savedProduct
-    });
+    const savedProduct = await newProduct.save();
+    res.status(200).json(savedProduct);
 }
 
 const deleteProductById = async (req, res) => {
@@ -194,6 +205,39 @@ const getAllNewProducts = async (req, res) => {
         products: products,
     });
 }
+
+const uploadProductImage = async(req, res) => {
+    let upload = multer({ storage: storage}).single('Users_pic');
+    try{
+        upload(req, res, function(err) {
+            const files = req?.files?.images;
+            // req.file contains information of uploaded file
+            // req.body contains information of text fields, if there were any
+            
+            if (req.fileValidationError) {
+                return res.send(req.fileValidationError);
+            }
+            else if (!files || files.length === 0) {
+                return res.send('Please select an image to upload');
+            }
+            else if (err instanceof multer.MulterError) {
+                return res.send(err);
+            }
+            else if (err) {
+                return res.send(err);
+            }
+            let filePaths = [];
+            files.map(file => {
+                const filePath = '/uploads/products/' + Date.now() + file.name;
+                file.mv('./public' + filePath);
+                filePaths.push(filePath);
+            })
+            res.status(200).json(filePaths);
+        });
+    }catch(error){
+        return res.send(error);
+    }
+}
 module.exports = {
     getProducts,
     searchProducts,
@@ -209,5 +253,6 @@ module.exports = {
     getAllProducts,
     getNewProducts,
     getAllNewProducts,
+    uploadProductImage
 };
   

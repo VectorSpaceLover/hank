@@ -19,6 +19,10 @@ import AdminSignIn from "../pages/admin/signIn";
 import AdminSignUp from '../pages/admin/signUp';
 import UserAccount from "../pages/admin/users/userAccount";
 import EditUserAccount from '../pages/admin/users/editUserAccount';
+import CollectionsLayout from "../pages/admin/collections";
+import CollectionDetail from "../pages/admin/collections/detail";
+import AllProductions from "../pages/admin/productions/allProductions";
+import ProductionLayout from "../pages/admin/productions/productionLayout";
 
 const Routers = () => {
 
@@ -106,10 +110,32 @@ const Routers = () => {
                   <EditUserAccount />
                 </Admin>
             }/>
+
+            <Route exact path="/admin/productions/" element={
+                <Admin>
+                  <AllProductions />
+                </Admin>
+            }/>
+            <Route exact path="/admin/productions/add" element={
+                <Admin>
+                  <ProductionLayout />
+                </Admin>
+            }/>
+            <Route exact path="/admin/productions/detail/:id" element={
+                <Admin>
+                  <EditUserAccount />
+                </Admin>
+            }/>
+
             <Route exact path="/admin/collections" element={
                 <Admin>
-                  <UserAccount>
-                  </UserAccount>
+                  <CollectionsLayout>
+                  </CollectionsLayout>
+                </Admin>
+            }/>
+            <Route exact path="/admin/collections/detail/:id" element={
+                <Admin>
+                  <CollectionDetail />
                 </Admin>
             }/>
         </Routes>

@@ -17,6 +17,7 @@ const {
     getAllProducts,
     getNewProducts,
     getAllNewProducts,
+    uploadProductImage,
 } = require('../controller/products');
 
 router.get('/', getProducts);
@@ -29,7 +30,8 @@ router.get('/all', getAllProducts);
 router.get('/new', getNewProducts);
 router.get('/new/all', getAllNewProducts);
 
-router.post('/', createNewProduct);
+router.post('/create', createNewProduct);
+router.post('/upload', uploadProductImage);
 router.post('/add/liked', addLikedProduct);
 router.post('/add/viewed', addViewedProduct);
 

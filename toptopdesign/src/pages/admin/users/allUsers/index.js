@@ -3,10 +3,9 @@ import SearchBox from '../../components/searchBox';
 import {Styles} from './style';
 import { ReactComponent as DeleteRed } from '../../../../assets/img/admin/delete_red.svg';
 import { ReactComponent as AddIcon } from '../../../../assets/img/user/collection/add.svg';
-
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
-import CustomedTabs from '../../components/customedTab';
+import UserTabs from '../../components/userTab';
 import UserTable from './userTable';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -139,7 +138,7 @@ export default function AllUsers(){
                     </AddUser>
                 </div>
             </div>
-            <CustomedTabs handleTabs={handleTabs}/>
+            <UserTabs handleTabs={handleTabs}/>
             {users && users.length > 0 && 
                 <UserTable 
                     users={users}

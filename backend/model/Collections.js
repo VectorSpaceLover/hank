@@ -5,6 +5,14 @@ const collectionsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  author: {
+    type: String,
+    required: false,
+  },
+  count: {
+    type: Number,
+    required: false,
+  },
   description: {
     type: String,
     required: true,
@@ -12,6 +20,10 @@ const collectionsSchema = new mongoose.Schema({
   imageList: {
     type: Array,
     required: false,
+  },
+  isActive: {
+    type: Boolean,
+    required: true,
   },
   createdDate: {
     type: Date,

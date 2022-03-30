@@ -53,12 +53,6 @@ export default function Profile({ setProfile, profile }){
         setProfile({ userAvatar, userAvatarPath, firstName, lastName, location, shortBio});
     }, [firstName, lastName, location, setProfile, shortBio, userAvatar, userAvatarPath])
     
-    // useEffect(() => {
-    //     if(userAvatar && userAvatarPath && firstName && lastName && location && shortBio)
-    //         setIsFulled(true);
-    //     else
-    //         setIsFulled(false);
-    // }, [firstName, lastName, location, setIsFulled, shortBio, userAvatar, userAvatarPath])
     return (
         <Styles>
             <div className="edit-profile-container">

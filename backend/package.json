@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "serve": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -22,5 +22,8 @@
     "path": "^0.12.7",
     "request": "^2.88.2",
     "sib-api-v3-sdk": "^8.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

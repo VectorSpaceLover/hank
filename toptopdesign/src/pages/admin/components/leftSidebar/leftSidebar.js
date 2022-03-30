@@ -129,7 +129,7 @@ export default function LeftSideBar({children}) {
   };
 
   useEffect(() => {
-    if(window.location.href.indexOf('products/all') >= 0){
+    if(window.location.href.indexOf('products/') >= 0){
       setExpanded(['1']);
     }else{
       const urlParams = window.location.href.split("/").pop()
@@ -166,12 +166,12 @@ export default function LeftSideBar({children}) {
                     <StyledChildTreeItem
                       nodeId={(sidebar.length).toString()}
                       labelText="All Products"
-                      onClick={() => navigate(`${item.path}/products/all`)}
+                      onClick={() => navigate(`/admin/productions/`)}
                     />
                     <StyledChildTreeItem
                       nodeId={(sidebar.length + 1).toString()}
                       labelText="Tag Management"
-                      onClick={() => navigate(`${item.path}/tagmanagement`)}
+                      onClick={() => navigate(`/admin/tagmanagement`)}
                     />
                 </React.Fragment>
               }
