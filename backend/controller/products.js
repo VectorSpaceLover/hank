@@ -78,10 +78,9 @@ const deleteProductById = async (req, res) => {
         });
     }
     await Products.findByIdAndDelete(id);
-    return res.send({
-        status: 'ok',
-        deletedId: id,
-    });
+    const products = await Products.find({});
+
+    res.status(200).json(products);
 }
 
 const deleteProducts = async(req, res) => {

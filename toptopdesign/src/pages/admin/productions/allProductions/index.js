@@ -6,7 +6,7 @@ import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import ProductionTable from './productionTable';
 import { useNavigate } from 'react-router-dom';
-import { getAllProducts } from '../../../../api/admin/productions';
+import { getAllProducts, deleteProductById } from '../../../../api/admin/productions';
 
 const AddUser = withStyles((theme) => ({
     root: {
@@ -48,6 +48,12 @@ export default function AllProductions(){
 
     }
 
+    const deleteProduct = async(id) => {
+        const res = await deleteProductById(id);
+        if(res.status === 200)
+            setProductions(res);
+    }
+
     const getInitialData = useCallback(async() => {
         const res = await getAllProducts();
         setProductions(res.products);
@@ -82,6 +88,7 @@ export default function AllProductions(){
                     selected={selected}
                     getInitialData={getInitialData}
                     setSelected={setSelected}
+                    deleteProduct={deleteProduct}
                 />
             }
         </Styles>

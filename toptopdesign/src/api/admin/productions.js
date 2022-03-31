@@ -27,3 +27,7 @@ export const createNewProduct = async (
     );
     return res;
 }
+
+export const deleteProductById = async (id) => {
+    return await axios.delete(`${process.env.REACT_APP_SERVER_URL}/products/${id}`);
+}

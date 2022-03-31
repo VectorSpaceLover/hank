@@ -207,7 +207,6 @@ function EnhancedTableHead(props) {
                     direction={orderBy === 'activeDate' ? order : 'asc'}
                     onClick={createSortHandler('activeDate')}
                 >
-                Last Active Date
                 {orderBy === 'activeDate' ? (
                     <Box component="span" sx={visuallyHidden}>
                     {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
@@ -232,8 +231,9 @@ EnhancedTableHead.propTypes = {
 export default function ProductionTable({ 
     productions, 
     getInitialData, 
-    selected, 
-    setSelected
+    selected,
+    setSelected,
+    deleteProduct
 }) {
     const navigate = useNavigate();
     const [order, setOrder] = useState('asc');
@@ -277,14 +277,7 @@ export default function ProductionTable({
         }
         setSelected(newSelected);
     };
-
-    function convert(str) {
-        var date = new Date(str),
-          mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-          day = ("0" + date.getDate()).slice(-2);
-        return [day, mnth, date.getFullYear()].join("/");
-    }
-
+    
     const handleChangePage = (event, newPage) => {
         setPage(newPage - 1);
     };
@@ -303,11 +296,6 @@ export default function ProductionTable({
 
     const editProduct = () => {
         navigate(`/admin/productions/detail/${selectedRow._id}`); 
-        closeGiftMenu()
-    }
-
-    const deleteProduct = () => {
-
         closeGiftMenu()
     }
 
@@ -383,23 +371,16 @@ export default function ProductionTable({
                                 <StyledTableCell align="left"><span>{row.liked}</span></StyledTableCell>
                                 <StyledTableCell align="left"><span>{row.viewed}</span></StyledTableCell>
                                 <StyledBoldTableCell align="right">
-                                    <div style={{
-                                        display: 'flex', 
-                                        alignItems: 'center',
-                                        width: 150,
-                                        justifyContent: 'space-between'
-                                        }}>
-                                        <span>{convert(row.createdDate)}</span>
-                                        <IconButton onClick={(e) => openGiftMenu(e, row)}>
-                                            <MoreIcon />
-                                        </IconButton>
-                                        <Menu
-                                            anchorEl={anchorGift}
-                                            id="account-menu"
-                                            open={openGift}
-                                            onClose={closeGiftMenu}
-                                            onClick={closeGiftMenu}
-                                            PaperProps={{
+                                    <IconButton onClick={(e) => openGiftMenu(e, row)}>
+                                        <MoreIcon />
+                                    </IconButton>
+                                    <Menu
+                                        anchorEl={anchorGift}
+                                        id="account-menu"
+                                        open={openGift}
+                                        onClose={closeGiftMenu}
+                                        onClick={closeGiftMenu}
+                                        PaperProps={{
                                             elevation: 0,
                                             sx: {
                                                 overflow: 'visible',
@@ -409,22 +390,24 @@ export default function ProductionTable({
                                                 borderRadius: 4,
                                                 padding: '10px',
                                             },
-                                            }}
-                                            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                                        }}
+                                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                                    >
+                                        <MenuItem 
+                                            onClick={() => editProduct()} 
+                                            disableRipple
                                         >
-                                            <MenuItem 
-                                                onClick={() => editProduct()} 
-                                                disableRipple
-                                            >
-                                                Edit
-                                            </MenuItem>
-                                            <Divider/>
-                                            <MenuItem onClick={deleteProduct} disableRipple>
-                                                Delete
-                                            </MenuItem>
-                                        </Menu>
-                                    </div>
+                                            Edit
+                                        </MenuItem>
+                                        <Divider/>
+                                        <MenuItem onClick={() => {
+                                            deleteProduct(selectedRow._id);
+                                            closeGiftMenu()
+                                        }} disableRipple>
+                                            Delete
+                                        </MenuItem>
+                                    </Menu>
                                 </StyledBoldTableCell>
                             </StyledTableRow>
                         );
