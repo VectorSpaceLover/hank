@@ -10,7 +10,7 @@ export default function CustomedInput({ label, inputValue, inputHandler, placeho
                 required={type==='email'?true:false}
                 className='customed-input'
                 onChange={e => inputHandler(e.target.value)}
-                value={inputValue}
+                value={inputValue!==null?inputValue:undefined}
                 placeholder={placeholderName}
             />
         </Styles>

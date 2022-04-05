@@ -54,7 +54,6 @@ const getCollectionById = async (req, res) => {
             collection: [],
         });
     }
-
 }
 
 const deleteCollectionById = async (req, res) => {

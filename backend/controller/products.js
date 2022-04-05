@@ -54,11 +54,12 @@ const createNewProduct = async (req, res) => {
     const {
         productInfo,
     } = req.body;
-    const { productName, category, year, imageList } = productInfo;
+    const { productName, category, year, description, imageList } = productInfo;
     const newProduct = new Products({
         productName,
         category,
         year,
+        description,
         imageList,
         type: 'web',
         liked: false,
@@ -217,7 +218,7 @@ const uploadProductImage = async(req, res) => {
                 return res.send(req.fileValidationError);
             }
             else if (!files || files.length === 0) {
-                return res.send('Please select an image to upload');
+                return res.status(404).send('');
             }
             else if (err instanceof multer.MulterError) {
                 return res.send(err);
@@ -226,21 +227,76 @@ const uploadProductImage = async(req, res) => {
                 return res.send(err);
             }
             let filePaths = [];
-            files.map(file => {
-                const filePath = '/uploads/products/' + Date.now() + file.name;
-                file.mv('./public' + filePath);
+            if(files.length > 1){
+                files.map(file => {
+                    const filePath = '/uploads/products/' + Date.now() + file.name;
+                    file.mv('./public' + filePath);
+                    filePaths.push(filePath);
+                })
+            }else{
+                const filePath = '/uploads/products/' + Date.now() + files.name;
+                files.mv('./public' + filePath);
                 filePaths.push(filePath);
-            })
+            }
             res.status(200).json(filePaths);
         });
     }catch(error){
         return res.send(error);
     }
 }
+
+const getProductById = async (req, res) => {
+    const { id } = req.query;
+    const product = await Products.find({_id: id});
+    if(product){
+        res.status(200).json(product[0]);
+    }else{
+        res.status(404).send({ message: 'something error' })
+    }
+}
+
+const getProductByName = async (req, res) => {
+    const {
+        productName, 
+    } = req.body;
+    const product = await Products.find({productName: productName});
+    if(product){
+        res.status(200).json(product[0]);
+    }else{
+        res.status(404).send({ message: 'something error' })
+    }
+}
+
+const upDateProduct = async (req, res) => {
+    const { id } = req.params;
+    const {
+        productInfo, 
+    } = req.body;
+    
+    const product = await Products.findById(id);
+    if(!product){
+        return res.status(404).send({
+            message: `product with ID: ${id} does not exist in database.`,
+        });
+    }
+
+    product.updatedAt = Date.now();
+    product.productName = productInfo?.productName;
+    product.category = productInfo?.category;
+    product.year = productInfo?.year
+    product.description = productInfo?.description;
+    product.imageList = productInfo?.imageList;
+
+    const savedProduct = await product.save();
+    res.status(200).json(savedProduct);
+}
+
 module.exports = {
     getProducts,
     searchProducts,
     createNewProduct,
+    getProductById,
+    getProductByName,
     deleteProductById,
     deleteProducts,
     addLikedProduct,
@@ -252,6 +308,7 @@ module.exports = {
     getAllProducts,
     getNewProducts,
     getAllNewProducts,
-    uploadProductImage
+    uploadProductImage,
+    upDateProduct
 };
   

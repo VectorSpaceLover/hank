@@ -129,7 +129,7 @@ function CustomSelect(props) {
     ...props.components,
   };
 
-  return <SelectUnstyled {...props} components={components} />;
+  return <SelectUnstyled {...props} components={components} defaultValue={props.defaultValue}/>;
 }
 
 CustomSelect.propTypes = {
@@ -157,14 +157,14 @@ function renderValue(option) {
   );
 }
 
-export default function SelectBox({setKeyword}) {
+export default function SelectBox({setKeyword, year}) {
   const [years, setYears] = useState([]);
 
   useEffect(() => {
     const date = new Date();
     const currentYear = date.getFullYear();
     let tmp = [];
-    for(let i = 0; i < 10; i++){
+    for(let i = 0; i < 5; i++){
       tmp.push(currentYear - i);
     }
     setYears(tmp);
@@ -176,6 +176,7 @@ export default function SelectBox({setKeyword}) {
         onChange={(e) => {
             setKeyword(e)
         }}
+        defaultValue={year}
     >
       {years.map((item, idx) => {
         return (

@@ -25,7 +25,6 @@ export default function AdminNavbar(){
     useEffect(() => {
         try{
             const adminAuth = JSON.parse(localStorage.getItem('adminAuth'));
-            console.log(adminAuth);
             setAuth(adminAuth);
         }catch(err){
             console.log(err);

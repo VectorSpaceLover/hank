@@ -123,7 +123,7 @@ const Routers = () => {
             }/>
             <Route exact path="/admin/productions/detail/:id" element={
                 <Admin>
-                  <EditUserAccount />
+                  <ProductionLayout />
                 </Admin>
             }/>
 

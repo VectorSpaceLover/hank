@@ -56,6 +56,7 @@ export default function AllProductions(){
 
     const getInitialData = useCallback(async() => {
         const res = await getAllProducts();
+        console.log(res)
         setProductions(res.products);
     }, [])
 

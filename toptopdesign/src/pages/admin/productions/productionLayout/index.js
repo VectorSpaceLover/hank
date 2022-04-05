@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Styles } from './style';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,7 +10,13 @@ import { ReactComponent as DeleteRed } from '../../../../assets/img/admin/delete
 import { ReactComponent as PlusWhiteIcon } from '../../../../assets/img/admin/plus_white.svg';
 import SearchBox from './searchBox';
 import CustomedInput from './input';
-import { uploadProductImage, createNewProduct } from '../../../../api/admin/productions';
+import { 
+    uploadProductImage, 
+    createNewProduct, 
+    getProductById,
+    upDateProduct,
+    getProductByName,
+} from '../../../../api/admin/productions';
 
 const DeleteButton = withStyles((theme) => ({
     root: {
@@ -67,55 +73,61 @@ const SaveButton = withStyles((theme) => ({
   }))(Button);
 export default function ProductionLayout(){
     const navigate = useNavigate();
+    const { id } = useParams();
+    const [isEdit, setEdit] = useState(false);
+    const [isLoading, setLoading] = useState(true);
+    const [productInfo, setProductInfo] = useState(null);
+    const [newImageList, setNewImageList] = useState([]);
+    const [linkedProduct, setLinkedProduct] = useState([]);
+    const [keyword, setKeyword] = useState('');
+    
     const [linkedCategory, setLinkedCategory] = useState(null);
     const [linkedYear, setLinkedYear] = useState(null);
-    const [productInfo, setProductInfo] = useState(null);
 
     if (typeof window !== "undefined") {
         injectStyle();
     }
     const uploadImage = useCallback(async() => {
         const formData = new FormData()
-        if(productInfo?.imageList.length > 0){
-            productInfo.imageList.map(item => formData.append('images', item));
+        if(newImageList.length > 0){
+            newImageList.map(item => formData.append('images', item));
             return await uploadProductImage(formData);
         }
-        
-    }, [productInfo?.imageList])
+    }, [newImageList])
+
     const goToMain = () => {
         navigate('/admin/productions/');
     }
+
     const saveProduct = async() => {
+
         if(productInfo && productInfo?.productName && productInfo?.year && productInfo?.description){
             const res = await uploadImage();
-            if(res.status === 200){
-                const result = await createNewProduct(
+            let result;
+            if(!isEdit){
+                result = await createNewProduct(
                     { ...productInfo, imageList: res?.data }
                 );
-                if(result.status === 200){
-                    await toast.warn('production created!', {
-                        position: "top-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
-                    await setTimeout(goToMain, 3000);
-                }else{
-                    toast.warn('Failed!', {
-                        position: "top-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
-                }
             }else{
-                toast.warn('image uploading failed!', {
+                result = await upDateProduct(
+                    id,
+                    { ...productInfo, imageList: newImageList.length > 0?[...productInfo.imageList, res?.data]:productInfo?.imageList }
+                );
+            }
+
+            if(result.status === 200){
+                await toast.warn('production created!', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                await setTimeout(goToMain, 3000);
+            }else{
+                toast.warn('Failed!', {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: false,
@@ -138,6 +150,36 @@ export default function ProductionLayout(){
         }
     }
 
+    const searchFunc = async () => {
+        if(keyword === ''){
+            setLinkedProduct(null);
+        }else{
+            if(keyword.length === 24 &&  !isNaN(Number('0x' + keyword))){
+                const res = await getProductById(keyword);
+                if(res.status === 200)
+                    setLinkedProduct(res.data);
+            }else{
+                const res = await getProductByName(keyword);
+                if(res.status === 200)
+                    setLinkedProduct(res.data);
+            }
+        }
+    }
+
+    const getInitialData = useCallback(async() => {
+        if(id !== undefined){
+            setEdit(true);
+            const res = await getProductById(id);
+            if(res.status === 200)
+                setProductInfo(res.data);
+            setLoading(false);
+        }
+    }, [id]);
+
+    useEffect(() => {
+        getInitialData();
+    }, [getInitialData])
+
     return (
         <Styles>
             <div className='productions-container'>
@@ -146,10 +188,10 @@ export default function ProductionLayout(){
                     <div className='productions-header'>
                         <div className='first-line'>
                             <span style={{color: '#B6B4BA', cursor: 'pointer'}} onClick={() => navigate('/admin/productions/')}>Products </span>
-                            <span>/ Add New</span>
+                            <span>{isEdit?'/ Products Details':'/ Add New'}</span>
                         </div>
                         <div className='second-line'>
-                            Add New Product
+                            {isEdit?productInfo?.productName:'Add New Product'}
                         </div>
                     </div>
                     <div style={{marginLeft: 'auto', display: 'flex'}}>
@@ -164,10 +206,22 @@ export default function ProductionLayout(){
                 </div>
                 <div className='productions-body'>
                     <div className='left-panel'>
-                        <ViewProduction 
-                            productInfo={productInfo}
-                            setProductInfo={setProductInfo}
-                        />
+                        {!isEdit?
+                            <ViewProduction
+                                newImageList={newImageList}
+                                setNewImageList={setNewImageList}
+                                productInfo={productInfo}
+                                setProductInfo={setProductInfo}
+                            />:
+                            !isLoading?
+                            <ViewProduction 
+                                newImageList={newImageList}
+                                setNewImageList={setNewImageList}
+                                productInfo={productInfo}
+                                setProductInfo={setProductInfo}
+                            />:
+                            <></>
+                        }
                     </div>
                     <div className='right-panel'>
                         <div className='right-panel-header'>
@@ -177,28 +231,37 @@ export default function ProductionLayout(){
                             Existing Product ID
                         </div>
                         <div className='form-group'>
-                            <SearchBox placeholder='{Product ID} - {Product Name}'/>
-                            <div style={{paddingTop: 32}}>
-                                <CustomedInput
-                                    label='Category'
-                                    inputValue={linkedCategory}
-                                    inputHandler={setLinkedCategory}
-                                    placeholderName=""
-                                />
-                            </div>
-                            <div style={{paddingTop: 32}}>
-                                <CustomedInput
-                                    label='Year Version'
-                                    inputValue={linkedYear}
-                                    inputHandler={setLinkedYear}
-                                    placeholderName=""
-                                />
-                            </div>
-                            <div style={{paddingTop: 32, display: 'flex', justifyContent: 'center'}}>
-                                <SaveButton>
-                                    Link Product
-                                </SaveButton>
-                            </div>
+                            <SearchBox 
+                                keyword={keyword}
+                                setKeyword={setKeyword}
+                                searchFunc={searchFunc}
+                                placeholder='{Product ID} - {Product Name}'
+                            />
+                            {linkedProduct && 
+                                <React.Fragment>
+                                    <div style={{paddingTop: 32}}>
+                                        <CustomedInput
+                                            label='Category'
+                                            inputValue={linkedProduct.category}
+                                            inputHandler={setLinkedCategory}
+                                            placeholderName=""
+                                        />
+                                    </div>
+                                    <div style={{paddingTop: 32}}>
+                                        <CustomedInput
+                                            label='Year Version'
+                                            inputValue={linkedProduct.year}
+                                            inputHandler={setLinkedYear}
+                                            placeholderName=""
+                                        />
+                                    </div>
+                                    <div style={{paddingTop: 32, display: 'flex', justifyContent: 'center'}}>
+                                        <SaveButton>
+                                            Link Product
+                                        </SaveButton>
+                                    </div>
+                                </React.Fragment>
+                            }
                         </div>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ export default function AppCard({info}){
                             {info.productName}
                         </div>
                         <div className="sub-name">
-                            {info.subName}
+                            {info.category}
                         </div>
                     </div>
                 </div>

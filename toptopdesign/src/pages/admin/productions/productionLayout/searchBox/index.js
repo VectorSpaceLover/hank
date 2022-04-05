@@ -1,7 +1,7 @@
 import { Styles } from './style/searchBoxStyle';
 import { ReactComponent as SearchIcon } from '../../../../../assets/img/admin/search.svg';
 
-export default function SearchBox({keyword, setKeyword, searchCollection, placeholder}){
+export default function SearchBox({keyword, setKeyword, searchFunc, placeholder}){
 
     const handleChange = (e) => {
         setKeyword(e.target.value);
@@ -9,7 +9,7 @@ export default function SearchBox({keyword, setKeyword, searchCollection, placeh
 
     const handleKeyDown = (e) => {
         if(e.code === "Enter")
-            searchCollection();
+            searchFunc();
     }
 
     return (
@@ -22,7 +22,10 @@ export default function SearchBox({keyword, setKeyword, searchCollection, placeh
                     placeholder={placeholder?placeholder:"Search"}
                     onKeyUp={(e) => handleKeyDown(e)}
                 />
-                <SearchIcon className='search-btn'/>
+                <SearchIcon 
+                    className='search-btn'
+                    onClick={searchFunc}
+                />
             </div>
         </Styles>
     )

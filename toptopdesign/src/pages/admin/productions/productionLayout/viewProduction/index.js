@@ -9,6 +9,7 @@ import { ReactComponent as PlusBlueIcon } from '../../../../../assets/img/admin/
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import ImageTag from './imageTag';
+import NewImageTag from './newImageTag'
 
 const UploadButton = withStyles((theme) => ({
     root: {
@@ -46,27 +47,36 @@ const UploadButton = withStyles((theme) => ({
 
 
 
-export default function ViewProduction({ setProductInfo, productInfo }){
-    const [imageList, setImageList] = useState([]);
+export default function ViewProduction({ setProductInfo, productInfo, newImageList, setNewImageList }){
+    const [oldImageList, setOldImageList] = useState(productInfo?productInfo?.imageList:[]);
     const [productName, setProductName] = useState(productInfo?.productName);
     const [category, setCategory] = useState(productInfo?.category);
-    const [description, setDescription] = useState('');
-    const [year, setYear] = useState('');
+    const [description, setDescription] = useState(productInfo?.description);
+    const [year, setYear] = useState(productInfo?.year);
 
     const uploadRef = useRef();
 
     const handleUpload = (file) => {
-        setImageList([...imageList, file]);//URL.createObjectURL(file)
+        setNewImageList([...newImageList, file]);
     }
 
     const deleteImage = (file) => {
-        const newImages = imageList.filter(item => {
+        
+        const tmp1 = oldImageList.filter(item => {
+            if(file === `${process.env.REACT_APP_UPLOAD_URL}${item}`)
+                return false;
+            else
+                return true;
+        })
+        setOldImageList(tmp1);
+
+        const tmp2 = newImageList.filter(item => {
             if(file === item)
                 return false;
             else
                 return true;
         })
-        setImageList(newImages);
+        setNewImageList(tmp2);
     }
 
     const handleChange = (content) => {
@@ -74,8 +84,13 @@ export default function ViewProduction({ setProductInfo, productInfo }){
     }
 
     useEffect(() => {
-        setProductInfo({ productName, year, category, description, imageList});
-    }, [category, description, imageList, productName, setProductInfo, year])
+        setProductInfo({ 
+            productName, 
+            year, 
+            category, 
+            description, 
+            imageList: [ ...oldImageList, ...newImageList ]});
+    }, [category, description, newImageList, oldImageList, productName, setProductInfo, year])
 
     return (
         <Styles>
@@ -94,7 +109,10 @@ export default function ViewProduction({ setProductInfo, productInfo }){
                         <Grid item xs={4}>
                             <div style={{display: 'flex', flexDirection: 'column'}}>
                                 <div className='label'>Year</div>
-                                <SelectBox setKeyword={setYear}/>
+                                <SelectBox 
+                                    year={year}
+                                    setKeyword={setYear}
+                                />
                             </div>
                         </Grid>
                     </Grid>
@@ -109,13 +127,15 @@ export default function ViewProduction({ setProductInfo, productInfo }){
                         <SunEditor 
                             height='128px'
                             onChange={(e) => handleChange(e)}
+                            setContents={description}
+                            setDefaultStyle="font-family: var(--font-family-manrope); font-size: 14px;"
                         />
                     </div>
                 </div>
                 <div className='image-upload'>
                     <UploadButton onClick={() => uploadRef.current.click()}>
                         <PlusBlueIcon className='icon'/>
-                        Add New Images 
+                        Add New Images
                     </UploadButton>
                     <input
                         ref={uploadRef}
@@ -126,10 +146,19 @@ export default function ViewProduction({ setProductInfo, productInfo }){
                         }}
                     />
                 </div>
-                {imageList && imageList.map((item, idx) => {
+                {oldImageList && oldImageList.map((item, idx) => {
                     return (
                         <ImageTag 
-                            image={item} 
+                            image={`${process.env.REACT_APP_UPLOAD_URL}${item}`}
+                            deleteImage={deleteImage}
+                            key={idx}
+                        />
+                    )
+                }) }
+                {newImageList && newImageList.map((item, idx) => {
+                    return (
+                        <NewImageTag 
+                            image={item}
                             deleteImage={deleteImage}
                             key={idx}
                         />

@@ -6,6 +6,8 @@ const {
     getProducts,
     searchProducts,
     createNewProduct,
+    getProductById,
+    getProductByName,
     deleteProductById,
     deleteProducts,
     addLikedProduct,
@@ -18,9 +20,11 @@ const {
     getNewProducts,
     getAllNewProducts,
     uploadProductImage,
+    upDateProduct,
 } = require('../controller/products');
 
 router.get('/', getProducts);
+router.get('/detail', getProductById);
 router.get('/search', searchProducts);
 router.get('/yearly', getYearlyProducts);
 router.get('/monthly', getMonthlyProducts);
@@ -30,6 +34,7 @@ router.get('/all', getAllProducts);
 router.get('/new', getNewProducts);
 router.get('/new/all', getAllNewProducts);
 
+router.post('/detail', getProductByName);
 router.post('/create', createNewProduct);
 router.post('/upload', uploadProductImage);
 router.post('/add/liked', addLikedProduct);
@@ -37,5 +42,7 @@ router.post('/add/viewed', addViewedProduct);
 
 router.delete('/:id', deleteProductById);
 router.delete('/', deleteProducts);
+
+router.put('/:id', upDateProduct);
 
 module.exports = router;

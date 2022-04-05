@@ -33,7 +33,7 @@ export default function ImageTag({image, deleteImage}){
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                     <div className='manro-normal-14'>Img</div>
                     <div className='image-preview'>
-                        <img className='image' src={URL.createObjectURL(image)} alt=''/>
+                        <img className='image' src={image} alt=''/>
                     </div>
                 </div>
                 <div style={{display: 'flex', flexDirection: 'column'}}>

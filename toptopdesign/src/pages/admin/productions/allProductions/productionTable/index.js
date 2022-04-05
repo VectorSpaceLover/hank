@@ -347,7 +347,7 @@ export default function ProductionTable({
                                     id={labelId}
                                     scope="row"
                                     padding="none"
-                                    onClick={() => navigate(`/admin/users/detail/${row._id}`)}
+                                    onClick={() => navigate(`/admin/productions/detail/${row._id}`)}
                                 >
                                 <span>{row._id}</span>
                                 </StyledIDTableCell>
