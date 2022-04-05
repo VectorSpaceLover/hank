@@ -19,6 +19,17 @@ import { ReactComponent as PasswordIcon } from '../assets/img/admin/password.svg
 import { ReactComponent as PasswordFocusIcon } from '../assets/img/admin/password_focus.svg';
 import { ReactComponent as AccountCollectionIcon } from '../assets/img/admin/account_collection.svg';
 import { ReactComponent as AccountCollectionFocusIcon } from '../assets/img/admin/account_collection_focus.svg';
+import { ReactComponent as ElectronicIcon } from '../assets/img/admin/electronic.svg';
+import { ReactComponent as HobbyIcon } from '../assets/img/admin/hobby.svg';
+import { ReactComponent as BeautyIcon } from '../assets/img/admin/beauty.svg';
+import { ReactComponent as FashionIcon } from '../assets/img/admin/fashion.svg';
+import { ReactComponent as FurnitureIcon } from '../assets/img/admin/furniture.svg';
+import { ReactComponent as BooksIcon } from '../assets/img/admin/books.svg';
+import { ReactComponent as GadgetIcon } from '../assets/img/admin/gadget.svg';
+import { ReactComponent as MusicIcon } from '../assets/img/admin/music.svg';
+import { ReactComponent as HealthIcon } from '../assets/img/admin/health.svg';
+import { ReactComponent as InvesmentIcon } from '../assets/img/admin/invesment.svg';
+import { ReactComponent as CameraIcon } from '../assets/img/admin/camera.svg';
 
 export const allPatternItems = [
     {
@@ -706,5 +717,52 @@ export const editAccountBar = [
         icon: AccountCollectionIcon,
         focusIcon: AccountCollectionFocusIcon,
         path: 'collection',
+    }
+]
+
+export const categories = [
+    {
+        label: 'Eletcronics',
+        icon: ElectronicIcon,
+    },
+    {
+        label: 'Hobby',
+        icon: HobbyIcon,
+    },
+    {
+        label: 'Beauty',
+        icon: BeautyIcon,
+    },
+    {
+        label: 'Fashion',
+        icon: FashionIcon,
+    },
+    {
+        label: 'Furniture',
+        icon: FurnitureIcon,
+    },
+    {
+        label: 'Books',
+        icon: BooksIcon,
+    },
+    {
+        label: 'Gadget',
+        icon: GadgetIcon,
+    },
+    {
+        label: 'Music',
+        icon: MusicIcon,
+    },
+    {
+        label: 'Health',
+        icon: HealthIcon,
+    },
+    {
+        label: 'Invesment',
+        icon: InvesmentIcon,
+    },
+    {
+        label: 'Camera',
+        icon: CameraIcon,
     }
 ]

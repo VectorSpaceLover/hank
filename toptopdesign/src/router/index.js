@@ -23,6 +23,8 @@ import CollectionsLayout from "../pages/admin/collections";
 import CollectionDetail from "../pages/admin/collections/detail";
 import AllProductions from "../pages/admin/productions/allProductions";
 import ProductionLayout from "../pages/admin/productions/productionLayout";
+import TagManagementLayout from "../pages/admin/productions/tagManagement";
+import Tags from "../pages/admin/productions/tags";
 
 const Routers = () => {
 
@@ -126,7 +128,16 @@ const Routers = () => {
                   <ProductionLayout />
                 </Admin>
             }/>
-
+            <Route exact path="/admin/tagmanagement" element={
+                <Admin>
+                  <TagManagementLayout />
+                </Admin>
+            }/>
+            <Route exact path="/admin/tags/:category" element={
+                <Admin>
+                  <Tags />
+                </Admin>
+            }/>
             <Route exact path="/admin/collections" element={
                 <Admin>
                   <CollectionsLayout>

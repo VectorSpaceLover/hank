@@ -9,7 +9,7 @@ export default function CustomedInput({ label, inputValue, inputHandler, placeho
                 type={type?type:'text'}
                 required={type==='email'?true:false}
                 className='customed-input'
-                onChange={e => inputHandler(e.target.value)}
+                onChange={e => inputHandler?inputHandler(e.target.value):undefined}
                 value={inputValue!==null?inputValue:undefined}
                 placeholder={placeholderName}
             />

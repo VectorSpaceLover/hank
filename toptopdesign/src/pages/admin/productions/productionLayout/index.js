@@ -71,6 +71,36 @@ const SaveButton = withStyles((theme) => ({
         }
     },
   }))(Button);
+
+const LinkedButton = withStyles((theme) => ({
+    root: {
+        marginRight: '24px !important',
+        height: '48px !important',
+        width: '163px !important',
+        display: 'flex !important',
+        alignItems: 'center !important',
+        justifyContent: 'center !important',
+        backgroundColor: `var(--admin-black) !important`,
+        borderRadius: '4px !important',
+        cursor: 'pointer !important',
+        textAlign: 'center !important',
+        textTransform: 'none !important',
+        transition: '.3s ease !important',
+        color: `var(--white) !important`,
+        fontFamily: `var(--font-family-pp_telegraf-regular) !important`,
+        fontSize: `var(--font-size-m) !important`,
+        fontWeight: '400px !important',
+        fontStyle: `normal !important`,
+        '&:hover': {
+            opacity: '.7 !important',
+            backgroundColor: 'var(--admin-black) !important',
+        },
+        '& .icon': {
+            marginRight: 8,
+        }
+    },
+}))(Button);
+
 export default function ProductionLayout(){
     const navigate = useNavigate();
     const { id } = useParams();
@@ -78,11 +108,9 @@ export default function ProductionLayout(){
     const [isLoading, setLoading] = useState(true);
     const [productInfo, setProductInfo] = useState(null);
     const [newImageList, setNewImageList] = useState([]);
-    const [linkedProduct, setLinkedProduct] = useState([]);
+    const [linkedProduct, setLinkedProduct] = useState(null);
     const [keyword, setKeyword] = useState('');
-    
-    const [linkedCategory, setLinkedCategory] = useState(null);
-    const [linkedYear, setLinkedYear] = useState(null);
+    const [isLinked, setLinked] = useState(false);
 
     if (typeof window !== "undefined") {
         injectStyle();
@@ -243,7 +271,6 @@ export default function ProductionLayout(){
                                         <CustomedInput
                                             label='Category'
                                             inputValue={linkedProduct.category}
-                                            inputHandler={setLinkedCategory}
                                             placeholderName=""
                                         />
                                     </div>
@@ -251,14 +278,23 @@ export default function ProductionLayout(){
                                         <CustomedInput
                                             label='Year Version'
                                             inputValue={linkedProduct.year}
-                                            inputHandler={setLinkedYear}
                                             placeholderName=""
                                         />
                                     </div>
                                     <div style={{paddingTop: 32, display: 'flex', justifyContent: 'center'}}>
-                                        <SaveButton>
-                                            Link Product
-                                        </SaveButton>
+                                        {!isLinked?
+                                            <SaveButton onClick={() => setLinked(true)}>
+                                                Link Product
+                                            </SaveButton>:
+                                            <React.Fragment>
+                                                <LinkedButton>
+                                                    Product Linked
+                                                </LinkedButton>
+                                                <DeleteButton onClick={() => setLinked(false)}>
+                                                    <DeleteRed />
+                                                </DeleteButton>
+                                            </React.Fragment>
+                                        }
                                     </div>
                                 </React.Fragment>
                             }
