@@ -593,7 +593,7 @@ export const sidebar = [
     {
         label: 'Products',
         icon: ProductsIcon,
-        focusIcon: OverViewIcon,
+        focusIcon: ProductsIcon,
         path: '/admin/products',
     },
     {

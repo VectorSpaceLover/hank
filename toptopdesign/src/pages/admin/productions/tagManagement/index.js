@@ -139,9 +139,6 @@ export default function TagManagementLayout(){
                         Categories
                     </div>
                     <div style={{marginLeft: 'auto', display: 'flex'}}>
-                        <DeleteButton>
-                            <DeleteRed />
-                        </DeleteButton>
                         <SaveButton onClick={handleAdd}>
                             <span>Add Category</span>
                         </SaveButton>

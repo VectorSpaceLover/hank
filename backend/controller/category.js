@@ -70,10 +70,14 @@ const updateTagToCategory = async (req, res) => {
     res.status(200).json(category);
 }
 
+const deleteCategories = async () => {
+    await Categories.remove({});
+}
 module.exports = {
     getCategories,
     addCategory,
     getTagsById,
     addNewTagToCategory,
-    updateTagToCategory
+    updateTagToCategory,
+    deleteCategories
 };
