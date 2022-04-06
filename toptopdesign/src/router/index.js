@@ -133,7 +133,7 @@ const Routers = () => {
                   <TagManagementLayout />
                 </Admin>
             }/>
-            <Route exact path="/admin/tags/:category" element={
+            <Route exact path="/admin/tags/:id" element={
                 <Admin>
                   <Tags />
                 </Admin>
