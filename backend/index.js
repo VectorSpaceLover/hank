@@ -7,6 +7,7 @@ const fs = require('fs-extra');
 const mongoose = require('mongoose');
 
 const productsRoute = require('./routes/products');
+const categoryRoute = require('./routes/category');
 const collectionRoute = require('./routes/collection');
 const accountRoute = require('./routes/account');
 const userRoute = require('./routes/user');
@@ -31,6 +32,7 @@ fs.mkdirsSync('./public/uploads/avatars');
 fs.mkdirsSync('./public/uploads/products');
 
 app.use('/api/products', productsRoute);
+app.use('/api/category', categoryRoute);
 app.use('/api/collection', collectionRoute);
 app.use('/api/account', accountRoute);
 app.use('/api/user', userRoute);

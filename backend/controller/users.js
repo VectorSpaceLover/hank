@@ -81,7 +81,6 @@ const uploadAvatar = async (req, res) => {
     }catch(error){
         return res.send(error);
     }
-    
 }
 
 const signUpWithEmail = async (req, res) => {
