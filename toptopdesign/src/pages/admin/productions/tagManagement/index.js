@@ -123,7 +123,7 @@ export default function TagManagementLayout(){
                     </div>
                 </div>
                 <div className='category-card-container'>
-                    {categories && categories.length > 1 && categories.map((item, idx) => {
+                    {categories && categories.length > 0 && categories.map((item, idx) => {
                         return (
                             <CategoryItem 
                                 info={item} 

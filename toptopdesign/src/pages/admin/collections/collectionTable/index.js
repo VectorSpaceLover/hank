@@ -229,7 +229,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function CollectionTable({users, getInitialData, selected, setSelected}) {
+export default function CollectionTable({collections, getInitialData, selected, setSelected}) {
     const navigate = useNavigate();
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
@@ -247,19 +247,19 @@ export default function CollectionTable({users, getInitialData, selected, setSel
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = users.map((n) => n._id);
+            const newSelecteds = collections.map((n) => n);
             setSelected(newSelecteds);
             return;
         }
         setSelected([]);
     };
 
-    const handleClick = (event, id) => {
-        const selectedIndex = selected.indexOf(id);
+    const handleClick = (event, row) => {
+        const selectedIndex = selected.indexOf(row);
         let newSelected = [];
 
         if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, id);
+            newSelected = newSelected.concat(selected, row);
         } else if (selectedIndex === 0) {
             newSelected = newSelected.concat(selected.slice(1));
         } else if (selectedIndex === selected.length - 1) {
@@ -296,29 +296,11 @@ export default function CollectionTable({users, getInitialData, selected, setSel
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
-    // Avoid a layout jump when reaching the last page with empty rows.
-    const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
-
     const goToAccount = () => {
-        navigate(`/admin/users/detail/${selectedRow._id}`); 
+        navigate(`/admin/collections/detail/${selectedRow._id}`); 
         closeGiftMenu()
     }
 
-    const goToCollection = () => {
-        navigate(`/admin/collections`); 
-        closeGiftMenu()
-    }
-
-    const handleSuspend = async() => {
-        if(selectedRow.isActive){
-            await suspendById(selectedRow._id);
-        }else{
-            await unSuspendById(selectedRow._id);
-        }
-        await getInitialData();
-        closeGiftMenu();
-    }
     return (
         <Box sx={{ width: '100%', mt: 4}}>
             <Paper sx={{ width: 'calc(100% - 45px)', height: 689, maxHeight: 689, mb: 4, padding: '24px 21px 15px 24px' }}>
@@ -333,15 +315,15 @@ export default function CollectionTable({users, getInitialData, selected, setSel
                         orderBy={orderBy}
                         onSelectAllClick={handleSelectAllClick}
                         onRequestSort={handleRequestSort}
-                        rowCount={users.length}
+                        rowCount={collections.length}
                     />
                     <TableBody>
                     {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                         rows.slice().sort(getComparator(order, orderBy)) */}
-                    {stableSort(users, getComparator(order, orderBy))
+                    {stableSort(collections, getComparator(order, orderBy))
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map((row, index) => {
-                        const isItemSelected = isSelected(row._id);
+                        const isItemSelected = isSelected(row);
                         const labelId = `enhanced-table-checkbox-${index}`;
                         return (
                             <StyledTableRow
@@ -361,8 +343,7 @@ export default function CollectionTable({users, getInitialData, selected, setSel
                                                 color: 'var(--txt-gray)',
                                             },
                                         }}
-                                        // onChange={handleChange}
-                                        onClick={(event) => handleClick(event, row._id)}
+                                        onClick={(event) => handleClick(event, row)}
                                     />
                                 </StyledTableCell>
                                 <StyledIDTableCell
@@ -380,12 +361,12 @@ export default function CollectionTable({users, getInitialData, selected, setSel
                                     scope="row"
                                     padding="none"
                                 >
-                                <span>{row._id}</span>
+                                <span>{row.collectionName}</span>
                                 </StyledIDTableCell>
                                 <StyledBoldTableCell align="left">
-                                    {row?.avatarPath?
+                                    {row?.author?.avatarPath?
                                         <img 
-                                            src={`${process.env.REACT_APP_UPLOAD_URL}${row?.avatarPath}`} 
+                                            src={`${process.env.REACT_APP_UPLOAD_URL}${row?.author?.avatarPath}`} 
                                             alt='' 
                                             style={{width: 38, height: 38, borderRadius: 38, position: 'absolute'}}
                                         />:<div style={{
@@ -396,9 +377,9 @@ export default function CollectionTable({users, getInitialData, selected, setSel
                                                     backgroundColor: 'var(--gray)'
                                                 }}></div>}
                                     
-                                    <span className='user-name' style={{ paddingLeft: 54 }}>{row.userName}</span>
+                                    <span className='user-name' style={{ paddingLeft: 54 }}>{row.author.userName}</span>
                                 </StyledBoldTableCell>
-                                <StyledTableCell align="left"><span>{row.email}</span></StyledTableCell>
+                                <StyledTableCell align="left"><span>{row.count}</span></StyledTableCell>
                                 <StyledTableCell align="left"><span>{row.isActive?'Active':'Suspended'}</span></StyledTableCell>
                                 <StyledBoldTableCell align="right">
                                     <div style={{
@@ -450,7 +431,7 @@ export default function CollectionTable({users, getInitialData, selected, setSel
             <div style={{ display: 'flex', width: '100%'}}>
                 <Pagination
                     sx={{ marginLeft: 'auto'}}
-                    count={users.length}
+                    count={collections.length}
                     shape="rounded" 
                     onChange={handleChangePage}
                 />

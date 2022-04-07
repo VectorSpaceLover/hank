@@ -485,7 +485,16 @@ export const oneCollection = [
     },
 ]
 
-export const imageList = ['1', '2' ,'3', '4', '5', '6' ,'7', '8'];
+export const imageList = [
+    {label: '1', value: false},
+    {label: '2', value: false},
+    {label: '3', value: false},
+    {label: '4', value: false},
+    {label: '5', value: false},
+    {label: '6', value: false},
+    {label: '7', value: false},
+    {label: '8', value: false},
+];
 
 export const profileBtns = [
     {

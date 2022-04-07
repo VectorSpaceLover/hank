@@ -1,16 +1,21 @@
-import { useState } from 'react';
 import { Styles } from './style';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function CollectionViewer(){
-    const [checked, setChecked] = useState(false);
+export default function CollectionViewer({item, images, setImages}){
     const handleChange = () => {
-        setChecked(!checked);
+        const tmp = images.map((val, idx) => {
+            if(val.label === item.label)
+                return { label: val.label, value: !val.value};
+            else
+                return val;
+        })
+        setImages(tmp)
     }
+
     return (
         <Styles>
             <Checkbox 
-                checked={checked} 
+                checked={item.value} 
                 sx={{
                     color: 'var(-txt-gray)',
                     '&.Mui-checked': {

@@ -1,28 +1,36 @@
 const Collection = require('../model/Collections');
+const Users = require('../model/Users');
 
 const createNewCollection = async (req, res) => {
     const {
         collectionName,
         description,
+        author,
+        count,
     } = req.body;
 
     const newCollection = new Collection({
-        collectionName: collectionName,
-        description: description,
+        collectionName,
+        description,
+        author,
+        count,
+        isActive: false,
     })
-
     const savedCollection = await newCollection.save();
-
-    return res.send({
-        status: 'ok',
-        data: savedCollection
-    });
+    res.status(200).json(savedCollection);
 }
 
 const getCollections = async (req, res) => {
-    const collections = await Collection.find({});
-    return res.send({
-        collections: collections,
+    Collection.find({})
+    .populate('author')
+    .exec(function(err, result) {
+        if(err){
+            res.status(404).json({message: 'something went wrong'});
+        }else{
+            return res.send({
+                collections: result,
+            });
+        }
     });
 }
 
@@ -43,17 +51,15 @@ const searchCollections = async (req, res) => {
 
 const getCollectionById = async (req, res) => {
     const { id } = req.query;
-    const collection = await Collection.find({_id: id});
-    if(collection){
-        return res.send({
-            collection: collection,
-        });
-    }else{
-        return res.send({
-            status: 'error',
-            collection: [],
-        });
-    }
+    await Collection.findById(id)
+    .populate('author')
+    .exec(function(err, result) {
+        if(err){
+            res.status(404).json({message: 'something went wrong'});
+        }else{
+            res.status(200).json(result)
+        }
+    });
 }
 
 const deleteCollectionById = async (req, res) => {
@@ -96,12 +102,64 @@ const upDateCollection = async (req, res) => {
     });
 }
 
+const getActiveCollections = async (req, res) => {
+    const query = { isActive: true };
+    const sort = { createdDate: 1 };
+    await Collection.find(query).sort(sort)
+    .populate('author')
+    .exec(function(err, result) {
+        if(err){
+            res.status(404).json({message: 'something went wrong'});
+        }else{
+            res.status(200).json(result);
+        }
+    });
+}
+
+const getSuspendedCollections = async (req, res) => {
+    const query = { isActive: false };
+    const sort = { createdDate: 1 };
+    await Collection.find(query).sort(sort)
+    .populate('author')
+    .exec(function(err, result) {
+        if(err){
+            res.status(404).json({message: 'something went wrong'});
+        }else{
+            res.status(200).json(result);
+        }
+    });
+}
+
+const suspendByIds = async (req, res) => {
+    const { ids } = req.body;
+    await ids.forEach(async(item) => {
+        const collection = await Collection.findById(item._id);
+        collection.isActive = false;
+        await collection.save()
+    })
+    res.status(200).json();
+}
+
+const unSuspendByIds = async (req, res) => {
+    const { ids } = req.body;
+    await ids.forEach(async(item) => {
+        const collection = await Collection.findById(item._id);
+        collection.isActive = true;
+        await collection.save()
+    })
+    res.status(200).json();
+}
+
 module.exports = {
     getCollections,
     getCollectionById,
     createNewCollection,
     deleteCollectionById,
     upDateCollection,
-    searchCollections
+    searchCollections,
+    getActiveCollections,
+    getSuspendedCollections,
+    suspendByIds,
+    unSuspendByIds,
 };
   

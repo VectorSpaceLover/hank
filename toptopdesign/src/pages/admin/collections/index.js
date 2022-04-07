@@ -9,10 +9,12 @@ import CollectionTabs from '../components/collectionTab';
 import CollectionTable from './collectionTable';
 import { useNavigate } from 'react-router-dom';
 import {
-    getAllUsers,
-    getActiveUsers,
-    getSuspendedUsers,
-} from '../../../api/admin/users';
+    getAllCollection,
+    getActiveCollections,
+    suspendByIds,
+    unSuspendByIds,
+    getSuspendedCollections,
+} from '../../../api/admin/collection';
 
 const SuspendButton = withStyles((theme) => ({
     root: {
@@ -34,7 +36,7 @@ const SuspendButton = withStyles((theme) => ({
             backgroundColor: props => props.disable === 1?'rgba(132, 129, 138, 0.1)':`var(--warnig) !important`,
         },
         '& .txt':{
-            color: props => props.disable === 1?'var(--txt-gray) !important':'#FC3400',
+            color: props => props.disable === 1?'var(--txt-gray)':'#FC3400',
             marginLeft: 10,
         }
     },
@@ -43,38 +45,69 @@ const SuspendButton = withStyles((theme) => ({
 export default function CollectionsLayout(){
     const navigate = useNavigate();
     const [keyword, setKeyword] = useState('');
-    const [users, setUsers] = useState([]);
+    const [collections, setCollections] = useState([]);
     const [selected, setSelected] = useState([]);
-    
+    const [isSuspend, setSuspend] = useState(true);
+
     const searchUser = () => {
 
     }
 
     const handleTabs = async (val) => {
         if(val === 0){
-            const res = await getAllUsers();
-            setUsers(res);
+            const { collections } = await getAllCollection();
+            setCollections(collections);
         }else{
             if(val === 1){
-                const res = await getActiveUsers();
-                setUsers(res);
+                const res = await getActiveCollections();
+                if(res.status === 200)
+                    setCollections(res.data);
             }else{
                 if(val === 2){
-                    const res = await getSuspendedUsers();
-                    setUsers(res);
+                    const res = await getSuspendedCollections();
+                    console.log(res)
+                    if(res.status === 200)
+                        setCollections(res.data);
                 }
             }
         }
     }
 
+    const suspendCollections = async() => {
+        if(isSuspend){
+            const res = await suspendByIds(selected);
+            if(res.status === 200){
+                getInitialData();
+                setSelected([]);
+            }
+        }else{
+            const res = await unSuspendByIds(selected);
+            if(res.status === 200){
+                getInitialData();
+                setSelected([]);
+            }
+        }
+    }
+
     const getInitialData = useCallback(async() => {
-        const res = await getAllUsers();
-        setUsers(res);
+        const { collections } = await getAllCollection();
+        setCollections(collections);
     }, [])
 
     useEffect(() => {
         getInitialData();
     }, [getInitialData])
+
+    useEffect(() => {
+        for (let item of selected) {
+            if (!item.isActive) {
+                setSuspend(false);
+                break;
+            }else{
+                setSuspend(true);
+            }
+        }
+    }, [selected])
 
     return (
         <Styles>
@@ -92,16 +125,17 @@ export default function CollectionsLayout(){
                     <SuspendButton 
                         disable={selected && selected.length > 0?0:1}
                         disabled={selected && selected.length > 0?false:true}
+                        onClick={() => suspendCollections()}
                     >
                         {selected && selected.length > 0?<SuspendIcon />:<SuspendDisableIcon />}
-                        <span className='txt'>Suspend</span>
+                        <span className='txt'>{isSuspend?'Suspend':'Unsuspend'}</span>
                     </SuspendButton>
                 </div>
             </div>
             <CollectionTabs handleTabs={handleTabs}/>
-            {users && users.length > 0 && 
+            {collections && collections.length > 0 && 
                 <CollectionTable 
-                    users={users}
+                    collections={collections}
                     selected={selected}
                     getInitialData={getInitialData}
                     setSelected={setSelected}

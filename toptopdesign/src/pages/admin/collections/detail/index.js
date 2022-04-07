@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Styles, ConfirmStyle } from './style';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import { ReactComponent as DeleteRed } from '../../../../assets/img/admin/delete_red.svg';
@@ -10,6 +10,11 @@ import { Grid } from '@mui/material';
 import CollectionViewer from './collectionViewer';
 import Dialog from '@mui/material/Dialog';
 import CancelButton from '../../../auth/components/cancelButton';
+import { useCallback } from 'react';
+import { getCollectionById } from '../../../../api/collection';
+import { useEffect } from 'react';
+import { imageList } from '../../../../assets/config';
+
 const DeleteButton = withStyles((theme) => ({
     root: {
         padding: 0,
@@ -86,14 +91,32 @@ const DlgButton = withStyles((theme) => ({
 
 export default function CollectionDetail(){
     const navigate = useNavigate();
+    const { id } = useParams();
+    const [collection, setCollection] = useState([]);
     const [confirmOpen, setConfirmOpen] = useState(false);
+    const [images, setImages] = useState(imageList);
+    
     const closeConfirmDlg = () => {
         setConfirmOpen(false);
     };
     const handleConfirmDlg = () => {
+        const tmp = images.filter((item) => {
+            return !item.value
+        })
+        setImages(tmp)
         setConfirmOpen(false);
-        // handleSuspend();
     }
+
+    const getInitialData = useCallback(async() => {
+        const res = await getCollectionById(id);
+        if(res.status === 200)
+            setCollection(res.data);
+    }, [id])
+
+    useEffect(() => {
+        getInitialData();
+    }, [getInitialData])
+
     return (
         <Styles>
             <div className='collection-detail-container'>
@@ -106,10 +129,11 @@ export default function CollectionDetail(){
                             >
                                 Collection
                             </span>
-                            <span style={{color: '#B6B4BA'}}>{` / Name of the author / `} </span>
+                            <span style={{color: '#B6B4BA'}}>{` / ${collection?.author?.userName}`} </span>
+                            <span style={{color: '#2E2C34'}}>{` / ${id}`}</span>
                         </div>
                         <div className='second-line'>
-                            ID
+                            {`${id} ${collection?.collectionName}`}
                         </div>
                     </div>
                     <div className='action-group'>
@@ -126,26 +150,18 @@ export default function CollectionDetail(){
                 </div>
                 <div className='collection-detail-body'>
                     <Grid container spacing={3}>
-                        <Grid item md={3} sm={4} xs={6}>
-                            <CollectionViewer/>
-                        </Grid>
-                        <Grid item md={3} sm={4} xs={6}>
-                            <CollectionViewer/>
-                        </Grid>
-                        <Grid item md={3} sm={4} xs={6}>
-                            <CollectionViewer/>
-                        </Grid>
-                        <Grid item md={3} sm={4} xs={6}>
-                            <CollectionViewer/>
-                        </Grid>
-                        <Grid item md={3} sm={4} xs={6}>
-                            <CollectionViewer/>
-                        </Grid>
-                        <Grid item md={3} sm={4} xs={6}>
-                            <CollectionViewer/>
-                        </Grid>
+                        {images && images.map((item, idx) => {
+                            return(
+                                <Grid item md={3} sm={4} xs={6} key={idx}>
+                                    <CollectionViewer
+                                        item={item}
+                                        images={images}
+                                        setImages={setImages}
+                                    />
+                                </Grid>
+                            )
+                        })}
                     </Grid>
-
                 </div>
             </div>
             <Dialog
@@ -178,7 +194,7 @@ export default function CollectionDetail(){
                                 </div>
                             </div>
                             <div className="footer">
-                                <DlgButton onClick={handleConfirmDlg}>
+                                <DlgButton onClick={() => handleConfirmDlg()}>
                                     Confirm
                                 </DlgButton>
                             </div>

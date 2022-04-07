@@ -199,10 +199,12 @@ export default function Collection({children}){
     }, [id]);
 
     const getInitialData = useCallback( async() => {
-        const { collection } = await getCollectionById(id);
-        setColDes(collection[0].description);
-        setDescription(collection[0].description);
-        setCollectionName(collection[0].collectionName);
+        const res = await getCollectionById(id);
+        if(res.status === 200){
+            setColDes(res.data.description);
+            setDescription(res.data.description);
+            setCollectionName(res.data.collectionName);
+        }
     }, [id])
 
     const handleCreate = async (isEdited) => {

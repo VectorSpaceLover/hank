@@ -68,7 +68,6 @@ const Profile = forwardRef((props, ref) => {
                 result = await upDateProfile(accountInfo._id, res?.filePath, firstName, lastName, location, shortBio);
             }
         }else{
-            
             result = await upDateProfile(accountInfo._id, accountInfo.avatarPath, firstName, lastName, location, shortBio);
         }
         setAccountInfo(result);
@@ -93,7 +92,7 @@ const Profile = forwardRef((props, ref) => {
 
 
     useEffect(() => {
-        if(firstName && lastName && location && shortBio){
+        if(firstName && lastName){
             setIsFulled(true);
         }else{
             setIsFulled(false);

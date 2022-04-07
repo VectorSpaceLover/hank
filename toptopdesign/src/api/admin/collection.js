@@ -21,18 +21,32 @@ export const getAllCollection = async () => {
     return res.data;
 }
 
-export const deleteCollectionById = async (id) => {
-    const res = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/collection/${id}`);
-    return res.data;
+export const getActiveCollections = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/collection/active`);
+    return res;
 }
 
-export const upDateCollection = async (id, collectionName, description) => {
-    const res = await axios.put(
-        `${process.env.REACT_APP_SERVER_URL}/collection/${id}`, 
+export const getSuspendedCollections = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/collection/suspended`);
+    return res;
+}
+
+export const suspendByIds = async (ids) => {
+    const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/collection/suspend`, 
         {
-            collectionName: collectionName, 
-            description: description
+            ids,
         }
     );
-    return res.data;
+    return res;
+}
+
+export const unSuspendByIds = async (ids) => {
+    const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/collection/unsuspend`, 
+        {
+            ids,
+        }
+    );
+    return res;
 }

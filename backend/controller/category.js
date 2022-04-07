@@ -11,6 +11,7 @@ const addCategory = async (req, res) => {
     } = req.body;
 
     const isExist = await Categories.find({name:{$regex: name, $options: 'i'}});
+    
     if(isExist && isExist.length > 1)
         res.status(202).json({message: `${name} is already existed`});
     else{

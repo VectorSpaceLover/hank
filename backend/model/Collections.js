@@ -5,10 +5,7 @@ const collectionsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  author: {
-    type: String,
-    required: false,
-  },
+  author: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
   count: {
     type: Number,
     required: false,
@@ -29,6 +26,7 @@ const collectionsSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  comments: [{body:"string", by: mongoose.Schema.Types.ObjectId}],
 });
 
 module.exports = mongoose.model('Collections', collectionsSchema);
