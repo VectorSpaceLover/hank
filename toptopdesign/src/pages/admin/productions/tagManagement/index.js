@@ -16,29 +16,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { ToastContainer, toast } from 'react-toastify';
 import { injectStyle } from "react-toastify/dist/inject-style";
 
-const DeleteButton = withStyles((theme) => ({
-    root: {
-        padding: 0,
-        color: `var(--white) !important`,
-        background: 'rgba(252, 52, 0, 0.1)',
-        borderRadius: 4,
-        cursor: 'pointer !important',
-        display: 'flex !important',
-        alignItems: 'center !important',
-        justifyContent: 'center !important',
-        height: '48px !important',
-        minWidth: 42,
-        width: '42px !important',
-        textTransform: 'none !important',
-        transition: '.3s ease !important',
-        '&:hover': {
-            opacity: '.7 !important',
-            backgroundColor: `var(--warnig) !important`,
-        },
-    },
-}))(Button);
-
-
 const SaveButton = withStyles((theme) => ({
     root: {
         marginLeft: '18px !important',
@@ -88,6 +65,7 @@ export default function TagManagementLayout(){
         setOpenAddCategory(false);
         const res = await addCategory(categoryName);
         if(res.status === 200){
+            setCategories(res.data);
             await toast.warn('category created!', {
                 position: "top-right",
                 autoClose: 1500,
