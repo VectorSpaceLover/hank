@@ -87,6 +87,8 @@ export default function AdminSignIn () {
         if(res.status === 200){
             localStorage.setItem('adminAuth', JSON.stringify(res.data));
             navigate('/admin/overview');
+        }else{
+            localStorage.setItem('adminAuth', JSON.stringify(null));
         }
     }
 
