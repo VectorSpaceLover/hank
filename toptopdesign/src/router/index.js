@@ -25,6 +25,12 @@ import AllProductions from "../pages/admin/productions/allProductions";
 import ProductionLayout from "../pages/admin/productions/productionLayout";
 import TagManagementLayout from "../pages/admin/productions/tagManagement";
 import Tags from "../pages/admin/productions/tags";
+import ManagerAccount from "../pages/admin/setting/managerAccount";
+import EditManagerAccount from "../pages/admin/setting/editManagerAccount";
+import Monetization from "../pages/admin/setting/monetization";
+import SettingLayout from "../pages/admin/setting/accountLayout";
+import Accounts from "../pages/admin/setting/accounts";
+import Integrations from "../pages/admin/setting/integrations";
 
 const Routers = () => {
 
@@ -147,6 +153,37 @@ const Routers = () => {
             <Route exact path="/admin/collections/detail/:id" element={
                 <Admin>
                   <CollectionDetail />
+                </Admin>
+            }/>
+            <Route exact path="/admin/setting/accounts/" element={
+                <Admin>
+                  <SettingLayout>
+                    <Accounts />
+                  </SettingLayout>
+                </Admin>
+            }/>
+            <Route exact path="/admin/setting/accounts/add/" element={
+                <Admin>
+                  <ManagerAccount />
+                </Admin>
+            }/>
+            <Route exact path="/admin/setting/accounts/detail/:id/" element={
+                <Admin>
+                  <EditManagerAccount />
+                </Admin>
+            }/>
+            <Route exact path="/admin/setting/integrations/" element={
+                <Admin>
+                  <SettingLayout>
+                    <Integrations />
+                  </SettingLayout>
+                </Admin>
+            }/>
+            <Route exact path="/admin/setting/monetization/" element={
+                <Admin>
+                  <SettingLayout>
+                    <Monetization />
+                  </SettingLayout>
                 </Admin>
             }/>
         </Routes>

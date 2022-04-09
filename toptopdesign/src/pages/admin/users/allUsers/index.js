@@ -81,7 +81,6 @@ export default function AllUsers(){
     }
 
     const deleteUser = async() => {
-        console.log(selected);
        const res = await deleteUsers(selected);
        setUsers(res);
     }
