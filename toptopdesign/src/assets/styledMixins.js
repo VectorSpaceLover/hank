@@ -319,6 +319,14 @@ export const ManropeSemiboldCharade16px = css`
   font-style: normal;
 `;
 
+export const ManropeSemiboldCharade18px = css`
+  color: var(--charade);
+  font-family: var(--font-family-manrope-semi-bold);
+  font-size: var(--font-size-18);
+  font-weight: 600;
+  font-style: normal;
+`;
+
 export const ManropeSemiBoldCharade28px = css`
   color: var(--charade);
   font-family: var(--font-family-manrope);

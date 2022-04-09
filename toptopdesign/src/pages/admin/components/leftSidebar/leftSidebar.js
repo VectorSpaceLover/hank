@@ -29,6 +29,9 @@ const useTreeItemStyles = makeStyles(() => ({
     '&.MuiCollapse-root':{
       paddingLeft: 0,
       marginLeft: 0,
+    },
+    '&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused p': {
+      color: '#5542F6',
     }
   },
   childContent: {
@@ -42,6 +45,9 @@ const useTreeItemStyles = makeStyles(() => ({
     },
     '& .MuiTreeItem-iconContainer':{
       display: 'none',
+    },
+    '&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused p': {
+      color: '#5542F6',
     }
   },
   labelRoot: {
@@ -159,7 +165,7 @@ export default function LeftSideBar({children}) {
               nodeId={(idx).toString()}
               labelText={item.label} 
               labelIcon={currentPage === item.label?item.focusIcon:item.icon}
-              onClick={() => idx !== 1?navigate(`${item.path}`):undefined}
+              onClick={() => (idx !== 1 && idx !== sidebar.length - 1)?navigate(`${item.path}`):undefined}
             >
               {idx === 1 &&
                 <React.Fragment>
@@ -172,6 +178,25 @@ export default function LeftSideBar({children}) {
                       nodeId={(sidebar.length + 1).toString()}
                       labelText="Tag Management"
                       onClick={() => navigate(`/admin/tagmanagement`)}
+                    />
+                </React.Fragment>
+              }
+              {idx === (sidebar.length - 1) &&
+                <React.Fragment>
+                    <StyledChildTreeItem
+                      nodeId={(sidebar.length + 2).toString()}
+                      labelText="Accounts"
+                      onClick={() => navigate(`/admin/setting/accounts/`)}
+                    />
+                    <StyledChildTreeItem
+                      nodeId={(sidebar.length + 3).toString()}
+                      labelText="Integrations"
+                      onClick={() => navigate(`/admin/setting/integrations/`)}
+                    />
+                    <StyledChildTreeItem
+                      nodeId={(sidebar.length + 4).toString()}
+                      labelText="Monetization"
+                      onClick={() => navigate('/admin/setting/monetization/')}
                     />
                 </React.Fragment>
               }

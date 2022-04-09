@@ -50,6 +50,16 @@ const getUserInfoById = async (req, res) => {
     }
 }
 
+const getCustomerInfoById = async (req, res) => {
+    const { id } = req.query;
+    const user = await Users.findById(id);
+    if(user){
+        res.status(200).json(user);
+    }else{
+        res.status(404).json();
+    }
+}
+
 const uploadAvatar = async (req, res) => {
     let upload = multer({ storage: storage}).single('Users_pic');
     try{
@@ -586,13 +596,16 @@ const getTopUsers = async (req, res) => {
 }
 
 const getAllUsers = async (req, res) => {
-    const query = {};
+    const query = {type: 1};
     const sort = { createdDate: 1 };
     const users = await Users.find(query).sort(sort);
-    // return res.send({
-    //     status: 'ok',
-    //     users: users,
-    // });
+    res.status(200).json(users);
+}
+
+const getAllCustomers = async (req, res) => {
+    const query = {type: 3};
+    const sort = { createdDate: 1 };
+    const users = await Users.find(query).sort(sort);
     res.status(200).json(users);
 }
 
@@ -649,6 +662,7 @@ const unSuspendById = async (req, res) => {
 }
 module.exports = {
     getUserInfoById,
+    getCustomerInfoById,
     uploadAvatar,
     signUpWithEmail,
     signUpWithGoogle,
@@ -669,6 +683,7 @@ module.exports = {
     getTotalUserCount,
     getTopUsers,
     getAllUsers,
+    getAllCustomers,
     deleteUsers,
     getNewUsers,
     getActiveUsers,

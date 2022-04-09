@@ -9,15 +9,19 @@ const {
     upDateSocialProfile,
     upDateEmailNotification,
     createCustomer,
-    deleteUser
+    deleteUser,
+    createManager,
+    upDateCustomerProfile
 } = require('../controller/admin/overview');
 
 router.post('/signup', adminSignUp);
 router.post('/signin', adminSignIn);
 router.post('/create', createCustomer);
+router.post('/manager/create', createManager);
 router.post('/delete', deleteUser);
 
 router.put('/editprofile/:id', upDateProfile);
+router.put('/editcustomerprofile/:id', upDateCustomerProfile);
 router.put('/accountsetting/:id', upDateAccountSetting);
 router.put('/password/:id', upDatePassword);
 router.put('/social/:id', upDateSocialProfile);

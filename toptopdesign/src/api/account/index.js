@@ -6,6 +6,11 @@ export const getUserInfoById = async (id) => {
 }
 
 
+export const getCustomerInfoById = async (id) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/account/manager/detail?id=${id}`);
+    return res;
+}
+
 export const uploadAvatar = async (formData) => {
     const config = {
         headers: {

@@ -15,6 +15,7 @@ const {
     getTotalUserCount,
     getTopUsers,
     getAllUsers,
+    getAllCustomers,
     deleteUsers,
     getNewUsers,
     getActiveUsers,
@@ -44,6 +45,7 @@ router.get('/daily', getDailyUsers);
 
 router.get('/top', getTopUsers);
 router.get('/all', getAllUsers);
+router.get('/manager/all', getAllCustomers);
 router.get('/new', getNewUsers);
 router.get('/active', getActiveUsers);
 router.get('/suspended', getSuspendedUsers);

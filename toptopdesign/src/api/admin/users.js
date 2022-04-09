@@ -6,6 +6,12 @@ export const getAllUsers = async () => {
     return res.data;
 }
 
+export const getAllCustomers = async () => {
+    const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/user/manager/all`);
+    return res.data;
+}
+
 export const getNewUsers = async () => {
     const res = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}/user/new`);
@@ -72,6 +78,28 @@ export const upDateProfile = async (
         }
     );
     return res.data;
+}
+
+export const upDateCustomerProfile = async (
+    id, 
+    avatarPath, 
+    firstName, 
+    lastName, 
+    userName, 
+    email,
+    password) => {
+    const res = await axios.put(
+        `${process.env.REACT_APP_SERVER_URL}/admin/editcustomerprofile/${id}`, 
+        {
+            avatarPath,
+            firstName, 
+            lastName, 
+            userName, 
+            email,
+            password
+        }
+    );
+    return res;
 }
 
 export const upDateAccountSetting = async (id, userName, email) => {
@@ -143,6 +171,18 @@ export const createCustomer = async (
             password, 
             social, 
             notification
+        }
+    );
+    return res;
+}
+
+export const createManager = async (
+    profile
+) => {
+    const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/admin/manager/create`, 
+        {
+            profile,
         }
     );
     return res;

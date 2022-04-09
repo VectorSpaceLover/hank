@@ -1,9 +1,11 @@
 import { ReactComponent as OverViewIcon } from '../assets/img/admin/overview.svg';
 import { ReactComponent as OverViewFocusIcon } from '../assets/img/admin/overview_sel.svg';
 import { ReactComponent as ProductsIcon } from '../assets/img/admin/products.svg';
+import { ReactComponent as ProductsFocusIcon } from '../assets/img/admin/products_focus.svg';
 import { ReactComponent as UserIcon } from '../assets/img/admin/user.svg';
 import { ReactComponent as UserFocusIcon } from '../assets/img/admin/user_sel.svg';
 import { ReactComponent as CollectionIcon } from '../assets/img/admin/collection.svg';
+import { ReactComponent as CollectionFocusIcon } from '../assets/img/admin/collection_focus.svg';
 import { ReactComponent as SettingIcon } from '../assets/img/admin/setting.svg';
 
 import { ReactComponent as TotalUserIcon } from '../assets/img/admin/totaluser.svg';
@@ -602,7 +604,7 @@ export const sidebar = [
     {
         label: 'Products',
         icon: ProductsIcon,
-        focusIcon: ProductsIcon,
+        focusIcon: ProductsFocusIcon,
         path: '/admin/products',
     },
     {
@@ -614,14 +616,14 @@ export const sidebar = [
     {
         label: 'Collections',
         icon: CollectionIcon,
-        focusIcon: OverViewIcon,
+        focusIcon: CollectionFocusIcon,
         path: '/admin/collections',
     },
     {
         label: 'Settings',
         icon: SettingIcon,
-        focusIcon: OverViewIcon,
-        path: 'settings',
+        focusIcon: SettingIcon,
+        path: '/admin/settings',
     }
 ]
 
@@ -687,6 +689,21 @@ export const accountBar = [
         icon: NotificationIcon,
         focusIcon: NotificationFocusIcon,
         path: 'notification',
+    }
+]
+
+export const managerBar = [
+    {
+        label: 'Profile*',
+        icon: ProfileIcon,
+        focusIcon: ProfileFocusIcon,
+        path: 'profile',
+    },
+    {
+        label: 'Level',
+        icon: NotificationIcon,
+        focusIcon: NotificationFocusIcon,
+        path: 'level',
     }
 ]
 
@@ -774,4 +791,103 @@ export const categories = [
         label: 'Camera',
         icon: CameraIcon,
     }
+]
+
+export const settingProducts = [
+    {
+        label: 'View product details',
+        value: true,
+    },
+    {
+        label: 'Add new products',  
+        value: true,
+    },
+    {
+        label: 'Remove products',  
+        value: true,
+    },
+    {
+        label: 'Edit products',  
+        value: true,
+    },
+    {
+        label: 'Add tags',  
+        value: true,
+    },
+    {
+        label: 'Edit tags',  
+        value: true,
+    },
+    {
+        label: 'Remove tags',  
+        value: true,
+    },
+]
+
+export const settingUsers = [
+    {
+        label: 'View user details',  
+    },
+    {
+        label: 'Add new users',  
+    },
+    {
+        label: 'Edit users',  
+    },
+    {
+        label: 'Suspend users',  
+    },
+    {
+        label: 'Unsuspend users',  
+    },
+    {
+        label: 'View user collections',  
+    }
+]
+
+export const settingCollections = [
+    {
+        label: 'View collection details',  
+    },
+    {
+        label: 'Suspend collection',  
+    },
+    {
+        label: 'Unsuspend collection',  
+    },
+    {
+        label: 'Remove collection detail items',  
+    }
+]
+
+export const monetizations = [
+    {
+        label: '300 x 250 px '
+    },
+    {
+        label: '250 x 250 px '
+    },
+    {
+        label: '336 x 280 px  '
+    },
+    {
+        label: '200 x 200 px '
+    },
+    {
+        label: '300 x 600 px  '
+    },
+    {
+        label: '160 x 160 px '
+    },
+    {
+        label: '728 x 90 px '
+    },
+    
+    {
+        label: '468 x 60 px '
+    },
+    
+    {
+        label: '970 x 90 px  '
+    },
 ]

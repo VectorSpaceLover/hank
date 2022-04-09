@@ -8,11 +8,13 @@ const {
     upDatePassword,
     upDateSocialProfile,
     upDateEmailNotification,
+    getCustomerInfoById
 } = require('../controller/users');
 
 router.post('/upload', uploadAvatar);
 
 router.get('/detail', getUserInfoById);
+router.get('/manager/detail', getCustomerInfoById);
 
 router.put('/editprofile/:id', upDateProfile);
 router.put('/accountsetting/:id', upDateAccountSetting);

@@ -39,16 +39,10 @@ const adminSignIn = async (req, res) => {
         if(password === user.password && user.type === 3){
             res.status(200).json(user);
         }else{
-            return res.send({
-                status: 'error',
-                message: 'passwrod not matched'
-            })
+            res.status(404).json({message: 'password is not matched'});
         }
     }else{
-        return res.send({
-            status: 'error',
-            message: 'User is not existed'
-        });
+        res.status(404).json({message: 'User is not existed'});
     }
 }
 
@@ -110,6 +104,38 @@ const upDateAccountSetting = async (req, res) => {
 
     user.updatedAt = Date.now();
     user.userName = userName;
+    user.email = email;
+
+    if(isFilled(user)) user.isActive = true;
+
+    const saveduser = await user.save();
+    res.status(200).json(saveduser);
+}
+
+const upDateCustomerProfile = async (req, res) => {
+    const { id } = req.params;
+    const {
+        avatarPath,
+        firstName, 
+        lastName, 
+        userName, 
+        email,
+        password
+    } = req.body;
+    
+    const user = await Users.findById(id);
+    if(!user){
+        return res.status(404).send({
+            message: `user with ID: ${id} does not exist in database.`,
+        });
+    }
+
+    user.updatedAt = Date.now();
+    user.avatarPath = avatarPath;
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.userName = userName;
+    user.password = password;
     user.email = email;
 
     if(isFilled(user)) user.isActive = true;
@@ -205,7 +231,6 @@ const createCustomer = async(req, res) => {
     } = req.body;
     const { avatarPath, firstName, lastName } = profile;
     const { userName, email } = accountSetting;
-
     const newAdmin = new Users({
         avatarPath,
         firstName,
@@ -213,6 +238,7 @@ const createCustomer = async(req, res) => {
         location: profile?.location,
         shortBio: profile?.shortBio,
         userName,
+        password,
         email,
         twitter: social?.twitter, 
         instagram: social?.instagram, 
@@ -220,6 +246,25 @@ const createCustomer = async(req, res) => {
         behance: social?.behance, 
         isGoogle: social?.isGoogle, 
         isFacebook: social?.isFacebook,
+        type: 1,
+        isActive: false,
+    })
+    const savedAdmin = await newAdmin.save();
+    res.status(200).json(savedAdmin);
+}
+
+const createManager = async(req, res) => {
+    const {
+        profile
+    } = req.body;
+
+    const newAdmin = new Users({
+        avatarPath: profile?.avatarPath,
+        firstName: profile?.firstName,
+        lastName: profile?.lastName,
+        userName: profile?.userName,
+        email: profile?.email,
+        password: profile?.oldPassword,
         type: 3,
         isActive: false,
     })
@@ -242,10 +287,12 @@ module.exports = {
     adminSignIn,
     upDateProfile,
     upDateAccountSetting,
+    upDateCustomerProfile,
     upDatePassword,
     upDateSocialProfile,
     upDateEmailNotification,
     createCustomer,
+    createManager,
     deleteUser,
 };
   
