@@ -260,6 +260,7 @@ export default function SignIn({setSigned, setOpenSignin, setOpenSignup}){
     }
 
     const handleGoogleSuccess = async(data) => {
+        console.log('success', data.profileObj)
         const res = await signInWithGoogle(data.profileObj.email)
         if(res.status === 'ok'){
             localStorage.setItem('auth', JSON.stringify(res.userInfo));
@@ -272,7 +273,7 @@ export default function SignIn({setSigned, setOpenSignin, setOpenSignup}){
     }
 
     const handleGoogleFailure = (err) => {
-        console.log(err);
+        console.log('err', err);
     }
 
     const responseFacebook = async(response) => {
@@ -307,7 +308,7 @@ export default function SignIn({setSigned, setOpenSignin, setOpenSignup}){
                         </div>
                         <div className="main">
                             <div className={signInStatus===SIGN_IN_MSG_NONE?"social-group":"social-group mt-55"}>
-                            <GoogleLogin
+                                <GoogleLogin
                                     clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
                                     buttonText="Login"
                                     onSuccess={handleGoogleSuccess}

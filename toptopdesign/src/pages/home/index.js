@@ -11,7 +11,7 @@ import { ReactComponent as SearchIcon } from '../../assets/img/user/home/search.
 import ImageView from '../../components/imageView';
 import Footer from '../../components/footer';
 import { 
-    getAllProducts, 
+    getProducts, 
     getSearchResults,
     sendVisitor,
 } from '../../api/home';
@@ -84,7 +84,7 @@ export default function Home(){
     useEffect(() => {
         try{
             async function getInitialData(){
-                const { mobiles, recents, websites } = await getAllProducts();
+                const { mobiles, recents, websites } = await getProducts();
                 setPopularApps(mobiles);
                 setPopularWebsites(websites);
                 setAddedApps(recents);

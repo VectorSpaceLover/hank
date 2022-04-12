@@ -86,6 +86,14 @@ export const PptelegrafRegularNormalBlack13px = css`
   font-style: normal;
 `;
 
+export const PptelegrafRegularNormalBlack24px = css`
+  color: var(--second);
+  font-family: var(--font-family-pp_telegraf-regular);
+  font-size: var(--font-size-24);
+  font-weight: 400;
+  font-style: normal;
+`;
+
 export const PptelegrafRegularNormalGray11px = css`
   color: var(--gray);
   font-family: var(--font-family-pp_telegraf-regular);
@@ -157,6 +165,15 @@ export const PptelegrafUltraBoldBlack40px = css`
   font-weight: 700;
   font-style: normal;
 `;
+
+export const PptelegrafUltraBoldBlack36px = css`
+  color: var(--second);
+  font-family: var(--font-family-pp_telegraf-ultrabold);
+  font-size: var(--font-size-36);
+  font-weight: 700;
+  font-style: normal;
+`;
+
 export const PptelegrafUltraBoldMirage16px = css`
   color: var(--mirage);
   font-family: var(--font-family-pp_telegraf-ultrabold);
@@ -177,6 +194,14 @@ export const PptelegrafRegularNormalWhite16px = css`
   color: var(--white);
   font-family: var(--font-family-pp_telegraf-regular);
   font-size: var(--font-size-16);
+  font-weight: 400;
+  font-style: normal;
+`;
+
+export const PptelegrafRegularNormalGray14px = css`
+  color: var(--txt-gray);
+  font-family: var(--font-family-pp_telegraf-regular);
+  font-size: var(--font-size-14);
   font-weight: 400;
   font-style: normal;
 `;

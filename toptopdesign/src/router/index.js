@@ -31,6 +31,7 @@ import Monetization from "../pages/admin/setting/monetization";
 import SettingLayout from "../pages/admin/setting/accountLayout";
 import Accounts from "../pages/admin/setting/accounts";
 import Integrations from "../pages/admin/setting/integrations";
+import Detail from "../pages/detail";
 
 const Routers = () => {
 
@@ -46,6 +47,7 @@ const Routers = () => {
               </MyAccount>
             } />
             <Route exact path="/home" element={<Home/>}/>
+            <Route exact path="/detail" element={<Detail/>}/>
             <Route exact path="/collection" element={
               <Collection>
                 <AllCollections />

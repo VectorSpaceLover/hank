@@ -171,7 +171,7 @@ export default function ImageView({ info }){
     
     useEffect(() => {
         getInitialData();
-    }, [])
+    }, [getInitialData])
     
     return (
         <Styles>
@@ -253,7 +253,7 @@ export default function ImageView({ info }){
                             boxShadow: 'none',
                             padding: 30,
                             '@media(minWidth: 780px)' : {
-                            height: 486,
+                                height: 486,
                             }
                         },
                     }}

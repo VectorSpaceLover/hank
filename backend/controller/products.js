@@ -36,7 +36,7 @@ const getProducts = async (req, res) => {
 }
 
 const searchProducts = async (req, res) => {
-    const { keyword, userId } = req.query;
+    const { keyword } = req.query;
     const searchResults = await Products.find({productName:{$regex: keyword, $options: 'i'}});
     if(searchResults){
         return res.send({
